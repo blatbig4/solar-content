@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Hướng dẫn Inverter Senergy · ESP32 — SOLAR CLOUD</title>
+<meta name="description" content="Nạp firmware, kết nối WiFi và dongle Senergy (Modbus TCP), thêm bộ giám sát Inverter Senergy ESP32 vào tài khoản SOLAR CLOUD.">
+<meta name="theme-color" content="#151311">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Martian+Mono:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/huongdan/guide.css">
+</head>
+<body>
+  <div class="topnav">
+    <a href="/huongdan">← Chọn thiết bị khác</a>
+    <a class="sp" href="/flash">Nạp firmware →</a>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <h1>Cài đặt bộ giám<br>sát inverter <span class="amp">Senergy</span></h1>
+      <p class="lede">Nạp firmware, kết nối WiFi, dò <b>dongle WiFi của Senergy</b> (đọc qua Modbus TCP), rồi thêm vào tài khoản. Khoảng mười phút.</p>
+      <svg class="dim" viewBox="0 0 600 26" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+        <line class="draw" x1="1" y1="13" x2="599" y2="13"/>
+        <path d="M1 8v10M599 8v10M1 13l9-4M1 13l9 4M599 13l-9-4M599 13l-9 4"/>
+        <text x="300" y="9" text-anchor="middle">04 bước · nạp → wifi → dongle → tài khoản</text>
+      </svg>
+    </div>
+
+    <div class="prep">
+      <h2>Cần chuẩn bị</h2>
+      <ul>
+        <li><span class="ix mono">01</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Máy tính</b> (Windows/macOS) có <b>Chrome</b> hoặc <b>Edge</b>. <em>Không dùng được trên điện thoại, Safari, Firefox.</em></div></li>
+        <li><span class="ix mono">02</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Cáp USB truyền dữ liệu</b> — không phải cáp chỉ để sạc.</div></li>
+        <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Mạch <b>Inverter Senergy · ESP32</b> — dùng bo <b>ESP32 DevKit (ESP‑WROOM‑32, 38 chân, USB‑C)</b>, chip nạp CP2102/CH340.</div></li>
+        <li><span class="ix mono">04</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>WiFi nhà 2.4GHz</b> + mật khẩu. <em>ESP32 không bắt được WiFi 5GHz.</em></div></li>
+        <li><span class="ix mono">05</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Dongle WiFi của Senergy</b> (loại <b>MIDHF‑LPB100</b>) đã cắm vào inverter và cho vào <b>cùng WiFi nhà</b> với mạch.</div></li>
+        <li><span class="ix mono">06</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Một <b>điện thoại</b> để cấu hình.</div></li>
+      </ul>
+    </div>
+
+    <!-- 1 -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">1</div>
+      <div class="sechd"><div class="st">Trên máy tính · bằng Chrome hoặc Edge</div><h2>Nạp firmware qua USB</h2></div>
+      <ol class="steps">
+        <li>Mở Chrome/Edge, truy cập <a href="/flash"><code>solarcloud.io.vn/flash</code></a></li>
+        <li>Ở ô <b>“Chọn dòng thiết bị”</b>, chọn <b>Inverter Senergy · ESP32</b>.<div class="hint">Chọn đúng chip <b>ESP32</b> — chọn nhầm sẽ bị chặn để tránh hỏng máy.</div></li>
+        <li><b>Cắm mạch</b> vào máy tính bằng cáp USB.</li>
+        <li>Bấm <b>Bắt đầu nạp Firmware</b> → chọn <b>cổng COM</b> → <b>Connect</b>.<div class="hint">Cài mới hoàn toàn: tích “Erase device”. Chỉ cập nhật (giữ WiFi): bỏ tích.</div></li>
+        <li>Chờ chạy đến 100%. <b>Mạch tự khởi động lại là xong.</b></li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">FIG.1</span><span>Trang /flash — chọn dòng &amp; nạp</span><span class="rule"></span></div>
+        <div class="plate"><span class="rc-tr"></span><span class="rc-bl"></span>
+          <div class="m-flash">
+            <div class="m-lbl">Dòng ESP / sản phẩm cần nạp</div>
+            <div class="m-sel"><span class="cv">Inverter Senergy · ESP32</span><span>▾</span></div>
+            <div class="btn-cta">Bắt đầu nạp Firmware</div>
+          </div>
+        </div>
+        <div class="figcap">Trang solarcloud.io.vn/flash — chọn đúng dòng Senergy · ESP32 rồi bấm nút nạp.</div>
+      </div>
+      <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Trong lúc nạp</span>Tuyệt đối <b>không rút cáp USB</b> và không ngắt nguồn cho tới khi báo xong.</div></div>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Nếu không thấy cổng COM, hoặc nạp báo lỗi</span><b>Không thấy COM:</b> cài driver <b>CP2102</b> hoặc <b>CH340</b> (có link ngay dưới trang /flash).<br><b>Lỗi kết nối:</b> giữ nút <b>BOOT</b>, bấm nhả <b>EN/RESET</b>, thả BOOT rồi nạp lại.</div></div>
+    </div>
+
+    <!-- 2 -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">2</div>
+      <div class="sechd"><div class="st">Trên điện thoại · mạch tự phát WiFi cấu hình</div><h2>Kết nối WiFi nhà</h2></div>
+      <ol class="steps">
+        <li>Cấp nguồn cho mạch. Mạch <b>tự phát một WiFi</b> tên <code>INVSEN-xxxxxxxxxx</code> (10 số).</li>
+        <li>Trên điện thoại vào <b>Cài đặt › WiFi</b> → chọn WiFi đó → nhập mật khẩu <code>123456789</code></li>
+        <li>Trang cấu hình <b>tự mở</b>. Nếu không → mở trình duyệt gõ <code>192.168.4.1</code></li>
+        <li>Trang hiện <b>ID thiết bị (10 số)</b> — <b>ghi lại</b> để nhập vào tài khoản ở bước 4.</li>
+        <li>Ở card <b>Kết nối WiFi</b>: chọn <b>WiFi nhà</b> (2.4GHz) → nhập <b>mật khẩu WiFi</b> → bấm <b>Lưu</b>.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">FIG.2</span><span>Chọn WiFi mạch → trang 192.168.4.1</span><span class="rule"></span></div>
+        <div class="plate"><span class="rc-tr"></span><span class="rc-bl"></span>
+          <div class="phone"><div class="scr">
+            <div class="bar">WiFi</div>
+            <div class="wifi-row sel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a10 10 0 0 1 14 0M8 15.8a5.5 5.5 0 0 1 8 0M12 19h.01"/></svg>INVSEN-5120783964<span class="lk">✓</span></div>
+            <div class="wifi-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a10 10 0 0 1 14 0M8 15.8a5.5 5.5 0 0 1 8 0M12 19h.01"/></svg>WiFi-Nha-Ban<span class="lk">🔒</span></div>
+            <div class="wifi-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a10 10 0 0 1 14 0M8 15.8a5.5 5.5 0 0 1 8 0M12 19h.01"/></svg>Hang xom 5G<span class="lk">🔒</span></div>
+          </div></div>
+          <div class="portal">
+            <div class="url">192.168.4.1</div>
+            <div class="body">
+              <div class="idbox"><div class="k">ID thiết bị</div><div class="v">5120783964</div></div>
+              <div class="fld"><div class="k">WiFi nhà (2.4GHz)</div><div class="inp">WiFi-Nha-Ban <span class="cx">▾</span></div></div>
+              <div class="fld"><div class="k">Mật khẩu WiFi</div><div class="inp">••••••••</div></div>
+              <div class="btn-save">Lưu &amp; kết nối</div>
+            </div>
+          </div>
+        </div>
+        <div class="figcap">Chọn WiFi của mạch (trái) → trang 192.168.4.1 hiện ID + nhập WiFi nhà (phải).</div>
+      </div>
+      <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Nhớ hai điều</span>WiFi nhà phải là <b>2.4GHz</b> (không phải 5GHz). Và <b>ghi lại ID 10 số</b> hiện ở trang <code>192.168.4.1</code>.</div></div>
+    </div>
+
+    <!-- 3 -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">3</div>
+      <div class="sechd"><div class="st">Trên trang 192.168.4.1 · card “Kết nối dongle”</div><h2>Kết nối dongle Senergy</h2></div>
+      <ol class="steps">
+        <li>Đảm bảo <b>dongle WiFi của Senergy</b> đã cắm vào inverter và đang ở <b>cùng WiFi nhà</b> với mạch.</li>
+        <li>Ở card <b>Kết nối dongle</b> bấm <b>Dò dongle tự động</b> — mạch tự tìm dongle trong mạng và đọc qua <b>Modbus TCP (cổng 502)</b>.<div class="hint">Nếu không tự dò được, nhập <b>IP của dongle</b> bằng tay rồi lưu (xem IP trong app/nhãn dongle hoặc trang router).</div></li>
+        <li>Khi có dữ liệu, trang <code>192.168.4.1</code> sẽ hiện <b>PV / Pin / Lưới / Tải</b> chạy live.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">FIG.3</span><span>Card “Kết nối dongle”</span><span class="rule"></span></div>
+        <div class="plate"><span class="rc-tr"></span><span class="rc-bl"></span>
+          <div class="portal">
+            <div class="url">192.168.4.1 · Kết nối dongle</div>
+            <div class="body">
+              <div class="linkrow"><span class="dot"></span>Dongle Senergy<span class="st">Đã kết nối · TCP 502</span></div>
+              <div class="btn-save">Dò dongle tự động</div>
+            </div>
+          </div>
+        </div>
+        <div class="figcap">Card “Kết nối dongle” — bấm dò tự động, thấy “Đã kết nối” là được.</div>
+      </div>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Nếu dò không thấy dữ liệu</span>Dongle MIDHF‑LPB100 mở <b>Modbus TCP cổng 502</b> (mạch tự đọc). Nếu là <b>dongle Solarman/IGEN</b>, mạch chuyển sang <b>cổng 8899</b> — cứ để mạch tự thử, hoặc nhập IP dongle bằng tay. Đảm bảo dongle + mạch <b>cùng một WiFi nhà</b>.</div></div>
+    </div>
+
+    <!-- 4 -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">4</div>
+      <div class="sechd"><div class="st">Trên điện thoại hoặc máy tính</div><h2>Tạo tài khoản &amp; thêm thiết bị</h2></div>
+      <ol class="steps">
+        <li>Vào <a href="/"><code>solarcloud.io.vn</code></a> → <b>Đăng ký</b> bằng email + mật khẩu (≥ 6 ký tự) → đăng nhập.<div class="hint">Mẹo: mở trên điện thoại rồi “Thêm vào màn hình chính” để dùng như một app.</div></li>
+        <li>Vào tab <b>Thiết bị</b> → bấm <b>Thêm thiết bị</b>.</li>
+        <li>Nhập <b>ID 10 số</b> (đã ghi ở bước 2) → <b>Thêm thiết bị</b>.</li>
+        <li>Chạm biểu tượng <b>ghim</b> để đưa thiết bị lên trang <b>Home</b>, rồi chạm vào để xem PV/pin/lưới/tải.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">FIG.4</span><span>App SOLAR CLOUD — thêm thiết bị</span><span class="rule"></span></div>
+        <div class="plate"><span class="rc-tr"></span><span class="rc-bl"></span>
+          <div class="appbox">
+            <div class="h">Thêm thiết bị</div>
+            <div class="inr">
+              <div class="fld"><div class="k">ID thiết bị (10 số)</div><div class="inp">5120783964</div></div>
+              <div class="btn-add">Thêm thiết bị</div>
+            </div>
+          </div>
+        </div>
+        <div class="figcap">Ứng dụng SOLAR CLOUD — nhập đúng 10 số ID của mạch.</div>
+      </div>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Nếu số liệu hiện toàn số 0</span>Kiểm tra dongle đã kết nối ở bước 3 chưa. Nếu là <b>bản ACT</b> cần <b>kích hoạt</b> mới hiện đầy đủ số liệu — liên hệ nơi bán để kích hoạt.</div></div>
+    </div>
+
+    <div class="fig">
+      <div class="figtag"><span class="n">FIG.5</span><span>Giao diện app khi chạy</span><span class="rule"></span></div>
+      <div class="plate"><span class="rc-tr"></span><span class="rc-bl"></span>
+        <img class="appshot" src="/huongdan/img/giaodien-lux-senergy.jpg" alt="Giao diện SOLAR CLOUD giám sát inverter Senergy: PV, pin, lưới, tải, biểu đồ 24h" loading="lazy">
+      </div>
+      <div class="figcap">Sau khi thêm thiết bị — mở app SOLAR CLOUD xem PV / pin / lưới / tải realtime + biểu đồ 24h.</div>
+    </div>
+
+    <div class="done"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div><div class="bd"><span class="tt">Hoàn tất</span><p>Mạch tự gửi dữ liệu inverter Senergy lên SOLAR CLOUD mỗi giây. Muốn đổi WiFi/dongle sau này: kết nối lại WiFi <code>INVSEN-…</code> rồi vào <code>192.168.4.1</code>. Giữ nút <b>BOOT ~5 giây</b> để xoá WiFi đã lưu và cài lại từ đầu.</p></div></div>
+
+    <div class="cta-row">
+      <a class="cta pri" href="/flash">Nạp firmware ngay →</a>
+      <a class="cta ghost" href="/huongdan">Thiết bị khác</a>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Solar Cloud · <span class="on">solarcloud.io.vn</span></span>
+    <span>Giám sát năng lượng mặt trời · pin lưu trữ · inverter</span>
+  </div>
+
+  <script src="/huongdan/guide.js" defer></script>
+</body>
+</html>
