@@ -3,14 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Hướng dẫn JK BMS · C3 BLE (ACT) — SOLAR CLOUD</title>
-<meta name="description" content="Nạp firmware, kết nối WiFi, ghép pin JK BMS qua Bluetooth và thêm bộ giám sát JK BMS C3 BLE (ACT) vào tài khoản SOLAR CLOUD.">
+<title>Giám sát pin JK BMS qua WiFi — giới thiệu & hướng dẫn tự lắp (ESP32 & ESP32-C3) | SOLAR CLOUD</title>
+<meta name="description" content="Bộ giám sát pin JK BMS qua WiFi: đọc dữ liệu BLE từ JK BMS rồi xem SoC, điện áp từng cell, cân bằng, SoH từ xa trên SOLAR CLOUD. Giới thiệu sản phẩm và hướng dẫn tự lắp cho cả ESP32 và ESP32-C3.">
 <meta name="theme-color" content="#0E775E">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/huongdan/guide.css">
+<style>
+  /* riêng bài này: ảnh bìa + phần giới thiệu */
+  .cover{margin:20px 0 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+    box-shadow:var(--sh-1);background:var(--ink-2)}
+  .cover img{display:block;width:100%;height:auto}
+  .intro{margin:22px 0 0;font-size:16.5px;line-height:1.72;color:var(--paper)}
+  .intro p{margin:0 0 14px}
+  .intro b{font-weight:650}
+  .feat{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:12px}
+  .feat li{position:relative;padding-left:30px;font-size:15.5px;line-height:1.5;color:var(--paper)}
+  .feat li b{font-weight:650}
+  .feat li svg{position:absolute;left:0;top:2px;width:19px;height:19px;color:var(--good)}
+</style>
 </head>
 <body>
   <div class="topnav">
@@ -19,22 +32,45 @@
   </div>
 
   <div class="wrap">
-    <div class="hero">
-      <h1>Cài đặt bộ giám<br>sát pin <span class="amp">JK BMS</span></h1>
-      <p class="lede">Nạp firmware, kết nối WiFi, <b>ghép pin JK BMS qua Bluetooth</b>, rồi thêm vào tài khoản. Khoảng mười phút.</p>
-      <svg class="dim" viewBox="0 0 600 26" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-        <line class="draw" x1="1" y1="13" x2="599" y2="13"/>
-        <path d="M1 8v10M599 8v10M1 13l9-4M1 13l9 4M599 13l-9-4M599 13l-9 4"/>
-        <text x="300" y="9" text-anchor="middle">04 bước · nạp → wifi → bluetooth → tài khoản</text>
-      </svg>
+    <!-- ẢNH BÌA -->
+    <figure class="cover">
+      <img src="/huongdan/img/jkbms-cover.webp" alt="Bộ giám sát pin JK BMS qua WiFi — dùng ESP32 hoặc ESP32-C3, xem SoC và điện áp từng cell từ xa trên web app SOLAR CLOUD" width="1200" height="675">
+    </figure>
+
+    <!-- GIỚI THIỆU SẢN PHẨM -->
+    <div class="hero" style="padding-top:clamp(26px,4.5vw,40px)">
+      <h1>Giám sát pin JK BMS<br><span class="amp">qua WiFi, xem từ xa</span></h1>
+      <p class="lede">Bộ pin lưu trữ của bạn đang dùng <b>JK BMS</b>? Gắn thêm một mạch nhỏ là xem được tình trạng pin <b>realtime trên điện thoại, từ bất cứ đâu</b> — không cần đứng cạnh tủ pin.</p>
     </div>
+
+    <div class="intro">
+      <p>Bình thường, muốn biết pin còn bao nhiêu %, điện áp <b>từng cell</b>, đang sạc hay xả, cell có <b>cân bằng</b> không, nhiệt độ ra sao… bạn phải mở <b>app JK</b> và <b>đứng sát tủ pin</b>, vì app chỉ kết nối Bluetooth ở khoảng cách gần.</p>
+      <p>Bộ giám sát này là một <b>mạch nhỏ gắn thêm</b>: nó đọc dữ liệu từ JK BMS qua <b>Bluetooth</b>, rồi đẩy lên internet qua <b>WiFi</b>. Nhờ vậy bạn xem pin <b>mọi lúc, mọi nơi</b> trên web app <b>SOLAR CLOUD</b> — có lịch sử và cảnh báo, không phải ra tận nơi.</p>
+      <ul class="feat">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Xem <b>SoC (% pin)</b>, <b>điện áp từng cell</b>, dòng sạc/xả và công suất — cập nhật từng giây.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Theo dõi <b>cân bằng cell</b> và <b>sức khoẻ pin (SoH)</b> — biết sớm pin chai hay cell lệch.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Cảnh báo</b> khi cell lệch, nhiệt độ cao hoặc pin sắp cạn.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Xem <b>từ xa qua internet</b>, không cần đứng cạnh tủ pin (app JK gốc chỉ xem khi ở gần).</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Bo rẻ, <b>tự lắp khoảng 10 phút</b> — dùng được với <b>ESP32-C3</b> hoặc <b>ESP32</b>.</li>
+      </ul>
+    </div>
+
+    <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Dùng chung cho 2 loại bo</span>Bài này áp dụng cho cả <b>ESP32-C3 SuperMini</b> và <b>ESP32 DevKit (ESP-WROOM-32)</b>. Mọi bước <b>giống hệt nhau</b> — chỉ khác ở chỗ <b>chọn đúng dòng thiết bị khi nạp firmware</b> (bản C3 hay bản ESP32) theo bo bạn đang có.</div></div>
+
+    <!-- CHUYỂN SANG HƯỚNG DẪN -->
+    <div class="ghead" style="margin-top:58px"><h2>Hướng dẫn tự lắp</h2><span class="gcount">4 bước · khoảng 10 phút</span></div>
+    <svg class="dim" viewBox="0 0 600 26" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+      <line class="draw" x1="1" y1="13" x2="599" y2="13"/>
+      <path d="M1 8v10M599 8v10M1 13l9-4M1 13l9 4M599 13l-9-4M599 13l-9 4"/>
+      <text x="300" y="9" text-anchor="middle">04 bước · nạp → wifi → bluetooth → tài khoản</text>
+    </svg>
 
     <div class="prep">
       <h2>Cần chuẩn bị</h2>
       <ul>
         <li><span class="ix mono">01</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Máy tính</b> (Windows/macOS) có <b>Chrome</b> hoặc <b>Edge</b>. <em>Không dùng được trên điện thoại, Safari, Firefox.</em></div></li>
         <li><span class="ix mono">02</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Cáp USB truyền dữ liệu</b> — không phải cáp chỉ để sạc.</div></li>
-        <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Mạch <b>JK BMS · C3 BLE (ACT)</b> — dùng bo <b>ESP32‑C3 SuperMini (4MB, USB‑C)</b>.</div></li>
+        <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Mạch <b>JK BMS · BLE (ACT)</b> — dùng một trong hai bo: <b>ESP32‑C3 SuperMini</b> (4MB, USB‑C) hoặc <b>ESP32 DevKit</b> (ESP‑WROOM‑32, 38 chân). <em>Chỉ khác con ESP, các bước còn lại như nhau.</em></div></li>
         <li><span class="ix mono">04</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Pin đang gắn <b>JK BMS đã bật Bluetooth</b>, đặt mạch <b>gần BMS</b> (trong tầm vài mét). <em>BMS phải còn nguồn.</em></div></li>
         <li><span class="ix mono">05</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>WiFi nhà 2.4GHz</b> + mật khẩu. <em>ESP32 không bắt được WiFi 5GHz.</em></div></li>
         <li><span class="ix mono">06</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Một <b>điện thoại</b> để cấu hình.</div></li>
@@ -48,7 +84,7 @@
       <div class="sechd"><div class="st">Trên máy tính · bằng Chrome hoặc Edge</div><h2>Nạp firmware qua USB</h2></div>
       <ol class="steps">
         <li>Mở Chrome/Edge, truy cập <a href="/flash"><code>solarcloud.io.vn/flash</code></a></li>
-        <li>Ở ô <b>“Chọn dòng thiết bị”</b>, chọn <b>JK BMS · C3 BLE (ACT)</b>.<div class="hint">Chọn đúng chip <b>ESP32-C3</b> — chọn nhầm sẽ bị chặn để tránh hỏng máy.</div></li>
+        <li>Ở ô <b>“Chọn dòng thiết bị”</b>, chọn đúng dòng theo bo của bạn: <b>JK BMS · C3 BLE (ACT)</b> nếu dùng ESP32‑C3, hoặc <b>JK BMS · ESP32 BLE (ACT)</b> nếu dùng ESP32.<div class="hint">Chọn đúng chip (<b>ESP32‑C3</b> hay <b>ESP32</b>) — chọn nhầm sẽ bị chặn để tránh hỏng máy.</div></li>
         <li><b>Cắm mạch</b> vào máy tính bằng cáp USB.</li>
         <li>Bấm <b>Bắt đầu nạp Firmware</b> → chọn <b>cổng COM</b> → <b>Connect</b>.<div class="hint">Cài mới hoàn toàn: tích “Erase device”. Chỉ cập nhật (giữ WiFi): bỏ tích.</div></li>
         <li>Chờ chạy đến 100%. <b>Mạch tự khởi động lại là xong.</b></li>
@@ -62,10 +98,10 @@
             <div class="btn-cta">Bắt đầu nạp Firmware</div>
           </div>
         </div>
-        <div class="figcap">Trang solarcloud.io.vn/flash — chọn đúng dòng rồi bấm nút nạp.</div>
+        <div class="figcap">Trang solarcloud.io.vn/flash — chọn đúng dòng theo bo (bản C3 hoặc bản ESP32) rồi bấm nút nạp.</div>
       </div>
       <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Trong lúc nạp</span>Tuyệt đối <b>không rút cáp USB</b> và không ngắt nguồn cho tới khi báo xong.</div></div>
-      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Nếu không thấy cổng COM, hoặc nạp báo lỗi</span><b>Không thấy COM:</b> cài driver <b>CH340</b> hoặc <b>CP2102</b> (có link ngay dưới trang /flash).<br><b>Lỗi kết nối:</b> giữ nút <b>BOOT</b>, bấm nhả <b>RESET</b>, thả BOOT rồi nạp lại.</div></div>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Nếu không thấy cổng COM, hoặc nạp báo lỗi</span><b>Không thấy COM:</b> bản <b>ESP32 DevKit</b> cần driver <b>CH340</b> hoặc <b>CP2102</b> (có link ngay dưới trang /flash); bản <b>ESP32‑C3 SuperMini</b> thường không cần driver — cắm vào là nhận.<br><b>Lỗi kết nối:</b> giữ nút <b>BOOT</b>, bấm nhả <b>RESET</b>, thả BOOT rồi nạp lại.</div></div>
     </div>
 
     <!-- 2 -->
