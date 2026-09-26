@@ -313,6 +313,19 @@ a:hover code{background:var(--phos);color:#fff;border-color:var(--phos)}
 .cta.ghost{background:var(--ink-2);color:var(--paper);border-color:var(--line)}
 .cta.ghost:hover{background:var(--phos-dim);border-color:var(--phos);color:var(--phos-d)}
 
+/* ───────── NẠP FIRMWARE NHÚNG (esp-web-tools) ───────── */
+.flashbox{width:100%;max-width:540px;text-align:center;margin:0 auto}
+.flashbox .fb-lbl{font-size:15px;color:var(--paper);font-weight:650;margin:0 0 14px}
+.flashbox .fb-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.flashbox esp-web-install-button{flex:1 1 210px;display:block}
+.fw-btn{width:100%;font-family:var(--fd);font-weight:700;font-size:15px;color:#fff;background:var(--phos);
+  border:none;border-radius:var(--r-btn);padding:15px 18px;cursor:pointer;transition:background .15s;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.fw-btn:hover{background:var(--phos-d)}
+.fw-unsup{display:block;font-size:13px;color:var(--amber-d);background:var(--amber-dim);
+  border:1px solid var(--amber-line);border-radius:8px;padding:10px 12px;line-height:1.5}
+.flashbox .fb-note{font-size:13px;color:var(--muted);line-height:1.55;margin:14px 0 0}
+
 /* ───────── FOOT ───────── */
 .foot{margin:40px auto 0;padding:22px 4px;max-width:var(--maxw);
   border-top:1px solid var(--line);background:transparent;

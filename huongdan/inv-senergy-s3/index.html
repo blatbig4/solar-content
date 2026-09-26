@@ -55,22 +55,28 @@
       <div class="snum">1</div>
       <div class="sechd"><div class="st">Trên máy tính · bằng Chrome hoặc Edge</div><h2>Nạp firmware qua USB</h2></div>
       <ol class="steps">
-        <li>Mở Chrome/Edge, truy cập <a href="/flash"><code>solarcloud.io.vn/flash</code></a></li>
-        <li>Ở ô <b>“Chọn dòng thiết bị”</b>, chọn <b>Inverter Senergy · S3 cảm ứng</b>.<div class="hint">Chọn đúng chip <b>ESP32-S3</b> — chọn nhầm sẽ bị chặn để tránh hỏng máy.</div></li>
+        <li>Dùng <b>máy tính</b> mở bài này bằng <b>Chrome</b> hoặc <b>Edge</b>. <em>Không nạp được trên điện thoại, Safari, Firefox.</em></li>
         <li><b>Cắm mạch</b> vào máy tính bằng cáp USB.</li>
-        <li>Bấm <b>Bắt đầu nạp Firmware</b> → chọn <b>cổng COM</b> → <b>Connect</b>.<div class="hint">Cài mới hoàn toàn: tích “Erase device”. Chỉ cập nhật (giữ WiFi): bỏ tích.</div></li>
+        <li>Ở khung <b>“Nạp ngay”</b> bên dưới, bấm <b>Nạp firmware</b>.</li>
+        <li>Chọn <b>cổng COM</b> hiện ra → <b>Connect</b>.<div class="hint">Cài mới hoàn toàn: tích “Erase device”. Chỉ cập nhật (giữ WiFi): bỏ tích.</div></li>
         <li>Chờ chạy đến 100%. <b>Mạch tự khởi động lại, hiện màn hình là xong.</b></li>
       </ol>
       <div class="fig">
-        <div class="figtag"><span class="n">FIG.1</span><span>Trang /flash — chọn dòng &amp; nạp</span><span class="rule"></span></div>
+        <div class="figtag"><span class="n">NẠP NGAY</span><span>Nạp firmware tại đây — không cần rời trang</span><span class="rule"></span></div>
         <div class="plate"><span class="rc-tr"></span><span class="rc-bl"></span>
-          <div class="m-flash">
-            <div class="m-lbl">Dòng ESP / sản phẩm cần nạp</div>
-            <div class="m-sel"><span class="cv">Inverter Senergy · S3 cảm ứng</span><span>▾</span></div>
-            <div class="btn-cta">Bắt đầu nạp Firmware</div>
+          <div class="flashbox">
+            <p class="fb-lbl">Cắm mạch vào máy rồi bấm nút:</p>
+            <div class="fb-btns">
+              <esp-web-install-button manifest="/flash/manifest/inv-senergy-s3.json">
+                <button class="fw-btn" slot="activate">⚡ Nạp firmware ngay</button>
+                <span slot="unsupported" class="fw-unsup">Trình duyệt chưa hỗ trợ — hãy dùng <b>Chrome</b> hoặc <b>Edge</b> trên máy tính.</span>
+                <span slot="not-allowed" class="fw-unsup">Cần mở trang bằng <b>HTTPS</b> mới nạp được.</span>
+              </esp-web-install-button>
+            </div>
+            <p class="fb-note">Cần <b>máy tính</b> + <b>Chrome/Edge</b> + <b>cáp USB truyền dữ liệu</b>. Bấm nút → chọn <b>cổng COM</b> → chờ tới 100%.</p>
           </div>
         </div>
-        <div class="figcap">Trang solarcloud.io.vn/flash — chọn đúng dòng Senergy S3 cảm ứng rồi bấm nút nạp.</div>
+        <div class="figcap">Nút nạp không hiện hoặc không chạy? Mở <a href="/flash">solarcloud.io.vn/flash</a> để nạp như bình thường.</div>
       </div>
       <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Trong lúc nạp</span>Tuyệt đối <b>không rút cáp USB</b> và không ngắt nguồn cho tới khi báo xong.</div></div>
       <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Nếu không thấy cổng COM, hoặc nạp báo lỗi</span><b>Không thấy COM:</b> cài driver <b>CP2102</b> hoặc <b>CH340</b> (có link ngay dưới trang /flash).<br><b>Lỗi kết nối:</b> giữ nút <b>BOOT</b>, bấm nhả <b>RESET</b>, thả BOOT rồi nạp lại.</div></div>
@@ -204,6 +210,7 @@
     <span>Giám sát năng lượng mặt trời · pin lưu trữ · inverter</span>
   </div>
 
+  <script type="module" src="https://cdn.jsdelivr.net/npm/esp-web-tools@10/dist/web/install-button.js"></script>
   <script src="/huongdan/guide.js" defer></script>
 </body>
 </html>
