@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Giám sát biến tần Luxpower qua WiFi — giới thiệu & hướng dẫn tự lắp (ESP32) | SOLAR CLOUD</title>
-<meta name="description" content="Giám sát inverter Luxpower từ xa: mạch ESP32 đọc dữ liệu qua dongle WiFi Luxpower hoặc RS485, xem PV/pin/lưới/tải realtime trên SOLAR CLOUD. Giới thiệu sản phẩm và hướng dẫn tự lắp ~10 phút.">
+<meta name="description" content="Giám sát inverter Luxpower từ xa: mạch ESP32 đọc dữ liệu qua dongle WiFi Luxpower, xem PV/pin/lưới/tải realtime trên SOLAR CLOUD. Giới thiệu sản phẩm và hướng dẫn tự lắp ~10 phút.">
 <meta name="theme-color" content="#0E775E">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,11 +27,7 @@
 
     <div class="intro">
       <p>Inverter Luxpower nào cũng có app hãng, nhưng mỗi lần xem phải mở app riêng, hay rớt mạng, xem lịch sử thì giới hạn, mà muốn gộp chung với pin hay thiết bị khác cũng chịu. <b>SOLAR CLOUD</b> gom tất cả về <b>một app duy nhất</b>, xem từ xa qua internet, có biểu đồ lịch sử và cảnh báo.</p>
-      <p><b>Nó hoạt động thế nào?</b> Một mạch nhỏ (bo <b>ESP32</b>) đọc số liệu trực tiếp từ inverter rồi đẩy lên máy chủ SOLAR CLOUD qua <b>WiFi nhà</b>. Mạch lấy dữ liệu theo <b>một trong hai cách</b> — tuỳ nhà bạn có sẵn gì:</p>
-      <ul class="feat">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Qua dongle WiFi Luxpower</b> <em style="color:var(--phos);font-style:normal;font-weight:600">(khuyên dùng)</em> — dongle đã cắm sẵn ở inverter; chỉ cần cho dongle + mạch vào <b>cùng WiFi nhà</b>, mạch tự đọc. Không phải đấu dây.</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Qua dây RS485</b> — đấu 2 dây từ cổng <b>RS485 / BMS / Meter</b> của inverter vào mạch. Ổn định nhất, hợp lắp cố định.</li>
-      </ul>
+      <p><b>Nó hoạt động thế nào?</b> Một mạch nhỏ (bo <b>ESP32</b>) đọc số liệu từ inverter qua <b>dongle WiFi Luxpower</b> (dongle đã cắm sẵn ở inverter), rồi đẩy lên máy chủ SOLAR CLOUD qua <b>WiFi nhà</b>. Chỉ cần cho dongle và mạch vào <b>cùng một WiFi nhà</b> — mạch tự đọc, <b>không phải đấu dây</b>.</p>
       <p style="margin-top:16px"><b>Gắn xong, trên điện thoại bạn xem được:</b></p>
       <ul class="feat">
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>PV · Pin · Lưới · Tải</b> chạy realtime từng giây, kèm <b>số điện (kWh) hôm nay & tổng</b>.</li>
@@ -56,7 +52,7 @@
         <li><span class="ix mono">02</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Cáp USB truyền dữ liệu</b> — không phải cáp chỉ để sạc.</div></li>
         <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Mạch <b>Inverter Luxpower · ESP32 (ACT)</b> — dùng bo <b>ESP32 DevKit (ESP‑WROOM‑32, 38 chân, USB‑C)</b>, chip nạp CP2102/CH340.</div></li>
         <li><span class="ix mono">04</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>WiFi nhà 2.4GHz</b> + mật khẩu. <em>ESP32 không bắt được WiFi 5GHz.</em></div></li>
-        <li><span class="ix mono">05</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Nguồn dữ liệu inverter: <b>dongle WiFi Luxpower</b> đã cắm vào inverter <em>(khuyên dùng)</em>, hoặc dây <b>RS485</b> đấu thẳng vào cổng BMS/Meter của inverter.</div></li>
+        <li><span class="ix mono">05</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Dongle WiFi Luxpower</b> đã cắm vào inverter và cho vào <b>cùng WiFi nhà</b> với mạch (đây là nguồn dữ liệu của mạch).</div></li>
         <li><span class="ix mono">06</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Một <b>điện thoại</b> để cấu hình.</div></li>
       </ul>
     </div>
@@ -134,10 +130,10 @@
     <div class="sec">
       <div class="rail"></div>
       <div class="snum">3</div>
-      <div class="sechd"><div class="st">Trên trang 192.168.4.1 · card “Kết nối dongle”</div><h2>Chọn nguồn dữ liệu inverter</h2></div>
+      <div class="sechd"><div class="st">Trên trang 192.168.4.1 · card “Kết nối dongle”</div><h2>Kết nối dongle Luxpower</h2></div>
       <ol class="steps">
-        <li><b>Nếu dùng dongle WiFi Luxpower:</b> cắm dongle vào inverter và cho nó vào <b>cùng WiFi nhà</b> với mạch. Ở card <b>Kết nối dongle</b> bấm <b>Dò dongle tự động</b> — mạch tự tìm và ghi nhớ dongle (hiện IP + số serial khi tìm thấy).<div class="hint">Nếu không tự dò được, nhập <b>IP của dongle</b> bằng tay rồi lưu.</div></li>
-        <li><b>Nếu đấu RS485 thẳng:</b> nối dây RS485 từ cổng Meter/BMS của inverter vào mạch — <b>bỏ qua</b> phần dongle, mạch tự đọc.</li>
+        <li>Cắm <b>dongle WiFi Luxpower</b> vào inverter và cho dongle vào <b>cùng WiFi nhà</b> với mạch.</li>
+        <li>Ở card <b>Kết nối dongle</b> bấm <b>Dò dongle tự động</b> — mạch tự tìm và ghi nhớ dongle (hiện IP + số serial khi tìm thấy).<div class="hint">Nếu không tự dò được, nhập <b>IP của dongle</b> bằng tay rồi lưu.</div></li>
         <li>Khi có dữ liệu, trang <code>192.168.4.1</code> sẽ hiện <b>PV / Pin / Lưới / Tải</b> chạy live.</li>
       </ol>
       <div class="fig">
@@ -153,7 +149,7 @@
         </div>
         <div class="figcap">Card “Kết nối dongle” — bấm dò tự động, thấy “Đã kết nối” là được.</div>
       </div>
-      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Chỉ chọn MỘT cách</span>Dùng <b>dongle</b> hoặc <b>RS485</b>, không cần cả hai. Dongle tiện hơn (không đấu dây); RS485 ổn định hơn khi để cố định.</div></div>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Dongle phải cùng WiFi nhà</span>Mạch chỉ dò thấy dongle khi <b>dongle Luxpower và mạch ở cùng một WiFi nhà 2.4GHz</b>. Nếu không dò được, kiểm tra lại dongle đã lên WiFi nhà chưa, hoặc nhập <b>IP dongle</b> bằng tay.</div></div>
     </div>
 
     <!-- 4 -->
