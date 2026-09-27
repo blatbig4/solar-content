@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Hướng dẫn Inverter Luxpower · ESP32 (ACT) — SOLAR CLOUD</title>
-<meta name="description" content="Nạp firmware, kết nối WiFi và dongle, thêm bộ giám sát Inverter Luxpower ESP32 (ACT) vào tài khoản SOLAR CLOUD.">
+<title>Giám sát biến tần Luxpower qua WiFi — giới thiệu & hướng dẫn tự lắp (ESP32) | SOLAR CLOUD</title>
+<meta name="description" content="Giám sát inverter Luxpower từ xa: mạch ESP32 đọc dữ liệu qua dongle WiFi Luxpower hoặc RS485, xem PV/pin/lưới/tải realtime trên SOLAR CLOUD. Giới thiệu sản phẩm và hướng dẫn tự lắp ~10 phút.">
 <meta name="theme-color" content="#0E775E">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,15 +19,35 @@
   </div>
 
   <div class="wrap">
+    <!-- GIỚI THIỆU -->
     <div class="hero">
-      <h1>Cài đặt bộ<br>giám sát <span class="amp">inverter</span></h1>
-      <p class="lede">Nạp firmware, kết nối WiFi, chọn nguồn dữ liệu (<b>dongle</b> hoặc <b>RS485</b>), rồi thêm vào tài khoản. Khoảng mười phút.</p>
-      <svg class="dim" viewBox="0 0 600 26" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
-        <line class="draw" x1="1" y1="13" x2="599" y2="13"/>
-        <path d="M1 8v10M599 8v10M1 13l9-4M1 13l9 4M599 13l-9-4M599 13l-9 4"/>
-        <text x="300" y="9" text-anchor="middle">04 bước · nạp → wifi → dongle → tài khoản</text>
-      </svg>
+      <h1>Giám sát biến tần<br>Luxpower <span class="amp">từ xa</span></h1>
+      <p class="lede">Đang đi làm hay đi cà phê vẫn biết dàn điện mặt trời nhà mình <b>đang phát bao nhiêu, pin còn bao nhiêu, có đẩy lên lưới không</b> — realtime ngay trên điện thoại. Chỉ với một mạch nhỏ gắn vào inverter Luxpower.</p>
     </div>
+
+    <div class="intro">
+      <p>Inverter Luxpower nào cũng có app hãng, nhưng mỗi lần xem phải mở app riêng, hay rớt mạng, xem lịch sử thì giới hạn, mà muốn gộp chung với pin hay thiết bị khác cũng chịu. <b>SOLAR CLOUD</b> gom tất cả về <b>một app duy nhất</b>, xem từ xa qua internet, có biểu đồ lịch sử và cảnh báo.</p>
+      <p><b>Nó hoạt động thế nào?</b> Một mạch nhỏ (bo <b>ESP32</b>) đọc số liệu trực tiếp từ inverter rồi đẩy lên máy chủ SOLAR CLOUD qua <b>WiFi nhà</b>. Mạch lấy dữ liệu theo <b>một trong hai cách</b> — tuỳ nhà bạn có sẵn gì:</p>
+      <ul class="feat">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Qua dongle WiFi Luxpower</b> <em style="color:var(--phos);font-style:normal;font-weight:600">(khuyên dùng)</em> — dongle đã cắm sẵn ở inverter; chỉ cần cho dongle + mạch vào <b>cùng WiFi nhà</b>, mạch tự đọc. Không phải đấu dây.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Qua dây RS485</b> — đấu 2 dây từ cổng <b>RS485 / BMS / Meter</b> của inverter vào mạch. Ổn định nhất, hợp lắp cố định.</li>
+      </ul>
+      <p style="margin-top:16px"><b>Gắn xong, trên điện thoại bạn xem được:</b></p>
+      <ul class="feat">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>PV · Pin · Lưới · Tải</b> chạy realtime từng giây, kèm <b>số điện (kWh) hôm nay & tổng</b>.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Biểu đồ lịch sử</b> và <b>cảnh báo</b> khi hệ có sự cố — biết sớm để xử lý.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Gộp <b>nhiều inverter / pin</b> về một tài khoản; dữ liệu để trên <b>máy chủ riêng</b>, không phụ thuộc cloud hãng.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Tự lắp khoảng 10 phút</b>, chi phí thấp — không cần dựng server phức tạp.</li>
+      </ul>
+    </div>
+
+    <!-- CHUYỂN SANG HƯỚNG DẪN -->
+    <div class="ghead" style="margin-top:58px"><h2>Hướng dẫn tự lắp</h2><span class="gcount">4 bước · khoảng 10 phút</span></div>
+    <svg class="dim" viewBox="0 0 600 26" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+      <line class="draw" x1="1" y1="13" x2="599" y2="13"/>
+      <path d="M1 8v10M599 8v10M1 13l9-4M1 13l9 4M599 13l-9-4M599 13l-9 4"/>
+      <text x="300" y="9" text-anchor="middle">04 bước · nạp → wifi → dongle → tài khoản</text>
+    </svg>
 
     <div class="prep">
       <h2>Cần chuẩn bị</h2>

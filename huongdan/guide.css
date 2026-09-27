@@ -100,6 +100,17 @@ h1 .amp{color:var(--phos)}
   margin:20px 0 0;font-weight:400}
 .lede b{color:var(--paper);font-weight:650}
 
+/* ẢNH BÌA + PHẦN GIỚI THIỆU (bài có phần mở đầu) */
+.cover{margin:20px 0 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh-1);background:var(--ink-2)}
+.cover img{display:block;width:100%;height:auto}
+.intro{margin:22px 0 0;font-size:16.5px;line-height:1.72;color:var(--paper)}
+.intro p{margin:0 0 14px}
+.intro b{font-weight:650}
+.feat{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:12px}
+.feat li{position:relative;padding-left:30px;font-size:15.5px;line-height:1.5;color:var(--paper)}
+.feat li b{font-weight:650}
+.feat li svg{position:absolute;left:0;top:2px;width:19px;height:19px;color:var(--good)}
+
 /* Dimension line dưới hero */
 .dim{display:block;width:100%;height:26px;margin:26px 0 0;color:var(--phos-line);overflow:visible}
 .dim .draw{stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 1.2s .15s cubic-bezier(.2,.7,.2,1) forwards}
