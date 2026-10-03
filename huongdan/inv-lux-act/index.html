@@ -11,6 +11,52 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/huongdan/guide.css">
+<style>
+/* bài JK: phần cài đặt từ xa — chú thích ảnh */
+.feat .new{display:inline-block;color:#fff;background:var(--phos);font-size:11px;font-weight:700;letter-spacing:.05em;line-height:1;padding:4px 7px 3px;border-radius:5px;margin-left:4px;vertical-align:2px}
+.feat a{color:var(--phos);font-weight:600}
+.jump{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;margin:26px 0 0;padding:13px 18px;border:1px solid var(--phos-line);border-radius:var(--r);background:var(--phos-dim);color:var(--paper);text-decoration:none;font-size:15px;line-height:1.45;transition:background .15s}
+.jump b{color:var(--phos-d);font-weight:700}
+.jump:hover{background:rgba(14,119,94,.15)}
+.annoplate{align-items:flex-start}
+.annoplate.stack{flex-direction:column;align-items:center}
+.anno{position:relative;display:block;width:100%;line-height:0;cursor:zoom-in}
+.anno img{display:block;width:100%;height:auto;border-radius:var(--r-sm);border:1px solid var(--line)}
+.annoplate.side .anno.tall{flex:0 1 320px}
+.annoplate.side .anno.mid{flex:0 1 340px}
+@media (min-width:760px){.annoplate.side .anno.tall{position:sticky;top:16px}}
+.annoplate.side .legend{flex:1 1 300px}
+.annoplate.stack .legend{width:100%;max-width:560px}
+.pin{position:absolute;transform:translate(-50%,-50%);width:24px;height:24px;border-radius:50%;background:var(--phos);color:#fff;font:700 12px/24px var(--fd);text-align:center;box-shadow:0 0 0 2px #fff,0 2px 6px rgba(0,0,0,.4);pointer-events:none;font-variant-numeric:tabular-nums}
+.brk{position:absolute;width:8px;border:2px solid #fff;border-right:0;border-radius:6px 0 0 6px;opacity:.9;pointer-events:none}
+.legend{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-size:15px;line-height:1.55;color:var(--paper)}
+.legend li{display:flex;gap:11px;align-items:flex-start}
+.legend li>div{min-width:0}
+.legend .pin{position:static;transform:none;flex:0 0 auto;box-shadow:none}
+.legend .pin-in{display:inline-block;width:20px;height:20px;font-size:11px;line-height:20px;vertical-align:1px;margin:0 2px}
+.legend b{font-weight:650}
+.legend.groups{gap:20px}
+.legend dl{margin:8px 0 0;padding:0}
+.legend dt{font-weight:650;font-size:14px;color:var(--phos-d);margin-top:8px}
+.legend dt:first-child{margin-top:0}
+.legend dd{margin:2px 0 0;font-size:14.5px;line-height:1.5}
+.legend .rule-line{margin:10px 0 0;font-size:13.5px;color:var(--muted);background:var(--ink-3);border:1px solid var(--line);border-radius:8px;padding:6px 10px;line-height:1.5}
+.legend .rule-line b{color:var(--paper)}
+.rtab{border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);overflow:hidden;box-shadow:var(--sh-1)}
+.rrow{display:grid;grid-template-columns:minmax(150px,230px) 1fr;gap:14px;padding:11px 16px;border-bottom:1px solid var(--line);font-size:14.5px;line-height:1.5}
+.rrow:last-child{border-bottom:0}
+.rrow .rk{font-weight:650;color:var(--amber-d)}
+.rrow b{font-weight:650}
+.rtab.set .rk{color:var(--phos-d)}
+.figtag .n{white-space:nowrap}
+@media (max-width:560px){
+  .rrow{grid-template-columns:1fr;gap:3px}
+  .pin{width:19px;height:19px;font-size:10px;line-height:19px;box-shadow:0 0 0 1.5px #fff,0 1px 4px rgba(0,0,0,.4)}
+  .legend .pin{width:22px;height:22px;font-size:11px;line-height:22px}
+  .brk{width:5px}
+  .annoplate{padding:14px 10px}
+}
+</style>
 </head>
 <body>
   <div class="topnav">
@@ -22,7 +68,7 @@
     <!-- GIỚI THIỆU -->
     <div class="hero">
       <h1>Giám sát biến tần<br>Luxpower <span class="amp">từ xa</span></h1>
-      <p class="lede">Đang đi làm hay đi cà phê vẫn biết dàn điện mặt trời nhà mình <b>đang phát bao nhiêu, pin còn bao nhiêu, có đẩy lên lưới không</b> — realtime ngay trên điện thoại. Chỉ với một mạch nhỏ gắn vào inverter Luxpower.</p>
+      <p class="lede">Đang đi làm hay đi cà phê vẫn biết dàn điện mặt trời nhà mình <b>đang phát bao nhiêu, pin còn bao nhiêu, có đẩy lên lưới không</b> — realtime ngay trên điện thoại. Chỉ với một mạch nhỏ gắn vào inverter Luxpower, xem được trên <b>điện thoại Android, iPhone hay máy tính</b>.</p>
     </div>
 
     <div class="intro">
@@ -30,12 +76,16 @@
       <p><b>Nó hoạt động thế nào?</b> Một mạch nhỏ (bo <b>ESP32</b>) đọc số liệu từ inverter qua <b>dongle WiFi Luxpower</b> (dongle đã cắm sẵn ở inverter), rồi đẩy lên máy chủ SOLAR CLOUD qua <b>WiFi nhà</b>. Chỉ cần cho dongle và mạch vào <b>cùng một WiFi nhà</b> — mạch tự đọc, <b>không phải đấu dây</b>.</p>
       <p style="margin-top:16px"><b>Gắn xong, trên điện thoại bạn xem được:</b></p>
       <ul class="feat">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>PV · Pin · Lưới · Tải</b> chạy realtime từng giây, kèm <b>số điện (kWh) hôm nay & tổng</b>.</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Biểu đồ lịch sử</b> và <b>cảnh báo</b> khi hệ có sự cố — biết sớm để xử lý.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>PV1 · PV2 · Pin · Lưới · Tải</b> chạy realtime từng giây, kèm <b>số điện (kWh) hôm nay</b>.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Biểu đồ 24 giờ</b> và <b>thống kê ngày · tháng · năm</b>: tỉ lệ tự dùng, <b>tiền điện tiết kiệm</b>.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Báo lỗi / cảnh báo</b> của inverter ngay trên app, <b>nhật ký</b> mạch trực tuyến / ngoại tuyến.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Đổi WiFi, cập nhật firmware, khởi động lại mạch từ xa</b>, không cần ra tận nơi.</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Gộp <b>nhiều inverter / pin</b> về một tài khoản; dữ liệu để trên <b>máy chủ riêng</b>, không phụ thuộc cloud hãng.</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Tự lắp khoảng 10 phút</b>, chi phí thấp — không cần dựng server phức tạp.</li>
       </ul>
     </div>
+
+    <a class="jump" href="#app">Đã lắp xong mạch? <b>Xem hướng dẫn dùng app →</b></a>
 
     <!-- CHUYỂN SANG HƯỚNG DẪN -->
     <div class="ghead" style="margin-top:58px"><h2>Hướng dẫn tự lắp</h2><span class="gcount">4 bước · khoảng 10 phút</span></div>
@@ -100,28 +150,26 @@
         <li>Trên điện thoại vào <b>Cài đặt › WiFi</b> → chọn WiFi đó → nhập mật khẩu <code>123456789</code></li>
         <li>Trang cấu hình <b>tự mở</b>. Nếu không → mở trình duyệt gõ <code>192.168.4.1</code></li>
         <li>Trang hiện <b>ID thiết bị (10 số)</b> — <b>ghi lại</b> để nhập vào tài khoản ở bước 4.</li>
-        <li>Ở card <b>Kết nối WiFi</b>: chọn <b>WiFi nhà</b> (2.4GHz) → nhập <b>mật khẩu WiFi</b> → bấm <b>Lưu</b>.</li>
+        <li>Ở card <b>① Kết nối WiFi</b>: bấm <b>Quét</b> → chọn <b>WiFi nhà</b> (2.4GHz) → nhập <b>mật khẩu WiFi</b> → bấm <b>Lưu &amp; Kết nối</b>.</li>
       </ol>
       <div class="fig">
-        <div class="figtag"><span class="n">FIG.2</span><span>Chọn WiFi mạch → trang 192.168.4.1</span><span class="rule"></span></div>
-        <div class="plate"><span class="rc-tr"></span><span class="rc-bl"></span>
-          <div class="phone"><div class="scr">
-            <div class="bar">WiFi</div>
-            <div class="wifi-row sel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a10 10 0 0 1 14 0M8 15.8a5.5 5.5 0 0 1 8 0M12 19h.01"/></svg>INVLUX-3823041907<span class="lk">✓</span></div>
-            <div class="wifi-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a10 10 0 0 1 14 0M8 15.8a5.5 5.5 0 0 1 8 0M12 19h.01"/></svg>WiFi-Nha-Ban<span class="lk">🔒</span></div>
-            <div class="wifi-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5a10 10 0 0 1 14 0M8 15.8a5.5 5.5 0 0 1 8 0M12 19h.01"/></svg>Hang xom 5G<span class="lk">🔒</span></div>
-          </div></div>
-          <div class="portal">
-            <div class="url">192.168.4.1</div>
-            <div class="body">
-              <div class="idbox"><div class="k">ID thiết bị</div><div class="v">3823041907</div></div>
-              <div class="fld"><div class="k">WiFi nhà (2.4GHz)</div><div class="inp">WiFi-Nha-Ban <span class="cx">▾</span></div></div>
-              <div class="fld"><div class="k">Mật khẩu WiFi</div><div class="inp">••••••••</div></div>
-              <div class="btn-save">Lưu &amp; kết nối</div>
-            </div>
-          </div>
+        <div class="figtag"><span class="n">HÌNH 2</span><span>Trang 192.168.4.1 — ID thiết bị &amp; WiFi</span><span class="rule"></span></div>
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:480px" href="/huongdan/img/lux32-web-wifi.jpg" target="_blank" rel="noopener">
+            <img src="/huongdan/img/lux32-web-wifi.jpg" width="864" height="747" alt="Trang cấu hình 192.168.4.1 của mạch Luxpower ESP32: ID thiết bị, chọn WiFi nhà, mật khẩu, Lưu và Kết nối" loading="lazy">
+            <span class="pin" style="left:3.70%;top:13.92%">1</span>
+            <span class="pin" style="left:3.70%;top:50.07%">2</span>
+            <span class="pin" style="left:3.70%;top:69.75%">3</span>
+            <span class="pin" style="left:3.70%;top:84.61%">4</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Device ID</b>: mã <b>10 số</b> của mạch. <b>Ghi lại</b> để thêm vào tài khoản ở bước 4.</div></li>
+            <li><span class="pin">2</span><div>Bấm <b>Quét</b> → chọn <b>WiFi nhà</b> (2.4GHz) trong danh sách.</div></li>
+            <li><span class="pin">3</span><div>Nhập <b>mật khẩu WiFi</b>.</div></li>
+            <li><span class="pin">4</span><div>Bấm <b>Lưu &amp; Kết nối</b>. Dòng trên cùng hiện tên WiFi và <b>MQTT ✓</b> là mạch đã lên mạng.</div></li>
+          </ol>
         </div>
-        <div class="figcap">Chọn WiFi của mạch (trái) → trang 192.168.4.1 hiện ID + nhập WiFi nhà (phải).</div>
+        <div class="figcap">Trang cấu hình của mạch (rút gọn), mở bằng điện thoại sau khi vào WiFi <code>INVLUX-…</code>.</div>
       </div>
       <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Nhớ hai điều</span>WiFi nhà phải là <b>2.4GHz</b> (không phải 5GHz). Và <b>ghi lại ID 10 số</b> hiện ở trang <code>192.168.4.1</code>.</div></div>
     </div>
@@ -130,24 +178,31 @@
     <div class="sec">
       <div class="rail"></div>
       <div class="snum">3</div>
-      <div class="sechd"><div class="st">Trên trang 192.168.4.1 · card “Kết nối dongle”</div><h2>Kết nối dongle Luxpower</h2></div>
+      <div class="sechd"><div class="st">Trên trang 192.168.4.1 · card “② Kết nối bộ đọc (dongle)”</div><h2>Kết nối dongle Luxpower</h2></div>
       <ol class="steps">
         <li>Cắm <b>dongle WiFi Luxpower</b> vào inverter và cho dongle vào <b>cùng WiFi nhà</b> với mạch.</li>
-        <li>Ở card <b>Kết nối dongle</b> bấm <b>Dò dongle tự động</b> — mạch tự tìm và ghi nhớ dongle (hiện IP + số serial khi tìm thấy).<div class="hint">Nếu không tự dò được, nhập <b>IP của dongle</b> bằng tay rồi lưu.</div></li>
-        <li>Khi có dữ liệu, trang <code>192.168.4.1</code> sẽ hiện <b>PV / Pin / Lưới / Tải</b> chạy live.</li>
+        <li>Ở card <b>② Kết nối bộ đọc (dongle)</b> bấm <b>🔍 Dò dongle tự động</b> — mạch tự tìm và ghi nhớ dongle (hiện IP + số serial khi tìm thấy).<div class="hint">Nếu không tự dò được, nhập <b>IP của dongle</b> bằng tay rồi lưu.</div></li>
+        <li>Khi có dữ liệu, trang <code>192.168.4.1</code> sẽ hiện <b>PV / Pin / Lưới / Tải</b> chạy live.<div class="hint">Bản ACT chưa kích hoạt: số đo trên trang hiện 0, nhưng mọi cấu hình vẫn dùng được.</div></li>
       </ol>
       <div class="fig">
-        <div class="figtag"><span class="n">FIG.3</span><span>Card “Kết nối dongle”</span><span class="rule"></span></div>
-        <div class="plate"><span class="rc-tr"></span><span class="rc-bl"></span>
-          <div class="portal">
-            <div class="url">192.168.4.1 · Kết nối dongle</div>
-            <div class="body">
-              <div class="linkrow"><span class="dot"></span>Dongle Luxpower<span class="st">Đã kết nối · SN 3210••••</span></div>
-              <div class="btn-save">Dò dongle tự động</div>
-            </div>
-          </div>
+        <div class="figtag"><span class="n">HÌNH 3</span><span>Card “② Kết nối bộ đọc (dongle)”</span><span class="rule"></span></div>
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:480px" href="/huongdan/img/lux32-web-dongle.jpg" target="_blank" rel="noopener">
+            <img src="/huongdan/img/lux32-web-dongle.jpg" width="864" height="1239" alt="Card Kết nối bộ đọc dongle trên trang 192.168.4.1: trạng thái, IP dongle, serial, dò dongle tự động, nhập IP và serial thủ công" loading="lazy">
+            <span class="pin" style="left:3.70%;top:11.22%">1</span>
+            <span class="pin" style="left:3.70%;top:20.98%">2</span>
+            <span class="pin" style="left:3.70%;top:41.89%">3</span>
+            <span class="pin" style="left:3.70%;top:58.92%">4</span>
+            <span class="pin" style="left:3.70%;top:82.32%">5</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Trạng thái</b>: <b>✅ Đang nhận dữ liệu</b> là mạch đã đọc được inverter.</div></li>
+            <li><span class="pin">2</span><div><b>IP dongle</b>, <b>Datalog SN</b> (serial dongle), <b>Inverter SN</b>: mạch tự điền khi tìm thấy dongle.</div></li>
+            <li><span class="pin">3</span><div>Bấm <b>🔍 Dò dongle tự động</b>: mạch quét mạng nhà để tìm dongle, thấy thì báo <b>“✓ Tìm thấy dongle: …”</b>.</div></li>
+            <li><span class="pin">4</span><div>Dò không ra: nhập <b>IP dongle</b> bằng tay → <b>Lưu IP</b>.</div></li>
+            <li><span class="pin">5</span><div>Khi cần: nhập <b>serial</b> chép từ tem dongle và tem biến tần → <b>Lưu serial</b>. Bỏ trống ô nào thì giữ nguyên ô đó.</div></li>
+          </ol>
         </div>
-        <div class="figcap">Card “Kết nối dongle” — bấm dò tự động, thấy “Đã kết nối” là được.</div>
       </div>
       <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Dongle phải cùng WiFi nhà</span>Mạch chỉ dò thấy dongle khi <b>dongle Luxpower và mạch ở cùng một WiFi nhà 2.4GHz</b>. Nếu không dò được, kiểm tra lại dongle đã lên WiFi nhà chưa, hoặc nhập <b>IP dongle</b> bằng tay.</div></div>
     </div>
@@ -179,15 +234,160 @@
       <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Nếu số liệu hiện toàn số 0</span>Bản <b>ACT</b> cần được <b>kích hoạt</b> mới hiện đầy đủ số liệu (mạch vẫn lên mạng bình thường). Liên hệ nơi bán để kích hoạt (mua đứt hoặc theo thuê bao).</div></div>
     </div>
 
-    <div class="fig">
-      <div class="figtag"><span class="n">FIG.5</span><span>Giao diện app khi chạy</span><span class="rule"></span></div>
-      <div class="plate"><span class="rc-tr"></span><span class="rc-bl"></span>
-        <img class="appshot" src="/huongdan/img/giaodien-lux-senergy.jpg" alt="Giao diện SOLAR CLOUD giám sát inverter: PV, pin, lưới, tải, biểu đồ 24h" loading="lazy">
+    <div class="done"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div><div class="bd"><span class="tt">Hoàn tất</span><p>Mạch tự gửi dữ liệu inverter lên SOLAR CLOUD mỗi giây. Muốn đổi WiFi sau này: dùng nút <b>Dò WiFi</b> trong app (tab Thông tin), hoặc kết nối lại WiFi <code>INVLUX-…</code> rồi vào <code>192.168.4.1</code>. Giữ nút <b>BOOT ~5 giây</b> để xoá WiFi đã lưu và cài lại từ đầu.</p></div></div>
+
+    <!-- ═════════ XEM & QUẢN LÝ TRÊN APP ═════════ -->
+    <div class="ghead" id="app" style="margin-top:76px"><h2>Xem &amp; quản lý trên app</h2><span class="gcount">Android · iPhone · máy tính</span></div>
+    <svg class="dim" viewBox="0 0 600 26" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+      <line class="draw" x1="1" y1="13" x2="599" y2="13"/>
+      <path d="M1 8v10M599 8v10M1 13l9-4M1 13l9 4M599 13l-9-4M599 13l-9 4"/>
+      <text x="300" y="9" text-anchor="middle">⚡ tổng quan → 📊 năng lượng → ℹ️ thông tin</text>
+    </svg>
+
+    <div class="intro">
+      <p>Thêm thiết bị xong, mở app <b>SOLAR CLOUD</b> và chạm vào thẻ <b>Inverter Luxpower</b> ở màn hình Home. Thanh dưới cùng có 4 tab: <b>⚡ Tổng quan · 📊 Năng lượng · ℹ️ Thông tin · 🔀 Thiết bị</b> (tab cuối để chuyển nhanh sang máy khác).</p>
+    </div>
+    <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Bản ACT</span>Sau khi cài đặt và <b>kết nối thành công vào app</b>, nhấn <b>Kích hoạt</b> để hiển thị các thông số.</div></div>
+
+    <!-- A -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">A</div>
+      <div class="sechd"><div class="st">Tab ⚡ Tổng quan · kiểu cổ điển</div><h2>Xem điện mặt trời, pin, lưới, tải</h2></div>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH A1</span><span>Tổng quan — 4 khối quanh inverter</span><span class="rule"></span></div>
+        <div class="plate annoplate side">
+          <a class="anno tall" href="/huongdan/img/lux-app-1-tongquan.jpg" target="_blank" rel="noopener">
+            <img src="/huongdan/img/lux-app-1-tongquan.jpg" width="796" height="1942" alt="Tab Tổng quan inverter Luxpower: điện mặt trời PV1 PV2, lưới điện, pin lưu trữ, tải gia đình, nhiệt độ, biểu đồ 24 giờ" loading="lazy">
+            <span class="pin" style="left:3.52%;top:2.06%">1</span>
+            <span class="pin" style="left:63.32%;top:2.06%">2</span>
+            <span class="pin" style="left:3.52%;top:30.07%">3</span>
+            <span class="pin" style="left:63.32%;top:30.07%">4</span>
+            <span class="pin" style="left:58.79%;top:24.20%">5</span>
+            <span class="pin" style="left:6.53%;top:16.58%">6</span>
+            <span class="pin" style="left:22.86%;top:49.59%">7</span>
+            <span class="pin" style="left:59.05%;top:58.60%">8</span>
+            <span class="pin" style="left:30.78%;top:62.10%">9</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>☀️ Điện mặt trời</b>: tổng công suất pin mặt trời đang phát; <b>PV1, PV2</b> là từng chuỗi tấm (điện áp · dòng · công suất).</div></li>
+            <li><span class="pin">2</span><div><b>🗼 Lưới điện</b>: số <b>dương = đang bán</b> lên lưới, <b>âm = đang mua</b>. Kèm trạng thái <b>Hòa lưới / Mất lưới</b>, điện áp, tần số, dòng. Mất lưới thì dây nối chuyển đỏ và hiện ⚠️.</div></li>
+            <li><span class="pin">3</span><div><b>🔋 Pin lưu trữ</b>: công suất sạc/xả, <b>SoC</b> (% pin), sức khoẻ, điện áp, dòng kèm nhãn <b>SẠC / XẢ</b>. Chạm biểu tượng 🔋 để xem thêm: trạng thái BMS, cell cao/thấp nhất (mV), số chu kỳ.</div></li>
+            <li><span class="pin">4</span><div><b>🏠 Tải gia đình</b>: điện nhà đang dùng, điện áp, tần số, dòng. <b>Cổng ra</b> cho biết tải đang chạy <b>Hòa lưới</b> hay <b>EPS (backup)</b> khi mất điện.</div></li>
+            <li><span class="pin">5</span><div><b>Inverter</b>: <b>TRỰC TUYẾN</b> là mạch đang gửi số liệu. Chấm chạy trên dây cho biết chiều dòng điện.</div></li>
+            <li><span class="pin">6</span><div><b>📅 Hôm nay</b>: số điện trong ngày của từng khối: PV phát, bán/mua lưới, nạp/xả pin, tải dùng (kWh).</div></li>
+            <li><span class="pin">7</span><div><b>🌡️ Nhiệt độ</b>: các cảm biến nhiệt của inverter và nhiệt độ pin.</div></li>
+            <li><span class="pin">8</span><div><b>Trạng thái lỗi</b>: <b>✓ Bình thường</b>, hoặc mã <b>Lỗi (fault)</b> / <b>Cảnh báo (warn)</b> do inverter báo.</div></li>
+            <li><span class="pin">9</span><div><b>📈 Biểu đồ 24 giờ</b>: công suất PV, tải, pin, lưới và đường <b>% pin (SoC)</b>. Rê chuột hoặc chạm để xem giá trị. Pin/Lưới <b>trên 0 = xả/xuất</b>, dưới 0 = nạp/nhập.</div></li>
+          </ol>
+        </div>
+        <div class="figcap">Bấm vào ảnh để xem cỡ lớn.</div>
       </div>
-      <div class="figcap">Sau khi thêm thiết bị — mở app SOLAR CLOUD xem PV / pin / lưới / tải realtime + biểu đồ 24h.</div>
+
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH A2</span><span>Tổng quan — kiểu sơ đồ dòng</span><span class="rule"></span></div>
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:480px" href="/huongdan/img/lux-app-2-sodo.jpg" target="_blank" rel="noopener">
+            <img src="/huongdan/img/lux-app-2-sodo.jpg" width="820" height="903" alt="Tab Tổng quan kiểu sơ đồ dòng: điện mặt trời, pin lưu trữ, lưới điện, tải tiêu thụ quanh inverter Luxpower" loading="lazy">
+            <span class="pin" style="left:42.68%;top:7.09%">1</span>
+            <span class="pin" style="left:10.24%;top:34.77%">2</span>
+            <span class="pin" style="left:75.12%;top:34.77%">3</span>
+            <span class="pin" style="left:42.68%;top:62.68%">4</span>
+            <span class="pin" style="left:57.56%;top:36.54%">5</span>
+            <span class="pin" style="left:3.66%;top:85.83%">6</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Điện mặt trời</b>: công suất PV đang phát.</div></li>
+            <li><span class="pin">2</span><div><b>Pin lưu trữ</b>: công suất, % pin, đang nạp hay xả, nhiệt độ pin.</div></li>
+            <li><span class="pin">3</span><div><b>Lưới điện</b>: công suất mua/bán, điện áp, tần số.</div></li>
+            <li><span class="pin">4</span><div><b>Tải tiêu thụ</b>: điện nhà đang dùng.</div></li>
+            <li><span class="pin">5</span><div><b>Inverter</b> ở giữa, kèm nhiệt độ. Dây có chấm chạy = có dòng điện, chạy theo chiều thật.</div></li>
+            <li><span class="pin">6</span><div><b>Số điện hôm nay</b>: PV phát · Nạp/Xả pin · Mua điện · Bán điện (kWh).</div></li>
+          </ol>
+        </div>
+        <div class="figcap">Chạm vào từng khối để xem chi tiết (PV1/PV2, tổng PV…).</div>
+      </div>
+      <ol class="steps">
+        <li>Muốn đổi giữa 2 kiểu xem: bấm <b>nút biểu tượng</b> ở đầu tab Tổng quan (<b>“Xem sơ đồ dòng”</b> / <b>“Xem giao diện cổ điển”</b>). App nhớ lựa chọn cho từng máy.</li>
+      </ol>
     </div>
 
-    <div class="done"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div><div class="bd"><span class="tt">Hoàn tất</span><p>Mạch tự gửi dữ liệu inverter lên SOLAR CLOUD mỗi giây. Muốn đổi WiFi/dongle sau này: kết nối lại WiFi <code>INVLUX-…</code> rồi vào <code>192.168.4.1</code>. Giữ nút <b>BOOT ~5 giây</b> để xoá WiFi đã lưu và cài lại từ đầu.</p></div></div>
+    <!-- B -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">B</div>
+      <div class="sechd"><div class="st">Tab 📊 Năng lượng</div><h2>Thống kê điện năng &amp; tiền điện</h2></div>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH B1</span><span>Xem theo ngày</span><span class="rule"></span></div>
+        <div class="plate annoplate side">
+          <a class="anno mid" href="/huongdan/img/lux-app-3-ngay.jpg" target="_blank" rel="noopener">
+            <img src="/huongdan/img/lux-app-3-ngay.jpg" width="808" height="1474" alt="Tab Năng lượng theo ngày: biểu đồ công suất, tỉ lệ tự dùng, môi trường và tiền điện" loading="lazy">
+            <span class="pin" style="left:28.47%;top:3.12%">1</span>
+            <span class="pin" style="left:17.33%;top:9.16%">2</span>
+            <span class="pin" style="left:34.90%;top:15.54%">3</span>
+            <span class="pin" style="left:24.75%;top:18.59%">4</span>
+            <span class="pin" style="left:27.97%;top:56.38%">5</span>
+            <span class="pin" style="left:46.78%;top:85.89%">6</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Ngày · Tháng · Năm · Tổng thể</b>: chọn khoảng thời gian muốn xem.</div></li>
+            <li><span class="pin">2</span><div><b>‹ ›</b> lùi/tới từng ngày (tháng, năm); <b>Hôm nay</b> để quay về hiện tại.</div></li>
+            <li><span class="pin">3</span><div><b>Biểu đồ công suất</b> cả ngày: sản xuất điện (PV), tiêu thụ, lưới, pin và đường <b>SOC</b>.</div></li>
+            <li><span class="pin">4</span><div>Chạm vào biểu đồ để xem <b>giá trị tại từng thời điểm</b> (giờ, kW, % pin).</div></li>
+            <li><span class="pin">5</span><div><b>Tỉ lệ tự dùng</b>: điện nhà dùng đến từ đâu (PV · xả pin · mua lưới), và điện PV làm ra được dùng vào đâu (tiêu thụ · sạc pin).</div></li>
+            <li><span class="pin">6</span><div><b>🌱 Môi trường &amp; Tiền điện</b>: lượng CO₂ giảm nhờ PV, số cây xanh tương đương, và <b>tiền điện tiết kiệm</b> ước tính.</div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH B2</span><span>Xem theo tháng</span><span class="rule"></span></div>
+        <div class="plate annoplate side">
+          <a class="anno mid" href="/huongdan/img/lux-app-4-thang.jpg" target="_blank" rel="noopener">
+            <img src="/huongdan/img/lux-app-4-thang.jpg" width="790" height="1485" alt="Tab Năng lượng theo tháng: hồ sơ điện năng từng ngày, PV, tiêu thụ, mua vào, bán ra, sạc, xả" loading="lazy">
+            <span class="pin" style="left:31.14%;top:15.96%">1</span>
+            <span class="pin" style="left:31.65%;top:35.02%">2</span>
+            <span class="pin" style="left:28.86%;top:55.35%">3</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Hồ sơ điện năng</b>: tổng cả tháng của <b>PV, tiêu thụ, bán ra, mua vào, sạc, xả</b> (kWh).</div></li>
+            <li><span class="pin">2</span><div><b>Cột từng ngày</b>: phía trên là điện có được (PV, mua vào, xả pin), phía dưới là điện đã dùng (tiêu thụ, sạc pin).</div></li>
+            <li><span class="pin">3</span><div><b>Tỉ lệ tự dùng</b> và <b>tiền điện</b> tính cho cả tháng. Xem theo <b>Năm</b> hoặc <b>Tổng thể</b> tương tự.</div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- C -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">C</div>
+      <div class="sechd"><div class="st">Tab ℹ️ Thông tin</div><h2>Thông tin máy, WiFi &amp; cập nhật</h2></div>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH C</span><span>Tab Thông tin</span><span class="rule"></span></div>
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:520px" href="/huongdan/img/lux-app-5-thongtin.jpg" target="_blank" rel="noopener">
+            <img src="/huongdan/img/lux-app-5-thongtin.jpg" width="814" height="1054" alt="Tab Thông tin: thông tin thiết bị, cập nhật firmware, kết nối WiFi, kết nối inverter qua dongle, hệ thống, nhật ký sự kiện" loading="lazy">
+            <span class="pin" style="left:32.92%;top:5.31%">1</span>
+            <span class="pin" style="left:73.71%;top:41.84%">2</span>
+            <span class="pin" style="left:26.04%;top:50.00%">3</span>
+            <span class="pin" style="left:30.22%;top:62.81%">4</span>
+            <span class="pin" style="left:70.64%;top:67.84%">5</span>
+            <span class="pin" style="left:22.60%;top:89.18%">6</span>
+            <span class="pin" style="left:30.22%;top:96.39%">7</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>📟 Thông tin thiết bị</b>: ID thiết bị (bấm 📋 để sao chép), hãng, dòng sản phẩm, phần cứng, thời gian mạch đã chạy, phiên bản firmware.</div></li>
+            <li><span class="pin">2</span><div><b>Cập nhật FW</b>: có bản mới thì hiện nút <b>“Cập nhật”</b>. Bấm, xác nhận, chờ khoảng 1–2 phút; <b>đừng rút nguồn/WiFi</b> trong lúc cập nhật.</div></li>
+            <li><span class="pin">3</span><div><b>📶 Kết nối WiFi</b>: độ mạnh sóng. Firmware mới có nút <b>🔍 Dò WiFi xung quanh</b> → chọn WiFi → nhập mật khẩu → <b>Đổi sang WiFi này</b>, đổi WiFi <b>từ xa</b> không cần ra tận nơi. WiFi mới không vào được thì mạch tự quay về WiFi cũ.</div></li>
+            <li><span class="pin">4</span><div><b>🔌 Kết nối inverter</b>: kiểu kết nối (DONGLE · Luxpower), IP và serial của dongle. Bản ESP32 có thêm nút <b>⚙️ Cài đặt dongle</b>: nhập IP dongle từ xa (để trống = tự dò), bấm <b>Lưu</b> rồi chờ khoảng 30 giây. Mạch phải <b>cùng WiFi với dongle</b>.</div></li>
+            <li><span class="pin">5</span><div><b>Trạng thái</b>: <b>🟢 Đang đọc dữ liệu</b> là mạch đọc được inverter.</div></li>
+            <li><span class="pin">6</span><div><b>🔧 Hệ thống</b>: <b>Khởi động lại thiết bị</b> từ xa, hoặc <b>Xoá thiết bị</b> khỏi tài khoản.</div></li>
+            <li><span class="pin">7</span><div><b>📋 Nhật ký sự kiện</b>: các lần mạch trực tuyến / ngoại tuyến, cập nhật firmware.</div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Chỉ giám sát</span>Bản Luxpower hiện dùng để <b>xem số liệu và quản lý mạch</b> (WiFi, cập nhật, khởi động lại). Việc chỉnh thông số inverter (chế độ làm việc, dòng sạc…) vẫn làm trên inverter hoặc app hãng.</div></div>
+    </div>
 
     <div class="cta-row">
       <a class="cta pri" href="/flash">Nạp firmware ngay →</a>
