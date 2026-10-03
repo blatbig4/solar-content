@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Giám sát 2 inverter Deye + Luxpower và pin JK BMS từ xa qua WiFi — tự lắp (ESP32-S3) | SOLAR CLOUD</title>
+<meta name="description" content="Tự làm bộ giám sát 2 inverter khác hãng (Deye + Luxpower SNA, 6.5 Pro) và pin JK BMS trên một app: xem điện mặt trời, pin, lưới, tải của từng máy và cả nhà từ xa. Không đấu dây: inverter qua dongle WiFi, BMS qua Bluetooth.">
+<meta name="theme-color" content="#0E775E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/huongdan/guide.css">
+<style>
+/* bài JK: phần cài đặt từ xa — chú thích ảnh */
+.feat .new{display:inline-block;color:#fff;background:var(--phos);font-size:11px;font-weight:700;letter-spacing:.05em;line-height:1;padding:4px 7px 3px;border-radius:5px;margin-left:4px;vertical-align:2px}
+.feat a{color:var(--phos);font-weight:600}
+.jump{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;margin:26px 0 0;padding:13px 18px;border:1px solid var(--phos-line);border-radius:var(--r);background:var(--phos-dim);color:var(--paper);text-decoration:none;font-size:15px;line-height:1.45;transition:background .15s}
+.jump b{color:var(--phos-d);font-weight:700}
+.jump:hover{background:rgba(14,119,94,.15)}
+.annoplate{align-items:flex-start}
+.annoplate.stack{flex-direction:column;align-items:center}
+.anno{position:relative;display:block;width:100%;line-height:0;cursor:zoom-in}
+.anno img{display:block;width:100%;height:auto;border-radius:var(--r-sm);border:1px solid var(--line)}
+.annoplate.side .anno.tall{flex:0 1 320px}
+.annoplate.side .anno.mid{flex:0 1 340px}
+@media (min-width:760px){.annoplate.side .anno.tall{position:sticky;top:16px}}
+.annoplate.side .legend{flex:1 1 300px}
+.annoplate.stack .legend{width:100%;max-width:560px}
+.pin{position:absolute;transform:translate(-50%,-50%);width:24px;height:24px;border-radius:50%;background:var(--phos);color:#fff;font:700 12px/24px var(--fd);text-align:center;box-shadow:0 0 0 2px #fff,0 2px 6px rgba(0,0,0,.4);pointer-events:none;font-variant-numeric:tabular-nums}
+.brk{position:absolute;width:8px;border:2px solid #fff;border-right:0;border-radius:6px 0 0 6px;opacity:.9;pointer-events:none}
+.legend{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-size:15px;line-height:1.55;color:var(--paper)}
+.legend li{display:flex;gap:11px;align-items:flex-start}
+.legend li>div{min-width:0}
+.legend .pin{position:static;transform:none;flex:0 0 auto;box-shadow:none}
+.legend .pin-in{display:inline-block;width:20px;height:20px;font-size:11px;line-height:20px;vertical-align:1px;margin:0 2px}
+.legend b{font-weight:650}
+.legend.groups{gap:20px}
+.legend dl{margin:8px 0 0;padding:0}
+.legend dt{font-weight:650;font-size:14px;color:var(--phos-d);margin-top:8px}
+.legend dt:first-child{margin-top:0}
+.legend dd{margin:2px 0 0;font-size:14.5px;line-height:1.5}
+.legend .rule-line{margin:10px 0 0;font-size:13.5px;color:var(--muted);background:var(--ink-3);border:1px solid var(--line);border-radius:8px;padding:6px 10px;line-height:1.5}
+.legend .rule-line b{color:var(--paper)}
+.rtab{border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);overflow:hidden;box-shadow:var(--sh-1)}
+.rrow{display:grid;grid-template-columns:minmax(150px,230px) 1fr;gap:14px;padding:11px 16px;border-bottom:1px solid var(--line);font-size:14.5px;line-height:1.5}
+.rrow:last-child{border-bottom:0}
+.rrow .rk{font-weight:650;color:var(--amber-d)}
+.rrow b{font-weight:650}
+.rtab.set .rk{color:var(--phos-d)}
+.figtag .n{white-space:nowrap}
+.compat{margin:26px 0 0;border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);padding:18px 20px 20px;box-shadow:var(--sh-1)}
+.compat h3{margin:0 0 6px;font-family:var(--fd);font-size:17px;font-weight:750;color:var(--paper)}
+.compat>p{margin:0;font-size:15px;line-height:1.55;color:var(--paper)}
+.compat b{font-weight:650}
+.cgrp{margin:16px 0 0}
+.cg{display:block;font-size:12.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:14px;font-weight:600;color:var(--phos-d);background:var(--phos-dim);border:1px solid var(--phos-line);border-radius:999px;padding:4px 11px;line-height:1.3;white-space:nowrap}
+.chip small{font-weight:500;color:var(--muted);font-size:12.5px}
+.compat .cnote{margin:16px 0 0;font-size:13.5px;line-height:1.5;color:var(--muted)}
+.heroshot{margin:22px auto 0;max-width:600px}
+.heroshot img{display:block;width:100%;height:auto}
+.anno img[src*="-box-"]{border:0;border-radius:0}
+@media (max-width:560px){
+  .rrow{grid-template-columns:1fr;gap:3px}
+  .pin{width:19px;height:19px;font-size:10px;line-height:19px;box-shadow:0 0 0 1.5px #fff,0 1px 4px rgba(0,0,0,.4)}
+  .legend .pin{width:22px;height:22px;font-size:11px;line-height:22px}
+  .brk{width:5px}
+  .annoplate{padding:14px 10px}
+}
+/* sơ đồ kết nối */
+.diag{margin:26px 0 0;border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);box-shadow:var(--sh-1);padding:18px 14px 10px}
+.diag svg{display:block;width:100%;height:auto}
+.diag .bx{fill:var(--ink-3);stroke:var(--line-2);stroke-width:1.5}
+.diag .bx.pri{fill:var(--phos-dim);stroke:var(--phos-line)}
+.diag .t1{font:700 15px var(--fd);fill:var(--paper)}
+.diag .t2{font:500 12.5px var(--fd);fill:var(--muted)}
+.diag .tl{font:700 12px var(--fd);fill:var(--phos-d)}
+.diag .tb{font:700 12px var(--fd);fill:#2563EB}
+.diag .wf{stroke:var(--phos);stroke-width:2.2;fill:none;stroke-dasharray:6 6}
+.diag .bt{stroke:#2563EB;stroke-width:2.2;fill:none;stroke-dasharray:3 6;stroke-linecap:round}
+.diag .net{stroke:var(--paper);stroke-width:2;fill:none;opacity:.55}
+.diag .dg{fill:var(--phos);}
+.diag .ic{fill:none;stroke:var(--phos-d);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mockui{width:100%;max-width:440px;background:#0f172a;border-radius:14px;padding:16px;color:#e2e8f0;font:14px/1.45 var(--fd);box-shadow:var(--sh-2)}
+.mockui .mh{font-weight:700;font-size:15px;margin-bottom:10px;color:#fff}
+.mockui .mr{display:flex;align-items:center;gap:10px;background:#1e293b;border:1px solid #334155;border-radius:10px;padding:10px 12px;margin-top:8px}
+.mockui .mr b{color:#fff;font-weight:650}
+.mockui .mr .st{margin-left:auto;color:#4ade80;font-weight:650;font-size:13px;white-space:nowrap}
+.mockui .mr .dt{width:9px;height:9px;border-radius:50%;background:#4ade80;flex:0 0 auto}
+.mockui .mr small{display:block;color:#94a3b8;font-size:12.5px}
+.mockui .mb{margin-top:12px;background:#38bdf8;color:#0f172a;border-radius:10px;text-align:center;font-weight:700;padding:10px}
+.mockui .mb.g{background:#1e293b;color:#e2e8f0;border:1px solid #334155}
+.mockui .seg{display:flex;gap:6px;background:#1e293b;border:1px solid #334155;border-radius:10px;padding:4px;margin-bottom:4px}
+.mockui .seg span{flex:1;text-align:center;padding:7px;border-radius:8px;color:#94a3b8;font-weight:600}
+.mockui .seg span.on{background:#38bdf8;color:#0f172a}
+</style>
+</head>
+<body>
+<script src="/site-nav.js"></script>
+  <div class="topnav">
+    <a href="/huongdan">← Chọn thiết bị khác</a>
+    <a class="sp" href="/flash">Nạp firmware →</a>
+  </div>
+
+  <div class="wrap">
+    <!-- GIỚI THIỆU -->
+    <div class="hero" style="padding-top:clamp(26px,4.5vw,40px)">
+      <h1>Giám sát 2 inverter<br>&amp; pin JK BMS <span class="amp">từ xa</span></h1>
+      <p class="lede">Nhà bạn có <b>2 inverter khác hãng</b>, một <b>Deye</b> và một <b>Luxpower</b> (SNA, 6.5 Pro…), cùng <b>pin JK BMS</b>? Một mạch nhỏ gom tất cả về <b>một app</b>: xem từng máy và cả nhà, ở đâu cũng được. <b>Không cần đấu dây.</b></p>
+    </div>
+
+    <div class="intro">
+      <p>Bình thường, mỗi inverter phải xem trên <b>app riêng của hãng</b>, còn pin JK thì mở <b>app JK</b> và phải <b>đứng gần tủ pin</b> vì chỉ nối Bluetooth ở khoảng cách gần. Muốn biết <b>cả nhà</b> đang phát bao nhiêu, dùng bao nhiêu thì phải tự cộng.</p>
+      <p>Bộ giám sát này là <b>một mạch nhỏ</b> đặt trong nhà: nó đọc 2 inverter <b>qua dongle WiFi</b> đang cắm sẵn ở mỗi máy, đọc pin <b>qua Bluetooth</b> của JK BMS, rồi gửi tất cả lên <b>SOLAR CLOUD</b>. Bạn xem trên điện thoại <b>Android, iPhone hay máy tính</b>, có cộng tổng cả nhà và chi tiết từng máy.</p>
+      <ul class="feat">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Tổng cả nhà</b>: điện mặt trời, pin, lưới, tải của 2 máy cộng lại, cập nhật từng giây.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Chi tiết từng máy</b>: Máy 1 Deye, Máy 2 Luxpower — PV1/PV2, pin, tải, lưới, số điện hôm nay, nhiệt độ.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Pin JK BMS</b>: % pin, điện áp, dòng sạc/xả, <b>điện áp từng cell</b>, cân bằng, nhiệt độ, số chu kỳ.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Không đấu dây</b>: inverter qua dongle WiFi, pin qua Bluetooth. Chỉ cần cấp nguồn 5V cho mạch.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Biểu đồ, thống kê ngày · tháng · năm; đổi WiFi và cập nhật firmware <b>từ xa</b>.</li>
+      </ul>
+    </div>
+
+    <div class="diag">
+      <svg viewBox="0 0 760 420" role="img" aria-label="Sơ đồ: inverter Deye và Luxpower nối WiFi nhà qua dongle WiFi; mạch ESP32-S3 đọc 2 inverter qua WiFi nhà và đọc pin JK BMS qua Bluetooth, rồi gửi lên SOLAR CLOUD; xem trên app">
+        <!-- inverter Deye -->
+        <rect class="bx" x="16" y="26" width="178" height="92" rx="14"/>
+        <text class="t1" x="34" y="62">Inverter Deye</text><text class="t2" x="34" y="84">hybrid</text>
+        <rect class="dg" x="200" y="56" width="44" height="22" rx="6"/><text class="t2" x="222" y="100" text-anchor="middle" style="font-size:11.5px">dongle WiFi</text>
+        <!-- inverter Lux -->
+        <rect class="bx" x="16" y="160" width="178" height="92" rx="14"/>
+        <text class="t1" x="34" y="196">Inverter Luxpower</text><text class="t2" x="34" y="218">SNA · 6.5 Pro · LXP…</text>
+        <rect class="dg" x="200" y="190" width="44" height="22" rx="6"/><text class="t2" x="222" y="234" text-anchor="middle" style="font-size:11.5px">dongle WiFi</text>
+        <!-- JK BMS -->
+        <rect class="bx" x="16" y="300" width="178" height="92" rx="14"/>
+        <text class="t1" x="34" y="336">Pin + JK BMS</text><text class="t2" x="34" y="358">Bluetooth bật sẵn</text>
+        <!-- router -->
+        <rect class="bx" x="322" y="110" width="140" height="84" rx="14"/>
+        <path class="ic" d="M366 138a36 36 0 0 1 52 0M374 147a24 24 0 0 1 36 0M382 156a12 12 0 0 1 20 0"/><circle cx="392" cy="164" r="3" fill="var(--phos-d)"/>
+        <text class="t1" x="392" y="186" text-anchor="middle">WiFi nhà</text>
+        <!-- mạch -->
+        <rect class="bx pri" x="322" y="300" width="140" height="92" rx="14"/>
+        <text class="t1" x="392" y="336" text-anchor="middle">Mạch</text><text class="t1" x="392" y="356" text-anchor="middle">ESP32-S3</text><text class="t2" x="392" y="377" text-anchor="middle">nguồn 5V</text>
+        <!-- cloud -->
+        <rect class="bx pri" x="560" y="110" width="184" height="84" rx="14"/>
+        <text class="t1" x="652" y="148" text-anchor="middle">SOLAR CLOUD</text><text class="t2" x="652" y="170" text-anchor="middle">máy chủ, lưu lịch sử</text>
+        <!-- app -->
+        <rect class="bx" x="560" y="300" width="184" height="92" rx="14"/>
+        <text class="t1" x="652" y="338" text-anchor="middle">App</text><text class="t2" x="652" y="360" text-anchor="middle">Android · iPhone · máy tính</text>
+        <!-- đường nối -->
+        <path class="wf" d="M244 67 C 292 67, 300 130, 322 138"/>
+        <path class="wf" d="M244 201 C 292 201, 300 170, 322 166"/>
+        <path class="wf" d="M392 194 L 392 300"/>
+        <path class="bt" d="M194 346 L 322 346"/>
+        <path class="net" d="M462 152 L 560 152"/>
+        <path class="net" d="M652 194 L 652 300"/>
+        <text class="tl" x="262" y="122">WiFi</text>
+        <text class="tl" x="402" y="252">WiFi</text>
+        <text class="tb" x="258" y="336" text-anchor="middle">Bluetooth</text>
+        <text class="t2" x="480" y="142">internet</text>
+        <text class="t2" x="662" y="252">xem từ xa</text>
+      </svg>
+    </div>
+    <div class="figcap" style="margin-top:10px">Mạch đọc 2 inverter qua dongle WiFi (cùng WiFi nhà) và đọc pin qua Bluetooth, rồi gửi lên SOLAR CLOUD.</div>
+
+    <div class="compat" id="tuongthich">
+      <h3>Dùng được với thiết bị nào?</h3>
+      <p>Hai inverter <b>hybrid</b> có <b>dongle WiFi</b> của hãng, cộng một pin dùng <b>JK BMS có Bluetooth</b>.</p>
+      <div class="cgrp"><span class="cg">Inverter Deye</span><div class="chips">
+        <span class="chip">Deye hybrid 1 pha</span><span class="chip">có dongle WiFi Deye</span>
+      </div></div>
+      <div class="cgrp"><span class="cg">Inverter Luxpower</span><div class="chips">
+        <span class="chip">SNA 3000</span><span class="chip">SNA 5000</span><span class="chip">SNA 6000</span><span class="chip">SNA PRO 6.5K <small>(6.5 Pro)</small></span><span class="chip">SNA 12K</span><span class="chip">LXP 3–6K</span><span class="chip">LXP-LB-EU 12K</span><span class="chip">GEN · GEN2 · GEN3</span>
+      </div></div>
+      <div class="cgrp"><span class="cg">Pin</span><div class="chips">
+        <span class="chip">JK BMS có Bluetooth</span>
+      </div></div>
+      <p class="cnote">Mỗi inverter cần <b>dongle WiFi của hãng</b> đã cắm sẵn và đã vào WiFi nhà (thường đã có khi lắp hệ để xem app hãng).</p>
+    </div>
+
+    <a class="jump" href="#app">Đã lắp xong mạch? <b>Xem hướng dẫn dùng app →</b></a>
+
+    <!-- HƯỚNG DẪN -->
+    <div class="ghead" style="margin-top:58px"><h2>Hướng dẫn tự lắp</h2><span class="gcount">5 bước · khoảng 15 phút</span></div>
+    <svg class="dim" viewBox="0 0 600 26" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+      <line class="draw" x1="1" y1="13" x2="599" y2="13"/>
+      <path d="M1 8v10M599 8v10M1 13l9-4M1 13l9 4M599 13l-9-4M599 13l-9 4"/>
+      <text x="300" y="9" text-anchor="middle">05 bước · nạp → wifi → pin → inverter → tài khoản</text>
+    </svg>
+
+    <div class="prep">
+      <h2>Cần chuẩn bị</h2>
+      <ul>
+        <li><span class="ix mono">01</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Máy tính</b> (Windows/macOS) có <b>Chrome</b> hoặc <b>Edge</b>, chỉ dùng cho bước nạp firmware. <em>Không nạp được trên điện thoại, Safari, Firefox.</em></div></li>
+        <li><span class="ix mono">02</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Cáp USB-C truyền dữ liệu</b> — không phải cáp chỉ để sạc.</div></li>
+        <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Bo <b>ESP32-S3 N16R8</b> (module ESP32-S3-WROOM-1, 16MB flash, 8MB PSRAM) — loại có 2 cổng USB-C như hình dưới.</div></li>
+        <li><span class="ix mono">04</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>WiFi nhà 2.4GHz</b> + mật khẩu. <em>ESP32 không bắt được WiFi 5GHz.</em></div></li>
+        <li><span class="ix mono">05</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Dongle WiFi</b> của inverter Deye và của inverter Luxpower đã cắm vào máy và <b>đã vào cùng WiFi nhà</b>.</div></li>
+        <li><span class="ix mono">06</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>JK BMS có Bluetooth</b>. Đặt mạch <b>gần tủ pin</b> (trong tầm Bluetooth, vài mét) và cấp nguồn <b>5V USB</b> lâu dài cho mạch.</div></li>
+      </ul>
+    </div>
+
+    <div class="fig">
+      <div class="figtag"><span class="n">BO MẠCH</span><span>ESP32-S3 N16R8 — 2 cổng USB-C</span><span class="rule"></span></div>
+      <div class="plate"><img class="appshot" style="max-width:420px" src="/huongdan/img/gw-esp32s3-n16r8.webp" width="1000" height="920" alt="Bo phát triển ESP32-S3 N16R8 với module ESP32-S3-WROOM-1 và 2 cổng USB-C" loading="lazy"></div>
+      <div class="figcap">Bo ESP32-S3 N16R8 (module ghi “N16R8”). Ảnh: VectorVoyager, <a href="https://commons.wikimedia.org/wiki/File:ESP32-S3_on_paper.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, giấy phép <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</div>
+    </div>
+
+    <!-- 1 -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">1</div>
+      <div class="sechd"><div class="st">Trên máy tính · bằng Chrome hoặc Edge</div><h2>Nạp firmware qua USB</h2></div>
+      <ol class="steps">
+        <li>Cắm bo vào máy tính bằng cáp USB-C (dùng cổng ghi <b>USB</b> hoặc <b>COM</b> đều được).</li>
+        <li>Mở trang <a href="/flash"><code>solarcloud.io.vn/flash</code></a> → ở ô <b>“Chọn dòng thiết bị”</b> chọn dòng <b>Gateway</b>.</li>
+        <li>Bấm <b>Bắt đầu nạp firmware</b> → chọn <b>cổng COM</b> hiện ra → <b>Connect</b>.<div class="hint">Cài mới hoàn toàn: tích “Erase device”. Chỉ cập nhật (giữ WiFi): bỏ tích.</div></li>
+        <li>Chờ chạy đến 100%. <b>Mạch tự khởi động lại là xong.</b></li>
+      </ol>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Firmware</span>Firmware cho bộ này đang được hoàn thiện và sẽ có trên trang nạp <a href="/flash"><code>/flash</code></a>. Bài sẽ cập nhật nút nạp ngay trong trang khi có bản chính thức.</div></div>
+      <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Trong lúc nạp</span>Tuyệt đối <b>không rút cáp USB</b> và không ngắt nguồn cho tới khi báo xong.</div></div>
+    </div>
+
+    <!-- 2 -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">2</div>
+      <div class="sechd"><div class="st">Trên điện thoại · mạch tự phát WiFi cấu hình</div><h2>Kết nối WiFi nhà</h2></div>
+      <ol class="steps">
+        <li>Cấp nguồn cho mạch. Mạch <b>tự phát một WiFi</b> tên <code>GATEWAY-S3-xxxxxxxxxx</code> (10 số).</li>
+        <li>Trên điện thoại vào <b>Cài đặt › WiFi</b> → chọn WiFi đó → nhập mật khẩu <code>123456789</code></li>
+        <li>Trang cấu hình <b>tự mở</b>. Nếu không → mở trình duyệt gõ <code>192.168.4.1</code></li>
+        <li>Trang hiện <b>Device ID (10 số)</b> — <b>ghi lại</b> để thêm vào tài khoản ở bước 5.</li>
+        <li>Ở thẻ <b>WiFi</b>: bấm <b>Quét</b> → chọn <b>WiFi nhà</b> (2.4GHz) → nhập mật khẩu → <b>Lưu &amp; Kết nối</b>.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 2</span><span>Trang 192.168.4.1 — ID thiết bị &amp; WiFi</span><span class="rule"></span></div>
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:480px" href="/huongdan/img/gw-portal-wifi.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/gw-portal-wifi.webp" width="864" height="670" alt="Trang cấu hình 192.168.4.1 của Gateway: Device ID, chọn WiFi nhà, mật khẩu, Lưu và Kết nối" loading="lazy">
+            <span class="pin" style="left:3.70%;top:14.93%">1</span>
+            <span class="pin" style="left:3.70%;top:51.34%">2</span>
+            <span class="pin" style="left:3.70%;top:70.75%">3</span>
+            <span class="pin" style="left:3.70%;top:85.52%">4</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Device ID</b>: mã <b>10 số</b> của mạch. <b>Ghi lại</b> để thêm vào tài khoản ở bước 5.</div></li>
+            <li><span class="pin">2</span><div>Bấm <b>Quét</b> → chọn <b>WiFi nhà</b> (2.4GHz).</div></li>
+            <li><span class="pin">3</span><div>Nhập <b>mật khẩu WiFi</b>.</div></li>
+            <li><span class="pin">4</span><div>Bấm <b>Lưu &amp; Kết nối</b>. Dòng trên cùng hiện tên WiFi là mạch đã lên mạng.</div></li>
+          </ol>
+        </div>
+        <div class="figcap">Thẻ WiFi trên trang cấu hình của mạch.</div>
+      </div>
+      <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Nhớ hai điều</span>WiFi nhà phải là <b>2.4GHz</b>. Và <b>ghi lại ID 10 số</b> hiện ở đầu trang <code>192.168.4.1</code>.</div></div>
+    </div>
+
+    <!-- 3 -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">3</div>
+      <div class="sechd"><div class="st">Trên trang 192.168.4.1 · thẻ “Kết nối BMS”</div><h2>Ghép pin JK BMS qua Bluetooth</h2></div>
+      <ol class="steps">
+        <li>Bật <b>Bluetooth của JK BMS</b> (trong app JK) và đặt mạch <b>gần tủ pin</b>.</li>
+        <li>Ở thẻ <b>Kết nối BMS</b> chọn <b>Bluetooth</b> (hoặc <b>Tự động</b>) → bấm <b>Dò BMS</b>.</li>
+        <li>Chọn đúng <b>tên / mã MAC</b> pin của bạn. Thẻ hiện <b>“Đã kết nối”</b> kèm số cell là xong.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 3</span><span>Thẻ “Kết nối BMS” (minh hoạ)</span><span class="rule"></span></div>
+        <div class="plate">
+          <div class="mockui">
+            <div class="mh">Kết nối BMS</div>
+            <div class="seg"><span>Tự động</span><span class="on">Bluetooth</span></div>
+            <div class="mr"><span class="dt"></span><div><b>JK_B2A16S20P</b><small>AA:BB:CC:00:01:01 · 16 cell</small></div><span class="st">✓ Đã kết nối</span></div>
+            <div class="mb g">🔍 Dò BMS</div>
+            <div class="mb g">✖ Quên BMS đã chọn</div>
+          </div>
+        </div>
+        <div class="figcap">Hình minh hoạ — giao diện thật có thể khác một chút theo bản firmware.</div>
+      </div>
+      <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Không dò thấy pin?</span><b>Tắt app JK trên điện thoại</b> (mỗi lúc BMS chỉ cho một thiết bị nối Bluetooth), đưa mạch <b>lại gần</b> tủ pin hơn rồi dò lại.</div></div>
+    </div>
+
+    <!-- 4 -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">4</div>
+      <div class="sechd"><div class="st">Trên trang 192.168.4.1 · thẻ “Kết nối inverter”</div><h2>Thêm 2 inverter qua dongle WiFi</h2></div>
+      <ol class="steps">
+        <li>Kiểm tra <b>dongle WiFi</b> của cả 2 inverter đã vào <b>cùng WiFi nhà</b> với mạch (xem được trên app hãng là đã vào).</li>
+        <li>Ở thẻ <b>Kết nối inverter</b> bấm <b>Tìm dongle trong mạng nhà</b>. Mạch tự tìm 2 dongle và điền vào danh sách.</li>
+        <li>Chọn <b>hãng</b> cho từng máy: <b>Máy 1 · Deye</b>, <b>Máy 2 · Luxpower</b> → bấm <b>Lưu</b>. Mạch khởi động lại và bắt đầu đọc cả 2 máy.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 4</span><span>Thẻ “Kết nối inverter” (minh hoạ)</span><span class="rule"></span></div>
+        <div class="plate">
+          <div class="mockui">
+            <div class="mh">Kết nối inverter</div>
+            <div class="mr"><span class="dt"></span><div><b>Máy 1 · Deye</b><small>dongle WiFi · 192.168.1.51</small></div><span class="st">✓ Đang đọc</span></div>
+            <div class="mr"><span class="dt"></span><div><b>Máy 2 · Luxpower</b><small>dongle WiFi · 192.168.1.52</small></div><span class="st">✓ Đang đọc</span></div>
+            <div class="mb g">🔍 Tìm dongle trong mạng nhà</div>
+            <div class="mb">Lưu &amp; khởi động lại</div>
+          </div>
+        </div>
+        <div class="figcap">Hình minh hoạ — giao diện thật có thể khác một chút theo bản firmware.</div>
+      </div>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Không tìm thấy dongle?</span>Mạch chỉ thấy dongle khi <b>dongle và mạch ở cùng một WiFi nhà 2.4GHz</b>. Kiểm tra dongle đã lên WiFi chưa (đèn trên dongle, hoặc app hãng có số liệu), rồi bấm tìm lại.</div></div>
+    </div>
+
+    <!-- 5 -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">5</div>
+      <div class="sechd"><div class="st">Trên điện thoại hoặc máy tính</div><h2>Tạo tài khoản &amp; thêm thiết bị</h2></div>
+      <ol class="steps">
+        <li>Vào <a href="/"><code>solarcloud.io.vn</code></a> → <b>Đăng ký</b> bằng email + mật khẩu → đăng nhập.</li>
+        <li>Vào tab <b>Thiết bị</b> → bấm <b>Thêm thiết bị</b>.</li>
+        <li>Nhập <b>ID 10 số</b> (đã ghi ở bước 2) → <b>Thêm thiết bị</b>.</li>
+        <li>Chạm vào thiết bị vừa thêm để xem <b>cả nhà, từng máy và pin</b> — phần dưới hướng dẫn từng màn.</li>
+      </ol>
+    </div>
+
+    <div class="done"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div><div class="bd"><span class="tt">Hoàn tất</span><p>Mạch tự gửi số liệu 2 inverter và pin lên SOLAR CLOUD mỗi giây. Muốn đổi WiFi sau này: kết nối lại WiFi <code>GATEWAY-S3-…</code> rồi vào <code>192.168.4.1</code>. Giữ nút <b>BOOT ~5 giây</b> để xoá WiFi đã lưu và cài lại từ đầu.</p></div></div>
+
+    <!-- ═════════ XEM TRÊN APP ═════════ -->
+    <div class="ghead" id="app" style="margin-top:76px"><h2>Xem trên app</h2><span class="gcount">Android · iPhone · máy tính</span></div>
+    <svg class="dim" viewBox="0 0 600 26" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+      <line class="draw" x1="1" y1="13" x2="599" y2="13"/>
+      <path d="M1 8v10M599 8v10M1 13l9-4M1 13l9 4M599 13l-9-4M599 13l-9 4"/>
+      <text x="300" y="9" text-anchor="middle">cả nhà → từng máy → pin → thông tin</text>
+    </svg>
+    <div class="intro"><p>Mở app <b>SOLAR CLOUD</b>, chạm vào thẻ thiết bị ở màn hình Home. Thanh dưới cùng có 4 tab: <b>⚡ Tổng quan · 📊 Năng lượng · ℹ️ Thông tin · 🔀 Thiết bị</b>. Tab Tổng quan hiện cả nhà ở trên, kéo xuống là từng máy và pin.</p></div>
+
+    <!-- A -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">A</div>
+      <div class="sechd"><div class="st">Tab ⚡ Tổng quan · phần trên</div><h2>Cả nhà trong một màn</h2></div>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH A</span><span>Sơ đồ điện cả nhà (2 máy cộng lại)</span><span class="rule"></span></div>
+        <div class="plate annoplate side">
+          <a class="anno mid" href="/huongdan/img/gw-app-tongquan.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/gw-app-tongquan.webp" width="780" height="1028" alt="Tab Tổng quan của Gateway: điện mặt trời 2 máy, pin lưu trữ, lưới điện, tải tiêu thụ và số điện hôm nay" loading="lazy">
+            <span class="pin" style="left:58.33%;top:18.68%">1</span>
+            <span class="pin" style="left:7.95%;top:42.02%">2</span>
+            <span class="pin" style="left:92.31%;top:42.02%">3</span>
+            <span class="pin" style="left:58.33%;top:64.40%">4</span>
+            <span class="pin" style="left:70.26%;top:39.30%">5</span>
+            <span class="pin" style="left:3.85%;top:86.09%">6</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Điện mặt trời</b>: tổng công suất pin mặt trời của <b>cả 2 máy</b>.</div></li>
+            <li><span class="pin">2</span><div><b>Pin lưu trữ</b>: công suất sạc/xả, <b>% pin</b>, nhiệt độ pin.</div></li>
+            <li><span class="pin">3</span><div><b>Lưới điện</b>: cả nhà đang mua hay bán điện, điện áp, tần số.</div></li>
+            <li><span class="pin">4</span><div><b>Tải tiêu thụ</b>: điện cả nhà đang dùng.</div></li>
+            <li><span class="pin">5</span><div><b>×2</b>: đang đọc 2 inverter. Giữa vòng là nhiệt độ của từng máy. Chấm chạy trên dây cho biết chiều dòng điện.</div></li>
+            <li><span class="pin">6</span><div><b>Số điện hôm nay</b>: PV phát · Nạp/Xả pin · Mua điện · Bán điện, cộng cả 2 máy (kWh).</div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- B -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">B</div>
+      <div class="sechd"><div class="st">Tab ⚡ Tổng quan · kéo xuống</div><h2>Chi tiết từng máy</h2></div>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH B</span><span>Máy 1 · Deye (mở chi tiết) và Máy 2 · Luxpower</span><span class="rule"></span></div>
+        <div class="plate annoplate side">
+          <a class="anno mid" href="/huongdan/img/gw-app-may.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/gw-app-may.webp" width="780" height="1212" alt="Thẻ từng inverter: Máy 1 Deye mở chi tiết PV1 PV2, pin, tải, lưới; Máy 2 Luxpower thu gọn" loading="lazy">
+            <span class="pin" style="left:41.03%;top:4.46%">1</span>
+            <span class="pin" style="left:3.85%;top:8.91%">2</span>
+            <span class="pin" style="left:29.49%;top:23.35%">3</span>
+            <span class="pin" style="left:29.49%;top:37.79%">4</span>
+            <span class="pin" style="left:29.49%;top:54.46%">5</span>
+            <span class="pin" style="left:47.44%;top:84.16%">6</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Máy 1 · Deye</b>: chấm xanh = đang đọc được. Bấm <b>chi tiết</b> để mở, <b>thu gọn</b> để đóng.</div></li>
+            <li><span class="pin">2</span><div>5 ô nhanh của riêng máy này: <b>PV · Pin</b> (nạp/xả) · <b>Tải · Lưới</b> (mua/bán) · <b>% pin</b>.</div></li>
+            <li><span class="pin">3</span><div><b>PV1, PV2</b>: điện áp · dòng · công suất từng chuỗi tấm; PV hôm nay, PV tổng.</div></li>
+            <li><span class="pin">4</span><div><b>Pin</b>: điện áp · dòng · công suất, nhiệt độ pin, nạp/xả hôm nay.</div></li>
+            <li><span class="pin">5</span><div><b>Tải, cổng ra, lưới</b>: công suất, điện áp, tần số; mua/bán hôm nay; nhiệt độ máy.</div></li>
+            <li><span class="pin">6</span><div><b>Máy 2 · Luxpower</b>: bấm <b>chi tiết</b> để xem tương tự.</div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- C -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">C</div>
+      <div class="sechd"><div class="st">Tab ⚡ Tổng quan · mục Pin lưu trữ</div><h2>Pin JK BMS &amp; từng cell</h2></div>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH C</span><span>Pack pin JK BMS + bảng 16 cell</span><span class="rule"></span></div>
+        <div class="plate annoplate side">
+          <a class="anno mid" href="/huongdan/img/gw-app-pin.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/gw-app-pin.webp" width="780" height="1344" alt="Pin JK BMS trên app: vòng % pin, điện áp, dòng, công suất, độ chai, chu kỳ, cân bằng và bảng điện áp 16 cell" loading="lazy">
+            <span class="pin" style="left:46.15%;top:8.93%">1</span>
+            <span class="pin" style="left:7.95%;top:15.77%">2</span>
+            <span class="pin" style="left:63.46%;top:12.80%">3</span>
+            <span class="pin" style="left:60.26%;top:39.88%">4</span>
+            <span class="pin" style="left:90.77%;top:37.57%">5</span>
+            <span class="pin" style="left:94.87%;top:46.58%">6</span>
+            <span class="pin" style="left:6.67%;top:68.82%">7</span>
+            <span class="pin" style="left:52.56%;top:80.58%">8</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Pack 1 · 16S</b>: trạng thái <b>Đang sạc / Đang xả</b> kèm công suất.</div></li>
+            <li><span class="pin">2</span><div>Vòng <b>% pin (SOC)</b> và dung lượng còn lại / tổng (Ah).</div></li>
+            <li><span class="pin">3</span><div><b>Điện áp, dòng điện, công suất, độ chai, chu kỳ</b>, dòng cân bằng.</div></li>
+            <li><span class="pin">4</span><div><b>Nhiệt độ</b> MOS và các cảm biến nhiệt của pin.</div></li>
+            <li><span class="pin">5</span><div>Bấm <b>Chi tiết cell</b> để mở bảng điện áp từng cell.</div></li>
+            <li><span class="pin">6</span><div>Tóm tắt: số cell · trung bình · <b>cao nhất · thấp nhất · độ lệch</b> (mV).</div></li>
+            <li><span class="pin">7</span><div>Cell <b>cao nhất</b> (viền xanh).</div></li>
+            <li><span class="pin">8</span><div>Cell <b>thấp nhất</b> (viền vàng). Lệch càng nhỏ càng tốt.</div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- D -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">D</div>
+      <div class="sechd"><div class="st">Tab ℹ️ Thông tin</div><h2>Thông tin máy, WiFi &amp; cập nhật</h2></div>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH D</span><span>Tab Thông tin</span><span class="rule"></span></div>
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:520px" href="/huongdan/img/gw-app-thongtin.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/gw-app-thongtin.webp" width="780" height="824" alt="Tab Thông tin của Gateway: ID thiết bị, dòng sản phẩm, firmware, cập nhật, sóng WiFi và nút dò WiFi" loading="lazy">
+            <span class="pin" style="left:45.13%;top:6.92%">1</span>
+            <span class="pin" style="left:61.54%;top:15.29%">2</span>
+            <span class="pin" style="left:38.46%;top:56.07%">3</span>
+            <span class="pin" style="left:37.18%;top:72.57%">4</span>
+            <span class="pin" style="left:27.56%;top:90.17%">5</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Thông tin thiết bị</b>: dòng sản phẩm, vi điều khiển, thời gian mạch đã chạy.</div></li>
+            <li><span class="pin">2</span><div><b>ID thiết bị</b> 10 số — bấm 📋 để sao chép.</div></li>
+            <li><span class="pin">3</span><div><b>Firmware</b> và <b>Cập nhật FW</b>: có bản mới thì hiện nút <b>Cập nhật</b>. Bấm, chờ 1–2 phút, <b>đừng rút nguồn</b>.</div></li>
+            <li><span class="pin">4</span><div><b>Kết nối WiFi</b>: độ mạnh sóng và tên WiFi đang dùng.</div></li>
+            <li><span class="pin">5</span><div><b>Dò WiFi xung quanh</b>: đổi WiFi <b>từ xa</b> — chọn WiFi mới, nhập mật khẩu. WiFi mới không vào được thì mạch tự quay về WiFi cũ.</div></li>
+          </ol>
+        </div>
+        <div class="figcap">Kéo xuống còn thẻ <b>Kết nối Inverter &amp; BMS</b> (trạng thái 2 máy và pin qua Bluetooth), <b>Khởi động lại</b> và <b>Nhật ký sự kiện</b>.</div>
+      </div>
+    </div>
+
+
+    <div class="cta-row">
+      <a class="cta pri" href="/flash">Nạp firmware ngay →</a>
+      <a class="cta ghost" href="/huongdan">Thiết bị khác</a>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Solar Cloud · <span class="on">solarcloud.io.vn</span></span>
+    <span>Giám sát năng lượng mặt trời · pin lưu trữ · inverter</span>
+  </div>
+
+  <script src="/huongdan/guide.js" defer></script>
+</body>
+</html>
