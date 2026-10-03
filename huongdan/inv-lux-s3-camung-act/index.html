@@ -49,6 +49,16 @@
 .rrow b{font-weight:650}
 .rtab.set .rk{color:var(--phos-d)}
 .figtag .n{white-space:nowrap}
+.compat{margin:26px 0 0;border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);padding:18px 20px 20px;box-shadow:var(--sh-1)}
+.compat h3{margin:0 0 6px;font-family:var(--fd);font-size:17px;font-weight:750;color:var(--paper)}
+.compat>p{margin:0;font-size:15px;line-height:1.55;color:var(--paper)}
+.compat b{font-weight:650}
+.cgrp{margin:16px 0 0}
+.cg{display:block;font-size:12.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:14px;font-weight:600;color:var(--phos-d);background:var(--phos-dim);border:1px solid var(--phos-line);border-radius:999px;padding:4px 11px;line-height:1.3;white-space:nowrap}
+.chip small{font-weight:500;color:var(--muted);font-size:12.5px}
+.compat .cnote{margin:16px 0 0;font-size:13.5px;line-height:1.5;color:var(--muted)}
 @media (max-width:560px){
   .rrow{grid-template-columns:1fr;gap:3px}
   .pin{width:19px;height:19px;font-size:10px;line-height:19px;box-shadow:0 0 0 1.5px #fff,0 1px 4px rgba(0,0,0,.4)}
@@ -83,6 +93,17 @@
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Trên app: số liệu realtime, <b>biểu đồ, thống kê ngày · tháng · năm, tiền điện tiết kiệm</b>, báo lỗi inverter.</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Đổi WiFi, cập nhật firmware, khởi động lại từ xa</b>; gộp nhiều thiết bị về một tài khoản.</li>
       </ul>
+    </div>
+    <div class="compat" id="tuongthich">
+      <h3>Dùng được với inverter Luxpower nào?</h3>
+      <p>Các dòng <b>inverter hybrid Luxpower</b> có <b>dongle WiFi Luxpower</b> đều dùng được. Mạch đọc số liệu qua dongle nên không phụ thuộc công suất máy.</p>
+      <div class="cgrp"><span class="cg">Hybrid · Eco-hybrid (dòng SNA)</span><div class="chips">
+        <span class="chip">SNA 3000</span><span class="chip">SNA 5000</span><span class="chip">SNA 6000</span><span class="chip">SNA PRO 3–6.5K <small>(6.5 Pro)</small></span><span class="chip">SNA 12K</span><span class="chip">SNA 14K</span><span class="chip">SNA2-EU-LT 10–14K</span>
+      </div></div>
+      <div class="cgrp"><span class="cg">Hybrid hoà lưới 1 pha (dòng LXP · GEN)</span><div class="chips">
+        <span class="chip">LXP 3–6K</span><span class="chip">LXP-LB-EU 12K</span><span class="chip">GEN 3–6K</span><span class="chip">GEN 7–10K</span><span class="chip">GEN2-LB-EU 3–6K</span><span class="chip">GEN2-LB-EU 7–14K</span><span class="chip">GEN3-LB-EU 3–8K</span><span class="chip">GEN PRO-LB-EU 8–12K</span>
+      </div></div>
+      <p class="cnote">…và các dòng hybrid Luxpower khác dùng dongle WiFi Luxpower. Chưa chắc máy của bạn có dùng được không? Gửi tên model trên tem inverter cho nơi bán để được kiểm tra.</p>
     </div>
     <a class="jump" href="#app">Đã lắp xong mạch? <b>Xem hướng dẫn dùng app &amp; màn hình →</b></a>
 
