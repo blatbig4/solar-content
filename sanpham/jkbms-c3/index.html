@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Bộ giám sát & cài đặt pin JK BMS từ xa — nạp sẵn, mua về dùng ngay | SOLAR CLOUD</title>
+<meta name="description" content="Mạch ESP32-C3 đã nạp sẵn phần mềm: xem và cài đặt pin JK BMS từ xa qua WiFi trên điện thoại Android, iPhone, máy tính. Không cần nạp firmware, không cần kích hoạt — cắm nguồn, nối WiFi là dùng.">
+<meta name="theme-color" content="#0E775E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/huongdan/guide.css">
+<style>
+/* bài JK: phần cài đặt từ xa — chú thích ảnh */
+.feat .new{display:inline-block;color:#fff;background:var(--phos);font-size:11px;font-weight:700;letter-spacing:.05em;line-height:1;padding:4px 7px 3px;border-radius:5px;margin-left:4px;vertical-align:2px}
+.feat a{color:var(--phos);font-weight:600}
+.jump{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;margin:26px 0 0;padding:13px 18px;border:1px solid var(--phos-line);border-radius:var(--r);background:var(--phos-dim);color:var(--paper);text-decoration:none;font-size:15px;line-height:1.45;transition:background .15s}
+.jump b{color:var(--phos-d);font-weight:700}
+.jump:hover{background:rgba(14,119,94,.15)}
+.annoplate{align-items:flex-start}
+.annoplate.stack{flex-direction:column;align-items:center}
+.anno{position:relative;display:block;width:100%;line-height:0;cursor:zoom-in}
+.anno img{display:block;width:100%;height:auto;border-radius:var(--r-sm);border:1px solid var(--line)}
+.annoplate.side .anno.tall{flex:0 1 320px}
+.annoplate.side .anno.mid{flex:0 1 340px}
+@media (min-width:760px){.annoplate.side .anno.tall{position:sticky;top:16px}}
+.annoplate.side .legend{flex:1 1 300px}
+.annoplate.stack .legend{width:100%;max-width:560px}
+.pin{position:absolute;transform:translate(-50%,-50%);width:24px;height:24px;border-radius:50%;background:var(--phos);color:#fff;font:700 12px/24px var(--fd);text-align:center;box-shadow:0 0 0 2px #fff,0 2px 6px rgba(0,0,0,.4);pointer-events:none;font-variant-numeric:tabular-nums}
+.brk{position:absolute;width:8px;border:2px solid #fff;border-right:0;border-radius:6px 0 0 6px;opacity:.9;pointer-events:none}
+.legend{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-size:15px;line-height:1.55;color:var(--paper)}
+.legend li{display:flex;gap:11px;align-items:flex-start}
+.legend li>div{min-width:0}
+.legend .pin{position:static;transform:none;flex:0 0 auto;box-shadow:none}
+.legend .pin-in{display:inline-block;width:20px;height:20px;font-size:11px;line-height:20px;vertical-align:1px;margin:0 2px}
+.legend b{font-weight:650}
+.legend.groups{gap:20px}
+.legend dl{margin:8px 0 0;padding:0}
+.legend dt{font-weight:650;font-size:14px;color:var(--phos-d);margin-top:8px}
+.legend dt:first-child{margin-top:0}
+.legend dd{margin:2px 0 0;font-size:14.5px;line-height:1.5}
+.legend .rule-line{margin:10px 0 0;font-size:13.5px;color:var(--muted);background:var(--ink-3);border:1px solid var(--line);border-radius:8px;padding:6px 10px;line-height:1.5}
+.legend .rule-line b{color:var(--paper)}
+.rtab{border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);overflow:hidden;box-shadow:var(--sh-1)}
+.rrow{display:grid;grid-template-columns:minmax(150px,230px) 1fr;gap:14px;padding:11px 16px;border-bottom:1px solid var(--line);font-size:14.5px;line-height:1.5}
+.rrow:last-child{border-bottom:0}
+.rrow .rk{font-weight:650;color:var(--amber-d)}
+.rrow b{font-weight:650}
+.rtab.set .rk{color:var(--phos-d)}
+.figtag .n{white-space:nowrap}
+.compat{margin:26px 0 0;border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);padding:18px 20px 20px;box-shadow:var(--sh-1)}
+.compat h3{margin:0 0 6px;font-family:var(--fd);font-size:17px;font-weight:750;color:var(--paper)}
+.compat>p{margin:0;font-size:15px;line-height:1.55;color:var(--paper)}
+.compat b{font-weight:650}
+.cgrp{margin:16px 0 0}
+.cg{display:block;font-size:12.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:14px;font-weight:600;color:var(--phos-d);background:var(--phos-dim);border:1px solid var(--phos-line);border-radius:999px;padding:4px 11px;line-height:1.3;white-space:nowrap}
+.chip small{font-weight:500;color:var(--muted);font-size:12.5px}
+.compat .cnote{margin:16px 0 0;font-size:13.5px;line-height:1.5;color:var(--muted)}
+.heroshot{margin:22px auto 0;max-width:600px}
+.heroshot img{display:block;width:100%;height:auto}
+.anno img[src*="-box-"]{border:0;border-radius:0}
+@media (max-width:560px){
+  .rrow{grid-template-columns:1fr;gap:3px}
+  .pin{width:19px;height:19px;font-size:10px;line-height:19px;box-shadow:0 0 0 1.5px #fff,0 1px 4px rgba(0,0,0,.4)}
+  .legend .pin{width:22px;height:22px;font-size:11px;line-height:22px}
+  .brk{width:5px}
+  .annoplate{padding:14px 10px}
+}
+/* trang sản phẩm JK nạp sẵn */
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.badge{display:inline-flex;align-items:center;gap:7px;font-size:14.5px;font-weight:650;color:var(--phos-d);background:var(--phos-dim);border:1px solid var(--phos-line);border-radius:999px;padding:7px 14px}
+.badge svg{width:17px;height:17px;color:var(--good)}
+.prodshot{margin:26px 0 0;border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,#fff,#F2F5F4);box-shadow:var(--sh-1);padding:22px 18px;text-align:center}
+.prodshot img{display:block;width:100%;max-width:620px;height:auto;margin:0 auto}
+.cmp{border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);overflow:hidden;box-shadow:var(--sh-1);margin:20px 0 0}
+.cmp .cr{display:grid;grid-template-columns:1.25fr 1fr 1fr;border-bottom:1px solid var(--line)}
+.cmp .cr:last-child{border-bottom:0}
+.cmp .cr>div{padding:12px 16px;font-size:15px;line-height:1.45}
+.cmp .ch>div{font-weight:700;font-size:13.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.02em;background:var(--ink-3)}
+.cmp .cr.ch>div.hl{color:#fff;background:var(--phos)}
+.cmp .cr>div:first-child{font-weight:600;color:var(--paper)}
+.cmp .cr>div.hl{background:var(--phos-dim);font-weight:650;color:var(--phos-d)}
+.cmp .ok{color:var(--good);font-weight:700}
+.steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 0}
+.stp{border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);box-shadow:var(--sh-1);padding:18px}
+.stp .n{font-family:var(--fm);font-size:12px;font-weight:700;color:var(--phos)}
+.stp h3{margin:6px 0 6px;font-size:17px;font-weight:750;color:var(--paper)}
+.stp p{margin:0;font-size:14.5px;line-height:1.55;color:var(--paper)}
+@media (max-width:720px){.steps3{grid-template-columns:1fr}.cmp .cr{grid-template-columns:1.1fr 1fr 1fr}.cmp .cr>div{padding:10px 10px;font-size:13.5px}}
+</style>
+</head>
+<body>
+<script src="/site-nav.js"></script>
+  <div class="topnav">
+    <a href="/sanpham">← Sản phẩm</a>
+    <a class="sp" href="/huongdan/jkbms-c3-act/">Hướng dẫn chi tiết →</a>
+  </div>
+
+  <div class="wrap">
+    <div class="hero" style="padding-top:clamp(26px,4.5vw,40px)">
+      <h1>Bộ giám sát pin JK BMS<br><span class="amp">mua về dùng ngay</span></h1>
+      <p class="lede">Mạch nhỏ <b>đã nạp sẵn phần mềm</b>: cắm nguồn, nối WiFi là <b>xem và cài đặt pin JK BMS từ xa</b> trên điện thoại Android, iPhone hay máy tính. <b>Không cần nạp firmware, không cần kích hoạt.</b></p>
+      <div class="badges">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Đã nạp sẵn phần mềm</span>
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Không cần kích hoạt</span>
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Không đấu dây vào pin</span>
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Cài đặt BMS từ xa</span>
+      </div>
+    </div>
+
+    <div class="prodshot">
+      <img src="/sanpham/img/jkbms-c3-hero.webp" width="1400" height="922" alt="Mạch ESP32-C3 SuperMini cổng USB-C đã nạp sẵn phần mềm giám sát và cài đặt pin JK BMS từ xa" loading="lazy">
+    </div>
+    <div class="figcap" style="margin-top:10px">Mạch ESP32-C3 SuperMini cổng USB-C, chỉ 22 × 18 mm. Đã nạp sẵn phần mềm SOLAR CLOUD cho JK BMS. <span style="opacity:.75">(Ảnh minh hoạ 3D)</span></div>
+
+    <div class="intro">
+      <p>Muốn biết pin còn bao nhiêu %, điện áp <b>từng cell</b>, đang sạc hay xả, cell có lệch không… thường phải mở <b>app JK</b> và <b>đứng sát tủ pin</b>, vì app chỉ nối Bluetooth ở gần. Đổi một thông số bảo vệ cũng phải ra tận nơi.</p>
+      <p>Bộ này đặt <b>gần tủ pin</b>, đọc JK BMS <b>qua Bluetooth</b> rồi đưa lên internet qua <b>WiFi nhà</b>. Bạn xem pin và chỉnh thông số BMS trên app <b>SOLAR CLOUD</b> ở bất cứ đâu, có lịch sử và biểu đồ.</p>
+    </div>
+
+    <div class="ghead" style="margin-top:56px"><h2>Làm được gì?</h2><span class="gcount">giống hệt bản tự lắp</span></div>
+    <ul class="feat">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Giám sát realtime</b>: % pin (SoC), điện áp tổng và <b>từng cell</b>, độ lệch cell, dòng và công suất sạc/xả — cập nhật từng giây.</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Cân bằng, nhiệt độ, sức khoẻ pin (SoH)</b>, số chu kỳ, <b>biểu đồ 24 giờ / 7 ngày</b>.</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Cài đặt BMS từ xa</b>: chọn nhanh loại pin <b>LFP · NCM/NCA · LTO</b>, chỉnh từng ngưỡng (quá áp, thấp áp, SOC, dòng sạc/xả, nhiệt độ…). Mạch ghi vào BMS rồi <b>đọc lại để xác nhận</b> từng ô.</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Bật/tắt Sạc · Xả · Cân bằng</b> và các chức năng khác của BMS ngay trên app.</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Dò và đổi pin, đổi WiFi, <b>cập nhật phần mềm từ xa</b>.</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Dùng trên <b>Android · iPhone · máy tính</b>; gộp nhiều pin, nhiều thiết bị về một tài khoản.</li>
+    </ul>
+
+    <div class="fig">
+      <div class="figtag"><span class="n">GIAO DIỆN</span><span>Giám sát &amp; cài đặt BMS trên app</span><span class="rule"></span></div>
+      <div class="plate">
+        <img class="appshot" src="/huongdan/img/giaodien-jkbms.jpg" alt="Giao diện giám sát JK BMS trên SOLAR CLOUD: SoC, điện áp từng cell, nhiệt độ, SoH, biểu đồ 24h" loading="lazy">
+        <img class="appshot" src="/huongdan/img/giaodien-jkbms-caidat.jpg" alt="Cài đặt JK BMS từ xa trên SOLAR CLOUD: chọn loại pin và chỉnh từng thông số" loading="lazy">
+      </div>
+      <div class="figcap">Trái: màn giám sát. Phải: cài đặt BMS từ xa. <a href="/huongdan/jkbms-c3-act/#caidat">Xem giải thích từng thông số →</a></div>
+    </div>
+
+    <div class="ghead" style="margin-top:56px"><h2>Khác gì bản tự lắp?</h2><span class="gcount">chức năng như nhau</span></div>
+    <div class="cmp">
+      <div class="cr ch"><div></div><div>Bản tự lắp (ACT)</div><div class="hl">Bản nạp sẵn</div></div>
+      <div class="cr"><div>Giám sát pin từ xa</div><div><span class="ok">✓</span></div><div class="hl"><span class="ok">✓</span></div></div>
+      <div class="cr"><div>Cài đặt BMS từ xa</div><div><span class="ok">✓</span></div><div class="hl"><span class="ok">✓</span></div></div>
+      <div class="cr"><div>Nạp phần mềm</div><div>Tự nạp bằng máy tính</div><div class="hl">Đã nạp sẵn</div></div>
+      <div class="cr"><div>Kích hoạt</div><div>Cần kích hoạt trên app</div><div class="hl">Không cần — dùng luôn</div></div>
+      <div class="cr"><div>Phù hợp</div><div>Người thích tự làm</div><div class="hl">Muốn cắm là chạy</div></div>
+    </div>
+
+    <div class="compat" id="tuongthich">
+      <h3>Dùng được với pin nào?</h3>
+      <p>Pin dùng <b>JK BMS có Bluetooth</b> — nếu app <b>JK BMS</b> trên điện thoại kết nối được với pin của bạn qua Bluetooth thì dùng được bộ này.</p>
+      <div class="cgrp"><span class="cg">Cần thêm</span><div class="chips">
+        <span class="chip">Nguồn USB 5V (củ sạc điện thoại)</span><span class="chip">Cáp USB-C</span><span class="chip">WiFi nhà 2.4GHz</span>
+      </div></div>
+      <p class="cnote">Đặt mạch trong tầm Bluetooth của pin (vài mét, gần tủ pin) và trong vùng có sóng WiFi nhà.</p>
+    </div>
+
+    <div class="ghead" style="margin-top:56px"><h2>Dùng trong 3 bước</h2><span class="gcount">khoảng 5 phút</span></div>
+    <div class="steps3">
+      <div class="stp"><div class="n">01</div><h3>Cắm nguồn gần tủ pin</h3><p>Cấp nguồn 5V qua cổng USB-C. Bật <b>Bluetooth của JK BMS</b> (trong app JK). Mạch tự tìm và kết nối pin gần nhất.</p></div>
+      <div class="stp"><div class="n">02</div><h3>Nối WiFi nhà</h3><p>Trên điện thoại vào WiFi <code>JKBMS-xxxxxxxxxx</code>, mật khẩu <code>123456789</code> → trang cấu hình tự mở (hoặc gõ <code>192.168.4.1</code>) → chọn WiFi nhà, nhập mật khẩu. <b>Ghi lại mã 10 số</b> trên trang.</p></div>
+      <div class="stp"><div class="n">03</div><h3>Thêm vào app</h3><p>Vào <a href="/"><code>solarcloud.io.vn</code></a>, đăng ký, bấm <b>Thêm thiết bị</b> và nhập <b>mã 10 số</b>. Xem pin và cài đặt ngay.</p></div>
+    </div>
+    <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Hướng dẫn có hình từng bước</span>Các bước nối WiFi, ghép pin và dùng app giống hệt bài hướng dẫn JK BMS — <b>bỏ qua bước nạp firmware</b> và <b>không cần kích hoạt</b>. <a href="/huongdan/jkbms-c3-act/">Xem hướng dẫn chi tiết →</a></div></div>
+    <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Lưu ý</span>Mỗi lúc JK BMS chỉ cho <b>một thiết bị</b> nối Bluetooth. Khi mạch đang chạy, app JK trên điện thoại sẽ không nối được pin — tắt app JK nếu mạch không tìm thấy pin.</div></div>
+
+    <div class="done"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div><div class="bd"><span class="tt">Mua về dùng ngay</span><p>Mạch đã nạp sẵn và <b>không cần kích hoạt</b>: cắm nguồn, nối WiFi, thêm vào app là xem và cài đặt pin JK BMS từ xa.</p></div></div>
+
+    <div class="cta-row">
+      <a class="cta pri" href="/huongdan/jkbms-c3-act/">Xem hướng dẫn chi tiết →</a>
+      <a class="cta ghost" href="/sanpham">Sản phẩm khác</a>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Solar Cloud · <span class="on">solarcloud.io.vn</span></span>
+    <span>Giám sát năng lượng mặt trời · pin lưu trữ · inverter</span>
+  </div>
+</body>
+</html>
