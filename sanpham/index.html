@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/sanpham/sanpham.css?v=20261004e">
+<link rel="stylesheet" href="/sanpham/sanpham.css?v=20261004g">
 <style>.gia::before{content:"15" "0"}.coin{display:inline-block;width:.95em;height:.95em;margin-left:.18em;vertical-align:-.12em}</style>
 </head>
 <body>
@@ -33,15 +33,34 @@
           <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg><span><b>Máy chủ riêng</b>không phụ thuộc cloud hãng</span></li>
         </ul>
       </div>
-      <div class="hv" aria-hidden="true">
+      <div class="hv">
         <svg class="circ" viewBox="0 0 400 360" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
           <path d="M0 60h90l30 30h120"/><path d="M400 40h-70l-30 30h-60"/><path d="M0 300h60l40-40h90"/><path d="M400 250h-80l-25 25h-70"/>
           <path d="M200 0v40l-20 20"/><path d="M330 360v-50l20-20h50"/>
           <circle cx="240" cy="90" r="5"/><circle cx="240" cy="70" r="5"/><circle cx="190" cy="260" r="5"/><circle cx="225" cy="275" r="5"/><circle cx="180" cy="60" r="5"/>
         </svg>
-        <div class="pod b"></div><div class="pod a"></div>
-        <img class="box" src="/huongdan/img/luxs3-box-hero-tongquan.webp" width="1382" height="1228" alt="">
-        <img class="board" src="/sanpham/img/jkbms-c3-hero.webp" width="1400" height="922" alt="">
+        <!-- ẢNH ĐỘNG: mỗi <a class="slide"> là 1 sản phẩm. Thêm sản phẩm = chép 1 khối slide, đổi ảnh + nhãn + link. -->
+        <a class="slide on" href="/huongdan/inv-lux-s3-camung-act/">
+          <div class="pod b"></div><div class="pod a"></div>
+          <img class="box" src="/huongdan/img/luxs3-box-hero-tongquan.webp" width="1382" height="1228" alt="Bộ giám sát inverter màn hình cảm ứng">
+          <img class="board" src="/sanpham/img/jkbms-c3-hero.webp" width="1400" height="922" alt="Mạch giám sát pin JK BMS">
+          <span class="cap">Giám sát inverter &amp; pin <span class="ar">→</span></span>
+        </a>
+        <a class="slide" href="/sanpham/jkbms-c3/">
+          <div class="pod c"></div>
+          <img class="kit" src="/sanpham/img/jkbms-c3-kit.webp" width="1400" height="770" alt="Bộ giám sát pin JK BMS: mạch ESP32-C3 kèm 2 thanh chân cắm" loading="lazy">
+          <span class="cap">Giám sát pin lưu trữ JK BMS <span class="ar">→</span></span>
+        </a>
+        <a class="slide" href="/huongdan/inv-lux-s3-camung-act/">
+          <div class="pod d"></div>
+          <img class="scr" src="/huongdan/img/luxs3-box-lcd-2-diennang.webp" width="1431" height="1132" alt="Màn hình cảm ứng hiển thị điện năng hôm nay" loading="lazy">
+          <span class="cap">Màn hình cảm ứng · điện năng <span class="ar">→</span></span>
+        </a>
+        <a class="slide" href="/huongdan/gateway-deye-lux-bms/">
+          <img class="card" src="/huongdan/img/gw-cover.webp" width="1200" height="675" alt="Gateway giám sát 2 inverter và pin BMS" loading="lazy">
+          <span class="cap">Giám sát gateway 2 inverter + BMS <span class="ar">→</span></span>
+        </a>
+        <div class="dots" role="tablist" aria-label="Chọn sản phẩm"></div>
       </div>
     </div>
   </section>
@@ -194,6 +213,23 @@
     window.addEventListener('scroll',onS,{passive:true});window.addEventListener('resize',onS);
     check(); setTimeout(check,300);
     setTimeout(function(){els.forEach(show);els=[];},6000); /* dự phòng: không để khối nào ẩn mãi */
+  })();
+  </script>
+  <script>
+  /* banner: tự chuyển ảnh sản phẩm mỗi 4,5 giây; rê chuột / chạm thì dừng; tab ẩn thì không chạy */
+  (function(){
+    var hv=document.querySelector('.hv'); if(!hv)return;
+    var s=[].slice.call(hv.querySelectorAll('.slide')), d=hv.querySelector('.dots');
+    if(s.length<2||!d){if(d)d.remove();return;}
+    var i=0,t=null,paused=false;
+    s.forEach(function(_,k){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Sản phẩm '+(k+1));
+      b.addEventListener('click',function(e){e.preventDefault();go(k);restart();});d.appendChild(b);});
+    var bs=d.children;
+    function go(k){s[i].classList.remove('on');bs[i].classList.remove('on');i=(k+s.length)%s.length;s[i].classList.add('on');bs[i].classList.add('on');}
+    function restart(){clearInterval(t);t=setInterval(function(){if(!paused&&!document.hidden)go(i+1);},4500);}
+    hv.addEventListener('mouseenter',function(){paused=true;});hv.addEventListener('mouseleave',function(){paused=false;});
+    hv.addEventListener('touchstart',function(){paused=true;clearTimeout(hv._tp);hv._tp=setTimeout(function(){paused=false;},8000);},{passive:true});
+    go(0);restart();
   })();
   </script>
 </body>

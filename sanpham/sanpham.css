@@ -278,3 +278,25 @@ a{color:var(--brand);text-decoration:none}
   .rv{translate:none}
   .hv::after,.hv .box,.hv .board,.guide .gi .ib{animation:none}
 }
+
+/* ═════════ BANNER ẢNH ĐỘNG (04/10) ═════════ */
+.hv .slide{position:absolute;inset:0;z-index:1;opacity:0;visibility:hidden;transform:scale(1.04);
+  transition:opacity .9s ease,transform 1.4s cubic-bezier(.2,.7,.2,1),visibility 0s linear .9s;color:inherit}
+.hv .slide.on{opacity:1;visibility:visible;transform:none;transition:opacity .9s ease,transform 1.4s cubic-bezier(.2,.7,.2,1),visibility 0s}
+.hv .pod.c{left:12%;right:12%;bottom:8%;height:24%}
+.hv .pod.d{left:22%;right:22%;bottom:8%;height:16%}
+.hv .kit{position:absolute;left:4%;top:25%;width:92%;height:auto;filter:drop-shadow(0 18px 22px rgba(0,0,0,.28));animation:sc-float 6s ease-in-out infinite}
+.hv .scr{position:absolute;left:9%;top:13%;width:82%;height:auto;filter:drop-shadow(0 18px 24px rgba(0,0,0,.25));animation:sc-float 6.5s ease-in-out infinite}
+.hv .card{position:absolute;left:7%;top:18%;width:86%;height:auto;border-radius:18px;box-shadow:0 24px 50px rgba(0,0,0,.28);animation:sc-float 7s ease-in-out infinite}
+.hv .cap{position:absolute;left:18px;bottom:16px;z-index:3;display:inline-flex;align-items:center;gap:8px;max-width:calc(100% - 140px);
+  background:rgba(255,255,255,.94);color:var(--ink);font-weight:700;font-size:14px;line-height:1.3;padding:9px 15px;border-radius:999px;
+  box-shadow:0 8px 20px rgba(0,0,0,.18);transform:translateY(8px);opacity:0;transition:opacity .6s .35s,transform .6s .35s}
+.hv .slide.on .cap{opacity:1;transform:none}
+.hv .cap .ar{color:var(--brand);transition:transform .15s}
+.hv .slide:hover .cap .ar{transform:translateX(3px)}
+.hv .dots{position:absolute;right:18px;bottom:24px;z-index:4;display:flex;gap:7px}
+.hv .dots button{width:9px;height:9px;padding:0;border:0;border-radius:999px;background:rgba(255,255,255,.45);cursor:pointer;transition:width .3s,background .3s}
+.hv .dots button.on{width:26px;background:#fff}
+.hv .dots button:focus-visible{outline:2px solid #fff;outline-offset:2px}
+@media (max-width:640px){.hv .cap{font-size:12.5px;padding:7px 12px;left:12px;bottom:12px;max-width:calc(100% - 110px)}.hv .dots{right:12px;bottom:19px}}
+@media (prefers-reduced-motion:reduce){.hv .slide{transform:none}.hv .kit,.hv .scr,.hv .card{animation:none}}
