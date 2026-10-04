@@ -380,14 +380,14 @@ body::before{content:"";position:fixed;inset:-12%;z-index:-2;pointer-events:none
     radial-gradient(30% 26% at 50% 50%,rgba(52,227,166,.10),transparent 70%);
   filter:blur(40px)}
 body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='560' viewBox='0 0 560 560' fill='none'%3E%3Cg stroke='%230E775E' stroke-opacity='.14' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M0 80h120l40 40h140l30-30h230'/%3E%3Cpath d='M60 0v60l30 30v130l-30 30v90'/%3E%3Cpath d='M560 300h-110l-35 35h-150l-40-40H0'/%3E%3Cpath d='M330 560v-80l25-25v-95l40-40V180l30-30V0'/%3E%3Cpath d='M0 470h90l35-35h120l30 30h285'/%3E%3Cpath d='M200 560v-60l-30-30v-70'/%3E%3C/g%3E%3Cg fill='%2323C08E' fill-opacity='.32'%3E%3Ccircle cx='160' cy='120' r='3.2'/%3E%3Ccircle cx='300' cy='120' r='3.2'/%3E%3Ccircle cx='90' cy='220' r='3.2'/%3E%3Ccircle cx='415' cy='335' r='3.2'/%3E%3Ccircle cx='265' cy='335' r='3.2'/%3E%3Ccircle cx='355' cy='455' r='3.2'/%3E%3Ccircle cx='245' cy='470' r='3.2'/%3E%3Ccircle cx='170' cy='470' r='3.2'/%3E%3Ccircle cx='425' cy='180' r='3.2'/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(rgba(14,119,94,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(14,119,94,.05) 1px,transparent 1px);
+  background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='560' viewBox='0 0 560 560' fill='none'%3E%3Cg stroke='%230E775E' stroke-opacity='.24' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M0 80h120l40 40h140l30-30h230'/%3E%3Cpath d='M60 0v60l30 30v130l-30 30v90'/%3E%3Cpath d='M560 300h-110l-35 35h-150l-40-40H0'/%3E%3Cpath d='M330 560v-80l25-25v-95l40-40V180l30-30V0'/%3E%3Cpath d='M0 470h90l35-35h120l30 30h285'/%3E%3Cpath d='M200 560v-60l-30-30v-70'/%3E%3C/g%3E%3Cg fill='%2323C08E' fill-opacity='.45'%3E%3Ccircle cx='160' cy='120' r='3.2'/%3E%3Ccircle cx='300' cy='120' r='3.2'/%3E%3Ccircle cx='90' cy='220' r='3.2'/%3E%3Ccircle cx='415' cy='335' r='3.2'/%3E%3Ccircle cx='265' cy='335' r='3.2'/%3E%3Ccircle cx='355' cy='455' r='3.2'/%3E%3Ccircle cx='245' cy='470' r='3.2'/%3E%3Ccircle cx='170' cy='470' r='3.2'/%3E%3Ccircle cx='425' cy='180' r='3.2'/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(rgba(14,119,94,.085) 1px,transparent 1px),linear-gradient(90deg,rgba(14,119,94,.085) 1px,transparent 1px);
   background-size:560px 560px,40px 40px,40px 40px;
-  -webkit-mask-image:radial-gradient(130% 100% at 50% 0%,#000 40%,rgba(0,0,0,.35) 100%);mask-image:radial-gradient(130% 100% at 50% 0%,#000 40%,rgba(0,0,0,.35) 100%)}
-/* bài hướng dẫn: khối kính mờ (trắng ~62%, mờ 12px) */
-.topnav{background:rgba(255,255,255,.7);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.prep,.note,.done,.rtab,.compat,.cmp,.price,.prodshot{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.prep,.rtab,.compat{background:rgba(255,255,255,.64)}
-.plate{background:rgba(247,249,248,.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  -webkit-mask-image:radial-gradient(130% 100% at 50% 0%,#000 45%,rgba(0,0,0,.55) 100%);mask-image:radial-gradient(130% 100% at 50% 0%,#000 45%,rgba(0,0,0,.55) 100%)}
+/* bài hướng dẫn: khối kính mờ (trong ~50%, mờ nhẹ 4px) */
+.topnav{background:rgba(255,255,255,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.prep,.note,.done,.rtab,.compat,.cmp,.price,.prodshot{backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+.prep,.rtab,.compat{background:rgba(255,255,255,.42)}
+.plate{background:rgba(247,249,248,.32);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
 /* tiêu đề bài dài hơn ("Hướng dẫn tự làm thiết bị …") — thu nhỏ một chút cho gọn */
 .hero h1{font-size:clamp(30px,5vw,52px);line-height:1.08}
 h1 .amp{white-space:nowrap}
