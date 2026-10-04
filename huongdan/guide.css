@@ -368,25 +368,20 @@ a:hover code{background:var(--phos);color:#fff;border-color:var(--phos)}
   .dim .draw{stroke-dashoffset:0}
 }
 
-/* ═════════ NỀN MỜ TÔNG XANH "ELECTRIC" (04/10) ═════════ */
+/* ═════════ NỀN MỜ TÔNG XANH "ELECTRIC" (04/10, bản NHẸ: nền đứng yên — không blur/không chuyển động để GPU không tải nặng) ═════════ */
 html{background:#F2F8F5}
 body{background:transparent;position:relative}
-body::before{content:"";position:fixed;inset:-12%;z-index:-2;pointer-events:none;
+body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
   background:
-    radial-gradient(38% 32% at 10% 14%,rgba(35,192,142,.30),transparent 70%),
-    radial-gradient(34% 30% at 92% 10%,rgba(14,119,94,.22),transparent 70%),
-    radial-gradient(42% 36% at 82% 82%,rgba(34,211,238,.20),transparent 70%),
-    radial-gradient(38% 34% at 12% 92%,rgba(16,185,129,.20),transparent 70%),
-    radial-gradient(30% 26% at 50% 50%,rgba(52,227,166,.10),transparent 70%);
-  filter:blur(40px);animation:sc-bgdrift 26s ease-in-out infinite alternate}
+    radial-gradient(45% 40% at 8% 10%,rgba(35,192,142,.22),transparent 72%),
+    radial-gradient(40% 36% at 94% 6%,rgba(14,119,94,.16),transparent 72%),
+    radial-gradient(48% 42% at 84% 86%,rgba(34,211,238,.15),transparent 72%),
+    radial-gradient(44% 40% at 10% 94%,rgba(16,185,129,.15),transparent 72%)}
 body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
-  background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='560' viewBox='0 0 560 560' fill='none'%3E%3Cg stroke='%230E775E' stroke-opacity='.13' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M0 80h120l40 40h140l30-30h230'/%3E%3Cpath d='M60 0v60l30 30v130l-30 30v90'/%3E%3Cpath d='M560 300h-110l-35 35h-150l-40-40H0'/%3E%3Cpath d='M330 560v-80l25-25v-95l40-40V180l30-30V0'/%3E%3Cpath d='M0 470h90l35-35h120l30 30h285'/%3E%3Cpath d='M200 560v-60l-30-30v-70'/%3E%3C/g%3E%3Cg fill='%2323C08E' fill-opacity='.28'%3E%3Ccircle cx='160' cy='120' r='3.2'/%3E%3Ccircle cx='300' cy='120' r='3.2'/%3E%3Ccircle cx='90' cy='220' r='3.2'/%3E%3Ccircle cx='415' cy='335' r='3.2'/%3E%3Ccircle cx='265' cy='335' r='3.2'/%3E%3Ccircle cx='355' cy='455' r='3.2'/%3E%3Ccircle cx='245' cy='470' r='3.2'/%3E%3Ccircle cx='170' cy='470' r='3.2'/%3E%3Ccircle cx='425' cy='180' r='3.2'/%3E%3C/g%3E%3Cg stroke-linecap='round' style='filter:drop-shadow(0 0 3px %2334E3A6)' stroke='%2323C08E'%3E%3Cpath d='M0 80h120l40 40h140l30-30h230' stroke='%2364F5C2' stroke-width='1.6' stroke-dasharray='16 900' stroke-dashoffset='916' opacity='.9'%3E%3Canimate attributeName='stroke-dashoffset' from='916' to='0' dur='7s' begin='0.0s' repeatCount='indefinite'/%3E%3C/path%3E%3Cpath d='M60 0v60l30 30v130l-30 30v90' stroke='%2364F5C2' stroke-width='1.6' stroke-dasharray='16 900' stroke-dashoffset='916' opacity='.9'%3E%3Canimate attributeName='stroke-dashoffset' from='916' to='0' dur='9s' begin='1.3s' repeatCount='indefinite'/%3E%3C/path%3E%3Cpath d='M560 300h-110l-35 35h-150l-40-40H0' stroke='%2364F5C2' stroke-width='1.6' stroke-dasharray='16 900' stroke-dashoffset='916' opacity='.9'%3E%3Canimate attributeName='stroke-dashoffset' from='916' to='0' dur='8s' begin='2.6s' repeatCount='indefinite'/%3E%3C/path%3E%3Cpath d='M330 560v-80l25-25v-95l40-40V180l30-30V0' stroke='%2364F5C2' stroke-width='1.6' stroke-dasharray='16 900' stroke-dashoffset='916' opacity='.9'%3E%3Canimate attributeName='stroke-dashoffset' from='916' to='0' dur='10s' begin='3.9000000000000004s' repeatCount='indefinite'/%3E%3C/path%3E%3Cpath d='M0 470h90l35-35h120l30 30h285' stroke='%2364F5C2' stroke-width='1.6' stroke-dasharray='16 900' stroke-dashoffset='916' opacity='.9'%3E%3Canimate attributeName='stroke-dashoffset' from='916' to='0' dur='7.5s' begin='5.2s' repeatCount='indefinite'/%3E%3C/path%3E%3Cpath d='M200 560v-60l-30-30v-70' stroke='%2364F5C2' stroke-width='1.6' stroke-dasharray='16 900' stroke-dashoffset='916' opacity='.9'%3E%3Canimate attributeName='stroke-dashoffset' from='916' to='0' dur='6.5s' begin='6.5s' repeatCount='indefinite'/%3E%3C/path%3E%3C/g%3E%3C/svg%3E"),linear-gradient(rgba(14,119,94,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(14,119,94,.05) 1px,transparent 1px);
+  background-image:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='560' height='560' viewBox='0 0 560 560' fill='none'%3E%3Cg stroke='%230E775E' stroke-opacity='.14' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M0 80h120l40 40h140l30-30h230'/%3E%3Cpath d='M60 0v60l30 30v130l-30 30v90'/%3E%3Cpath d='M560 300h-110l-35 35h-150l-40-40H0'/%3E%3Cpath d='M330 560v-80l25-25v-95l40-40V180l30-30V0'/%3E%3Cpath d='M0 470h90l35-35h120l30 30h285'/%3E%3Cpath d='M200 560v-60l-30-30v-70'/%3E%3C/g%3E%3Cg fill='%2323C08E' fill-opacity='.32'%3E%3Ccircle cx='160' cy='120' r='3.2'/%3E%3Ccircle cx='300' cy='120' r='3.2'/%3E%3Ccircle cx='90' cy='220' r='3.2'/%3E%3Ccircle cx='415' cy='335' r='3.2'/%3E%3Ccircle cx='265' cy='335' r='3.2'/%3E%3Ccircle cx='355' cy='455' r='3.2'/%3E%3Ccircle cx='245' cy='470' r='3.2'/%3E%3Ccircle cx='170' cy='470' r='3.2'/%3E%3Ccircle cx='425' cy='180' r='3.2'/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(rgba(14,119,94,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(14,119,94,.05) 1px,transparent 1px);
   background-size:560px 560px,40px 40px,40px 40px;
   -webkit-mask-image:radial-gradient(130% 100% at 50% 0%,#000 40%,rgba(0,0,0,.35) 100%);mask-image:radial-gradient(130% 100% at 50% 0%,#000 40%,rgba(0,0,0,.35) 100%)}
-@keyframes sc-bgdrift{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(2.5%,-2%,0) scale(1.06)}100%{transform:translate3d(-2%,2%,0) scale(1.03)}}
-/* bài hướng dẫn: khối nửa trong suốt để thấy nền */
-.topnav{background:rgba(255,255,255,.82);backdrop-filter:blur(8px)}
-.prep,.note,.done,.rtab,.compat,.cmp,.price,.prodshot{backdrop-filter:blur(6px)}
-.prep,.rtab,.compat{background:rgba(255,255,255,.86)}
-.plate{background:rgba(247,249,248,.82);backdrop-filter:blur(6px)}
-@media (prefers-reduced-motion:reduce){body::before{animation:none}}
+/* bài hướng dẫn: khối nửa trong suốt (không backdrop-filter) */
+.topnav{background:rgba(255,255,255,.92)}
+.prep,.rtab,.compat{background:rgba(255,255,255,.92)}
+.plate{background:rgba(247,249,248,.9)}
