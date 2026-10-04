@@ -211,3 +211,68 @@ a{color:var(--brand);text-decoration:none}
   .feats{grid-template-columns:1fr}
   .shead .more{display:none}
 }
+
+/* ═════════ HIỆU ỨNG (04/10) — tắt hết khi máy bật "giảm chuyển động" ═════════ */
+/* hiện dần khi cuộn tới (JS gắn .rv rồi .in) */
+.rv{opacity:0;translate:0 22px;transition:opacity .7s cubic-bezier(.2,.7,.2,1),translate .7s cubic-bezier(.2,.7,.2,1),box-shadow .2s,transform .2s,border-color .2s}
+.rv.in{opacity:1;translate:0 0}
+
+/* banner: đường mạch có dòng điện chạy + phát sáng */
+.hv .circ{opacity:.32}
+.hv .circ path{stroke-dasharray:7 11;animation:sc-flow 2.6s linear infinite;filter:drop-shadow(0 0 3px rgba(190,255,230,.9))}
+.hv .circ path:nth-child(2n){animation-duration:3.4s;animation-direction:reverse}
+.hv .circ path:nth-child(3n){animation-duration:4.2s}
+.hv .circ circle{fill:#B8FFE4;stroke:#fff;transform-box:fill-box;transform-origin:center;animation:sc-node 2.4s ease-in-out infinite;filter:drop-shadow(0 0 6px #9DFFD8)}
+.hv .circ circle:nth-of-type(2){animation-delay:.5s}.hv .circ circle:nth-of-type(3){animation-delay:1s}
+.hv .circ circle:nth-of-type(4){animation-delay:1.5s}.hv .circ circle:nth-of-type(5){animation-delay:2s}
+@keyframes sc-flow{to{stroke-dashoffset:-72}}
+@keyframes sc-node{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.35)}}
+
+/* banner: vệt sáng lướt qua khối xanh */
+.hv::after{content:"";position:absolute;inset:-40% -60%;pointer-events:none;
+  background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.16) 50%,transparent 58%);animation:sc-sweep 7s ease-in-out infinite}
+@keyframes sc-sweep{0%,15%{transform:translateX(-45%)}55%,100%{transform:translateX(45%)}}
+
+/* banner: sản phẩm bồng bềnh */
+.hv .box{animation:sc-float 6s ease-in-out infinite}
+.hv .board{animation:sc-float 5s ease-in-out infinite;animation-delay:-2.2s}
+@keyframes sc-float{0%,100%{translate:0 0}50%{translate:0 -10px}}
+.hv .pod{animation:sc-podglow 6s ease-in-out infinite}
+@keyframes sc-podglow{0%,100%{box-shadow:0 20px 40px rgba(0,0,0,.18)}50%{box-shadow:0 20px 44px rgba(0,0,0,.14),0 0 28px rgba(157,255,216,.35)}}
+
+/* chấm "Realtime" nhấp nháy */
+.trust li:first-child .ic{animation:sc-blink 1.6s ease-in-out infinite;filter:drop-shadow(0 0 4px rgba(14,119,94,.45))}
+@keyframes sc-blink{0%,100%{opacity:1}50%{opacity:.35}}
+.eyebrow::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#23C08E;margin-right:9px;vertical-align:1px;
+  box-shadow:0 0 0 0 rgba(35,192,142,.6);animation:sc-ping 1.8s ease-out infinite}
+@keyframes sc-ping{0%{box-shadow:0 0 0 0 rgba(35,192,142,.55)}100%{box-shadow:0 0 0 9px rgba(35,192,142,0)}}
+
+/* nút chính: vệt sáng lướt khi rê chuột */
+.cta.pri{position:relative;overflow:hidden;box-shadow:0 6px 18px rgba(14,119,94,.25)}
+.cta.pri::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:45%;transform:skewX(-20deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transition:left .6s}
+.cta.pri:hover::after{left:120%}
+.cta.pri:hover{box-shadow:0 8px 24px rgba(14,119,94,.38)}
+
+/* thẻ: nổi + viền sáng xanh + ảnh phóng nhẹ */
+.cat,.pcard,.prod{will-change:transform}
+.cat:hover,.pcard:hover{box-shadow:0 14px 34px rgba(14,119,94,.16),0 0 0 1px rgba(14,119,94,.25),0 0 22px rgba(35,192,142,.18)}
+.cat .ci img,.pimg img,.prod .figframe img{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.cat:hover .ci img,.pcard:hover .pimg img{transform:scale(1.06)}
+.prod:hover .figframe img{transform:scale(1.03)}
+
+/* đồng xu giá loé sáng */
+.coin{animation:sc-coin 3.2s ease-in-out infinite}
+@keyframes sc-coin{0%,70%,100%{filter:none;transform:none}80%{filter:drop-shadow(0 0 6px rgba(245,179,1,.9));transform:rotate(-12deg) scale(1.12)}}
+
+/* khu hướng dẫn: biểu tượng sách bồng bềnh, khối "sắp ra mắt" viền chạy */
+.guide .gi .ib{animation:sc-float 4.5s ease-in-out infinite}
+.soon{position:relative}
+.badge-soon{animation:sc-ping2 2.2s ease-out infinite}
+@keyframes sc-ping2{0%{box-shadow:0 0 0 0 rgba(14,119,94,.45)}100%{box-shadow:0 0 0 8px rgba(14,119,94,0)}}
+
+@media (prefers-reduced-motion:reduce){
+  /* máy bật "giảm chuyển động": vẫn giữ sáng/nhấp nháy/rê chuột, chỉ bỏ bồng bềnh, vệt lướt và trượt */
+  .rv{translate:none}
+  .hv::after,.hv .box,.hv .board,.guide .gi .ib{animation:none}
+}
