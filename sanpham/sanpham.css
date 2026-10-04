@@ -300,3 +300,23 @@ a{color:var(--brand);text-decoration:none}
 .hv .dots button:focus-visible{outline:2px solid #fff;outline-offset:2px}
 @media (max-width:640px){.hv .cap{font-size:12.5px;padding:7px 12px;left:12px;bottom:12px;max-width:calc(100% - 110px)}.hv .dots{right:12px;bottom:19px}}
 @media (prefers-reduced-motion:reduce){.hv .slide{transform:none}.hv .kit,.hv .scr,.hv .card{animation:none}}
+
+/* ═════════ NÚT ĐẶT HÀNG QUA ZALO + GIÁ ═════════ */
+.zbtn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:11px 18px;border-radius:12px;background:#0068FF;color:#fff!important;
+  font-weight:700;font-size:15px;line-height:1.2;text-decoration:none;box-shadow:0 6px 18px rgba(0,104,255,.28);transition:background .15s,box-shadow .15s,transform .15s;position:relative;overflow:hidden}
+.zbtn:hover{background:#0057D6;box-shadow:0 8px 24px rgba(0,104,255,.38);transform:translateY(-1px)}
+.zbtn .zi{width:24px;height:24px;flex:0 0 auto;border-radius:6px}
+.zbtn::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;transform:skewX(-20deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transition:left .6s}
+.zbtn:hover::after{left:120%}
+.zphone{display:block;margin-top:6px;font-size:13px;color:var(--muted)}
+.coin{width:1em;height:1em}
+.pcard.has-order .pimg{display:block}
+.pcard.has-order h3 a{color:inherit}
+.pcard.has-order h3 a:hover{color:var(--brand)}
+.pcard.has-order:hover .pbtn{background:transparent;color:var(--brand)}
+.pcard.has-order .pbtn:hover{background:var(--brand);color:#fff}
+.pricebox{display:inline-flex;align-items:baseline;gap:10px;margin:12px 0 0;padding:8px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;align-self:flex-start;box-shadow:var(--sh-1)}
+.pricebox .pl{font-size:12.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.pricebox .pv{font-size:26px;font-weight:800;color:var(--brand-d);line-height:1}
+.zbtn.sm{margin:12px 0 0;width:100%;font-size:14.5px;padding:10px 12px}
+.pb .zbtn.sm + .pbtn{margin-top:10px}

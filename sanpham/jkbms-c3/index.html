@@ -70,6 +70,17 @@
   .annoplate{padding:14px 10px}
 }
 /* trang sản phẩm JK BMS */
+
+/* ═════════ NÚT ĐẶT HÀNG QUA ZALO + GIÁ ═════════ */
+.zbtn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:11px 18px;border-radius:12px;background:#0068FF;color:#fff!important;
+  font-weight:700;font-size:15px;line-height:1.2;text-decoration:none;box-shadow:0 6px 18px rgba(0,104,255,.28);transition:background .15s,box-shadow .15s,transform .15s;position:relative;overflow:hidden}
+.zbtn:hover{background:#0057D6;box-shadow:0 8px 24px rgba(0,104,255,.38);transform:translateY(-1px)}
+.zbtn .zi{width:24px;height:24px;flex:0 0 auto;border-radius:6px}
+.zbtn::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;transform:skewX(-20deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transition:left .6s}
+.zbtn:hover::after{left:120%}
+.zphone{display:block;margin-top:6px;font-size:13px;color:var(--muted)}
+.coin{width:1em;height:1em}
+.order{margin:16px 0 0}
 .price{display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin:22px 0 0;padding:12px 20px;border-radius:14px;background:var(--ink-2);border:1px solid var(--phos-line);box-shadow:var(--sh-1)}
 .price .pl{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
 .price .pv{font-size:30px;font-weight:800;color:var(--phos-d);line-height:1}
@@ -115,7 +126,8 @@
         <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Không đấu dây vào pin</span>
         <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Android · iPhone · máy tính</span>
       </div>
-      <div class="price"><span class="pl">Giá</span><span class="pv"><span class="gia"></span><svg class="coin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="#F5B301" stroke="#B8860B" stroke-width="1.4"/><circle cx="12" cy="12" r="7" fill="none" stroke="#FFE08A" stroke-width="1.4"/><path d="M12 7.6l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3-2.2-2.1 3-.4z" fill="#FFF3C4"/></svg></span><span class="pn">giám sát + cài đặt từ xa</span></div>
+      <div class="price"><span class="pl">Giá</span><span class="pv"><span class="gia"></span><svg class="coin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#F7931A"/><circle cx="12" cy="12" r="11" fill="none" stroke="#D97C0B" stroke-width=".8"/><g transform="rotate(14 12 12)" fill="#fff"><path fill-rule="evenodd" d="M8.4 6.3h5.1c2.2 0 3.3 1.2 3.3 2.8 0 1.2-.7 2-1.7 2.3 1.4.3 2.4 1.4 2.4 2.9 0 2.1-1.5 3.7-3.9 3.7H8.4zm2.3 1.8v3.1h2.4c1 0 1.5-.6 1.5-1.6s-.5-1.5-1.5-1.5zm0 4.7v3.4h2.7c1.2 0 1.8-.7 1.8-1.7s-.6-1.7-1.8-1.7z"/><rect x="9.9" y="4.4" width="1.4" height="2.2" rx=".4"/><rect x="12.3" y="4.4" width="1.4" height="2.2" rx=".4"/><rect x="9.9" y="17.4" width="1.4" height="2.2" rx=".4"/><rect x="12.3" y="17.4" width="1.4" height="2.2" rx=".4"/></g></svg></span><span class="pn">giám sát + cài đặt từ xa</span></div>
+      <div class="order"><a class="zbtn" href="https://zalo.me/0349897777" target="_blank" rel="noopener"><svg class="zi" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#fff"/><path d="M12 4.2c-4.6 0-8.3 3.1-8.3 7 0 2.2 1.2 4.1 3.1 5.4l-.6 2.6c-.1.4.3.7.6.5l3-1.7c.7.1 1.4.2 2.2.2 4.6 0 8.3-3.1 8.3-7s-3.7-7-8.3-7z" fill="#0068FF"/><path d="M8.6 9h5.6l-5.3 5.4h5.5" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Đặt hàng qua Zalo</span></a><span class="zphone">Zalo / điện thoại: 0349 897 777</span></div>
     </div>
 
     <div class="prodshot">
@@ -165,9 +177,10 @@
     <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Hướng dẫn có hình từng bước</span>Các bước nối WiFi, ghép pin và dùng app có hình minh hoạ trong bài hướng dẫn JK BMS (bắt đầu từ bước <b>Kết nối WiFi nhà</b>). <a href="/huongdan/jkbms-c3-act/">Xem hướng dẫn chi tiết →</a></div></div>
     <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Lưu ý</span>Mỗi lúc JK BMS chỉ cho <b>một thiết bị</b> nối Bluetooth. Khi mạch đang chạy, app JK trên điện thoại sẽ không nối được pin — tắt app JK nếu mạch không tìm thấy pin.</div></div>
 
-    <div class="done"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div><div class="bd"><span class="tt">Mua về dùng ngay</span><p>Cắm nguồn, nối WiFi, thêm vào app là xem và cài đặt pin JK BMS từ xa. Giá <b><span class="gia"></span><svg class="coin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="#F5B301" stroke="#B8860B" stroke-width="1.4"/><circle cx="12" cy="12" r="7" fill="none" stroke="#FFE08A" stroke-width="1.4"/><path d="M12 7.6l1.3 2.7 3 .4-2.2 2.1.5 3-2.6-1.4-2.6 1.4.5-3-2.2-2.1 3-.4z" fill="#FFF3C4"/></svg></b>.</p></div></div>
+    <div class="done"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div><div class="bd"><span class="tt">Mua về dùng ngay</span><p>Cắm nguồn, nối WiFi, thêm vào app là xem và cài đặt pin JK BMS từ xa. Giá <b><span class="gia"></span><svg class="coin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#F7931A"/><circle cx="12" cy="12" r="11" fill="none" stroke="#D97C0B" stroke-width=".8"/><g transform="rotate(14 12 12)" fill="#fff"><path fill-rule="evenodd" d="M8.4 6.3h5.1c2.2 0 3.3 1.2 3.3 2.8 0 1.2-.7 2-1.7 2.3 1.4.3 2.4 1.4 2.4 2.9 0 2.1-1.5 3.7-3.9 3.7H8.4zm2.3 1.8v3.1h2.4c1 0 1.5-.6 1.5-1.6s-.5-1.5-1.5-1.5zm0 4.7v3.4h2.7c1.2 0 1.8-.7 1.8-1.7s-.6-1.7-1.8-1.7z"/><rect x="9.9" y="4.4" width="1.4" height="2.2" rx=".4"/><rect x="12.3" y="4.4" width="1.4" height="2.2" rx=".4"/><rect x="9.9" y="17.4" width="1.4" height="2.2" rx=".4"/><rect x="12.3" y="17.4" width="1.4" height="2.2" rx=".4"/></g></svg></b>.</p></div></div>
 
     <div class="cta-row">
+      <a class="zbtn" href="https://zalo.me/0349897777" target="_blank" rel="noopener"><svg class="zi" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#fff"/><path d="M12 4.2c-4.6 0-8.3 3.1-8.3 7 0 2.2 1.2 4.1 3.1 5.4l-.6 2.6c-.1.4.3.7.6.5l3-1.7c.7.1 1.4.2 2.2.2 4.6 0 8.3-3.1 8.3-7s-3.7-7-8.3-7z" fill="#0068FF"/><path d="M8.6 9h5.6l-5.3 5.4h5.5" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Đặt hàng qua Zalo</span></a>
       <a class="cta pri" href="/huongdan/jkbms-c3-act/">Xem hướng dẫn chi tiết →</a>
       <a class="cta ghost" href="/sanpham">Sản phẩm khác</a>
     </div>
