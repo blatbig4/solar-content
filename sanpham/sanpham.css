@@ -144,6 +144,8 @@ a{color:var(--brand);text-decoration:none}
 .pcard:hover .pbtn .ar{transform:translateX(3px)}
 .pbtn .ar{transition:transform .15s}
 /* thẻ ngang SolarMeter */
+.forwho{display:inline-flex;align-items:center;gap:8px;margin:10px 0 0;padding:7px 12px;border-radius:999px;background:#FFF6DB;border:1px solid #F3D27A;color:#7A5300;font-size:13.5px;font-weight:650;line-height:1.3;align-self:flex-start}
+.forwho svg{width:16px;height:16px;flex:0 0 auto}
 .prod.wide{flex-direction:row}
 .prod.wide .figframe{flex:0 0 42%;aspect-ratio:auto;border-bottom:0;border-right:1px solid var(--line);min-height:300px}
 /* Home Assistant: sắp ra mắt */
