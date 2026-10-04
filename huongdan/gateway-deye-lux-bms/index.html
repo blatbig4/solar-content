@@ -69,6 +69,13 @@
   .brk{width:5px}
   .annoplate{padding:14px 10px}
 }
+/* hai bản bo */
+.plate.boards{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:end}
+.plate.boards figure{margin:0;text-align:center}
+.plate.boards img{display:block;width:100%;height:auto;max-height:340px;object-fit:contain;border-radius:var(--r-sm)}
+.plate.boards figcaption{margin-top:10px;font-size:14px;color:var(--muted)}
+.plate.boards figcaption b{color:var(--paper)}
+@media (max-width:560px){.plate.boards{grid-template-columns:1fr}}
 /* sơ đồ kết nối */
 .diag{margin:26px 0 0;border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);box-shadow:var(--sh-1);padding:18px 14px 10px}
 .diag svg{display:block;width:100%;height:auto}
@@ -119,6 +126,7 @@
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Chi tiết từng máy</b>: Máy 1 Deye, Máy 2 Luxpower — PV1/PV2, pin, tải, lưới, số điện hôm nay, nhiệt độ.</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Pin JK BMS</b>: % pin, điện áp, dòng sạc/xả, <b>điện áp từng cell</b>, cân bằng, nhiệt độ, số chu kỳ.</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Không đấu dây</b>: inverter qua dongle WiFi, pin qua Bluetooth. Chỉ cần cấp nguồn 5V cho mạch.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>2 bản, cùng 1 firmware</b>: bo ESP32-S3 <b>không màn</b>, hoặc bo <b>màn cảm ứng 2.8″</b> (ES3C28P) xem số liệu và cài đặt ngay tại chỗ.</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Biểu đồ, thống kê ngày · tháng · năm; đổi WiFi và cập nhật firmware <b>từ xa</b>.</li>
       </ul>
     </div>
@@ -195,7 +203,7 @@
       <ul>
         <li><span class="ix mono">01</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Máy tính</b> (Windows/macOS) có <b>Chrome</b> hoặc <b>Edge</b>, chỉ dùng cho bước nạp firmware. <em>Không nạp được trên điện thoại, Safari, Firefox.</em></div></li>
         <li><span class="ix mono">02</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Cáp USB-C truyền dữ liệu</b> — không phải cáp chỉ để sạc.</div></li>
-        <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Bo <b>ESP32-S3 N16R8</b> (module ESP32-S3-WROOM-1, 16MB flash, 8MB PSRAM) — loại có 2 cổng USB-C như hình dưới.</div></li>
+        <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Một trong hai bo (cùng 1 firmware): <b>ESP32-S3 N16R8 không màn</b> (module ESP32-S3-WROOM-1, 16MB flash, 8MB PSRAM), hoặc bo <b>ES3C28P màn cảm ứng 2.8″</b> (ESP32-S3 N16R8 có sẵn màn). <em>Bo S3 loại khác (N8, N4R2…) không chạy được.</em></div></li>
         <li><span class="ix mono">04</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>WiFi nhà 2.4GHz</b> + mật khẩu. <em>ESP32 không bắt được WiFi 5GHz.</em></div></li>
         <li><span class="ix mono">05</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Dongle WiFi</b> của inverter Deye và của inverter Luxpower đã cắm vào máy và <b>đã vào cùng WiFi nhà</b>.</div></li>
         <li><span class="ix mono">06</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>JK BMS có Bluetooth</b>. Đặt mạch <b>gần tủ pin</b> (trong tầm Bluetooth, vài mét) và cấp nguồn <b>5V USB</b> lâu dài cho mạch.</div></li>
@@ -203,9 +211,12 @@
     </div>
 
     <div class="fig">
-      <div class="figtag"><span class="n">BO MẠCH</span><span>ESP32-S3 N16R8 — 2 cổng USB-C</span><span class="rule"></span></div>
-      <div class="plate"><img class="appshot" style="max-width:420px;height:auto" src="/huongdan/img/gw-esp32s3-n16r8.webp" width="1000" height="920" alt="Bo phát triển ESP32-S3 N16R8 với module ESP32-S3-WROOM-1 và 2 cổng USB-C" loading="lazy"></div>
-      <div class="figcap">Bo ESP32-S3 N16R8 (module ghi “N16R8”). Ảnh: VectorVoyager, <a href="https://commons.wikimedia.org/wiki/File:ESP32-S3_on_paper.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, giấy phép <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</div>
+      <div class="figtag"><span class="n">BO MẠCH</span><span>Chọn 1 trong 2 bản — cùng 1 firmware</span><span class="rule"></span></div>
+      <div class="plate boards">
+        <figure><img src="/huongdan/img/gw-esp32s3-n16r8.webp" width="1000" height="920" alt="Bo phát triển ESP32-S3 N16R8 không màn hình, module ESP32-S3-WROOM-1, 2 cổng USB-C" loading="lazy"><figcaption><b>Bản không màn</b> · ESP32-S3 N16R8</figcaption></figure>
+        <figure><img src="/huongdan/img/chuanbi-esp32s3lcd.jpg" alt="Bộ ES3C28P: bo ESP32-S3 màn hình cảm ứng 2.8 inch, cáp USB, dây nối, loa" loading="lazy"><figcaption><b>Bản có màn</b> · ES3C28P cảm ứng 2.8″</figcaption></figure>
+      </div>
+      <div class="figcap">Firmware tự nhận màn: cắm bo ES3C28P thì màn cảm ứng hiện số liệu và trang cài đặt; bo không màn thì chạy bình thường, xem trên app. Ảnh bo không màn: VectorVoyager, <a href="https://commons.wikimedia.org/wiki/File:ESP32-S3_on_paper.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</div>
     </div>
 
     <!-- 1 -->
@@ -214,13 +225,30 @@
       <div class="snum">1</div>
       <div class="sechd"><div class="st">Trên máy tính · bằng Chrome hoặc Edge</div><h2>Nạp firmware qua USB</h2></div>
       <ol class="steps">
-        <li>Cắm bo vào máy tính bằng cáp USB-C (dùng cổng ghi <b>USB</b> hoặc <b>COM</b> đều được).</li>
-        <li>Mở trang <a href="/flash"><code>solarcloud.io.vn/flash</code></a> → ở ô <b>“Chọn dòng thiết bị”</b> chọn dòng <b>Gateway</b>.</li>
-        <li>Bấm <b>Bắt đầu nạp firmware</b> → chọn <b>cổng COM</b> hiện ra → <b>Connect</b>.<div class="hint">Cài mới hoàn toàn: tích “Erase device”. Chỉ cập nhật (giữ WiFi): bỏ tích.</div></li>
+        <li>Dùng <b>máy tính</b> mở bài này bằng <b>Chrome</b> hoặc <b>Edge</b>. <em>Không nạp được trên điện thoại, Safari, Firefox.</em></li>
+        <li><b>Cắm bo</b> (ESP32-S3 N16R8 hoặc ES3C28P) vào máy tính bằng cáp USB-C.<div class="hint">Bo không màn có 2 cổng: cổng ghi <b>USB</b> hoặc <b>COM</b> đều được.</div></li>
+        <li>Ở khung <b>“Nạp ngay”</b> bên dưới, bấm <b>Nạp Gateway (ESP32-S3)</b>.<div class="hint">Bấm nhầm loại chip sẽ báo sai chip và tự dừng — không hỏng máy.</div></li>
+        <li>Chọn <b>cổng COM</b> hiện ra → <b>Connect</b>.<div class="hint">Cài mới hoàn toàn: tích “Erase device”. Chỉ cập nhật (giữ WiFi): bỏ tích.</div></li>
         <li>Chờ chạy đến 100%. <b>Mạch tự khởi động lại là xong.</b></li>
       </ol>
-      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Firmware</span>Firmware cho bộ này đang được hoàn thiện và sẽ có trên trang nạp <a href="/flash"><code>/flash</code></a>. Bài sẽ cập nhật nút nạp ngay trong trang khi có bản chính thức.</div></div>
-      <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Trong lúc nạp</span>Tuyệt đối <b>không rút cáp USB</b> và không ngắt nguồn cho tới khi báo xong.</div></div>
+      <div class="fig">
+        <div class="figtag"><span class="n">NẠP NGAY</span><span>Nạp firmware tại đây — không cần rời trang</span><span class="rule"></span></div>
+        <div class="plate"><span class="rc-tr"></span><span class="rc-bl"></span>
+          <div class="flashbox">
+            <p class="fb-lbl">Cắm bo vào máy rồi bấm — dùng chung cho bản không màn và bản màn cảm ứng:</p>
+            <div class="fb-btns">
+              <esp-web-install-button manifest="/flash/manifest/gateway-s3-act.json">
+                <button class="fw-btn" slot="activate">⚡ Nạp Gateway (ESP32-S3)</button>
+                <span slot="unsupported" class="fw-unsup">Trình duyệt chưa hỗ trợ — hãy dùng <b>Chrome</b> hoặc <b>Edge</b> trên máy tính.</span>
+                <span slot="not-allowed" class="fw-unsup">Cần mở trang bằng <b>HTTPS</b> mới nạp được.</span>
+              </esp-web-install-button>
+            </div>
+            <p class="fb-note">Cần <b>máy tính</b> + <b>Chrome/Edge</b> + <b>cáp USB-C truyền dữ liệu</b>. Bấm nút → chọn <b>cổng COM</b> → chờ tới 100%.</p>
+          </div>
+        </div>
+        <div class="figcap">Nút nạp không hiện hoặc không chạy? Mở <a href="/flash">solarcloud.io.vn/flash</a>, chọn dòng <b>Gateway</b> để nạp như bình thường.</div>
+      </div>
+      <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Đúng bo ESP32-S3 N16R8</span>Firmware Gateway cần bo <b>ESP32-S3 N16R8</b> (16MB flash, 8MB PSRAM — module ghi “N16R8”), hoặc bo màn cảm ứng <b>ES3C28P</b>. Bo S3 loại khác (N8, N4R2…) <b>không chạy được</b>. Trong lúc nạp <b>không rút cáp USB</b>.</div></div>
     </div>
 
     <!-- 2 -->
@@ -229,11 +257,11 @@
       <div class="snum">2</div>
       <div class="sechd"><div class="st">Trên điện thoại · mạch tự phát WiFi cấu hình</div><h2>Kết nối WiFi nhà</h2></div>
       <ol class="steps">
-        <li>Cấp nguồn cho mạch. Mạch <b>tự phát một WiFi</b> tên <code>GATEWAY-S3-xxxxxxxxxx</code> (10 số).</li>
+        <li>Cấp nguồn cho mạch. Mạch <b>tự phát một WiFi</b> tên <code>GATEWAY-S3-ACT-xxxxxxxxxx</code> (10 số).</li>
         <li>Trên điện thoại vào <b>Cài đặt › WiFi</b> → chọn WiFi đó → nhập mật khẩu <code>123456789</code></li>
         <li>Trang cấu hình <b>tự mở</b>. Nếu không → mở trình duyệt gõ <code>192.168.4.1</code></li>
         <li>Trang hiện <b>Device ID (10 số)</b> — <b>ghi lại</b> để thêm vào tài khoản ở bước 5.</li>
-        <li>Ở thẻ <b>WiFi</b>: bấm <b>Quét</b> → chọn <b>WiFi nhà</b> (2.4GHz) → nhập mật khẩu → <b>Lưu &amp; Kết nối</b>.</li>
+        <li>Ở thẻ <b>WiFi</b>: bấm <b>Quét</b> → chọn <b>WiFi nhà</b> (2.4GHz) → nhập mật khẩu → <b>Lưu &amp; Kết nối</b>.<div class="hint"><b>Bản có màn (ES3C28P):</b> có thể cài WiFi ngay trên màn — vào trang <b>CÀI ĐẶT</b> → chọn WiFi → gõ mật khẩu bằng bàn phím ảo.</div></li>
       </ol>
       <div class="fig">
         <div class="figtag"><span class="n">HÌNH 2</span><span>Trang 192.168.4.1 — ID thiết bị &amp; WiFi</span><span class="rule"></span></div>
@@ -320,9 +348,10 @@
         <li>Nhập <b>ID 10 số</b> (đã ghi ở bước 2) → <b>Thêm thiết bị</b>.</li>
         <li>Chạm vào thiết bị vừa thêm để xem <b>cả nhà, từng máy và pin</b> — phần dưới hướng dẫn từng màn.</li>
       </ol>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Bản ACT</span>Sau khi cài đặt và <b>kết nối thành công vào app</b>, nhấn <b>Kích hoạt</b> để hiển thị các thông số.</div></div>
     </div>
 
-    <div class="done"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div><div class="bd"><span class="tt">Hoàn tất</span><p>Mạch tự gửi số liệu 2 inverter và pin lên SOLAR CLOUD mỗi giây. Muốn đổi WiFi sau này: kết nối lại WiFi <code>GATEWAY-S3-…</code> rồi vào <code>192.168.4.1</code>. Giữ nút <b>BOOT ~5 giây</b> để xoá WiFi đã lưu và cài lại từ đầu.</p></div></div>
+    <div class="done"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div><div class="bd"><span class="tt">Hoàn tất</span><p>Mạch tự gửi số liệu 2 inverter và pin lên SOLAR CLOUD mỗi giây. Muốn đổi WiFi sau này: kết nối lại WiFi <code>GATEWAY-S3-ACT-…</code> rồi vào <code>192.168.4.1</code>. Giữ nút <b>BOOT ~5 giây</b> để xoá WiFi đã lưu và cài lại từ đầu.</p></div></div>
 
     <!-- ═════════ XEM TRÊN APP ═════════ -->
     <div class="ghead" id="app" style="margin-top:76px"><h2>Xem trên app</h2><span class="gcount">Android · iPhone · máy tính</span></div>
@@ -466,6 +495,7 @@
     <span>Giám sát năng lượng mặt trời · pin lưu trữ · inverter</span>
   </div>
 
+  <script type="module" src="https://cdn.jsdelivr.net/npm/esp-web-tools@10/dist/web/install-button.js"></script>
   <script src="/huongdan/guide.js" defer></script>
 </body>
 </html>
