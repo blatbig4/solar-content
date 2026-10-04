@@ -3,131 +3,202 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Hướng dẫn cài đặt thiết bị — SOLAR CLOUD</title>
+<title>Hướng dẫn cài đặt thiết bị — giám sát pin, inverter, gateway | SOLAR CLOUD</title>
 <meta name="description" content="Chọn thiết bị để xem hướng dẫn nạp firmware, kết nối WiFi và thêm vào tài khoản SOLAR CLOUD.">
 <meta name="theme-color" content="#0E775E">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/huongdan/guide.css">
+<link rel="stylesheet" href="/sanpham/sanpham.css?v=20261004i">
+<style>
+/* trang /huongdan — dùng chung sanpham.css; phần riêng: hero 3 bước, ô tìm, nút lọc, thẻ hướng dẫn */
+.zbtn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 18px;border-radius:10px;background:#0068FF;color:#fff!important;font-weight:700;font-size:15px;line-height:1;text-decoration:none;box-shadow:0 6px 18px rgba(0,104,255,.28);transition:background .15s,transform .15s}
+.zbtn:hover{background:#0057D6;transform:translateY(-1px)}
+.zbtn .zi{width:22px;height:22px;border-radius:6px}
+.hhero .wrap{padding-top:40px;padding-bottom:42px}
+.hsearch{position:relative;margin:26px 0 0;max-width:560px}
+.hsearch svg{position:absolute;left:16px;top:50%;width:20px;height:20px;transform:translateY(-50%);color:var(--brand)}
+.hsearch input{width:100%;font:inherit;font-size:16px;padding:15px 18px 15px 48px;border:1.5px solid var(--brand-line);border-radius:14px;background:rgba(255,255,255,.9);color:var(--ink);outline:none;box-shadow:var(--sh-1);transition:border-color .15s,box-shadow .15s}
+.hsearch input:focus{border-color:var(--brand);box-shadow:0 0 0 4px rgba(14,119,94,.12)}
+.hsteps{position:relative;border-radius:28px;overflow:hidden;padding:28px 26px;display:grid;gap:14px;align-content:center;min-height:330px;
+  background:radial-gradient(120% 90% at 85% 10%,#16967A 0%,#0E775E 45%,#0A5E4A 100%)}
+.hsteps .circ{position:absolute;inset:0;width:100%;height:100%;opacity:.3}
+.hsteps .circ path{stroke-dasharray:7 11;animation:sc-flow 2.8s linear infinite;filter:drop-shadow(0 0 3px rgba(190,255,230,.9))}
+.hsteps .circ circle{fill:#B8FFE4;transform-box:fill-box;transform-origin:center;animation:sc-node 2.4s ease-in-out infinite}
+.hsteps .st{position:relative;display:flex;gap:14px;align-items:center;padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(6px);color:#fff;
+  animation:sc-float 6s ease-in-out infinite}
+.hsteps .st:nth-of-type(2){animation-delay:-2s;margin-left:22px}
+.hsteps .st:nth-of-type(3){animation-delay:-4s;margin-left:44px}
+.hsteps .st b{flex:0 0 auto;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#fff;color:var(--brand);font-weight:800;font-size:18px;box-shadow:0 0 0 4px rgba(255,255,255,.18),0 0 18px rgba(157,255,216,.5)}
+.hsteps h4{margin:0;font-size:16.5px;font-weight:750}
+.hsteps p{margin:2px 0 0;font-size:13.5px;opacity:.85}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:-6px 0 20px}
+.fchip{font:inherit;font-size:14.5px;font-weight:650;color:var(--ink-2);background:rgba(255,255,255,.85);border:1.5px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .15s}
+.fchip i{font-style:normal;font-size:12px;font-weight:700;color:var(--muted);background:var(--soft);border-radius:999px;padding:1px 7px}
+.fchip:hover{border-color:var(--brand-line);color:var(--brand)}
+.fchip.on{background:var(--brand);border-color:var(--brand);color:#fff;box-shadow:0 6px 16px rgba(14,119,94,.25)}
+.fchip.on i{background:rgba(255,255,255,.22);color:#fff}
+.hgrid{grid-template-columns:repeat(4,1fr)}
+.hcard[hidden]{display:none!important}
+.hcard .pimg{position:relative}
+.hbadge{position:absolute;top:10px;left:10px;z-index:2;font-size:11.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:var(--brand);border-radius:999px;padding:4px 10px;box-shadow:0 4px 10px rgba(14,119,94,.3)}
+.hbadge.new{background:#F59E0B;box-shadow:0 4px 10px rgba(245,158,11,.35)}
+.hbadge.soon{background:#64748B;box-shadow:none}
+.hchips{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 14px}
+.hchips span{font-size:12px;font-weight:650;color:var(--brand-d);background:var(--brand-l);border:1px solid var(--brand-line);border-radius:999px;padding:2px 9px}
+.soonc{border-style:dashed;opacity:.9}
+.soonc .pbtn.dis{border-color:var(--line);color:var(--muted)}
+.soonc:hover{transform:none}
+.hempty{margin:18px 0 0;padding:18px;border:1.5px dashed var(--brand-line);border-radius:var(--r);text-align:center;color:var(--muted);background:rgba(255,255,255,.7)}
+.hbuy .gr img{width:100%}
+@media (max-width:1000px){.hgrid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:900px){.hsteps{min-height:0}.hsteps .st:nth-of-type(2),.hsteps .st:nth-of-type(3){margin-left:0}}
+@media (max-width:760px){.hgrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.hgrid{gap:10px}.hcard .pbtn{white-space:nowrap;font-size:13px;padding:9px 6px;gap:5px}.hcard .pbtn .ar{display:none}.hcard .part{font-size:11px}.hsteps{padding:18px 16px}.hsteps .st{padding:11px 12px}.hchips span{font-size:11px}.fchip{font-size:13.5px;padding:7px 12px}}
+@media (prefers-reduced-motion:reduce){.hsteps .st{animation:none}}
+</style>
 </head>
 <body>
 <script src="/site-nav.js"></script>
-  <div class="topnav">
-    <a href="/sanpham">← Sản phẩm</a>
-    <a class="sp" href="/flash">Nạp firmware →</a>
-  </div>
+
+  <section class="hero hhero">
+    <div class="wrap">
+      <div class="hl">
+        <span class="eyebrow">Hướng dẫn · Tự lắp · Từng bước</span>
+        <h1>Hướng dẫn cài đặt<br><em>thiết bị</em></h1>
+        <p class="lede">Chọn thiết bị để xem hướng dẫn <b>nạp firmware</b>, <b>kết nối WiFi</b> và <b>dùng app SOLAR CLOUD</b>. Mỗi bài có hình minh hoạ từng bước, nạp firmware ngay trong trang.</p>
+        <div class="hsearch">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="q" type="search" placeholder="Tìm thiết bị: JK BMS, Luxpower, Senergy, Gateway…" autocomplete="off" aria-label="Tìm hướng dẫn">
+        </div>
+      </div>
+      <div class="hsteps" aria-hidden="true">
+        <svg class="circ" viewBox="0 0 400 360" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
+          <path d="M0 60h90l30 30h120"/><path d="M400 40h-70l-30 30h-60"/><path d="M0 300h60l40-40h90"/><path d="M400 250h-80l-25 25h-70"/>
+          <circle cx="240" cy="90" r="5"/><circle cx="190" cy="260" r="5"/><circle cx="330" cy="70" r="5"/>
+        </svg>
+        <div class="st"><b>1</b><div><h4>Nạp firmware</h4><p>Ngay trên trình duyệt Chrome / Edge</p></div></div>
+        <div class="st"><b>2</b><div><h4>Kết nối WiFi</h4><p>Trên điện thoại hoặc màn cảm ứng</p></div></div>
+        <div class="st"><b>3</b><div><h4>Xem trên app</h4><p>Nhập mã 10 số — xem từ xa realtime</p></div></div>
+      </div>
+    </div>
+  </section>
 
   <div class="wrap">
-    <!-- PHẦN 0 — GATEWAY: 2 INVERTER + PIN JK -->
-    <div class="group">
-      <div class="ghead">
-        <h2>Giám sát 2 inverter + pin JK BMS từ xa qua internet</h2>
-        <span class="gcount">01 thiết bị</span>
-      </div>
-      <div class="dev-grid solo">
-        <a class="dev-cell feat" href="/huongdan/gateway-deye-lux-bms/">
-          <div class="figframe">
-            <img src="/huongdan/img/gw-cover.webp" alt="Bộ giám sát 2 inverter Deye + Luxpower và pin JK BMS qua WiFi: sơ đồ kết nối không dây và màn tổng quan trên app SOLAR CLOUD" loading="lazy" onerror="this.remove()">
-          </div>
-          <div class="dc-body">
-            <span class="part">Gateway · Deye + Luxpower + JK BMS · ESP32-S3</span>
-            <h3>Hướng dẫn làm bộ giám sát 2 inverter Deye + Luxpower và pin JK BMS qua WiFi — không cần đấu dây</h3>
-            <span class="go">Xem hướng dẫn <span class="ar">→</span></span>
+    <section class="sec" id="danhsach">
+      <div class="shead"><h2>Chọn thiết bị</h2><a class="more" href="/flash">Nạp firmware →</a></div>
+      <div class="filters" role="tablist" aria-label="Lọc theo loại"><button type="button" class="fchip on" data-f="all">Tất cả<i>6</i></button><button type="button" class="fchip" data-f="pin">Pin lưu trữ<i>1</i></button><button type="button" class="fchip" data-f="inv">Inverter<i>4</i></button><button type="button" class="fchip" data-f="gw">Gateway<i>1</i></button></div>
+      <div class="pgrid hgrid">
+        <a class="pcard hcard" href="/huongdan/jkbms-c3-act/" data-cat="pin">
+          <div class="pimg"><span class="hbadge">Có bán sẵn</span><img src="/sanpham/img/jkbms-c3-hero.webp" alt="Giám sát & cài đặt pin JK BMS qua WiFi" loading="lazy"></div>
+          <div class="pb">
+            <span class="part">Pin lưu trữ · JK BMS</span>
+            <h3>Giám sát & cài đặt pin JK BMS qua WiFi</h3>
+            <p>Xem từng cell, <b>cài đặt BMS từ xa</b>. Đọc pin qua Bluetooth, không đấu dây.</p>
+            <div class="hchips"><span>ESP32-C3</span><span>ESP32</span><span>Bluetooth</span></div>
+            <span class="pbtn">Xem hướng dẫn <span class="ar">→</span></span>
           </div>
         </a>
-      </div>
-    </div>
-    <!-- PHẦN 1 — BMS JK -->
-    <div class="group">
-      <div class="ghead">
-        <h2>Giám sát BMS JK từ xa qua internet</h2>
-        <span class="gcount">01 thiết bị</span>
-      </div>
-      <div class="dev-grid solo">
-        <a class="dev-cell feat" href="/huongdan/jkbms-c3-act/">
-          <div class="figframe">
-            <span class="ph"><b>Ảnh minh hoạ · JK BMS</b>lưu ảnh vào<br>huongdan/img/jkbms-cover.webp</span>
-            <img src="/huongdan/img/jkbms-cover.webp" alt="Hướng dẫn DIY giám sát pin JK BMS qua WiFi — dùng ESP32 và ESP32-C3, xem từ xa trên SOLAR CLOUD" loading="lazy" onerror="this.remove()">
-          </div>
-          <div class="dc-body">
-            <span class="part">JK BMS · ESP32 / ESP32-C3 · BLE</span>
-            <h3>Giới thiệu &amp; hướng dẫn làm bộ giám sát pin JK BMS qua WiFi (ESP32 &amp; ESP32-C3)</h3>
-            <span class="go">Xem hướng dẫn <span class="ar">→</span></span>
+        <a class="pcard hcard" href="/huongdan/gateway-deye-lux-bms/" data-cat="gw">
+          <div class="pimg wide"><span class="hbadge new">Mới</span><img src="/huongdan/img/gw-cover.webp" alt="Giám sát 2 inverter + pin BMS" loading="lazy"></div>
+          <div class="pb">
+            <span class="part">Gateway · ESP32-S3 N16R8</span>
+            <h3>Giám sát 2 inverter + pin BMS</h3>
+            <p>Deye + Luxpower qua <b>dongle WiFi</b>, pin JK qua <b>Bluetooth</b>. Bản không màn hoặc màn cảm ứng.</p>
+            <div class="hchips"><span>ESP32-S3 N16R8</span><span>ES3C28P</span><span>Không dây</span></div>
+            <span class="pbtn">Xem hướng dẫn <span class="ar">→</span></span>
           </div>
         </a>
+        <a class="pcard hcard" href="/huongdan/inv-lux-s3-camung-act/" data-cat="inv">
+          <div class="pimg"><img src="/huongdan/img/luxs3-box-hero-tongquan.webp" alt="Giám sát Luxpower màn cảm ứng" loading="lazy"></div>
+          <div class="pb">
+            <span class="part">Inverter · Luxpower</span>
+            <h3>Giám sát Luxpower màn cảm ứng</h3>
+            <p>Xem ngay trên <b>màn 2.8″</b> và từ xa trên app. SNA, 6.5 Pro, LXP, GEN…</p>
+            <div class="hchips"><span>ES3C28P</span><span>Màn cảm ứng</span><span>Dongle WiFi</span></div>
+            <span class="pbtn">Xem hướng dẫn <span class="ar">→</span></span>
+          </div>
+        </a>
+        <a class="pcard hcard" href="/huongdan/inv-lux-act/" data-cat="inv">
+          <div class="pimg"><img src="/huongdan/img/inv-lux-esp32.webp" alt="Giám sát Luxpower không màn hình" loading="lazy"></div>
+          <div class="pb">
+            <span class="part">Inverter · Luxpower</span>
+            <h3>Giám sát Luxpower không màn hình</h3>
+            <p>Mạch <b>ESP32</b> nhỏ gọn đọc inverter qua dongle WiFi, xem trên app.</p>
+            <div class="hchips"><span>ESP32</span><span>Không màn</span><span>Dongle WiFi</span></div>
+            <span class="pbtn">Xem hướng dẫn <span class="ar">→</span></span>
+          </div>
+        </a>
+        <a class="pcard hcard" href="/huongdan/inv-senergy-s3/" data-cat="inv">
+          <div class="pimg"><img src="/huongdan/img/chuanbi-esp32s3lcd.jpg" alt="Giám sát Senergy màn cảm ứng" loading="lazy"></div>
+          <div class="pb">
+            <span class="part">Inverter · Senergy</span>
+            <h3>Giám sát Senergy màn cảm ứng</h3>
+            <p>Cài WiFi và dò dongle <b>ngay trên màn</b>, không cần điện thoại.</p>
+            <div class="hchips"><span>ES3C28P</span><span>Màn cảm ứng</span><span>Dongle WiFi</span></div>
+            <span class="pbtn">Xem hướng dẫn <span class="ar">→</span></span>
+          </div>
+        </a>
+        <a class="pcard hcard" href="/huongdan/inv-senergy-esp32/" data-cat="inv">
+          <div class="pimg"><img src="/huongdan/img/inv-lux-esp32.webp" alt="Giám sát Senergy không màn hình" loading="lazy"></div>
+          <div class="pb">
+            <span class="part">Inverter · Senergy</span>
+            <h3>Giám sát Senergy không màn hình</h3>
+            <p>Mạch <b>ESP32</b> đọc inverter Senergy qua dongle WiFi, xem trên app.</p>
+            <div class="hchips"><span>ESP32</span><span>Không màn</span><span>Dongle WiFi</span></div>
+            <span class="pbtn">Xem hướng dẫn <span class="ar">→</span></span>
+          </div>
+        </a>
+        <div class="pcard hcard soonc" data-cat="pin">
+          <div class="pimg"><span class="hbadge soon">Sắp có</span><div class="noimg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="16" height="10" rx="2"/><path d="M21 10.5v3M7 10.5v3M10.5 10.5v3"/></svg><span>Pin lưu trữ</span></div></div>
+          <div class="pb"><span class="part">Pin lưu trữ</span><h3>BMS Seplos · SVE · BBS</h3><p>Giám sát và cài đặt các dòng BMS phổ biến khác.</p><span class="pbtn dis">Đang phát triển</span></div>
+        </div>
+        <div class="pcard hcard soonc" data-cat="ha">
+          <div class="pimg"><span class="hbadge soon">Sắp có</span><div class="noimg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/><circle cx="12" cy="14" r="2"/></svg><span>Home Assistant</span></div></div>
+          <div class="pb"><span class="part">Home Assistant</span><h3>Thiết bị cho Home Assistant</h3><p>Đưa số liệu pin, inverter, điện mặt trời vào Home Assistant.</p><span class="pbtn dis">Đang phát triển</span></div>
+        </div>
       </div>
-    </div>
+      <p class="hempty" hidden>Không tìm thấy thiết bị phù hợp. Thử từ khoá khác hoặc <a href="https://zalo.me/0349897777" target="_blank" rel="noopener">hỏi qua Zalo</a>.</p>
+    </section>
 
-    <!-- PHẦN 2 — BIẾN TẦN LUXPOWER -->
-    <div class="group">
-      <div class="ghead">
-        <h2>Giám sát biến tần LuxPower từ xa qua internet</h2>
-        <span class="gcount">02 thiết bị</span>
+    <section class="guide hbuy">
+      <div class="gl">
+        <div class="gi"><div class="ib"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div><h2>Không muốn tự lắp?</h2></div>
+        <p class="sdesc" style="margin:12px 0 0">Mua thiết bị làm sẵn: cắm nguồn, nối WiFi là xem được. Xem các sản phẩm hoặc nhắn Zalo để được tư vấn.</p>
+        <div class="cta-row"><a class="cta pri" href="/sanpham/">Xem sản phẩm <span class="ar">→</span></a><a class="zbtn" href="https://zalo.me/0349897777" target="_blank" rel="noopener"><svg class="zi" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#fff"/><path d="M12 4.2c-4.6 0-8.3 3.1-8.3 7 0 2.2 1.2 4.1 3.1 5.4l-.6 2.6c-.1.4.3.7.6.5l3-1.7c.7.1 1.4.2 2.2.2 4.6 0 8.3-3.1 8.3-7s-3.7-7-8.3-7z" fill="#0068FF"/><path d="M8.6 9h5.6l-5.3 5.4h5.5" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Đặt hàng qua Zalo</span></a></div>
       </div>
-      <div class="dev-grid">
-        <a class="dev-cell" href="/huongdan/inv-lux-act/">
-          <div class="figframe">
-            <span class="ph"><b>Ảnh minh hoạ · bo ESP32</b>lưu ảnh vào<br>huongdan/img/inv-lux-esp32.jpg</span>
-            <img src="/huongdan/img/inv-lux-esp32.webp" alt="Bo mạch ESP32 (ESP-WROOM-32) giám sát biến tần Luxpower" loading="lazy" onerror="this.remove()">
-          </div>
-          <div class="dc-body">
-            <span class="part">Inverter · ESP32 · không màn hình</span>
-            <h3>Hướng dẫn làm bộ giám sát biến tần Luxpower không màn hình với ESP32</h3>
-            <span class="go">Xem hướng dẫn <span class="ar">→</span></span>
-          </div>
-        </a>
-        <a class="dev-cell" href="/huongdan/inv-lux-s3-camung-act/">
-          <div class="figframe">
-            <span class="ph"><b>Ảnh minh hoạ · bo ESP32-S3</b>lưu ảnh vào<br>huongdan/img/inv-lux-esp32s3.jpg</span>
-            <img src="/huongdan/img/inv-lux-esp32s3.jpg" alt="Bo mạch ESP32-S3 màn hình 2.8 inch cảm ứng giám sát biến tần Luxpower" loading="lazy" onerror="this.remove()">
-          </div>
-          <div class="dc-body">
-            <span class="part">Inverter · ESP32-S3 · cảm ứng</span>
-            <h3>Hướng dẫn làm bộ giám sát biến tần Luxpower có màn hình cảm ứng với ESP32-S3</h3>
-            <span class="go">Xem hướng dẫn <span class="ar">→</span></span>
-          </div>
-        </a>
-      </div>
-    </div>
+      <div class="gr"><img src="/huongdan/img/luxs3-box-hero-tongquan.webp" alt="Thiết bị giám sát SOLAR CLOUD làm sẵn" loading="lazy" style="box-shadow:none;max-width:360px"></div>
+    </section>
 
-    <!-- PHẦN 3 — BIẾN TẦN SENERGY -->
-    <div class="group">
-      <div class="ghead">
-        <h2>Giám sát biến tần Senergy từ xa qua internet</h2>
-        <span class="gcount">02 thiết bị</span>
-      </div>
-      <div class="dev-grid">
-        <a class="dev-cell" href="/huongdan/inv-senergy-esp32/">
-          <div class="figframe">
-            <span class="ph"><b>Ảnh minh hoạ · bo ESP32</b>lưu ảnh vào<br>huongdan/img/inv-lux-esp32.webp</span>
-            <img src="/huongdan/img/inv-lux-esp32.webp" alt="Bo mạch ESP32 giám sát biến tần Senergy" loading="lazy" onerror="this.remove()">
-          </div>
-          <div class="dc-body">
-            <h3>Hướng dẫn làm bộ giám sát biến tần Senergy không màn hình với ESP32</h3>
-            <span class="go">Xem hướng dẫn <span class="ar">→</span></span>
-          </div>
-        </a>
-        <a class="dev-cell" href="/huongdan/inv-senergy-s3/">
-          <div class="figframe">
-            <span class="ph"><b>Ảnh minh hoạ · bo ESP32-S3</b>lưu ảnh vào<br>huongdan/img/chuanbi-esp32s3lcd.jpg</span>
-            <img src="/huongdan/img/chuanbi-esp32s3lcd.jpg" alt="Bo ESP32-S3 màn cảm ứng giám sát biến tần Senergy" loading="lazy" onerror="this.remove()">
-          </div>
-          <div class="dc-body">
-            <h3>Hướng dẫn làm bộ giám sát biến tần Senergy có màn hình cảm ứng với ESP32-S3</h3>
-            <span class="go">Xem hướng dẫn <span class="ar">→</span></span>
-          </div>
-        </a>
-      </div>
-    </div>
+    <section class="feats">
+      <div class="feat"><div class="ib"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><div><b>Nạp ngay trong trang</b><span>Mỗi bài có nút nạp firmware, không cần cài phần mềm.</span></div></div>
+      <div class="feat"><div class="ib"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></div><div><b>Hình minh hoạ từng bước</b><span>Ảnh app và màn hình thiết bị có đánh số chú thích.</span></div></div>
+      <div class="feat"><div class="ib"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></div><div><b>Hỗ trợ qua Zalo</b><span>Vướng bước nào, nhắn <a href="https://zalo.me/0349897777" target="_blank" rel="noopener">0349 897 777</a>.</span></div></div>
+    </section>
   </div>
 
-  <div class="foot">
-    <span>Solar Cloud · <span class="on">solarcloud.io.vn</span></span>
-    <span>Giám sát năng lượng mặt trời · pin lưu trữ · inverter</span>
-  </div>
+  <footer class="foot">
+    <div class="wrap">
+      <span>Solar Cloud · <span class="on">solarcloud.io.vn</span> · <a href="/sanpham/">Sản phẩm</a> · <a href="/flash">Nạp firmware</a></span>
+      <span>Giám sát năng lượng mặt trời · pin lưu trữ · inverter</span>
+    </div>
+  </footer>
 
-  <script src="/huongdan/guide.js" defer></script>
+  <script>
+  /* lọc theo loại + tìm nhanh (bỏ dấu tiếng Việt) */
+  (function(){
+    var cards=[].slice.call(document.querySelectorAll('.hcard')), chips=[].slice.call(document.querySelectorAll('.fchip')),
+        q=document.getElementById('q'), empty=document.querySelector('.hempty'), f='all';
+    function norm(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d');}
+    cards.forEach(function(c){c._t=norm(c.textContent);});
+    function apply(){var t=norm(q.value).trim(), n=0;
+      cards.forEach(function(c){var ok=(f==='all'||c.dataset.cat===f)&&(!t||t.split(/\s+/).every(function(w){return c._t.indexOf(w)>=0;}));
+        c.hidden=!ok; if(ok)n++;});
+      empty.hidden=n>0;}
+    chips.forEach(function(b){b.addEventListener('click',function(){chips.forEach(function(x){x.classList.toggle('on',x===b);});f=b.dataset.f;apply();});});
+    q.addEventListener('input',apply);
+  })();
+  </script>
 </body>
 </html>
