@@ -388,3 +388,6 @@ body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
 .prep,.note,.done,.rtab,.compat,.cmp,.price,.prodshot{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .prep,.rtab,.compat{background:rgba(255,255,255,.64)}
 .plate{background:rgba(247,249,248,.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+/* tiêu đề bài dài hơn ("Hướng dẫn tự làm thiết bị …") — thu nhỏ một chút cho gọn */
+.hero h1{font-size:clamp(30px,5vw,52px);line-height:1.08}
+h1 .amp{white-space:nowrap}
