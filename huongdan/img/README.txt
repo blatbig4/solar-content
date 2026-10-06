@@ -9,3 +9,8 @@ Các file đang dùng (index.html trỏ tới):
 
 Muốn đổi ảnh: thay file cùng tên (giữ đuôi), hoặc đổi đuôi thì sửa <img src> trong ../index.html.
 Nên giữ ảnh < ~300KB/tấm cho web nhẹ.
+
+Bài Senergy (inv-senergy-act, 06/10):
+  sen-box-*.webp   → màn LCD firmware INV-SENERGY-ACT V2.4 đặt trong vỏ hộp 3D (ID/serial giả 1234567890 / 2616-8xxxxxxxPH)
+  sen-box-hero.webp → ảnh bìa (góc nghiêng ngược bản Luxpower để khỏi trùng), dùng cả ở /huongdan và /sanpham
+  sen-web-*.webp   → trang 192.168.4.1 dựng từ code firmware + dữ liệu giả

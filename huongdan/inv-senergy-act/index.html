@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Giám sát inverter Senergy từ xa — tự làm, mọi model (ESP32 / ESP32-S3 màn cảm ứng) | SOLAR CLOUD</title>
+<meta name="description" content="Tự làm bộ giám sát inverter Senergy (SE Green, ECO, PRO, Pro3, KTL…) xem từ xa trên app: điện mặt trời, pin, lưới, tải. Một firmware tự nhận model, đọc qua dongle WiFi, không đấu dây. Bo ESP32, ESP32-S3 N16R8 hoặc màn cảm ứng 2.8 inch.">
+<meta name="theme-color" content="#0E775E">
+<link rel="canonical" href="https://solarcloud.io.vn/huongdan/inv-senergy-act/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/huongdan/guide.css?v=20261004j">
+<style>
+/* bài JK: phần cài đặt từ xa — chú thích ảnh */
+.feat .new{display:inline-block;color:#fff;background:var(--phos);font-size:11px;font-weight:700;letter-spacing:.05em;line-height:1;padding:4px 7px 3px;border-radius:5px;margin-left:4px;vertical-align:2px}
+.feat a{color:var(--phos);font-weight:600}
+.jump{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;margin:26px 0 0;padding:13px 18px;border:1px solid var(--phos-line);border-radius:var(--r);background:var(--phos-dim);color:var(--paper);text-decoration:none;font-size:15px;line-height:1.45;transition:background .15s}
+.jump b{color:var(--phos-d);font-weight:700}
+.jump:hover{background:rgba(14,119,94,.15)}
+.annoplate{align-items:flex-start}
+.annoplate.stack{flex-direction:column;align-items:center}
+.anno{position:relative;display:block;width:100%;line-height:0;cursor:zoom-in}
+.anno img{display:block;width:100%;height:auto;border-radius:var(--r-sm);border:1px solid var(--line)}
+.annoplate.side .anno.tall{flex:0 1 320px}
+.annoplate.side .anno.mid{flex:0 1 340px}
+@media (min-width:760px){.annoplate.side .anno.tall{position:sticky;top:16px}}
+.annoplate.side .legend{flex:1 1 300px}
+.annoplate.stack .legend{width:100%;max-width:560px}
+.pin{position:absolute;transform:translate(-50%,-50%);width:24px;height:24px;border-radius:50%;background:var(--phos);color:#fff;font:700 12px/24px var(--fd);text-align:center;box-shadow:0 0 0 2px #fff,0 2px 6px rgba(0,0,0,.4);pointer-events:none;font-variant-numeric:tabular-nums}
+.brk{position:absolute;width:8px;border:2px solid #fff;border-right:0;border-radius:6px 0 0 6px;opacity:.9;pointer-events:none}
+.legend{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-size:15px;line-height:1.55;color:var(--paper)}
+.legend li{display:flex;gap:11px;align-items:flex-start}
+.legend li>div{min-width:0}
+.legend .pin{position:static;transform:none;flex:0 0 auto;box-shadow:none}
+.legend .pin-in{display:inline-block;width:20px;height:20px;font-size:11px;line-height:20px;vertical-align:1px;margin:0 2px}
+.legend b{font-weight:650}
+.legend.groups{gap:20px}
+.legend dl{margin:8px 0 0;padding:0}
+.legend dt{font-weight:650;font-size:14px;color:var(--phos-d);margin-top:8px}
+.legend dt:first-child{margin-top:0}
+.legend dd{margin:2px 0 0;font-size:14.5px;line-height:1.5}
+.legend .rule-line{margin:10px 0 0;font-size:13.5px;color:var(--muted);background:var(--ink-3);border:1px solid var(--line);border-radius:8px;padding:6px 10px;line-height:1.5}
+.legend .rule-line b{color:var(--paper)}
+.rtab{border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);overflow:hidden;box-shadow:var(--sh-1)}
+.rrow{display:grid;grid-template-columns:minmax(150px,230px) 1fr;gap:14px;padding:11px 16px;border-bottom:1px solid var(--line);font-size:14.5px;line-height:1.5}
+.rrow:last-child{border-bottom:0}
+.rrow .rk{font-weight:650;color:var(--amber-d)}
+.rrow b{font-weight:650}
+.rtab.set .rk{color:var(--phos-d)}
+.figtag .n{white-space:nowrap}
+.compat{margin:26px 0 0;border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);padding:18px 20px 20px;box-shadow:var(--sh-1)}
+.compat h3{margin:0 0 6px;font-family:var(--fd);font-size:17px;font-weight:750;color:var(--paper)}
+.compat>p{margin:0;font-size:15px;line-height:1.55;color:var(--paper)}
+.compat b{font-weight:650}
+.cgrp{margin:16px 0 0}
+.cg{display:block;font-size:12.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:14px;font-weight:600;color:var(--phos-d);background:var(--phos-dim);border:1px solid var(--phos-line);border-radius:999px;padding:4px 11px;line-height:1.3;white-space:nowrap}
+.chip small{font-weight:500;color:var(--muted);font-size:12.5px}
+.compat .cnote{margin:16px 0 0;font-size:13.5px;line-height:1.5;color:var(--muted)}
+.heroshot{margin:22px auto 0;max-width:600px}
+.heroshot img{display:block;width:100%;height:auto}
+.anno img[src*="-box-"]{border:0;border-radius:0}
+@media (max-width:560px){
+  .rrow{grid-template-columns:1fr;gap:3px}
+  .pin{width:19px;height:19px;font-size:10px;line-height:19px;box-shadow:0 0 0 1.5px #fff,0 1px 4px rgba(0,0,0,.4)}
+  .legend .pin{width:22px;height:22px;font-size:11px;line-height:22px}
+  .brk{width:5px}
+  .annoplate{padding:14px 10px}
+}
+/* hai bản bo */
+.plate.boards{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:end}
+.plate.boards figure{margin:0;text-align:center}
+.plate.boards img{display:block;width:100%;height:auto;max-height:340px;object-fit:contain;border-radius:var(--r-sm)}
+.plate.boards figcaption{margin-top:10px;font-size:14px;color:var(--muted)}
+.plate.boards figcaption b{color:var(--paper)}
+@media (max-width:560px){.plate.boards{grid-template-columns:1fr}}
+/* sơ đồ kết nối */
+.diag{margin:26px 0 0;border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);box-shadow:var(--sh-1);padding:18px 14px 10px}
+.diag svg{display:block;width:100%;height:auto}
+.diag .bx{fill:var(--ink-3);stroke:var(--line-2);stroke-width:1.5}
+.diag .bx.pri{fill:var(--phos-dim);stroke:var(--phos-line)}
+.diag .t1{font:700 15px var(--fd);fill:var(--paper)}
+.diag .t2{font:500 12.5px var(--fd);fill:var(--muted)}
+.diag .tl{font:700 12px var(--fd);fill:var(--phos-d)}
+.diag .tb{font:700 12px var(--fd);fill:#2563EB}
+.diag .wf{stroke:var(--phos);stroke-width:2.2;fill:none;stroke-dasharray:6 6}
+.diag .bt{stroke:#2563EB;stroke-width:2.2;fill:none;stroke-dasharray:3 6;stroke-linecap:round}
+.diag .net{stroke:var(--paper);stroke-width:2;fill:none;opacity:.55}
+.diag .dg{fill:var(--phos);}
+.diag .ic{fill:none;stroke:var(--phos-d);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mockui{width:100%;max-width:440px;background:#0f172a;border-radius:14px;padding:16px;color:#e2e8f0;font:14px/1.45 var(--fd);box-shadow:var(--sh-2)}
+.mockui .mh{font-weight:700;font-size:15px;margin-bottom:10px;color:#fff}
+.mockui .mr{display:flex;align-items:center;gap:10px;background:#1e293b;border:1px solid #334155;border-radius:10px;padding:10px 12px;margin-top:8px}
+.mockui .mr b{color:#fff;font-weight:650}
+.mockui .mr .st{margin-left:auto;color:#4ade80;font-weight:650;font-size:13px;white-space:nowrap}
+.mockui .mr .dt{width:9px;height:9px;border-radius:50%;background:#4ade80;flex:0 0 auto}
+.mockui .mr small{display:block;color:#94a3b8;font-size:12.5px}
+.mockui .mb{margin-top:12px;background:#38bdf8;color:#0f172a;border-radius:10px;text-align:center;font-weight:700;padding:10px}
+.mockui .mb.g{background:#1e293b;color:#e2e8f0;border:1px solid #334155}
+.mockui .seg{display:flex;gap:6px;background:#1e293b;border:1px solid #334155;border-radius:10px;padding:4px;margin-bottom:4px}
+.mockui .seg span{flex:1;text-align:center;padding:7px;border-radius:8px;color:#94a3b8;font-weight:600}
+.mockui .seg span.on{background:#38bdf8;color:#0f172a}
+/* bài Senergy: 3 bo + hai ảnh cạnh nhau */
+.plate.boards.b3{grid-template-columns:repeat(3,1fr)}
+.plate.boards .fw{font-size:12.5px;font-weight:650;color:var(--phos-d)}
+.plate.duo{display:flex;flex-direction:column;align-items:center;gap:34px}
+.duo .dcol{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%;max-width:620px;min-width:0}
+.duo .legend{width:100%;max-width:560px}
+.duo .dshot{margin:0;text-align:center;width:100%;max-width:480px}
+.duo .dshot img{display:block;width:100%;height:auto;border-radius:var(--r-sm);border:1px solid var(--line)}
+.duo .dshot figcaption{margin-top:10px;font-size:14px;color:var(--muted)}
+.duo .dshot figcaption b{color:var(--paper)}
+.mockui .mr small{margin-bottom:2px}
+@media (max-width:560px){.plate.boards.b3{grid-template-columns:repeat(3,1fr);gap:10px}.plate.boards.b3 figcaption{font-size:12px;line-height:1.35}.plate.boards .fw{font-size:11px}}
+</style>
+</head>
+<body>
+<script src="/site-nav.js"></script>
+  <div class="topnav">
+    <a href="/huongdan">← Chọn thiết bị khác</a>
+    <a class="sp" href="/flash">Nạp firmware →</a>
+  </div>
+
+  <div class="wrap">
+    <!-- GIỚI THIỆU -->
+    <div class="hero" style="padding-top:clamp(26px,4.5vw,40px)">
+      <h1>Hướng dẫn tự làm thiết bị<br>giám sát inverter Senergy <span class="amp">từ xa</span></h1>
+      <p class="lede">Một firmware cho <b>mọi dòng inverter Senergy</b>: GREEN, ECO, PRO, Pro3, KTL… Mạch tự nhận đúng model máy nhà bạn. Chọn bo <b>không màn</b> cho gọn, hoặc bo <b>màn cảm ứng 2.8″</b> để xem ngay tại chỗ. <b>Không cần đấu dây.</b></p>
+    </div>
+    <figure class="heroshot"><img src="/huongdan/img/sen-box-hero.webp" width="1356" height="1221" alt="Mạch giám sát inverter Senergy màn cảm ứng 2.8 inch đặt trong vỏ hộp in 3D, hiện điện mặt trời, lưới, pin, tải"></figure>
+
+    <div class="intro">
+      <p>Muốn biết inverter Senergy đang làm được bao nhiêu điện, pin còn bao nhiêu, nhà đang dùng bao nhiêu, bình thường phải đứng xem màn hình máy hoặc mở app riêng của hãng. Bộ giám sát này là <b>một mạch nhỏ</b> đặt trong nhà: nó đọc inverter <b>qua dongle WiFi Senergy</b> đang cắm sẵn ở máy, rồi gửi lên <b>SOLAR CLOUD</b>. Bạn xem trên điện thoại <b>Android, iPhone hay máy tính</b>, ở đâu cũng được.</p>
+      <ul class="feat">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Điện mặt trời, pin, lưới, tải</b> cập nhật từng giây: PV1/PV2, % pin, sạc/xả, mua/bán điện, nhiệt độ máy.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Đúng model máy nhà bạn</b> <span class="new">MỚI</span>: mạch đọc model từ inverter và tự chọn. Muốn chọn tay thì chọn ở trang cài đặt, trên màn hình hoặc ngay trên app.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Không đấu dây</b>: đọc qua dongle WiFi của Senergy. Chỉ cần cấp nguồn 5V cho mạch.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>3 loại bo</b>: ESP32 thường (không màn), ESP32-S3 N16R8 (không màn), hoặc bo <b>màn cảm ứng 2.8″</b> ES3C28P — 4 trang xem số liệu và cài đặt ngay trên màn.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Số điện <b>hôm nay · tháng · tổng</b>, biểu đồ ngày · tháng · năm; đổi WiFi và cập nhật firmware <b>từ xa</b>.</li>
+      </ul>
+    </div>
+
+    <div class="diag">
+      <svg viewBox="0 0 760 300" role="img" aria-label="Sơ đồ: inverter Senergy có dongle WiFi vào WiFi nhà; mạch ESP32 đọc inverter qua WiFi nhà rồi gửi lên SOLAR CLOUD; xem trên app">
+        <!-- inverter -->
+        <rect class="bx" x="16" y="26" width="178" height="92" rx="14"/>
+        <text class="t1" x="34" y="62">Inverter Senergy</text><text class="t2" x="34" y="84">GREEN · ECO · PRO…</text>
+        <rect class="dg" x="200" y="56" width="44" height="22" rx="6"/><text class="t2" x="222" y="100" text-anchor="middle" style="font-size:11.5px">dongle WiFi</text>
+        <!-- router -->
+        <rect class="bx" x="322" y="30" width="140" height="84" rx="14"/>
+        <path class="ic" d="M366 58a36 36 0 0 1 52 0M374 67a24 24 0 0 1 36 0M382 76a12 12 0 0 1 20 0"/><circle cx="392" cy="84" r="3" fill="var(--phos-d)"/>
+        <text class="t1" x="392" y="106" text-anchor="middle">WiFi nhà</text>
+        <!-- mạch -->
+        <rect class="bx pri" x="322" y="186" width="140" height="92" rx="14"/>
+        <text class="t1" x="392" y="222" text-anchor="middle">Mạch ESP32</text><text class="t2" x="392" y="243" text-anchor="middle">có / không màn</text><text class="t2" x="392" y="262" text-anchor="middle">nguồn 5V</text>
+        <!-- cloud -->
+        <rect class="bx pri" x="560" y="30" width="184" height="84" rx="14"/>
+        <text class="t1" x="652" y="68" text-anchor="middle">SOLAR CLOUD</text><text class="t2" x="652" y="90" text-anchor="middle">máy chủ, lưu lịch sử</text>
+        <!-- app -->
+        <rect class="bx" x="560" y="186" width="184" height="92" rx="14"/>
+        <text class="t1" x="652" y="224" text-anchor="middle">App</text><text class="t2" x="652" y="246" text-anchor="middle">Android · iPhone · máy tính</text>
+        <!-- đường nối -->
+        <path class="wf" d="M244 67 C 282 67, 296 72, 322 72"/>
+        <path class="wf" d="M392 114 L 392 186"/>
+        <path class="net" d="M462 72 L 560 72"/>
+        <path class="net" d="M652 114 L 652 186"/>
+        <text class="tl" x="262" y="56">WiFi</text>
+        <text class="tl" x="402" y="156">WiFi</text>
+        <text class="t2" x="480" y="62">internet</text>
+        <text class="t2" x="662" y="156">xem từ xa</text>
+      </svg>
+    </div>
+    <div class="figcap" style="margin-top:10px">Mạch đọc inverter qua dongle WiFi (cùng WiFi nhà), rồi gửi lên SOLAR CLOUD để xem từ xa.</div>
+
+    <div class="compat" id="tuongthich">
+      <h3>Dùng được với inverter Senergy nào?</h3>
+      <p>Các dòng inverter Senergy có <b>dongle WiFi</b> của hãng. Mạch <b>tự nhận model</b>; danh sách dưới đây cũng là các lựa chọn khi muốn chọn tay.</p>
+      <div class="cgrp"><span class="cg">Dòng GREEN</span><div class="chips">
+        <span class="chip">SE 4K Green <small>4kW · pin 24V · 1 MPPT</small></span><span class="chip">SE 6K Green <small>6kW · pin 48V · 2 MPPT</small></span><span class="chip">Dòng GREEN khác</span>
+      </div></div>
+      <div class="cgrp"><span class="cg">Dòng Hybrid</span><div class="chips">
+        <span class="chip">SE 3–6K ECO / ECO II <small>1 pha · pin 48V</small></span><span class="chip">SE 6K / 12K PRO <small>1 pha</small></span><span class="chip">SE 16K / 20K Pro3 <small>3 pha</small></span><span class="chip">SE 3KTL</span><span class="chip">Hybrid Senergy khác <small>(SE …KHB)</small></span>
+      </div></div>
+      <p class="cnote">Inverter cần <b>dongle WiFi của Senergy</b> đã cắm sẵn và đã vào WiFi nhà (thường đã có khi lắp hệ để xem app hãng).</p>
+    </div>
+
+    <a class="jump" href="#manhinh">Đã lắp xong mạch? <b>Xem màn hình cảm ứng &amp; app →</b></a>
+
+    <!-- HƯỚNG DẪN -->
+    <div class="ghead" style="margin-top:58px"><h2>Hướng dẫn tự lắp</h2><span class="gcount">4 bước · khoảng 15 phút</span></div>
+    <svg class="dim" viewBox="0 0 600 26" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+      <line class="draw" x1="1" y1="13" x2="599" y2="13"/>
+      <path d="M1 8v10M599 8v10M1 13l9-4M1 13l9 4M599 13l-9-4M599 13l-9 4"/>
+      <text x="300" y="9" text-anchor="middle">04 bước · nạp → wifi → dongle &amp; model → tài khoản</text>
+    </svg>
+
+    <div class="prep">
+      <h2>Cần chuẩn bị</h2>
+      <ul>
+        <li><span class="ix mono">01</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Máy tính</b> (Windows/macOS) có <b>Chrome</b> hoặc <b>Edge</b>, chỉ dùng cho bước nạp firmware. <em>Không nạp được trên điện thoại, Safari, Firefox.</em></div></li>
+        <li><span class="ix mono">02</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Cáp USB truyền dữ liệu</b> — không phải cáp chỉ để sạc.</div></li>
+        <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Một trong ba bo: <b>ESP32 thường</b> (ESP32-WROOM-32) không màn · <b>ESP32-S3 N16R8</b> không màn (16MB flash, 8MB PSRAM) · bo <b>ES3C28P màn cảm ứng 2.8″</b>. <em>Bo S3 phải đúng loại N16R8 — loại khác (N8, N4R2…) không chạy được.</em></div></li>
+        <li><span class="ix mono">04</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>WiFi nhà 2.4GHz</b> + mật khẩu. <em>ESP32 không bắt được WiFi 5GHz.</em></div></li>
+        <li><span class="ix mono">05</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Dongle WiFi của Senergy</b> đã cắm vào inverter và <b>đã vào cùng WiFi nhà</b> (xem được trên app hãng là đã vào).</div></li>
+        <li><span class="ix mono">06</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Nguồn <b>5V USB</b> cấp lâu dài cho mạch (cục sạc điện thoại là được).</div></li>
+      </ul>
+    </div>
+
+    <div class="fig">
+      <div class="figtag"><span class="n">BO MẠCH</span><span>Chọn 1 trong 3 bản</span><span class="rule"></span></div>
+      <div class="plate boards b3">
+        <figure><img src="/huongdan/img/inv-lux-esp32.webp" width="800" height="800" alt="Bo ESP32 thường ESP-WROOM-32, cổng USB-C, không màn hình" loading="lazy"><figcaption><b>ESP32 thường</b> · không màn<br><span class="fw">nút nạp ESP32</span></figcaption></figure>
+        <figure><img src="/huongdan/img/gw-esp32s3-n16r8.webp" width="1000" height="920" alt="Bo phát triển ESP32-S3 N16R8 không màn hình, module ESP32-S3-WROOM-1, 2 cổng USB-C" loading="lazy"><figcaption><b>ESP32-S3 N16R8</b> · không màn<br><span class="fw">nút nạp ESP32-S3</span></figcaption></figure>
+        <figure><img src="/huongdan/img/chuanbi-esp32s3lcd.jpg" width="1161" height="1135" alt="Bộ ES3C28P: bo ESP32-S3 màn hình cảm ứng 2.8 inch, cáp USB, dây nối, loa" loading="lazy"><figcaption><b>ES3C28P</b> · màn cảm ứng 2.8″<br><span class="fw">nút nạp ESP32-S3</span></figcaption></figure>
+      </div>
+      <div class="figcap">Hai bo ESP32-S3 dùng chung một firmware: cắm bo ES3C28P thì mạch tự nhận màn và hiện số liệu; bo không màn chạy bình thường, xem trên app. Ảnh bo ESP32-S3: VectorVoyager, <a href="https://commons.wikimedia.org/wiki/File:ESP32-S3_on_paper.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</div>
+    </div>
+
+    <!-- 1 -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">1</div>
+      <div class="sechd"><div class="st">Trên máy tính · bằng Chrome hoặc Edge</div><h2>Nạp firmware qua USB</h2></div>
+      <ol class="steps">
+        <li>Dùng <b>máy tính</b> mở bài này bằng <b>Chrome</b> hoặc <b>Edge</b>. <em>Không nạp được trên điện thoại, Safari, Firefox.</em></li>
+        <li><b>Cắm bo</b> vào máy tính bằng cáp USB.<div class="hint">Bo ESP32-S3 không màn có 2 cổng: cổng ghi <b>USB</b> hoặc <b>COM</b> đều được.</div></li>
+        <li>Ở khung <b>“Nạp ngay”</b> bên dưới, bấm đúng nút theo bo: <b>ESP32</b> cho bo thường, <b>ESP32-S3</b> cho bo S3 không màn và bo màn cảm ứng.<div class="hint">Bấm nhầm loại chip sẽ báo sai chip và tự dừng — không hỏng máy.</div></li>
+        <li>Chọn <b>cổng COM</b> hiện ra → <b>Connect</b>.<div class="hint">Cài mới hoàn toàn: tích “Erase device”. Chỉ cập nhật (giữ WiFi): bỏ tích.</div></li>
+        <li>Chờ chạy đến 100%. <b>Mạch tự khởi động lại là xong</b> (bo màn cảm ứng sẽ sáng màn hình).</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">NẠP NGAY</span><span>Nạp firmware tại đây — không cần rời trang</span><span class="rule"></span></div>
+        <div class="plate"><span class="rc-tr"></span><span class="rc-bl"></span>
+          <div class="flashbox">
+            <p class="fb-lbl">Cắm bo vào máy rồi bấm nút đúng loại chip:</p>
+            <div class="fb-btns">
+              <esp-web-install-button manifest="/flash/manifest/inv-senergy-esp32-act.json">
+                <button class="fw-btn" slot="activate">⚡ Nạp bản ESP32 (không màn)</button>
+                <span slot="unsupported" class="fw-unsup">Trình duyệt chưa hỗ trợ — hãy dùng <b>Chrome</b> hoặc <b>Edge</b> trên máy tính.</span>
+                <span slot="not-allowed" class="fw-unsup">Cần mở trang bằng <b>HTTPS</b> mới nạp được.</span>
+              </esp-web-install-button>
+              <esp-web-install-button manifest="/flash/manifest/inv-senergy-s3-act.json">
+                <button class="fw-btn" slot="activate">⚡ Nạp bản ESP32-S3 (có / không màn)</button>
+                <span slot="unsupported" class="fw-unsup">Trình duyệt chưa hỗ trợ — hãy dùng <b>Chrome</b> hoặc <b>Edge</b> trên máy tính.</span>
+                <span slot="not-allowed" class="fw-unsup">Cần mở trang bằng <b>HTTPS</b> mới nạp được.</span>
+              </esp-web-install-button>
+            </div>
+            <p class="fb-note">Cần <b>máy tính</b> + <b>Chrome/Edge</b> + <b>cáp USB truyền dữ liệu</b>. Bấm nút → chọn <b>cổng COM</b> → chờ tới 100%.</p>
+          </div>
+        </div>
+        <div class="figcap">Nút nạp không hiện hoặc không chạy? Mở <a href="/flash">solarcloud.io.vn/flash</a>, chọn dòng <b>Inverter Senergy · ESP32 · mọi model</b> hoặc <b>Inverter Senergy · ESP32-S3 có/không màn · mọi model</b>.</div>
+      </div>
+      <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Bo S3 phải đúng N16R8</span>Bản ESP32-S3 cần bo <b>ESP32-S3 N16R8</b> (16MB flash, 8MB PSRAM — module ghi “N16R8”), hoặc bo màn cảm ứng <b>ES3C28P</b>. Bo S3 loại khác (N8, N4R2…) <b>không chạy được</b>. Trong lúc nạp <b>không rút cáp USB</b>.</div></div>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Không thấy cổng COM, hoặc nạp báo lỗi</span><b>Không thấy COM:</b> cài driver <b>CP2102</b> hoặc <b>CH340</b> (có link ngay dưới trang /flash).<br><b>Lỗi kết nối:</b> giữ nút <b>BOOT</b>, bấm nhả <b>RESET</b>, thả BOOT rồi nạp lại.</div></div>
+    </div>
+
+    <!-- 2 -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">2</div>
+      <div class="sechd"><div class="st">Trên điện thoại · mạch tự phát WiFi cấu hình</div><h2>Kết nối WiFi nhà</h2></div>
+      <ol class="steps">
+        <li>Cấp nguồn cho mạch. Mạch <b>tự phát một WiFi</b> tên <code>INVSEN-xxxxxxxxxx</code> (10 số).</li>
+        <li>Trên điện thoại vào <b>Cài đặt › WiFi</b> → chọn WiFi đó → nhập mật khẩu <code>123456789</code></li>
+        <li>Trang cấu hình <b>tự mở</b>. Nếu không → mở trình duyệt gõ <code>192.168.4.1</code></li>
+        <li>Đầu trang hiện <b>Device ID (10 số)</b> — <b>ghi lại</b> để thêm vào tài khoản ở bước 4.</li>
+        <li>Ở thẻ <b>① Kết nối WiFi</b>: bấm <b>Quét</b> → chọn <b>WiFi nhà</b> (2.4GHz) → nhập mật khẩu → <b>Lưu &amp; Kết nối</b>.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 2</span><span>Trang 192.168.4.1 — ID thiết bị &amp; WiFi</span><span class="rule"></span></div>
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:480px" href="/huongdan/img/sen-web-wifi.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/sen-web-wifi.webp" width="1016" height="696" alt="Trang cấu hình 192.168.4.1 của mạch Senergy: Device ID, chọn WiFi nhà, mật khẩu, Lưu và Kết nối" loading="lazy">
+            <span class="pin" style="left:2.56%;top:14.87%">1</span>
+            <span class="pin" style="left:2.56%;top:46.41%">2</span>
+            <span class="pin" style="left:2.56%;top:67.53%">3</span>
+            <span class="pin" style="left:2.56%;top:83.48%">4</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Device ID</b>: mã <b>10 số</b> của mạch. <b>Ghi lại</b> để thêm vào tài khoản ở bước 4. Bên cạnh là WiFi đang nối.</div></li>
+            <li><span class="pin">2</span><div>Bấm <b>Quét</b> → chọn <b>WiFi nhà</b> (2.4GHz) trong danh sách.</div></li>
+            <li><span class="pin">3</span><div>Nhập <b>mật khẩu WiFi</b>.</div></li>
+            <li><span class="pin">4</span><div>Bấm <b>Lưu &amp; Kết nối</b>. Đầu trang hiện tên WiFi + <b>MQTT ✓</b> là mạch đã lên mạng.</div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 2B</span><span>Bản màn cảm ứng — cài WiFi ngay trên màn</span><span class="rule"></span></div>
+        <div class="plate duo">
+          <div class="dcol">
+            <a class="anno" href="/huongdan/img/sen-box-wifi.webp" target="_blank" rel="noopener">
+              <img src="/huongdan/img/sen-box-wifi.webp" width="1431" height="1132" alt="Màn cảm ứng trong vỏ hộp: danh sách WiFi quanh nhà, nút Nhập tay, Quét lại" loading="lazy">
+              <span class="pin" style="left:28.2%;top:34.24%">1</span>
+              <span class="pin" style="left:75.2%;top:42.19%">2</span>
+              <span class="pin" style="left:38.59%;top:63.36%">3</span>
+              <span class="pin" style="left:54.95%;top:61.91%">4</span>
+            </a>
+            <ol class="legend">
+              <li><span class="pin">1</span><div>Chạm vào <b>WiFi nhà</b> trong danh sách (🔒 = có mật khẩu).</div></li>
+              <li><span class="pin">2</span><div>Mũi tên <b>lên/xuống</b> để xem thêm mạng.</div></li>
+              <li><span class="pin">3</span><div><b>Nhập tay</b>: WiFi ẩn tên.</div></li>
+              <li><span class="pin">4</span><div><b>Quét lại</b> nếu chưa thấy WiFi nhà.</div></li>
+            </ol>
+          </div>
+          <div class="dcol">
+            <a class="anno" href="/huongdan/img/sen-box-banphim.webp" target="_blank" rel="noopener">
+              <img src="/huongdan/img/sen-box-banphim.webp" width="1431" height="1132" alt="Màn cảm ứng trong vỏ hộp: bàn phím ảo nhập mật khẩu WiFi, nút Hiện và Lưu" loading="lazy">
+              <span class="pin" style="left:53.9%;top:30.97%">1</span>
+              <span class="pin" style="left:28.94%;top:39.65%">2</span>
+              <span class="pin" style="left:68.29%;top:32.71%">3</span>
+              <span class="pin" style="left:75.32%;top:62.61%">4</span>
+            </a>
+            <ol class="legend">
+              <li><span class="pin">1</span><div>Tên <b>WiFi vừa chọn</b>.</div></li>
+              <li><span class="pin">2</span><div>Gõ <b>mật khẩu</b> bằng bàn phím ảo (<b>hoa</b> = chữ hoa, <b>?123</b> = số và ký tự).</div></li>
+              <li><span class="pin">3</span><div><b>Hiện</b>: xem lại mật khẩu vừa gõ.</div></li>
+              <li><span class="pin">4</span><div>Chạm <b>Lưu</b> để kết nối.</div></li>
+            </ol>
+          </div>
+        </div>
+        <div class="figcap">Trên màn: trang <b>CÀI ĐẶT</b> → <b>WiFi</b> → chọn mạng → gõ mật khẩu → <b>Lưu</b>. Device ID xem ở <b>CÀI ĐẶT › Cài đặt màn hình</b> hoặc trang 192.168.4.1.</div>
+      </div>
+      <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Nhớ hai điều</span>WiFi nhà phải là <b>2.4GHz</b>. Và <b>ghi lại ID 10 số</b> hiện ở đầu trang <code>192.168.4.1</code>.</div></div>
+    </div>
+
+    <!-- 3 -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">3</div>
+      <div class="sechd"><div class="st">Trên trang 192.168.4.1 · thẻ “② Kết nối bộ đọc (dongle)”</div><h2>Tìm dongle Senergy &amp; chọn model</h2></div>
+      <ol class="steps">
+        <li>Kiểm tra <b>dongle WiFi Senergy</b> đã vào <b>cùng WiFi nhà</b> với mạch (xem được trên app hãng là đã vào).</li>
+        <li>Bấm <b>🔍 Dò dongle tự động</b>. Mạch tự tìm dongle trong mạng nhà (khoảng 30 giây). <b>Trạng thái “✅ Đang nhận dữ liệu”</b> là xong.<div class="hint">Dò không ra → nhập <b>IP dongle</b> (xem trong app hãng hoặc trang quản lý modem) → <b>Lưu IP</b>. Nếu trang hiện thêm ô <b>Logger SN</b> → nhập số in trên tem dongle rồi dò lại.</div></li>
+        <li>Xem dòng <b>Model đang dùng</b>. Mặc định là <b>Tự nhận</b>: mạch đọc model từ inverter rồi tự chọn. Nếu chưa đúng máy nhà bạn → chọn đúng model ở ô <b>Model inverter Senergy</b> → <b>Lưu</b>. Mạch áp dụng ngay, không cần khởi động lại.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 3</span><span>Thẻ “② Kết nối bộ đọc (dongle)”</span><span class="rule"></span></div>
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:480px" href="/huongdan/img/sen-web-dongle.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/sen-web-dongle.webp" width="1016" height="1036" alt="Thẻ Kết nối bộ đọc dongle: trạng thái đang nhận dữ liệu, IP dongle, model đang dùng, ô chọn model, nút dò dongle tự động, nhập IP thủ công" loading="lazy">
+            <span class="pin" style="left:2.56%;top:12.89%">1</span>
+            <span class="pin" style="left:2.56%;top:18.77%">2</span>
+            <span class="pin" style="left:2.56%;top:30.55%">3</span>
+            <span class="pin" style="left:2.56%;top:36.44%">4</span>
+            <span class="pin" style="left:2.56%;top:50.19%">5</span>
+            <span class="pin" style="left:2.56%;top:70.66%">6</span>
+            <span class="pin" style="left:2.56%;top:91.02%">7</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Trạng thái</b>: <b>✅ Đang nhận dữ liệu</b> là mạch đã đọc được inverter.</div></li>
+            <li><span class="pin">2</span><div><b>IP dongle</b>: địa chỉ dongle trong mạng nhà, mạch tự nhớ sau khi dò thấy.</div></li>
+            <li><span class="pin">3</span><div><b>Model đang dùng</b>: model mạch đang áp dụng, kèm <b>tự nhận</b> hoặc <b>chọn tay</b>.</div></li>
+            <li><span class="pin">4</span><div><b>Model đọc từ máy</b>: tên model inverter tự báo.</div></li>
+            <li><span class="pin">5</span><div>Ô <b>Model inverter Senergy</b>: để <b>Tự nhận</b>, hoặc chọn đúng model → <b>Lưu</b>.</div></li>
+            <li><span class="pin">6</span><div><b>🔍 Dò dongle tự động</b>: tìm dongle trong mạng nhà.</div></li>
+            <li><span class="pin">7</span><div>Dò không ra: nhập <b>IP dongle</b> bằng tay → <b>Lưu IP</b>.</div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 3B</span><span>Danh sách model — trên trang cài đặt và trên màn cảm ứng</span><span class="rule"></span></div>
+        <div class="plate duo">
+          <figure class="dshot"><a href="/huongdan/img/sen-web-model.webp" target="_blank" rel="noopener"><img src="/huongdan/img/sen-web-model.webp" width="960" height="896" alt="Ô chọn model inverter Senergy mở ra: Tự nhận, nhóm GREEN và nhóm Hybrid" loading="lazy"></a><figcaption>Trang <b>192.168.4.1</b>: mở ô chọn model</figcaption></figure>
+          <div class="dcol">
+            <a class="anno" href="/huongdan/img/sen-box-model.webp" target="_blank" rel="noopener">
+              <img src="/huongdan/img/sen-box-model.webp" width="1431" height="1132" alt="Màn cảm ứng trong vỏ hộp: trang chọn model, Tự nhận, SE 4K Green, SE 6K Green, model đang dùng" loading="lazy">
+              <span class="pin" style="left:28.18%;top:33.93%">1</span>
+              <span class="pin" style="left:29.41%;top:49.66%">2</span>
+              <span class="pin" style="left:75.28%;top:43.17%">3</span>
+              <span class="pin" style="left:53.86%;top:67.59%">4</span>
+            </a>
+            <ol class="legend">
+              <li><span class="pin">1</span><div><b>Tự nhận</b> theo model đọc từ máy (mặc định).</div></li>
+              <li><span class="pin">2</span><div>Chạm vào model đúng máy nhà bạn để chọn tay — <b>chạm là lưu</b>.</div></li>
+              <li><span class="pin">3</span><div>Mũi tên xuống để xem nhóm <b>Hybrid</b>.</div></li>
+              <li><span class="pin">4</span><div><b>Đang dùng</b>: model mạch đang áp dụng.</div></li>
+            </ol>
+          </div>
+        </div>
+        <div class="figcap">Bản màn cảm ứng: <b>CÀI ĐẶT</b> → <b>Biến tần Senergy</b> → chạm ô <b>Model</b>. Ở trang Biến tần cũng có <b>Dò tự động</b> và ô <b>IP dongle</b> (bàn phím số).</div>
+      </div>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Không tìm thấy dongle?</span>Mạch chỉ thấy dongle khi <b>dongle và mạch ở cùng một WiFi nhà 2.4GHz</b>. Kiểm tra dongle đã lên WiFi chưa (đèn trên dongle, hoặc app hãng có số liệu), rồi bấm dò lại. Model chọn sai thì số liệu có thể lệch (ví dụ pin sạc/xả ngược) — chọn lại đúng model là hết.</div></div>
+    </div>
+
+    <!-- 4 -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">4</div>
+      <div class="sechd"><div class="st">Trên điện thoại hoặc máy tính</div><h2>Tạo tài khoản &amp; thêm thiết bị</h2></div>
+      <ol class="steps">
+        <li>Vào <a href="/"><code>solarcloud.io.vn</code></a> → <b>Đăng ký</b> bằng email + mật khẩu → đăng nhập.</li>
+        <li>Vào tab <b>Thiết bị</b> → bấm <b>Thêm thiết bị</b>.</li>
+        <li>Nhập <b>ID 10 số</b> (đã ghi ở bước 2) → <b>Thêm thiết bị</b>.</li>
+        <li>Chạm vào thiết bị vừa thêm để xem điện mặt trời, pin, lưới, tải — phần dưới hướng dẫn từng màn.</li>
+      </ol>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Bản ACT</span>Sau khi cài đặt và <b>kết nối thành công vào app</b>, nhấn <b>Kích hoạt</b> để hiển thị các thông số.</div></div>
+    </div>
+
+    <div class="done"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div><div class="bd"><span class="tt">Hoàn tất</span><p>Mạch tự gửi số liệu inverter lên SOLAR CLOUD mỗi giây. WiFi cấu hình <code>INVSEN-…</code> <b>luôn bật</b>: muốn đổi WiFi, dongle hay model sau này, nối lại WiFi đó rồi vào <code>192.168.4.1</code> (hoặc đổi từ xa trên app). Giữ nút <b>BOOT ~5 giây</b> để xoá WiFi đã lưu và cài lại.</p></div></div>
+
+    <!-- ═════════ MÀN HÌNH CẢM ỨNG ═════════ -->
+    <div class="ghead" id="manhinh" style="margin-top:76px"><h2>Màn hình cảm ứng</h2><span class="gcount">bản ES3C28P · 4 trang</span></div>
+    <svg class="dim" viewBox="0 0 600 26" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+      <line class="draw" x1="1" y1="13" x2="599" y2="13"/>
+      <path d="M1 8v10M599 8v10M1 13l9-4M1 13l9 4M599 13l-9-4M599 13l-9 4"/>
+      <text x="300" y="9" text-anchor="middle">tổng quan → pin → điện năng → cài đặt</text>
+    </svg>
+    <div class="intro"><p>Bo màn cảm ứng có <b>4 trang</b>: <b>Tổng quan · Pin · Điện năng · Cài đặt</b>. <b>Vuốt ngang</b> hoặc chạm <b>&lt; PREV / NEXT &gt;</b> ở thanh dưới để chuyển trang, chạm <b>OFF</b> để tắt màn. Màn tự tắt sau một lúc (đặt trong Cài đặt màn hình), chạm là sáng lại. Bo không màn bỏ qua phần này — <a href="#app">xem trên app ↓</a></p></div>
+
+    <!-- M1 -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">A</div>
+      <div class="sechd"><div class="st">Trang 1</div><h2>Tổng quan</h2></div>
+      <div class="fig">
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:680px" href="/huongdan/img/sen-box-tongquan.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/sen-box-tongquan.webp" width="1431" height="1132" alt="Màn hình cảm ứng trong vỏ hộp: trang tổng quan điện mặt trời PV1 PV2, lưới, pin, tải, nhiệt độ máy, chế độ máy" loading="lazy">
+            <span class="pin" style="left:50.43%;top:30.03%">1</span>
+            <span class="pin" style="left:74.72%;top:28.3%">2</span>
+            <span class="pin" style="left:51.76%;top:46.15%">3</span>
+            <span class="pin" style="left:76.13%;top:44.2%">4</span>
+            <span class="pin" style="left:42.52%;top:63.11%">5</span>
+            <span class="pin" style="left:64.17%;top:61.19%">6</span>
+            <span class="pin" style="left:46.27%;top:70.52%">7</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Điện mặt trời</b>: tổng công suất, <b>PV1 / PV2</b> (điện áp, dòng, công suất).</div></li>
+            <li><span class="pin">2</span><div><b>Lưới</b>: công suất mua/bán (số âm = đang bán), điện áp, dòng, tần số.</div></li>
+            <li><span class="pin">3</span><div><b>Pin</b>: công suất sạc/xả, <b>% pin</b>, điện áp, dòng.</div></li>
+            <li><span class="pin">4</span><div><b>Tải</b> gia đình: công suất, điện áp, dòng, tần số.</div></li>
+            <li><span class="pin">5</span><div><b>Nhiệt độ máy</b> (và nhiệt độ pin nếu máy có báo).</div></li>
+            <li><span class="pin">6</span><div><b>Chế độ máy</b>: Bypass lưới, Chạy pin/PV, Hòa lưới…</div></li>
+            <li><span class="pin">7</span><div>Thanh dưới: chuyển trang / tắt màn. Chấm xanh góc phải = đang nối cloud. Dòng trên cùng: chấm cạnh <b>SENERGY</b> xanh = đang đọc được inverter, giờ, model và sóng WiFi.</div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- M2 -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">B</div>
+      <div class="sechd"><div class="st">Trang 2</div><h2>Pin</h2></div>
+      <div class="fig">
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:680px" href="/huongdan/img/sen-box-pin.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/sen-box-pin.webp" width="1431" height="1132" alt="Màn hình cảm ứng trong vỏ hộp: trang pin, % pin, đang xả, điện áp, dòng, công suất, nhiệt độ, nạp xả hôm nay và tích lũy" loading="lazy">
+            <span class="pin" style="left:61.52%;top:30.23%">1</span>
+            <span class="pin" style="left:28.84%;top:40.27%">2</span>
+            <span class="pin" style="left:29.63%;top:50.35%">3</span>
+            <span class="pin" style="left:30.42%;top:60.49%">4</span>
+            <span class="pin" style="left:63.36%;top:24.95%">5</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div>Thanh <b>% pin</b> và trạng thái <b>ĐANG SẠC / ĐANG XẢ</b>.</div></li>
+            <li><span class="pin">2</span><div><b>Điện áp · Dòng · Công suất</b> pin, <b>nhiệt độ pin</b> (nếu máy có cảm biến).</div></li>
+            <li><span class="pin">3</span><div><b>Nạp / Xả hôm nay</b> (kWh).</div></li>
+            <li><span class="pin">4</span><div><b>Nạp / Xả tích lũy</b> từ trước tới nay.</div></li>
+            <li><span class="pin">5</span><div><b>Model</b> đang dùng và <b>chế độ máy</b>.</div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- M3 -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">C</div>
+      <div class="sechd"><div class="st">Trang 3</div><h2>Điện năng</h2></div>
+      <div class="fig">
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:680px" href="/huongdan/img/sen-box-diennang.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/sen-box-diennang.webp" width="1431" height="1132" alt="Màn hình cảm ứng trong vỏ hộp: trang điện năng hôm nay, PV, sạc, xả, mua vào, bán ra" loading="lazy">
+            <span class="pin" style="left:44.43%;top:32.66%">1</span>
+            <span class="pin" style="left:29.68%;top:50.96%">2</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div>Chạm để đổi: <b>Hôm nay · Tháng này · Tổng</b>.</div></li>
+            <li><span class="pin">2</span><div>Số điện <b>PV · Sạc · Xả · Mua vào · Bán ra</b> (kWh). Thanh màu dài hơn = nhiều hơn.</div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- M4 -->
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">D</div>
+      <div class="sechd"><div class="st">Trang 4</div><h2>Cài đặt &amp; Biến tần</h2></div>
+      <div class="fig">
+        <div class="plate duo">
+          <div class="dcol">
+            <a class="anno" href="/huongdan/img/sen-box-caidat.webp" target="_blank" rel="noopener">
+              <img src="/huongdan/img/sen-box-caidat.webp" width="1431" height="1132" alt="Màn hình cảm ứng trong vỏ hộp: trang cài đặt, cài đặt màn hình, biến tần Senergy, WiFi, kích hoạt" loading="lazy">
+              <span class="pin" style="left:28.32%;top:35.74%">1</span>
+              <span class="pin" style="left:28.99%;top:44.3%">2</span>
+              <span class="pin" style="left:29.66%;top:52.9%">3</span>
+              <span class="pin" style="left:30.36%;top:61.73%">4</span>
+            </a>
+            <ol class="legend">
+              <li><span class="pin">1</span><div><b>Cài đặt màn hình</b>: độ sáng, thời gian tự tắt, ID thiết bị, firmware.</div></li>
+              <li><span class="pin">2</span><div><b>Biến tần Senergy</b>: IP dongle — chạm để dò dongle, chọn model.</div></li>
+              <li><span class="pin">3</span><div><b>WiFi</b>: mạng đang nối — chạm để đổi.</div></li>
+              <li><span class="pin">4</span><div><b>Kích hoạt</b>: trạng thái kích hoạt của mạch.</div></li>
+            </ol>
+          </div>
+          <div class="dcol">
+            <a class="anno" href="/huongdan/img/sen-box-bientan.webp" target="_blank" rel="noopener">
+              <img src="/huongdan/img/sen-box-bientan.webp" width="1431" height="1132" alt="Màn hình cảm ứng trong vỏ hộp: trang biến tần, đang nhận dữ liệu, model, IP dongle, dò tự động" loading="lazy">
+              <span class="pin" style="left:28.35%;top:36.04%">1</span>
+              <span class="pin" style="left:38.74%;top:45.57%">2</span>
+              <span class="pin" style="left:39.35%;top:53.12%">3</span>
+              <span class="pin" style="left:42.61%;top:64.33%">4</span>
+            </a>
+            <ol class="legend">
+              <li><span class="pin">1</span><div><b>Đang nhận dữ liệu</b>, IP dongle, model và số máy inverter.</div></li>
+              <li><span class="pin">2</span><div><b>Model</b>: chạm để chọn (tự nhận / chọn tay).</div></li>
+              <li><span class="pin">3</span><div><b>IP dongle</b>: chạm để nhập bằng bàn phím số.</div></li>
+              <li><span class="pin">4</span><div><b>Dò tự động</b>: tìm dongle trong mạng nhà.</div></li>
+            </ol>
+          </div>
+        </div>
+        <div class="figcap">Trang CÀI ĐẶT (trên) → chạm <b>Biến tần Senergy</b> để mở trang BIẾN TẦN (dưới).</div>
+      </div>
+    </div>
+
+    <!-- ═════════ XEM TRÊN APP ═════════ -->
+    <div class="ghead" id="app" style="margin-top:76px"><h2>Xem trên app</h2><span class="gcount">Android · iPhone · máy tính</span></div>
+    <svg class="dim" viewBox="0 0 600 26" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+      <line class="draw" x1="1" y1="13" x2="599" y2="13"/>
+      <path d="M1 8v10M599 8v10M1 13l9-4M1 13l9 4M599 13l-9-4M599 13l-9 4"/>
+      <text x="300" y="9" text-anchor="middle">tổng quan → năng lượng → thông tin</text>
+    </svg>
+    <div class="intro"><p>Mở app <b>SOLAR CLOUD</b>, chạm vào thẻ inverter ở màn hình Home. Thanh dưới cùng có các tab: <b>⚡ Tổng quan · 📊 Năng lượng · ℹ️ Thông tin · 👤 Tài khoản</b>.</p></div>
+
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">E</div>
+      <div class="sechd"><div class="st">Tab ⚡ Tổng quan · 📊 Năng lượng</div><h2>Xem số liệu</h2></div>
+      <ol class="steps">
+        <li><b>Tổng quan</b>: sơ đồ điện mặt trời · pin · lưới · tải chạy từng giây. Ô thông tin hiện <b>model máy</b> (ví dụ <b>SE 4K Green · Senergy · 4kW · 1 pha · 1 MPPT · pin 24V</b>) và <b>chế độ máy</b> (ví dụ <b>Chạy pin/PV</b>).</li>
+        <li><b>Năng lượng</b>: số điện và biểu đồ theo <b>ngày · tháng · năm</b> — điện mặt trời làm được, sạc/xả pin, mua/bán điện, tải dùng.</li>
+      </ol>
+    </div>
+
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">F</div>
+      <div class="sechd"><div class="st">Tab ℹ️ Thông tin · thẻ 🔌 Kết nối inverter</div><h2>Đổi model, dongle, WiFi từ xa</h2></div>
+      <ol class="steps">
+        <li>Vào tab <b>ℹ️ Thông tin</b>, kéo xuống thẻ <b>🔌 Kết nối inverter</b>: có dòng <b>Dòng inverter</b> (model mạch đang dùng) và <b>Chế độ máy</b>.</li>
+        <li>Mở <b>⚙️ Cài đặt dongle</b> → ô <b>Dòng inverter (model)</b> → chọn đúng model → <b>💾 Lưu dòng inverter</b>. Chờ dòng chữ <b>“Đang chờ máy xác nhận…”</b> biến mất là xong.</li>
+        <li>Cũng trong <b>Cài đặt dongle</b>: đổi <b>IP dongle</b> hoặc bấm <b>🔍 Dò lại dongle</b>.</li>
+        <li>Thẻ <b>📶 Kết nối WiFi</b>: dò WiFi xung quanh và đổi WiFi <b>từ xa</b>. Thẻ thông tin có nút <b>Cập nhật FW</b> khi có bản mới.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH F</span><span>Cài đặt dongle → Dòng inverter (minh hoạ)</span><span class="rule"></span></div>
+        <div class="plate">
+          <div class="mockui">
+            <div class="mh">🔌 Kết nối inverter</div>
+            <div class="mr"><div><small>Dòng inverter</small><b>SE 4K Green · 4kW · pin 24V · 1 MPPT</b></div></div>
+            <div class="mr"><div><small>Chế độ máy</small><b>Chạy pin/PV (OffGrid)</b></div></div>
+            <div class="mh" style="margin-top:14px">⚙️ Cài đặt dongle</div>
+            <div class="mr"><div><small>Dòng inverter (model)</small><b>Tự nhận (theo model đọc từ máy)</b></div><span class="st" style="color:#94a3b8">▾</span></div>
+            <div class="mr" style="background:transparent;border:0;padding:4px 2px 0"><small>Đang dùng: <b style="color:#4ade80">SE 4K Green · 4kW · pin 24V · 1 MPPT</b></small></div>
+            <div class="mb">💾 Lưu dòng inverter</div>
+          </div>
+        </div>
+        <div class="figcap">Hình minh hoạ — giao diện thật có thể khác một chút. <b>Tự nhận</b> theo model đọc từ máy; tự nhận sai thì chọn tay đúng model, mạch áp dụng ngay.</div>
+      </div>
+    </div>
+
+    <div class="cta-row">
+      <a class="cta pri" href="/flash">Nạp firmware ngay →</a>
+      <a class="cta ghost" href="/huongdan">Thiết bị khác</a>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Solar Cloud · <span class="on">solarcloud.io.vn</span></span>
+    <span>Giám sát năng lượng mặt trời · pin lưu trữ · inverter</span>
+  </div>
+
+  <script type="module" src="https://cdn.jsdelivr.net/npm/esp-web-tools@10/dist/web/install-button.js"></script>
+  <script src="/huongdan/guide.js" defer></script>
+</body>
+</html>
