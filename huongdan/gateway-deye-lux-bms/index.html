@@ -132,47 +132,10 @@
       </ul>
     </div>
 
-    <div class="diag">
-      <svg viewBox="0 0 760 420" role="img" aria-label="Sơ đồ: 2 inverter chạy song song, mỗi máy một dongle WiFi, cùng vào WiFi nhà; mạch ESP32-S3 đọc 2 inverter qua WiFi nhà và đọc pin JK BMS qua Bluetooth, rồi gửi lên SOLAR CLOUD; xem trên app">
-        <!-- inverter Deye -->
-        <rect class="bx" x="16" y="26" width="178" height="92" rx="14"/>
-        <text class="t1" x="34" y="62">Inverter máy 1</text><text class="t2" x="34" y="84">chạy song song</text>
-        <rect class="dg" x="200" y="56" width="44" height="22" rx="6"/><text class="t2" x="222" y="100" text-anchor="middle" style="font-size:11.5px">dongle WiFi</text>
-        <!-- inverter Lux -->
-        <rect class="bx" x="16" y="160" width="178" height="92" rx="14"/>
-        <text class="t1" x="34" y="196">Inverter máy 2</text><text class="t2" x="34" y="218">chạy song song</text>
-        <rect class="dg" x="200" y="190" width="44" height="22" rx="6"/><text class="t2" x="222" y="234" text-anchor="middle" style="font-size:11.5px">dongle WiFi</text>
-        <!-- JK BMS -->
-        <rect class="bx" x="16" y="300" width="178" height="92" rx="14"/>
-        <text class="t1" x="34" y="336">Pin + JK BMS</text><text class="t2" x="34" y="358">Bluetooth bật sẵn</text>
-        <!-- router -->
-        <rect class="bx" x="322" y="110" width="140" height="84" rx="14"/>
-        <path class="ic" d="M366 138a36 36 0 0 1 52 0M374 147a24 24 0 0 1 36 0M382 156a12 12 0 0 1 20 0"/><circle cx="392" cy="164" r="3" fill="var(--phos-d)"/>
-        <text class="t1" x="392" y="186" text-anchor="middle">WiFi nhà</text>
-        <!-- mạch -->
-        <rect class="bx pri" x="322" y="300" width="140" height="92" rx="14"/>
-        <text class="t1" x="392" y="336" text-anchor="middle">Mạch</text><text class="t1" x="392" y="356" text-anchor="middle">ESP32-S3</text><text class="t2" x="392" y="377" text-anchor="middle">nguồn 5V</text>
-        <!-- cloud -->
-        <rect class="bx pri" x="560" y="110" width="184" height="84" rx="14"/>
-        <text class="t1" x="652" y="148" text-anchor="middle">SOLAR CLOUD</text><text class="t2" x="652" y="170" text-anchor="middle">máy chủ, lưu lịch sử</text>
-        <!-- app -->
-        <rect class="bx" x="560" y="300" width="184" height="92" rx="14"/>
-        <text class="t1" x="652" y="338" text-anchor="middle">App</text><text class="t2" x="652" y="360" text-anchor="middle">Android · iPhone · máy tính</text>
-        <!-- đường nối -->
-        <path class="wf" d="M244 67 C 292 67, 300 130, 322 138"/>
-        <path class="wf" d="M244 201 C 292 201, 300 170, 322 166"/>
-        <path class="wf" d="M392 194 L 392 300"/>
-        <path class="bt" d="M194 346 L 322 346"/>
-        <path class="net" d="M462 152 L 560 152"/>
-        <path class="net" d="M652 194 L 652 300"/>
-        <text class="tl" x="262" y="122">WiFi</text>
-        <text class="tl" x="402" y="252">WiFi</text>
-        <text class="tb" x="258" y="336" text-anchor="middle">Bluetooth</text>
-        <text class="t2" x="480" y="142">internet</text>
-        <text class="t2" x="662" y="252">xem từ xa</text>
-      </svg>
+    <div class="fig" style="margin-top:26px">
+      <div class="plate" style="padding:10px"><a href="/huongdan/img/gw-sodo.webp" target="_blank" rel="noopener" style="display:block;width:100%"><img src="/huongdan/img/gw-sodo.webp" width="1600" height="1000" style="display:block;width:100%;height:auto;border-radius:var(--r-sm)" alt="Sơ đồ Gateway: 2 inverter Deye chạy song song nối qua dongle WiFi và pack pin JK BMS nối qua Bluetooth vào hộp Gateway; Gateway gửi lên máy chủ SOLAR CLOUD; xem trên máy tính, điện thoại Android và iPhone" loading="lazy"></a></div>
+      <div class="figcap">Gateway đọc cả 2 inverter cùng lúc qua dongle WiFi (2 dongle chung một WiFi nhà) và đọc pin qua Bluetooth, rồi gửi lên SOLAR CLOUD — xem trên máy tính, Android, iPhone. Ví dụ 2 máy Deye; hãng khác cũng dùng được.</div>
     </div>
-    <div class="figcap" style="margin-top:10px">Mạch đọc cả 2 inverter cùng lúc qua dongle WiFi (2 dongle chung một WiFi nhà) và đọc pin qua Bluetooth, rồi gửi lên SOLAR CLOUD.</div>
 
     <div class="compat" id="tuongthich">
       <h3>Dùng được với inverter nào?</h3>
