@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Giám sát 2 inverter Deye + Luxpower và pin JK BMS từ xa qua WiFi — tự lắp (ESP32-S3) | SOLAR CLOUD</title>
-<meta name="description" content="Tự làm bộ giám sát 2 inverter khác hãng (Deye + Luxpower SNA, 6.5 Pro) và pin JK BMS trên một app: xem điện mặt trời, pin, lưới, tải của từng máy và cả nhà từ xa. Không đấu dây: inverter qua dongle WiFi, BMS qua Bluetooth.">
+<title>Giám sát 2 inverter chạy song song và pin JK BMS từ xa qua WiFi — Deye, Luxpower, Solis, Growatt… tự lắp (ESP32-S3) | SOLAR CLOUD</title>
+<meta name="description" content="Tự làm bộ giám sát 2 inverter chạy song song (hoặc 1 máy) và pin JK BMS trên một app: xem cả 2 máy cùng lúc trên cùng một mạng WiFi nhà. Đọc được Deye, Luxpower, Senergy, Solis, Sofar, Growatt, SolaX. Không đấu dây: inverter qua dongle WiFi, BMS qua Bluetooth.">
 <meta name="theme-color" content="#0E775E">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -114,16 +114,17 @@
   <div class="wrap">
     <!-- GIỚI THIỆU -->
     <div class="hero" style="padding-top:clamp(26px,4.5vw,40px)">
-      <h1>Hướng dẫn tự làm thiết bị<br>giám sát 2 inverter &amp; pin JK BMS <span class="amp">từ xa</span></h1>
-      <p class="lede">Nhà bạn có <b>2 inverter khác hãng</b>, một <b>Deye</b> và một <b>Luxpower</b> (SNA, 6.5 Pro…), cùng <b>pin JK BMS</b>? Một mạch nhỏ gom tất cả về <b>một app</b>: xem từng máy và cả nhà, ở đâu cũng được. <b>Không cần đấu dây.</b></p>
+      <h1>Hướng dẫn tự làm thiết bị<br>giám sát 2 inverter song song &amp; pin JK BMS <span class="amp">từ xa</span></h1>
+      <p class="lede">Nhà bạn có <b>2 inverter chạy song song</b>? Một mạch nhỏ xem <b>cả 2 máy cùng lúc</b> trên <b>cùng một mạng WiFi nhà</b>, kèm <b>pin JK BMS</b>, gom hết về <b>một app</b>: xem từng máy và cả nhà, ở đâu cũng được. Nhà chỉ có <b>1 inverter</b> cũng dùng được. <b>Không cần đấu dây.</b></p>
     </div>
 
     <div class="intro">
-      <p>Bình thường, mỗi inverter phải xem trên <b>app riêng của hãng</b>, còn pin JK thì mở <b>app JK</b> và phải <b>đứng gần tủ pin</b> vì chỉ nối Bluetooth ở khoảng cách gần. Muốn biết <b>cả nhà</b> đang phát bao nhiêu, dùng bao nhiêu thì phải tự cộng.</p>
-      <p>Bộ giám sát này là <b>một mạch nhỏ</b> đặt trong nhà: nó đọc 2 inverter <b>qua dongle WiFi</b> đang cắm sẵn ở mỗi máy, đọc pin <b>qua Bluetooth</b> của JK BMS, rồi gửi tất cả lên <b>SOLAR CLOUD</b>. Bạn xem trên điện thoại <b>Android, iPhone hay máy tính</b>, có cộng tổng cả nhà và chi tiết từng máy.</p>
+      <p>Hai inverter chạy song song thì mỗi máy lại phải xem riêng trên <b>app của hãng</b>; muốn biết <b>cả nhà</b> đang phát bao nhiêu, dùng bao nhiêu thì phải tự cộng. Còn pin JK phải mở <b>app JK</b> và <b>đứng gần tủ pin</b> vì Bluetooth chỉ nối được ở khoảng cách gần.</p>
+      <p>Bộ giám sát này là <b>một mạch nhỏ</b> đặt trong nhà: nó đọc <b>cả 2 inverter cùng lúc</b> qua <b>dongle WiFi</b> đang cắm sẵn ở mỗi máy (2 dongle cùng vào một WiFi nhà), đọc pin <b>qua Bluetooth</b> của JK BMS, rồi gửi tất cả lên <b>SOLAR CLOUD</b>. Bạn xem trên điện thoại <b>Android, iPhone hay máy tính</b>, có cộng tổng cả nhà và chi tiết từng máy.</p>
       <ul class="feat">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>2 máy song song, xem cùng lúc</b>: 2 inverter cùng hãng hoặc khác hãng, chung một mạng WiFi nhà (chỉ 1 máy cũng được). Đọc được <b>Deye, Luxpower, Senergy, Solis, Sofar, Growatt, SolaX</b>.</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Tổng cả nhà</b>: điện mặt trời, pin, lưới, tải của 2 máy cộng lại, cập nhật từng giây.</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Chi tiết từng máy</b>: Máy 1 Deye, Máy 2 Luxpower — PV1/PV2, pin, tải, lưới, số điện hôm nay, nhiệt độ.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Chi tiết từng máy</b>: Máy 1, Máy 2 — PV1/PV2, pin, tải, lưới, số điện hôm nay, nhiệt độ.</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Pin JK BMS</b>: % pin, điện áp, dòng sạc/xả, <b>điện áp từng cell</b>, cân bằng, nhiệt độ, số chu kỳ.</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Không đấu dây</b>: inverter qua dongle WiFi, pin qua Bluetooth. Chỉ cần cấp nguồn 5V cho mạch.</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>2 bản, cùng 1 firmware</b>: bo ESP32-S3 <b>không màn</b>, hoặc bo <b>màn cảm ứng 2.8″</b> (ES3C28P) xem số liệu và cài đặt ngay tại chỗ.</li>
@@ -132,14 +133,14 @@
     </div>
 
     <div class="diag">
-      <svg viewBox="0 0 760 420" role="img" aria-label="Sơ đồ: inverter Deye và Luxpower nối WiFi nhà qua dongle WiFi; mạch ESP32-S3 đọc 2 inverter qua WiFi nhà và đọc pin JK BMS qua Bluetooth, rồi gửi lên SOLAR CLOUD; xem trên app">
+      <svg viewBox="0 0 760 420" role="img" aria-label="Sơ đồ: 2 inverter chạy song song, mỗi máy một dongle WiFi, cùng vào WiFi nhà; mạch ESP32-S3 đọc 2 inverter qua WiFi nhà và đọc pin JK BMS qua Bluetooth, rồi gửi lên SOLAR CLOUD; xem trên app">
         <!-- inverter Deye -->
         <rect class="bx" x="16" y="26" width="178" height="92" rx="14"/>
-        <text class="t1" x="34" y="62">Inverter Deye</text><text class="t2" x="34" y="84">hybrid</text>
+        <text class="t1" x="34" y="62">Inverter máy 1</text><text class="t2" x="34" y="84">chạy song song</text>
         <rect class="dg" x="200" y="56" width="44" height="22" rx="6"/><text class="t2" x="222" y="100" text-anchor="middle" style="font-size:11.5px">dongle WiFi</text>
         <!-- inverter Lux -->
         <rect class="bx" x="16" y="160" width="178" height="92" rx="14"/>
-        <text class="t1" x="34" y="196">Inverter Luxpower</text><text class="t2" x="34" y="218">SNA · 6.5 Pro · LXP…</text>
+        <text class="t1" x="34" y="196">Inverter máy 2</text><text class="t2" x="34" y="218">chạy song song</text>
         <rect class="dg" x="200" y="190" width="44" height="22" rx="6"/><text class="t2" x="222" y="234" text-anchor="middle" style="font-size:11.5px">dongle WiFi</text>
         <!-- JK BMS -->
         <rect class="bx" x="16" y="300" width="178" height="92" rx="14"/>
@@ -171,21 +172,39 @@
         <text class="t2" x="662" y="252">xem từ xa</text>
       </svg>
     </div>
-    <div class="figcap" style="margin-top:10px">Mạch đọc 2 inverter qua dongle WiFi (cùng WiFi nhà) và đọc pin qua Bluetooth, rồi gửi lên SOLAR CLOUD.</div>
+    <div class="figcap" style="margin-top:10px">Mạch đọc cả 2 inverter cùng lúc qua dongle WiFi (2 dongle chung một WiFi nhà) và đọc pin qua Bluetooth, rồi gửi lên SOLAR CLOUD.</div>
 
     <div class="compat" id="tuongthich">
-      <h3>Dùng được với thiết bị nào?</h3>
-      <p>Hai inverter <b>hybrid</b> có <b>dongle WiFi</b> của hãng, cộng một pin dùng <b>JK BMS có Bluetooth</b>.</p>
-      <div class="cgrp"><span class="cg">Inverter Deye</span><div class="chips">
-        <span class="chip">Deye hybrid 1 pha</span><span class="chip">có dongle WiFi Deye</span>
+      <h3>Dùng được với inverter nào?</h3>
+      <p>Inverter <b>hybrid</b> các hãng dưới đây, mỗi máy có <b>dongle WiFi</b>, cộng một pin dùng <b>JK BMS có Bluetooth</b>. Chạy được <b>2 máy song song cùng lúc</b> (cùng hãng hoặc khác hãng), hoặc chỉ <b>1 máy</b>.</p>
+      <div class="cgrp"><span class="cg">Số máy</span><div class="chips">
+        <span class="chip">1 máy</span><span class="chip">2 máy song song cùng hãng</span><span class="chip">2 máy khác hãng</span>
       </div></div>
-      <div class="cgrp"><span class="cg">Inverter Luxpower</span><div class="chips">
+      <div class="cgrp"><span class="cg">Deye</span><div class="chips">
+        <span class="chip">SUN-…-SG03LP1</span><span class="chip">SUN-…-SG04LP1</span><span class="chip">SUN-…-SG05LP1</span>
+      </div></div>
+      <div class="cgrp"><span class="cg">Luxpower</span><div class="chips">
         <span class="chip">SNA 3000</span><span class="chip">SNA 5000</span><span class="chip">SNA 6000</span><span class="chip">SNA PRO 6.5K <small>(6.5 Pro)</small></span><span class="chip">SNA 12K</span><span class="chip">LXP 3–6K</span><span class="chip">LXP-LB-EU 12K</span><span class="chip">GEN · GEN2 · GEN3</span>
+      </div></div>
+      <div class="cgrp"><span class="cg">Senergy</span><div class="chips">
+        <span class="chip">SE 3KTL</span><span class="chip">SE 3–6K ECO</span><span class="chip">SE 6K / 12K PRO</span><span class="chip">Hybrid SE …KHB</span>
+      </div></div>
+      <div class="cgrp"><span class="cg">Solis</span><div class="chips">
+        <span class="chip">S5 / S6-EH1P <small>1 pha</small></span><span class="chip">S5 / S6-EH3P <small>3 pha</small></span><span class="chip">RHI</span>
+      </div></div>
+      <div class="cgrp"><span class="cg">Sofar</span><div class="chips">
+        <span class="chip">HYD 3000–6000-ES</span><span class="chip">HYD 3–6K-EP</span><span class="chip">HYD 5–20KTL-3PH</span>
+      </div></div>
+      <div class="cgrp"><span class="cg">Growatt</span><div class="chips">
+        <span class="chip">SPF 3500 / 5000 ES</span><span class="chip">SPH 3000–10000</span><span class="chip">MIN 2500–6000TL-XH</span>
+      </div></div>
+      <div class="cgrp"><span class="cg">SolaX</span><div class="chips">
+        <span class="chip">X1-Hybrid G3 / G4</span><span class="chip">X3-Hybrid G3 / G4</span><span class="chip">X1 / X3-IES</span>
       </div></div>
       <div class="cgrp"><span class="cg">Pin</span><div class="chips">
         <span class="chip">JK BMS có Bluetooth</span>
       </div></div>
-      <p class="cnote">Mỗi inverter cần <b>dongle WiFi của hãng</b> đã cắm sẵn và đã vào WiFi nhà (thường đã có khi lắp hệ để xem app hãng).</p>
+      <p class="cnote">Mỗi inverter cần <b>dongle WiFi của hãng</b> đã cắm sẵn và đã vào <b>cùng một WiFi nhà</b> (thường đã có khi lắp hệ để xem app hãng). 2 máy song song thì mỗi máy một dongle.</p>
     </div>
 
     <a class="jump" href="#app">Đã lắp xong mạch? <b>Xem hướng dẫn dùng app →</b></a>
@@ -205,7 +224,7 @@
         <li><span class="ix mono">02</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Cáp USB-C truyền dữ liệu</b> — không phải cáp chỉ để sạc.</div></li>
         <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Một trong hai bo (cùng 1 firmware): <b>ESP32-S3 N16R8 không màn</b> (module ESP32-S3-WROOM-1, 16MB flash, 8MB PSRAM), hoặc bo <b>ES3C28P màn cảm ứng 2.8″</b> (ESP32-S3 N16R8 có sẵn màn). <em>Bo S3 loại khác (N8, N4R2…) không chạy được.</em></div></li>
         <li><span class="ix mono">04</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>WiFi nhà 2.4GHz</b> + mật khẩu. <em>ESP32 không bắt được WiFi 5GHz.</em></div></li>
-        <li><span class="ix mono">05</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Dongle WiFi</b> của inverter Deye và của inverter Luxpower đã cắm vào máy và <b>đã vào cùng WiFi nhà</b>.</div></li>
+        <li><span class="ix mono">05</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Dongle WiFi</b> của <b>mỗi inverter</b> (2 máy là 2 dongle) đã cắm vào máy và <b>đã vào cùng WiFi nhà</b>.</div></li>
         <li><span class="ix mono">06</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>JK BMS có Bluetooth</b>. Đặt mạch <b>gần tủ pin</b> (trong tầm Bluetooth, vài mét) và cấp nguồn <b>5V USB</b> lâu dài cho mạch.</div></li>
       </ul>
     </div>
@@ -257,7 +276,7 @@
       <div class="snum">2</div>
       <div class="sechd"><div class="st">Trên điện thoại · mạch tự phát WiFi cấu hình</div><h2>Kết nối WiFi nhà</h2></div>
       <ol class="steps">
-        <li>Cấp nguồn cho mạch. Mạch <b>tự phát một WiFi</b> tên <code>GATEWAY-S3-ACT-xxxxxxxxxx</code> (10 số).</li>
+        <li>Cấp nguồn cho mạch. Mạch <b>tự phát một WiFi</b> có tên bắt đầu bằng <code>GATEWAY-S3</code>, kèm 10 số.</li>
         <li>Trên điện thoại vào <b>Cài đặt › WiFi</b> → chọn WiFi đó → nhập mật khẩu <code>123456789</code></li>
         <li>Trang cấu hình <b>tự mở</b>. Nếu không → mở trình duyệt gõ <code>192.168.4.1</code></li>
         <li>Trang hiện <b>Device ID (10 số)</b> — <b>ghi lại</b> để thêm vào tài khoản ở bước 5.</li>
@@ -319,7 +338,7 @@
       <ol class="steps">
         <li>Kiểm tra <b>dongle WiFi</b> của cả 2 inverter đã vào <b>cùng WiFi nhà</b> với mạch (xem được trên app hãng là đã vào).</li>
         <li>Ở thẻ <b>Kết nối inverter</b> bấm <b>Tìm dongle trong mạng nhà</b>. Mạch tự tìm 2 dongle và điền vào danh sách.</li>
-        <li>Chọn <b>hãng</b> cho từng máy: <b>Máy 1 · Deye</b>, <b>Máy 2 · Luxpower</b> → bấm <b>Lưu</b>. Mạch khởi động lại và bắt đầu đọc cả 2 máy.</li>
+        <li>Chọn <b>hãng</b> cho từng máy (ví dụ <b>Máy 1 · Deye</b>, <b>Máy 2 · Luxpower</b>) → bấm <b>Lưu</b>. Mạch khởi động lại và bắt đầu đọc <b>cả 2 máy cùng lúc</b>.<div class="hint">2 máy song song cùng hãng: chọn cùng hãng cho cả 2 máy (ví dụ Máy 1 · Deye, Máy 2 · Deye). Nhà chỉ có 1 inverter: chỉ cần Máy 1.</div></li>
       </ol>
       <div class="fig">
         <div class="figtag"><span class="n">HÌNH 4</span><span>Thẻ “Kết nối inverter” (minh hoạ)</span><span class="rule"></span></div>
@@ -348,10 +367,10 @@
         <li>Nhập <b>ID 10 số</b> (đã ghi ở bước 2) → <b>Thêm thiết bị</b>.</li>
         <li>Chạm vào thiết bị vừa thêm để xem <b>cả nhà, từng máy và pin</b> — phần dưới hướng dẫn từng màn.</li>
       </ol>
-      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Bản ACT</span>Sau khi cài đặt và <b>kết nối thành công vào app</b>, nhấn <b>Kích hoạt</b> để hiển thị các thông số.</div></div>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Kích hoạt</span>Sau khi cài đặt và <b>kết nối thành công vào app</b>, nhấn <b>Kích hoạt</b> để hiển thị các thông số.</div></div>
     </div>
 
-    <div class="done"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div><div class="bd"><span class="tt">Hoàn tất</span><p>Mạch tự gửi số liệu 2 inverter và pin lên SOLAR CLOUD mỗi giây. Muốn đổi WiFi sau này: kết nối lại WiFi <code>GATEWAY-S3-ACT-…</code> rồi vào <code>192.168.4.1</code>. Giữ nút <b>BOOT ~5 giây</b> để xoá WiFi đã lưu và cài lại từ đầu.</p></div></div>
+    <div class="done"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div><div class="bd"><span class="tt">Hoàn tất</span><p>Mạch tự gửi số liệu 2 inverter và pin lên SOLAR CLOUD mỗi giây. Muốn đổi WiFi sau này: kết nối lại WiFi <code>GATEWAY-S3…</code> rồi vào <code>192.168.4.1</code>. Giữ nút <b>BOOT ~5 giây</b> để xoá WiFi đã lưu và cài lại từ đầu.</p></div></div>
 
     <!-- ═════════ XEM TRÊN APP ═════════ -->
     <div class="ghead" id="app" style="margin-top:76px"><h2>Xem trên app</h2><span class="gcount">Android · iPhone · máy tính</span></div>
@@ -397,7 +416,7 @@
       <div class="snum">B</div>
       <div class="sechd"><div class="st">Tab ⚡ Tổng quan · kéo xuống</div><h2>Chi tiết từng máy</h2></div>
       <div class="fig">
-        <div class="figtag"><span class="n">HÌNH B</span><span>Máy 1 · Deye (mở chi tiết) và Máy 2 · Luxpower</span><span class="rule"></span></div>
+        <div class="figtag"><span class="n">HÌNH B</span><span>Ví dụ: Máy 1 · Deye (mở chi tiết) và Máy 2 · Luxpower</span><span class="rule"></span></div>
         <div class="plate annoplate side">
           <a class="anno mid" href="/huongdan/img/gw-app-may.webp" target="_blank" rel="noopener">
             <img src="/huongdan/img/gw-app-may.webp" width="780" height="1260" alt="Thẻ từng inverter: Máy 1 Deye mở chi tiết PV1 PV2, pin, tải, lưới; Máy 2 Luxpower thu gọn" loading="lazy">
