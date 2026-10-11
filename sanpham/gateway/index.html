@@ -70,6 +70,26 @@
   .annoplate{padding:14px 10px}
 }
 /* trang sản phẩm Gateway */
+/* hướng dẫn cài đặt (phần dưới trang sản phẩm) */
+html{scroll-behavior:smooth}
+.sec,.prep,.kband,.fig{scroll-margin-top:70px}
+.kband{margin:84px 0 0;padding:26px 24px;border-radius:var(--r);background:linear-gradient(135deg,#0E775E,#12936F);color:#fff;box-shadow:var(--sh-2)}
+.kband .kk{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.kband h2{margin:4px 0 6px;font-family:var(--fd);font-size:clamp(28px,4.6vw,40px);font-weight:800;letter-spacing:-.02em;color:#fff}
+.kband p{margin:0;font-size:16px;line-height:1.5;opacity:.95}
+.kband p b{color:#fff}
+.ktoc{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0}
+.ktoc a{font-size:14px;font-weight:650;color:#fff;text-decoration:none;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 12px;transition:background .15s}
+.ktoc a:hover{background:rgba(255,255,255,.26)}
+.faqs{display:grid;gap:10px;margin:22px 0 0}
+.faq{border:1px solid var(--line);border-radius:12px;background:var(--ink-2);box-shadow:var(--sh-1);overflow:hidden}
+.faq summary{cursor:pointer;list-style:none;padding:14px 44px 14px 16px;font-weight:650;font-size:15.5px;color:var(--paper);position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:22px;font-weight:600;color:var(--phos)}
+.faq[open] summary::after{content:"–"}
+.faq>div{padding:0 16px 15px;font-size:15px;line-height:1.6;color:var(--paper)}
+.faq a,.sec .note a{color:var(--phos-d);font-weight:650}
+
 
 /* ═════════ NÚT ĐẶT HÀNG QUA ZALO + GIÁ ═════════ */
 .zbtn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:11px 18px;border-radius:12px;background:#0068FF;color:#fff!important;
@@ -113,7 +133,7 @@
 <script src="/site-nav.js"></script>
   <div class="topnav">
     <a href="/sanpham">← Sản phẩm</a>
-    <a class="sp" href="/huongdan/gateway-deye-lux-bms/">Hướng dẫn chi tiết →</a>
+    <a class="sp" href="#caidat">Hướng dẫn cài đặt ↓</a>
   </div>
 
   <div class="wrap">
@@ -128,6 +148,7 @@
       </div>
       <div class="price"><span class="pl">Giá</span><span class="pv"><span class="gia"></span><svg class="coin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#F7931A"/><circle cx="12" cy="12" r="11" fill="none" stroke="#D97C0B" stroke-width=".8"/><g transform="rotate(14 12 12)" fill="#fff"><path fill-rule="evenodd" d="M8.4 6.3h5.1c2.2 0 3.3 1.2 3.3 2.8 0 1.2-.7 2-1.7 2.3 1.4.3 2.4 1.4 2.4 2.9 0 2.1-1.5 3.7-3.9 3.7H8.4zm2.3 1.8v3.1h2.4c1 0 1.5-.6 1.5-1.6s-.5-1.5-1.5-1.5zm0 4.7v3.4h2.7c1.2 0 1.8-.7 1.8-1.7s-.6-1.7-1.8-1.7z"/><rect x="9.9" y="4.4" width="1.4" height="2.2" rx=".4"/><rect x="12.3" y="4.4" width="1.4" height="2.2" rx=".4"/><rect x="9.9" y="17.4" width="1.4" height="2.2" rx=".4"/><rect x="12.3" y="17.4" width="1.4" height="2.2" rx=".4"/></g></svg></span><span class="pn">2 inverter + pin JK BMS</span></div>
       <div class="order"><a class="zbtn" href="https://zalo.me/0349897777" target="_blank" rel="noopener"><svg class="zi" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#fff"/><path d="M12 4.2c-4.6 0-8.3 3.1-8.3 7 0 2.2 1.2 4.1 3.1 5.4l-.6 2.6c-.1.4.3.7.6.5l3-1.7c.7.1 1.4.2 2.2.2 4.6 0 8.3-3.1 8.3-7s-3.7-7-8.3-7z" fill="#0068FF"/><path d="M8.6 9h5.6l-5.3 5.4h5.5" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Đặt hàng qua Zalo</span></a><span class="zphone">Zalo / điện thoại: 0349 897 777</span></div>
+      <a class="jump" href="#caidat">Đã mua Gateway? <b>Xem hướng dẫn cài đặt ↓</b></a>
     </div>
 
     <div class="prodshot">
@@ -195,18 +216,211 @@
       <p class="cnote">Mỗi inverter cần <b>dongle WiFi của hãng</b> đã cắm sẵn và đã vào <b>cùng một WiFi nhà</b> (thường đã có khi lắp hệ để xem app hãng). 2 máy song song thì mỗi máy một dongle.</p>
     </div>
 
-    <div class="ghead" style="margin-top:56px"><h2>Dùng trong 3 bước</h2><span class="gcount">khoảng 10 phút</span></div>
-    <div class="steps3">
-      <div class="stp"><div class="n">01</div><h3>Cắm nguồn trong nhà</h3><p>Cấp nguồn 5V qua cổng USB-C. Đặt hộp <b>gần tủ pin</b> (trong tầm Bluetooth, vài mét) và trong vùng có sóng WiFi nhà.</p></div>
-      <div class="stp"><div class="n">02</div><h3>Nối WiFi, tìm inverter</h3><p>Trên điện thoại vào WiFi có tên bắt đầu bằng <code>GATEWAY-S3</code>, mật khẩu <code>123456789</code> → trang cấu hình tự mở (hoặc gõ <code>192.168.4.1</code>) → chọn <b>WiFi nhà</b>, bấm <b>Tìm dongle</b> và <b>Dò BMS</b>.</p></div>
-      <div class="stp"><div class="n">03</div><h3>Thêm vào app</h3><p>Vào <a href="/"><code>solarcloud.io.vn</code></a>, đăng ký, bấm <b>Thêm thiết bị</b> và nhập <b>mã 10 số</b>. Xem cả nhà, từng máy và pin ngay.</p></div>
+    <!-- ═════════ HƯỚNG DẪN CÀI ĐẶT GATEWAY ═════════ -->
+    <div class="kband" id="caidat">
+      <span class="kk">Hướng dẫn cài đặt Gateway</span>
+      <h2>Cài đặt Gateway trong 10 phút</h2>
+      <p>Đã nhận hộp Gateway? Làm theo 5 bước dưới đây — <b>chỉ cần điện thoại</b>.</p>
+      <nav class="ktoc"><a href="#chuanbi">Chuẩn bị</a><a href="#b1">1 · Cắm nguồn</a><a href="#b2">2 · WiFi nhà</a><a href="#b3">3 · Inverter</a><a href="#b4">4 · Pin JK</a><a href="#b5">5 · Vào app</a><a href="#doiwifi">Đổi WiFi</a><a href="#suco">Sự cố</a></nav>
     </div>
-    <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Hướng dẫn có hình từng bước</span>Các bước nối WiFi, tìm dongle inverter, ghép pin JK và dùng app có hình minh hoạ trong <a href="/huongdan/gateway-deye-lux-bms/">bài hướng dẫn Gateway</a>.</div></div>
-    <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Lưu ý</span>Dongle WiFi của inverter và Gateway phải ở <b>cùng một WiFi nhà 2.4GHz</b>. Mỗi lúc JK BMS chỉ cho <b>một thiết bị</b> nối Bluetooth — khi Gateway đang đọc pin, app JK trên điện thoại sẽ không nối được pin.</div></div>
+
+    <div class="prep" id="chuanbi">
+      <h2>Cần chuẩn bị</h2>
+      <ul>
+        <li><span class="ix mono">01</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Hộp Gateway</b> + <b>củ sạc 5V</b> (củ sạc điện thoại là được) + <b>cáp USB-C</b>.</div></li>
+        <li><span class="ix mono">02</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>WiFi nhà 2.4GHz</b> + mật khẩu. <em>Gateway không bắt được WiFi 5GHz.</em></div></li>
+        <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Dongle WiFi</b> của inverter đã cắm vào máy và <b>đã vào WiFi nhà</b> — mở app của hãng thấy số liệu là đã vào. 2 máy thì 2 dongle. <em>Dongle chưa vào WiFi: làm theo hướng dẫn đi kèm dongle hoặc của hãng inverter.</em></div></li>
+        <li><span class="ix mono">04</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Pin JK BMS có Bluetooth</b> — app JK trên điện thoại nối được pin qua Bluetooth là dùng được.</div></li>
+        <li><span class="ix mono">05</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Điện thoại</b> (Android hoặc iPhone) để cài đặt.</div></li>
+      </ul>
+    </div>
+
+    <div class="sec" id="b1">
+      <div class="rail"></div>
+      <div class="snum">1</div>
+      <div class="sechd"><div class="st">Tại nhà</div><h2>Cắm nguồn &amp; chọn chỗ đặt</h2></div>
+      <ol class="steps">
+        <li>Đặt hộp <b>gần tủ pin</b> (trong tầm Bluetooth, vài mét) và ở chỗ <b>có sóng WiFi nhà</b>. <div class="hint">Tránh đặt trong tủ sắt đóng kín — sóng WiFi và Bluetooth sẽ yếu.</div></li>
+        <li>Cắm cáp <b>USB-C</b> vào hộp, đầu kia vào <b>củ sạc 5V</b>. Hộp tự khởi động sau khoảng 10 giây.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 1</span><span>Hộp Gateway</span><span class="rule"></span></div>
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:520px" href="/huongdan/img/gw-box-photo.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/gw-box-photo.webp" width="1400" height="1052" alt="Hộp Gateway: cổng nguồn USB-C ở cạnh trước, nút bấm trên nắp hộp" loading="lazy">
+            <span class="pin" style="left:44.6%;top:73.9%">1</span>
+            <span class="pin" style="left:78.8%;top:60.9%">2</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Cổng USB-C</b>: cắm nguồn 5V.</div></li>
+            <li><span class="pin">2</span><div><b>Nút trên nắp hộp</b>: chỉ dùng khi muốn cài lại WiFi từ đầu (giữ khoảng 5 giây). Bình thường không cần bấm.</div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec" id="b2">
+      <div class="rail"></div>
+      <div class="snum">2</div>
+      <div class="sechd"><div class="st">Trên điện thoại · trang cài đặt 192.168.4.1</div><h2>Nối WiFi nhà</h2></div>
+      <ol class="steps">
+        <li>Trên điện thoại vào <b>Cài đặt › WiFi</b> → chọn WiFi có tên bắt đầu bằng <code>GATEWAY-S3</code> (kèm 10 số) → nhập mật khẩu <code>123456789</code>.<div class="hint">Điện thoại báo “WiFi không có internet” → chọn <b>Vẫn kết nối</b> / <b>Giữ kết nối</b>.</div></li>
+        <li>Trang cài đặt <b>tự mở</b>. Nếu không → mở trình duyệt, gõ <code>192.168.4.1</code>.</li>
+        <li><b>Ghi lại Device ID 10 số</b> ở dòng trên cùng — dùng ở bước 5.</li>
+        <li>Ở thẻ <b>WiFi</b>: bấm <b>Quét</b> → chọn <b>WiFi nhà</b> → nhập mật khẩu → <b>Lưu &amp; Kết nối</b>.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 2</span><span>Trang 192.168.4.1 — Device ID &amp; WiFi</span><span class="rule"></span></div>
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:480px" href="/huongdan/img/gw-web-wifi.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/gw-web-wifi.webp" width="1016" height="538" alt="Trang cài đặt Gateway 192.168.4.1: Device ID, chọn WiFi nhà, mật khẩu, nút Lưu và Kết nối" loading="lazy">
+            <span class="pin" style="left:2.76%;top:3.72%">1</span>
+            <span class="pin" style="left:2.76%;top:39.87%">2</span>
+            <span class="pin" style="left:2.76%;top:63.94%">3</span>
+            <span class="pin" style="left:2.76%;top:82.53%">4</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Device ID</b> 10 số — <b>ghi lại</b>. Bên cạnh là WiFi đang nối và <b>MQTT ✓</b> khi đã lên mạng.</div></li>
+            <li><span class="pin">2</span><div>Bấm <b>Quét</b> rồi chọn <b>WiFi nhà</b> trong danh sách.</div></li>
+            <li><span class="pin">3</span><div>Nhập <b>mật khẩu WiFi</b> nhà.</div></li>
+            <li><span class="pin">4</span><div>Bấm <b>Lưu &amp; Kết nối</b>. Dòng trên cùng hiện tên WiFi nhà + <b>MQTT ✓</b> là xong.</div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Nhớ hai điều</span>WiFi nhà phải là <b>2.4GHz</b>. Và <b>ghi lại Device ID 10 số</b>.</div></div>
+    </div>
+
+    <div class="sec" id="b3">
+      <div class="rail"></div>
+      <div class="snum">3</div>
+      <div class="sechd"><div class="st">Trang 192.168.4.1 · thẻ “Kết nối inverter”</div><h2>Tìm inverter</h2></div>
+      <ol class="steps">
+        <li>Kiểm tra <b>dongle WiFi</b> của inverter đã vào <b>cùng WiFi nhà</b> (app hãng có số liệu là đã vào).</li>
+        <li>Bấm <b>🔍 Quét tự động</b> và chờ thanh chạy hết. Gateway tự tìm inverter trong mạng nhà và <b>tự điền</b> Máy 1, Máy 2.</li>
+        <li>Kiểm tra <b>hãng</b> từng máy: dấu <b>✓</b> là đã nhận đúng hãng. Ô hãng có <b>viền cam</b> là chưa nhận ra — chọn đúng hãng.<div class="hint">Nhà chỉ có <b>1 inverter</b>: chỉ cần Máy 1, để trống Máy 2.</div></li>
+        <li>Bấm <b>Lưu &amp; khởi động lại</b>. Khoảng 15 giây sau, đầu thẻ hiện từng máy <b>Online</b>.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 3</span><span>Thẻ “Kết nối inverter” — ví dụ 2 máy Deye</span><span class="rule"></span></div>
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:480px" href="/huongdan/img/gw-web-inverter.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/gw-web-inverter.webp" width="1016" height="1263" alt="Thẻ Kết nối inverter: nút Quét tự động, kết quả tự điền Máy 1 và Máy 2 hãng Deye, nút Lưu và khởi động lại, hai máy Online" loading="lazy">
+            <span class="pin" style="left:2.76%;top:40.3%">1</span>
+            <span class="pin" style="left:2.76%;top:49.01%">2</span>
+            <span class="pin" style="left:2.76%;top:62.15%">3</span>
+            <span class="pin" style="left:2.76%;top:78.23%">4</span>
+            <span class="pin" style="left:2.76%;top:92.56%">5</span>
+            <span class="pin" style="left:2.76%;top:13.22%">6</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div>Bấm <b>Quét tự động</b>.</div></li>
+            <li><span class="pin">2</span><div>Kết quả quét: tìm thấy mấy máy, hãng gì (<b>✓</b> = nhận đúng hãng).</div></li>
+            <li><span class="pin">3</span><div><b>Máy 1</b>: hãng, cách kết nối, địa chỉ — Gateway tự điền, không cần sửa.</div></li>
+            <li><span class="pin">4</span><div><b>Máy 2</b>: tương tự. Nhà 1 inverter thì để trống.</div></li>
+            <li><span class="pin">5</span><div>Bấm <b>Lưu &amp; khởi động lại</b>.</div></li>
+            <li><span class="pin">6</span><div>Sau khi khởi động lại: từng máy <b>Online</b> (chấm xanh) là Gateway đang đọc được.</div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Quét không thấy inverter?</span>Gateway chỉ thấy inverter khi <b>dongle và Gateway cùng một WiFi nhà</b>. Xem mục <a href="#suco">Sự cố thường gặp</a>.</div></div>
+    </div>
+
+    <div class="sec" id="b4">
+      <div class="rail"></div>
+      <div class="snum">4</div>
+      <div class="sechd"><div class="st">Trang 192.168.4.1 · thẻ “Kết nối BMS (Bluetooth)”</div><h2>Ghép pin JK BMS</h2></div>
+      <ol class="steps">
+        <li><b>Tắt app JK</b> trên điện thoại (mỗi lúc JK BMS chỉ cho một thiết bị nối Bluetooth).</li>
+        <li>Gateway <b>tự dò và tự nhận</b> pin JK ở gần. Nếu chưa thấy: bấm <b>Dò lại</b> rồi <b>chạm vào tên pin</b> của bạn (thường bắt đầu bằng <code>JK_</code>) → <b>OK</b>.</li>
+        <li>Dòng <b>Trạng thái</b> hiện <b>● Đang nhận số</b> và số cell là xong.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 4</span><span>Thẻ “Kết nối BMS (Bluetooth)”</span><span class="rule"></span></div>
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:480px" href="/huongdan/img/gw-web-bms.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/gw-web-bms.webp" width="1016" height="1116" alt="Thẻ Kết nối BMS Bluetooth: trạng thái đang nhận số, 16 cell, danh sách thiết bị Bluetooth với pin JK đã chọn, nút Dò lại và Quên BMS đã chọn" loading="lazy">
+            <span class="pin" style="left:2.76%;top:56.18%">1</span>
+            <span class="pin" style="left:2.76%;top:65.41%">2</span>
+            <span class="pin" style="left:2.76%;top:19.18%">3</span>
+            <span class="pin" style="left:2.76%;top:94.44%">4</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Dò lại</b>: tìm pin JK quanh đây.</div></li>
+            <li><span class="pin">2</span><div>Chạm vào <b>pin JK của bạn</b>. Pin đang dùng có <b>viền xanh</b> và chữ “đã chọn”.</div></li>
+            <li><span class="pin">3</span><div><b>Trạng thái</b>: <b>● Đang nhận số</b> là Gateway đã đọc được pin.</div></li>
+            <li><span class="pin">4</span><div><b>Quên BMS đã chọn</b>: chỉ dùng khi đổi sang pin khác.</div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec" id="b5">
+      <div class="rail"></div>
+      <div class="snum">5</div>
+      <div class="sechd"><div class="st">Trên điện thoại hoặc máy tính</div><h2>Thêm vào app SOLAR CLOUD</h2></div>
+      <ol class="steps">
+        <li>Ngắt WiFi <code>GATEWAY-S3…</code> trên điện thoại (về WiFi nhà hoặc 4G).</li>
+        <li>Vào <a href="/"><code>solarcloud.io.vn</code></a> → <b>Đăng ký</b> bằng email + mật khẩu → đăng nhập.</li>
+        <li>Vào tab <b>Thiết bị</b> → <b>Thêm thiết bị</b> → nhập <b>Device ID 10 số</b> (đã ghi ở bước 2).</li>
+        <li>Chạm vào thiết bị vừa thêm: thấy <b>tổng cả nhà</b>, <b>từng máy</b> và <b>pin JK</b>.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 5</span><span>Trên app: chi tiết từng máy</span><span class="rule"></span></div>
+        <div class="plate">
+          <img class="appshot" style="max-width:340px" src="/huongdan/img/gw-app-may.webp" alt="App SOLAR CLOUD: Máy 1 và Máy 2 — PV1, PV2, pin, tải, lưới, số điện hôm nay" loading="lazy">
+        </div>
+        <div class="figcap">Tab ⚡ Tổng quan: trên là tổng cả nhà, kéo xuống là từng máy và pin. Giải thích từng màn: <a href="/huongdan/gateway-deye-lux-bms/#app">xem tại đây →</a></div>
+      </div>
+    </div>
+
+    <div class="done"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div><div class="bd"><span class="tt">Xong rồi!</span><p>Gateway gửi số liệu inverter và pin lên SOLAR CLOUD <b>mỗi giây</b>. Mất điện hay mất mạng, có lại là Gateway tự nối lại — không cần làm gì thêm.</p></div></div>
+
+    <div class="sec" id="doiwifi">
+      <div class="rail"></div>
+      <div class="snum">↻</div>
+      <div class="sechd"><div class="st">Khi cần</div><h2>Đổi WiFi, chuyển chỗ, cài lại</h2></div>
+      <ol class="steps">
+        <li><b>Đổi WiFi từ xa</b> (ví dụ đổi mật khẩu modem): trên app vào tab <b>ℹ️ Thông tin</b> → <b>Kết nối WiFi</b> → <b>Dò WiFi xung quanh</b> → chọn WiFi mới, nhập mật khẩu. WiFi mới không vào được thì Gateway <b>tự quay về WiFi cũ</b>.</li>
+        <li><b>Đổi tại chỗ</b>: WiFi <code>GATEWAY-S3…</code> của hộp <b>luôn bật</b> — điện thoại vào WiFi đó, mở <code>192.168.4.1</code>, làm lại bước 2.</li>
+        <li><b>Cài lại WiFi từ đầu</b>: <b>giữ nút trên nắp hộp khoảng 5 giây</b> để xoá WiFi đã lưu, rồi làm lại bước 2.</li>
+        <li><b>Thêm / đổi inverter, đổi pin</b>: vào <code>192.168.4.1</code>, làm lại bước 3 hoặc 4.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 6</span><span>Đổi WiFi từ xa trên app — tab ℹ️ Thông tin</span><span class="rule"></span></div>
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:460px" href="/huongdan/img/gw-app-thongtin.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/gw-app-thongtin.webp" width="780" height="824" alt="Tab Thông tin trên app: ID thiết bị, phiên bản, sóng WiFi và nút Dò WiFi xung quanh để đổi WiFi từ xa" loading="lazy">
+            <span class="pin" style="left:61.54%;top:15.29%">1</span>
+            <span class="pin" style="left:37.18%;top:72.57%">2</span>
+            <span class="pin" style="left:27.56%;top:90.17%">3</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>ID thiết bị</b> 10 số (bấm 📋 để sao chép) — gửi kèm khi cần hỗ trợ.</div></li>
+            <li><span class="pin">2</span><div><b>Kết nối WiFi</b>: sóng và tên WiFi Gateway đang dùng.</div></li>
+            <li><span class="pin">3</span><div><b>Dò WiFi xung quanh</b>: chọn WiFi mới, nhập mật khẩu. Không vào được thì tự quay về WiFi cũ.</div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec" id="suco">
+      <div class="rail"></div>
+      <div class="snum">?</div>
+      <div class="sechd"><div class="st">Bấm vào từng mục để xem</div><h2>Sự cố thường gặp</h2></div>
+      <div class="faqs">
+      <details class="faq"><summary>Điện thoại không thấy WiFi <code>GATEWAY-S3…</code></summary><div>Chờ khoảng 30 giây sau khi cắm nguồn rồi quét lại WiFi. Đứng gần hộp. Thử đổi củ sạc / cáp USB-C khác (củ 5V, cáp còn tốt).</div></details>
+      <details class="faq"><summary>Trang <code>192.168.4.1</code> không mở</summary><div>Tắt <b>dữ liệu di động (4G)</b> trong lúc đang nối WiFi <code>GATEWAY-S3…</code>, rồi gõ lại <code>192.168.4.1</code> trên trình duyệt.</div></details>
+      <details class="faq"><summary>Không lưu được WiFi nhà</summary><div>WiFi phải là <b>2.4GHz</b>. Kiểm tra lại mật khẩu (phân biệt chữ hoa / thường). Modem phát 2 băng tần cùng tên thì vào cài đặt modem tách riêng WiFi 2.4GHz.</div></details>
+      <details class="faq"><summary>Quét không thấy inverter</summary><div>Mở app của hãng inverter: app <b>không có số liệu</b> nghĩa là dongle chưa vào WiFi nhà — làm lại phần cài WiFi cho dongle theo hướng dẫn của hãng. Dongle và Gateway phải <b>cùng một WiFi nhà</b>. Thử rút cắm lại dongle, chờ 2 phút rồi quét lại.</div></details>
+      <details class="faq"><summary>Không thấy pin JK</summary><div><b>Tắt app JK</b> trên điện thoại (và các thiết bị khác đang nối Bluetooth vào pin), đưa hộp <b>lại gần tủ pin</b>, rồi bấm <b>Dò lại</b>.</div></details>
+      <details class="faq"><summary>App báo mất kết nối</summary><div>Kiểm tra mạng nhà và nguồn của hộp. Có mạng lại là Gateway tự nối lại. Đổi modem / mật khẩu WiFi thì xem mục <a href="#doiwifi">Đổi WiFi</a>.</div></details>
+      </div>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Cần hỗ trợ?</span>Nhắn Zalo <a href="https://zalo.me/0349897777" target="_blank" rel="noopener"><b>0349 897 777</b></a> kèm <b>Device ID 10 số</b> để được hỗ trợ nhanh.</div></div>
+    </div>
 
     <div class="cta-row">
       <a class="zbtn" href="https://zalo.me/0349897777" target="_blank" rel="noopener"><svg class="zi" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#fff"/><path d="M12 4.2c-4.6 0-8.3 3.1-8.3 7 0 2.2 1.2 4.1 3.1 5.4l-.6 2.6c-.1.4.3.7.6.5l3-1.7c.7.1 1.4.2 2.2.2 4.6 0 8.3-3.1 8.3-7s-3.7-7-8.3-7z" fill="#0068FF"/><path d="M8.6 9h5.6l-5.3 5.4h5.5" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Đặt hàng qua Zalo</span></a>
-      <a class="cta pri" href="/huongdan/gateway-deye-lux-bms/">Xem hướng dẫn chi tiết →</a>
+      <a class="cta pri" href="#caidat">Lên đầu hướng dẫn ↑</a>
       <a class="cta ghost" href="/sanpham">Sản phẩm khác</a>
     </div>
   </div>

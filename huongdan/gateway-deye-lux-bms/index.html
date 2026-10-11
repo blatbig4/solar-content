@@ -69,6 +69,13 @@
   .brk{width:5px}
   .annoplate{padding:14px 10px}
 }
+.kp{margin:22px 0 0;font-size:16px;line-height:1.6;color:var(--paper)}
+.ksteps{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0 0}
+.kstep{display:flex;flex-direction:column;gap:3px;padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:var(--ink-2);box-shadow:var(--sh-1);text-decoration:none;color:var(--paper);transition:border-color .15s}
+.kstep b{font-size:15.5px;color:var(--phos-d)}
+.kstep span{font-size:13.5px;color:var(--muted)}
+.kstep:hover{border-color:var(--phos-line)}
+@media (max-width:560px){.ksteps{grid-template-columns:1fr}}
 /* hai bản bo */
 .plate.boards{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:end}
 .plate.boards figure{margin:0;text-align:center}
@@ -174,11 +181,11 @@
     <a class="jump" style="margin-top:12px" href="#app">Đã lắp xong mạch? <b>Xem hướng dẫn dùng app →</b></a>
 
     <!-- HƯỚNG DẪN -->
-    <div class="ghead" style="margin-top:58px"><h2>Hướng dẫn tự lắp</h2><span class="gcount">5 bước · khoảng 15 phút</span></div>
+    <div class="ghead" style="margin-top:58px"><h2>Hướng dẫn tự lắp</h2><span class="gcount">nạp firmware → kết nối · khoảng 15 phút</span></div>
     <svg class="dim" viewBox="0 0 600 26" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
       <line class="draw" x1="1" y1="13" x2="599" y2="13"/>
       <path d="M1 8v10M599 8v10M1 13l9-4M1 13l9 4M599 13l-9-4M599 13l-9 4"/>
-      <text x="300" y="9" text-anchor="middle">05 bước · nạp → wifi → pin → inverter → tài khoản</text>
+      <text x="300" y="9" text-anchor="middle">nạp firmware → wifi → inverter → pin → app</text>
     </svg>
 
     <div class="prep">
@@ -238,103 +245,17 @@
     <div class="sec">
       <div class="rail"></div>
       <div class="snum">2</div>
-      <div class="sechd"><div class="st">Trên điện thoại · mạch tự phát WiFi cấu hình</div><h2>Kết nối WiFi nhà</h2></div>
-      <ol class="steps">
-        <li>Cấp nguồn cho mạch. Mạch <b>tự phát một WiFi</b> có tên bắt đầu bằng <code>GATEWAY-S3</code>, kèm 10 số.</li>
-        <li>Trên điện thoại vào <b>Cài đặt › WiFi</b> → chọn WiFi đó → nhập mật khẩu <code>123456789</code></li>
-        <li>Trang cấu hình <b>tự mở</b>. Nếu không → mở trình duyệt gõ <code>192.168.4.1</code></li>
-        <li>Trang hiện <b>Device ID (10 số)</b> — <b>ghi lại</b> để thêm vào tài khoản ở bước 5.</li>
-        <li>Ở thẻ <b>WiFi</b>: bấm <b>Quét</b> → chọn <b>WiFi nhà</b> (2.4GHz) → nhập mật khẩu → <b>Lưu &amp; Kết nối</b>.<div class="hint"><b>Bản có màn (ES3C28P):</b> có thể cài WiFi ngay trên màn — vào trang <b>CÀI ĐẶT</b> → chọn WiFi → gõ mật khẩu bằng bàn phím ảo.</div></li>
-      </ol>
-      <div class="fig">
-        <div class="figtag"><span class="n">HÌNH 2</span><span>Trang 192.168.4.1 — ID thiết bị &amp; WiFi</span><span class="rule"></span></div>
-        <div class="plate annoplate stack">
-          <a class="anno" style="max-width:480px" href="/huongdan/img/gw-portal-wifi.webp" target="_blank" rel="noopener">
-            <img src="/huongdan/img/gw-portal-wifi.webp" width="864" height="670" alt="Trang cấu hình 192.168.4.1 của Gateway: Device ID, chọn WiFi nhà, mật khẩu, Lưu và Kết nối" loading="lazy">
-            <span class="pin" style="left:3.70%;top:14.93%">1</span>
-            <span class="pin" style="left:3.70%;top:51.34%">2</span>
-            <span class="pin" style="left:3.70%;top:70.75%">3</span>
-            <span class="pin" style="left:3.70%;top:85.52%">4</span>
-          </a>
-          <ol class="legend">
-            <li><span class="pin">1</span><div><b>Device ID</b>: mã <b>10 số</b> của mạch. <b>Ghi lại</b> để thêm vào tài khoản ở bước 5.</div></li>
-            <li><span class="pin">2</span><div>Bấm <b>Quét</b> → chọn <b>WiFi nhà</b> (2.4GHz).</div></li>
-            <li><span class="pin">3</span><div>Nhập <b>mật khẩu WiFi</b>.</div></li>
-            <li><span class="pin">4</span><div>Bấm <b>Lưu &amp; Kết nối</b>. Dòng trên cùng hiện tên WiFi là mạch đã lên mạng.</div></li>
-          </ol>
-        </div>
-        <div class="figcap">Thẻ WiFi trên trang cấu hình của mạch.</div>
+      <div class="sechd"><div class="st">Giống hệt hộp Gateway mua sẵn</div><h2>Kết nối WiFi, inverter, pin &amp; app</h2></div>
+      <p class="kp">Nạp xong, mạch của bạn chạy <b>cùng firmware</b> với hộp Gateway bán sẵn, nên các bước kết nối giống hệt nhau. Hướng dẫn có hình từng bước nằm ở trang Gateway:</p>
+      <div class="ksteps">
+        <a class="kstep" href="/sanpham/gateway/#b2"><b>Nối WiFi nhà</b><span>WiFi GATEWAY-S3… → 192.168.4.1 → ghi Device ID</span></a>
+        <a class="kstep" href="/sanpham/gateway/#b3"><b>Tìm inverter</b><span>Quét tự động → kiểm hãng → Lưu</span></a>
+        <a class="kstep" href="/sanpham/gateway/#b4"><b>Ghép pin JK BMS</b><span>tắt app JK → Dò lại → chọn pin</span></a>
+        <a class="kstep" href="/sanpham/gateway/#b5"><b>Thêm vào app</b><span>solarcloud.io.vn → Thêm thiết bị → nhập ID</span></a>
       </div>
-      <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Nhớ hai điều</span>WiFi nhà phải là <b>2.4GHz</b>. Và <b>ghi lại ID 10 số</b> hiện ở đầu trang <code>192.168.4.1</code>.</div></div>
+      <a class="jump" href="/sanpham/gateway/#b2">Mở <b>Hướng dẫn cài đặt Gateway</b> có hình, <b>bắt đầu từ bước 2 →</b></a>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Khác hộp mua sẵn một chút</span>Bo tự làm không có nắp hộp: chỗ hướng dẫn ghi “nút trên nắp hộp” thì dùng <b>nút BOOT</b> trên bo. Bo màn cảm ứng ES3C28P cài được WiFi ngay trên màn: trang <b>CÀI ĐẶT</b> → chọn WiFi → gõ mật khẩu bằng bàn phím ảo.</div></div>
     </div>
-
-    <!-- 3 -->
-    <div class="sec">
-      <div class="rail"></div>
-      <div class="snum">3</div>
-      <div class="sechd"><div class="st">Trên trang 192.168.4.1 · thẻ “Kết nối BMS”</div><h2>Ghép pin JK BMS qua Bluetooth</h2></div>
-      <ol class="steps">
-        <li>Bật <b>Bluetooth của JK BMS</b> (trong app JK) và đặt mạch <b>gần tủ pin</b>.</li>
-        <li>Ở thẻ <b>Kết nối BMS</b> chọn <b>Bluetooth</b> (hoặc <b>Tự động</b>) → bấm <b>Dò BMS</b>.</li>
-        <li>Chọn đúng <b>tên / mã MAC</b> pin của bạn. Thẻ hiện <b>“Đã kết nối”</b> kèm số cell là xong.</li>
-      </ol>
-      <div class="fig">
-        <div class="figtag"><span class="n">HÌNH 3</span><span>Thẻ “Kết nối BMS” (minh hoạ)</span><span class="rule"></span></div>
-        <div class="plate">
-          <div class="mockui">
-            <div class="mh">Kết nối BMS</div>
-            <div class="seg"><span>Tự động</span><span class="on">Bluetooth</span></div>
-            <div class="mr"><span class="dt"></span><div><b>JK_B2A16S20P</b><small>AA:BB:CC:00:01:01 · 16 cell</small></div><span class="st">✓ Đã kết nối</span></div>
-            <div class="mb g">🔍 Dò BMS</div>
-            <div class="mb g">✖ Quên BMS đã chọn</div>
-          </div>
-        </div>
-        <div class="figcap">Hình minh hoạ — giao diện thật có thể khác một chút theo bản firmware.</div>
-      </div>
-      <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Không dò thấy pin?</span><b>Tắt app JK trên điện thoại</b> (mỗi lúc BMS chỉ cho một thiết bị nối Bluetooth), đưa mạch <b>lại gần</b> tủ pin hơn rồi dò lại.</div></div>
-    </div>
-
-    <!-- 4 -->
-    <div class="sec">
-      <div class="rail"></div>
-      <div class="snum">4</div>
-      <div class="sechd"><div class="st">Trên trang 192.168.4.1 · thẻ “Kết nối inverter”</div><h2>Thêm 2 inverter qua dongle WiFi</h2></div>
-      <ol class="steps">
-        <li>Kiểm tra <b>dongle WiFi</b> của cả 2 inverter đã vào <b>cùng WiFi nhà</b> với mạch (xem được trên app hãng là đã vào).</li>
-        <li>Ở thẻ <b>Kết nối inverter</b> bấm <b>Tìm dongle trong mạng nhà</b>. Mạch tự tìm 2 dongle và điền vào danh sách.</li>
-        <li>Chọn <b>hãng</b> cho từng máy (ví dụ <b>Máy 1 · Deye</b>, <b>Máy 2 · Luxpower</b>) → bấm <b>Lưu</b>. Mạch khởi động lại và bắt đầu đọc <b>cả 2 máy cùng lúc</b>.<div class="hint">2 máy song song cùng hãng: chọn cùng hãng cho cả 2 máy (ví dụ Máy 1 · Deye, Máy 2 · Deye). Nhà chỉ có 1 inverter: chỉ cần Máy 1.</div></li>
-      </ol>
-      <div class="fig">
-        <div class="figtag"><span class="n">HÌNH 4</span><span>Thẻ “Kết nối inverter” (minh hoạ)</span><span class="rule"></span></div>
-        <div class="plate">
-          <div class="mockui">
-            <div class="mh">Kết nối inverter</div>
-            <div class="mr"><span class="dt"></span><div><b>Máy 1 · Deye</b><small>dongle WiFi · 192.168.1.51</small></div><span class="st">✓ Đang đọc</span></div>
-            <div class="mr"><span class="dt"></span><div><b>Máy 2 · Luxpower</b><small>dongle WiFi · 192.168.1.52</small></div><span class="st">✓ Đang đọc</span></div>
-            <div class="mb g">🔍 Tìm dongle trong mạng nhà</div>
-            <div class="mb">Lưu &amp; khởi động lại</div>
-          </div>
-        </div>
-        <div class="figcap">Hình minh hoạ — giao diện thật có thể khác một chút theo bản firmware.</div>
-      </div>
-      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Không tìm thấy dongle?</span>Mạch chỉ thấy dongle khi <b>dongle và mạch ở cùng một WiFi nhà 2.4GHz</b>. Kiểm tra dongle đã lên WiFi chưa (đèn trên dongle, hoặc app hãng có số liệu), rồi bấm tìm lại.</div></div>
-    </div>
-
-    <!-- 5 -->
-    <div class="sec">
-      <div class="rail"></div>
-      <div class="snum">5</div>
-      <div class="sechd"><div class="st">Trên điện thoại hoặc máy tính</div><h2>Tạo tài khoản &amp; thêm thiết bị</h2></div>
-      <ol class="steps">
-        <li>Vào <a href="/"><code>solarcloud.io.vn</code></a> → <b>Đăng ký</b> bằng email + mật khẩu → đăng nhập.</li>
-        <li>Vào tab <b>Thiết bị</b> → bấm <b>Thêm thiết bị</b>.</li>
-        <li>Nhập <b>ID 10 số</b> (đã ghi ở bước 2) → <b>Thêm thiết bị</b>.</li>
-        <li>Chạm vào thiết bị vừa thêm để xem <b>cả nhà, từng máy và pin</b> — phần dưới hướng dẫn từng màn.</li>
-      </ol>
-      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Kích hoạt</span>Sau khi cài đặt và <b>kết nối thành công vào app</b>, nhấn <b>Kích hoạt</b> để hiển thị các thông số.</div></div>
-    </div>
-
-    <div class="done"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div><div class="bd"><span class="tt">Hoàn tất</span><p>Mạch tự gửi số liệu 2 inverter và pin lên SOLAR CLOUD mỗi giây. Muốn đổi WiFi sau này: kết nối lại WiFi <code>GATEWAY-S3…</code> rồi vào <code>192.168.4.1</code>. Giữ nút <b>BOOT ~5 giây</b> để xoá WiFi đã lưu và cài lại từ đầu.</p></div></div>
 
     <!-- ═════════ XEM TRÊN APP ═════════ -->
     <div class="ghead" id="app" style="margin-top:76px"><h2>Xem trên app</h2><span class="gcount">Android · iPhone · máy tính</span></div>
