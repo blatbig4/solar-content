@@ -70,6 +70,64 @@
   .annoplate{padding:14px 10px}
 }
 /* trang sản phẩm JK BMS */
+/* hướng dẫn cài đặt (phần dưới trang sản phẩm) */
+html{scroll-behavior:smooth}
+.sec,.prep,.kband,.fig{scroll-margin-top:70px}
+.kband{margin:84px 0 0;padding:26px 24px;border-radius:var(--r);background:linear-gradient(135deg,#0E775E,#12936F);color:#fff;box-shadow:var(--sh-2)}
+.kband .kk{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.kband h2{margin:4px 0 6px;font-family:var(--fd);font-size:clamp(28px,4.6vw,40px);font-weight:800;letter-spacing:-.02em;color:#fff}
+.kband p{margin:0;font-size:16px;line-height:1.5;opacity:.95}
+.kband p b{color:#fff}
+.ktoc{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0}
+.ktoc a{font-size:14px;font-weight:650;color:#fff;text-decoration:none;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 12px;transition:background .15s}
+.ktoc a:hover{background:rgba(255,255,255,.26)}
+.faqs{display:grid;gap:10px;margin:22px 0 0}
+.faq{border:1px solid var(--line);border-radius:12px;background:var(--ink-2);box-shadow:var(--sh-1);overflow:hidden}
+.faq summary{cursor:pointer;list-style:none;padding:14px 44px 14px 16px;font-weight:650;font-size:15.5px;color:var(--paper);position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:22px;font-weight:600;color:var(--phos)}
+.faq[open] summary::after{content:"–"}
+.faq>div{padding:0 16px 15px;font-size:15px;line-height:1.6;color:var(--paper)}
+.faq a,.sec .note a{color:var(--phos-d);font-weight:650}
+
+
+/* ═════════ NÚT ĐẶT HÀNG QUA ZALO + GIÁ ═════════ */
+.zbtn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:11px 18px;border-radius:12px;background:#0068FF;color:#fff!important;
+  font-weight:700;font-size:15px;line-height:1.2;text-decoration:none;box-shadow:0 6px 18px rgba(0,104,255,.28);transition:background .15s,box-shadow .15s,transform .15s;position:relative;overflow:hidden}
+.zbtn:hover{background:#0057D6;box-shadow:0 8px 24px rgba(0,104,255,.38);transform:translateY(-1px)}
+.zbtn .zi{width:24px;height:24px;flex:0 0 auto;border-radius:6px}
+.zbtn::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;transform:skewX(-20deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transition:left .6s}
+.zbtn:hover::after{left:120%}
+.zphone{display:block;margin-top:6px;font-size:13px;color:var(--muted)}
+.coin{width:1em;height:1em}
+.order{margin:16px 0 0}
+.price{display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin:22px 0 0;padding:12px 20px;border-radius:14px;background:var(--ink-2);border:1px solid var(--phos-line);box-shadow:var(--sh-1)}
+.price .pl{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+.price .pv{font-size:30px;font-weight:800;color:var(--phos-d);line-height:1}
+.price .pn{font-size:14px;color:var(--muted)}
+.gia::before{content:"50" "0"}
+.coin{display:inline-block;width:.95em;height:.95em;margin-left:.18em;vertical-align:-.12em}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.badge{display:inline-flex;align-items:center;gap:7px;font-size:14.5px;font-weight:650;color:var(--phos-d);background:var(--phos-dim);border:1px solid var(--phos-line);border-radius:999px;padding:7px 14px}
+.badge svg{width:17px;height:17px;color:var(--good)}
+.prodshot{margin:26px 0 0;border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,#fff,#F2F5F4);box-shadow:var(--sh-1);padding:22px 18px;text-align:center}
+.prodshot img{display:block;width:100%;max-width:620px;height:auto;margin:0 auto}
+.cmp{border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);overflow:hidden;box-shadow:var(--sh-1);margin:20px 0 0}
+.cmp .cr{display:grid;grid-template-columns:1.25fr 1fr 1fr;border-bottom:1px solid var(--line)}
+.cmp .cr:last-child{border-bottom:0}
+.cmp .cr>div{padding:12px 16px;font-size:15px;line-height:1.45}
+.cmp .ch>div{font-weight:700;font-size:13.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.02em;background:var(--ink-3)}
+.cmp .cr.ch>div.hl{color:#fff;background:var(--phos)}
+.cmp .cr>div:first-child{font-weight:600;color:var(--paper)}
+.cmp .cr>div.hl{background:var(--phos-dim);font-weight:650;color:var(--phos-d)}
+.cmp .ok{color:var(--good);font-weight:700}
+.steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 0}
+.stp{border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);box-shadow:var(--sh-1);padding:18px}
+.stp .n{font-family:var(--fm);font-size:12px;font-weight:700;color:var(--phos)}
+.stp h3{margin:6px 0 6px;font-size:17px;font-weight:750;color:var(--paper)}
+.stp p{margin:0;font-size:14.5px;line-height:1.55;color:var(--paper)}
+@media (max-width:720px){.steps3{grid-template-columns:1fr}.cmp .cr{grid-template-columns:1.1fr 1fr 1fr}.cmp .cr>div{padding:10px 10px;font-size:13.5px}}
+
 
 /* ═════════ NÚT ĐẶT HÀNG QUA ZALO + GIÁ ═════════ */
 .zbtn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:11px 18px;border-radius:12px;background:#0068FF;color:#fff!important;
@@ -113,7 +171,7 @@
 <script src="/site-nav.js"></script>
   <div class="topnav">
     <a href="/sanpham">← Sản phẩm</a>
-    <a class="sp" href="/huongdan/jkbms-c3-act/">Hướng dẫn chi tiết →</a>
+    <a class="sp" href="#caidat">Hướng dẫn cài đặt ↓</a>
   </div>
 
   <div class="wrap">
@@ -128,6 +186,7 @@
       </div>
       <div class="price"><span class="pl">Giá</span><span class="pv"><span class="gia"></span><svg class="coin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#F7931A"/><circle cx="12" cy="12" r="11" fill="none" stroke="#D97C0B" stroke-width=".8"/><g transform="rotate(14 12 12)" fill="#fff"><path fill-rule="evenodd" d="M8.4 6.3h5.1c2.2 0 3.3 1.2 3.3 2.8 0 1.2-.7 2-1.7 2.3 1.4.3 2.4 1.4 2.4 2.9 0 2.1-1.5 3.7-3.9 3.7H8.4zm2.3 1.8v3.1h2.4c1 0 1.5-.6 1.5-1.6s-.5-1.5-1.5-1.5zm0 4.7v3.4h2.7c1.2 0 1.8-.7 1.8-1.7s-.6-1.7-1.8-1.7z"/><rect x="9.9" y="4.4" width="1.4" height="2.2" rx=".4"/><rect x="12.3" y="4.4" width="1.4" height="2.2" rx=".4"/><rect x="9.9" y="17.4" width="1.4" height="2.2" rx=".4"/><rect x="12.3" y="17.4" width="1.4" height="2.2" rx=".4"/></g></svg></span><span class="pn">giám sát + cài đặt từ xa</span></div>
       <div class="order"><a class="zbtn" href="https://zalo.me/0349897777" target="_blank" rel="noopener"><svg class="zi" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#fff"/><path d="M12 4.2c-4.6 0-8.3 3.1-8.3 7 0 2.2 1.2 4.1 3.1 5.4l-.6 2.6c-.1.4.3.7.6.5l3-1.7c.7.1 1.4.2 2.2.2 4.6 0 8.3-3.1 8.3-7s-3.7-7-8.3-7z" fill="#0068FF"/><path d="M8.6 9h5.6l-5.3 5.4h5.5" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Đặt hàng qua Zalo</span></a><span class="zphone">Zalo / điện thoại: 0349 897 777</span></div>
+      <a class="jump" href="#caidat">Đã mua bộ giám sát JK BMS? <b>Xem hướng dẫn cài đặt ↓</b></a>
     </div>
 
     <div class="prodshot">
@@ -168,20 +227,181 @@
       <p class="cnote">Đặt mạch trong tầm Bluetooth của pin (vài mét, gần tủ pin) và trong vùng có sóng WiFi nhà.</p>
     </div>
 
-    <div class="ghead" style="margin-top:56px"><h2>Dùng trong 3 bước</h2><span class="gcount">khoảng 5 phút</span></div>
-    <div class="steps3">
-      <div class="stp"><div class="n">01</div><h3>Cắm nguồn gần tủ pin</h3><p>Cấp nguồn 5V qua cổng USB-C. Bật <b>Bluetooth của JK BMS</b> (trong app JK). Mạch tự tìm và kết nối pin gần nhất.</p></div>
-      <div class="stp"><div class="n">02</div><h3>Nối WiFi nhà</h3><p>Trên điện thoại vào WiFi <code>JKBMS-xxxxxxxxxx</code>, mật khẩu <code>123456789</code> → trang cấu hình tự mở (hoặc gõ <code>192.168.4.1</code>) → chọn WiFi nhà, nhập mật khẩu. <b>Ghi lại mã 10 số</b> trên trang.</p></div>
-      <div class="stp"><div class="n">03</div><h3>Thêm vào app</h3><p>Vào <a href="/"><code>solarcloud.io.vn</code></a>, đăng ký, bấm <b>Thêm thiết bị</b> và nhập <b>mã 10 số</b>. Xem pin và cài đặt ngay.</p></div>
+    <!-- ═════════ HƯỚNG DẪN CÀI ĐẶT JK BMS ═════════ -->
+    <div class="kband" id="caidat">
+      <span class="kk">Hướng dẫn cài đặt bộ giám sát JK BMS</span>
+      <h2>Cài đặt JK BMS trong 5 phút</h2>
+      <p>Đã nhận hộp? Làm theo các bước dưới đây — <b>chỉ cần điện thoại</b>.</p>
+      <nav class="ktoc"><a href="#chuanbi">Chuẩn bị</a><a href="#b1">1 · Cắm nguồn</a><a href="#b2">2 · WiFi nhà</a><a href="#b3">3 · Nối pin JK</a><a href="#b4">4 · Vào app</a><a href="#b5">5 · Cài đặt BMS</a><a href="#suco">Sự cố</a></nav>
     </div>
-    <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Hướng dẫn có hình từng bước</span>Các bước nối WiFi, ghép pin và dùng app có hình minh hoạ trong bài hướng dẫn JK BMS (bắt đầu từ bước <b>Kết nối WiFi nhà</b>). <a href="/huongdan/jkbms-c3-act/">Xem hướng dẫn chi tiết →</a></div></div>
-    <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Lưu ý</span>Mỗi lúc JK BMS chỉ cho <b>một thiết bị</b> nối Bluetooth. Khi mạch đang chạy, app JK trên điện thoại sẽ không nối được pin — tắt app JK nếu mạch không tìm thấy pin.</div></div>
 
-    <div class="done"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div><div class="bd"><span class="tt">Mua về dùng ngay</span><p>Cắm nguồn, nối WiFi, thêm vào app là xem và cài đặt pin JK BMS từ xa. Giá <b><span class="gia"></span><svg class="coin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#F7931A"/><circle cx="12" cy="12" r="11" fill="none" stroke="#D97C0B" stroke-width=".8"/><g transform="rotate(14 12 12)" fill="#fff"><path fill-rule="evenodd" d="M8.4 6.3h5.1c2.2 0 3.3 1.2 3.3 2.8 0 1.2-.7 2-1.7 2.3 1.4.3 2.4 1.4 2.4 2.9 0 2.1-1.5 3.7-3.9 3.7H8.4zm2.3 1.8v3.1h2.4c1 0 1.5-.6 1.5-1.6s-.5-1.5-1.5-1.5zm0 4.7v3.4h2.7c1.2 0 1.8-.7 1.8-1.7s-.6-1.7-1.8-1.7z"/><rect x="9.9" y="4.4" width="1.4" height="2.2" rx=".4"/><rect x="12.3" y="4.4" width="1.4" height="2.2" rx=".4"/><rect x="9.9" y="17.4" width="1.4" height="2.2" rx=".4"/><rect x="12.3" y="17.4" width="1.4" height="2.2" rx=".4"/></g></svg></b>.</p></div></div>
+    <div class="prep" id="chuanbi">
+      <h2>Cần chuẩn bị</h2>
+      <ul>
+        <li><span class="ix mono">01</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Hộp giám sát JK BMS</b> + <b>củ sạc 5V</b> (củ sạc điện thoại là được) + <b>cáp USB-C</b>.</div></li>
+        <li><span class="ix mono">02</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>WiFi nhà 2.4GHz</b> + mật khẩu. <em>Thiết bị không bắt được WiFi 5GHz.</em></div></li>
+        <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Pin dùng JK BMS có Bluetooth</b> — app JK trên điện thoại nối được pin qua Bluetooth là dùng được.</div></li>
+        <li><span class="ix mono">04</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Điện thoại</b> (Android hoặc iPhone) để cài đặt.</div></li>
+      </ul>
+    </div>
+
+    <div class="sec" id="b1">
+      <div class="rail"></div>
+      <div class="snum">1</div>
+      <div class="sechd"><div class="st">Tại tủ pin</div><h2>Cắm nguồn &amp; chọn chỗ đặt</h2></div>
+      <ol class="steps">
+        <li>Đặt hộp <b>gần tủ pin</b> (trong tầm Bluetooth, vài mét) và ở chỗ <b>có sóng WiFi nhà</b>.<div class="hint">Tránh đặt trong tủ sắt đóng kín — sóng WiFi và Bluetooth sẽ yếu.</div></li>
+        <li>Cắm cáp <b>USB-C</b> vào hộp, đầu kia vào <b>củ sạc 5V</b>. Hộp tự khởi động và <b>tự tìm pin JK gần nhất</b>.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 1</span><span>Hộp giám sát JK BMS</span><span class="rule"></span></div>
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:520px" href="/sanpham/img/jkbms-c3-box.webp" target="_blank" rel="noopener">
+            <img src="/sanpham/img/jkbms-c3-box.webp" width="1400" height="1188" alt="Hộp giám sát JK BMS màu trắng: cổng nguồn USB-C ở mặt trước, nút BOOT và RESET trên nắp" loading="lazy">
+            <span class="pin" style="left:33.1%;top:63%">1</span>
+            <span class="pin" style="left:45.7%;top:37.5%">2</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Cổng USB-C</b>: cắm nguồn 5V. Hộp không cần đấu dây vào pin.</div></li>
+            <li><span class="pin">2</span><div><b>Hai nút trên nắp</b>: một nút <b>BOOT</b> — giữ khoảng 5 giây để cài lại WiFi; một nút <b>RESET</b> — bấm để khởi động lại hộp. Bình thường không cần bấm.</div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec" id="b2">
+      <div class="rail"></div>
+      <div class="snum">2</div>
+      <div class="sechd"><div class="st">Trên điện thoại · trang cài đặt 192.168.4.1</div><h2>Nối WiFi nhà</h2></div>
+      <ol class="steps">
+        <li>Trên điện thoại vào <b>Cài đặt › WiFi</b> → chọn WiFi tên <code>JKBMS-xxxxxxxxxx</code> (10 số) → nhập mật khẩu <code>123456789</code>.<div class="hint">Điện thoại báo “WiFi không có internet” → chọn <b>Vẫn kết nối</b> / <b>Giữ kết nối</b>.</div></li>
+        <li>Trang cài đặt <b>tự mở</b>. Nếu không → mở trình duyệt, gõ <code>192.168.4.1</code>.</li>
+        <li><b>Ghi lại Device ID 10 số</b> ở dòng trên cùng — dùng ở bước 4.</li>
+        <li>Kéo xuống thẻ <b>Kết nối</b>: bấm <b>Quét</b> → chọn <b>WiFi nhà</b> → nhập mật khẩu → <b>Lưu &amp; Kết nối</b>.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 2</span><span>Trang 192.168.4.1 — Device ID &amp; WiFi</span><span class="rule"></span></div>
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:480px" href="/huongdan/img/jk-web-wifi.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/jk-web-wifi.webp" width="1016" height="578" alt="Trang cài đặt JK BMS 192.168.4.1: Device ID, chọn WiFi nhà, mật khẩu, nút Lưu và Kết nối" loading="lazy">
+            <span class="pin" style="left:2.76%;top:15.05%">1</span>
+            <span class="pin" style="left:2.76%;top:49.13%">2</span>
+            <span class="pin" style="left:2.76%;top:71.97%">3</span>
+            <span class="pin" style="left:2.76%;top:89.27%">4</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Device ID</b> 10 số — <b>ghi lại</b>. Bên cạnh là WiFi đang nối và <b>MQTT ✓</b> khi đã lên mạng.</div></li>
+            <li><span class="pin">2</span><div>Bấm <b>Quét</b> rồi chọn <b>WiFi nhà</b> trong danh sách.</div></li>
+            <li><span class="pin">3</span><div>Nhập <b>mật khẩu WiFi</b> nhà.</div></li>
+            <li><span class="pin">4</span><div>Bấm <b>Lưu &amp; Kết nối</b>. Hiện “✓ Đã kết nối” và dòng trên cùng có <b>MQTT ✓</b> là xong.</div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Nhớ hai điều</span>WiFi nhà phải là <b>2.4GHz</b>. Và <b>ghi lại Device ID 10 số</b>.</div></div>
+    </div>
+
+    <div class="sec" id="b3">
+      <div class="rail"></div>
+      <div class="snum">3</div>
+      <div class="sechd"><div class="st">Trang 192.168.4.1 · thẻ “Kết nối BLE (JK BMS)”</div><h2>Kiểm tra / nối pin JK BMS</h2></div>
+      <ol class="steps">
+        <li><b>Tắt app JK</b> trên điện thoại (mỗi lúc JK BMS chỉ cho một thiết bị nối Bluetooth).</li>
+        <li>Thường hộp <b>đã tự nối</b> pin gần nhất: dòng <b>Trạng thái</b> hiện <b>Đã kết nối</b> và số cell.</li>
+        <li>Chưa nối, hoặc nhà có nhiều pin: bấm <b>Dò BMS</b> → chọn đúng <b>tên pin</b> của bạn (thường bắt đầu bằng <code>JK_</code>) → <b>Kết nối BMS đã chọn</b>.</li>
+        <li>Kéo lên đầu trang: thẻ <b>Tổng quan</b> và <b>Cell</b> hiện số pin là đã đọc được.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 3</span><span>Thẻ “Kết nối BLE (JK BMS)”</span><span class="rule"></span></div>
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:480px" href="/huongdan/img/jk-web-bms.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/jk-web-bms.webp" width="1016" height="443" alt="Thẻ Kết nối BLE JK BMS: trạng thái đã kết nối, nút Dò BMS, chọn BMS, nút Kết nối BMS đã chọn" loading="lazy">
+            <span class="pin" style="left:2.76%;top:22.35%">1</span>
+            <span class="pin" style="left:93.5%;top:48.08%">2</span>
+            <span class="pin" style="left:2.76%;top:56.21%">3</span>
+            <span class="pin" style="left:2.76%;top:78.33%">4</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Trạng thái</b>: <b>Đã kết nối</b> kèm địa chỉ pin và số cell.</div></li>
+            <li><span class="pin">2</span><div><b>Dò BMS</b>: tìm các pin JK quanh đây (khoảng 6 giây).</div></li>
+            <li><span class="pin">3</span><div><b>Chọn BMS</b>: chọn đúng pin của bạn.</div></li>
+            <li><span class="pin">4</span><div><b>Kết nối BMS đã chọn</b>. Muốn đổi sang pin khác thì bấm <b>Xóa</b> trước.</div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 3B</span><span>Trang 192.168.4.1 cũng hiện số pin</span><span class="rule"></span></div>
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:420px" href="/huongdan/img/jk-web-tongquan.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/jk-web-tongquan.webp" width="1016" height="1086" alt="Trang 192.168.4.1 hiện số pin: điện áp, dòng, công suất, SOC và điện áp 16 cell" loading="lazy">
+            <span class="pin" style="left:2.76%;top:3.96%">1</span>
+            <span class="pin" style="left:2.76%;top:22.38%">2</span>
+            <span class="pin" style="left:2.76%;top:58.47%">3</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div>Chấm <b>xanh</b> cạnh tên = đang nhận số từ pin.</div></li>
+            <li><span class="pin">2</span><div><b>Tổng quan</b>: điện áp, dòng, công suất, % pin (SOC)…</div></li>
+            <li><span class="pin">3</span><div><b>Cell</b>: điện áp từng cell, độ lệch (Δ mV). Viền xanh = cell cao nhất, viền đỏ = thấp nhất.</div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec" id="b4">
+      <div class="rail"></div>
+      <div class="snum">4</div>
+      <div class="sechd"><div class="st">Trên điện thoại hoặc máy tính</div><h2>Thêm vào app SOLAR CLOUD</h2></div>
+      <ol class="steps">
+        <li>Ngắt WiFi <code>JKBMS-…</code> trên điện thoại (về WiFi nhà hoặc 4G).</li>
+        <li>Vào <a href="/"><code>solarcloud.io.vn</code></a> → <b>Đăng ký</b> bằng email + mật khẩu → đăng nhập.</li>
+        <li>Vào tab <b>Thiết bị</b> → <b>Thêm thiết bị</b> → nhập <b>Device ID 10 số</b> (đã ghi ở bước 2).</li>
+        <li>Chạm vào thiết bị vừa thêm: thấy <b>% pin, từng cell, nhiệt độ</b>, biểu đồ.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 4</span><span>Trên app: giám sát pin</span><span class="rule"></span></div>
+        <div class="plate">
+          <img class="appshot" style="max-width:340px" src="/huongdan/img/giaodien-jkbms.jpg" alt="App SOLAR CLOUD giám sát JK BMS: SoC, điện áp từng cell, nhiệt độ, biểu đồ" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <div class="sec" id="b5">
+      <div class="rail"></div>
+      <div class="snum">5</div>
+      <div class="sechd"><div class="st">Trên app · tab ⚙️ Cài đặt</div><h2>Cài đặt BMS từ xa (khi cần)</h2></div>
+      <ol class="steps">
+        <li>Vào tab <b>⚙️ Cài đặt</b>: thẻ đầu trang cho biết hộp đang <b>kết nối với pin</b>.</li>
+        <li><b>Cài nhanh theo loại pin</b> (LFP · NCM/NCA · LTO) hoặc sửa từng thông số → <b>OK</b>. Hộp ghi vào BMS rồi <b>đọc lại để xác nhận</b>.</li>
+        <li>Mục <b>Điều khiển</b>: bật/tắt <b>Sạc · Xả · Cân bằng</b>.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 5</span><span>Cài đặt BMS từ xa trên app</span><span class="rule"></span></div>
+        <div class="plate">
+          <img class="appshot" style="max-width:340px" src="/huongdan/img/giaodien-jkbms-caidat.jpg" alt="Cài đặt JK BMS từ xa trên SOLAR CLOUD: chọn loại pin và chỉnh từng thông số" loading="lazy">
+        </div>
+        <div class="figcap">Giải thích từng thông số và từng nút: <a href="/huongdan/jkbms-c3-act/#caidat">xem tại đây →</a></div>
+      </div>
+      <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Cẩn thận khi chỉnh</span>Ngưỡng bảo vệ sai có thể làm pin ngắt sạc/xả. Chưa rõ thông số nào thì giữ nguyên, hoặc nhắn Zalo để được hướng dẫn.</div></div>
+    </div>
+
+    <div class="done"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div><div class="bd"><span class="tt">Xong rồi!</span><p>Hộp gửi số liệu pin lên SOLAR CLOUD <b>mỗi giây</b>. Mất điện hay mất mạng, có lại là hộp tự nối lại — không cần làm gì thêm.</p></div></div>
+
+    <div class="sec" id="suco">
+      <div class="rail"></div>
+      <div class="snum">?</div>
+      <div class="sechd"><div class="st">Bấm vào từng mục để xem</div><h2>Sự cố thường gặp</h2></div>
+      <div class="faqs">
+      <details class="faq"><summary>Điện thoại không thấy WiFi <code>JKBMS-…</code></summary><div>Chờ khoảng 30 giây sau khi cắm nguồn rồi quét lại WiFi. Đứng gần hộp. Thử đổi củ sạc / cáp USB-C khác.</div></details>
+      <details class="faq"><summary>Trang <code>192.168.4.1</code> không mở</summary><div>Tắt <b>dữ liệu di động (4G)</b> trong lúc đang nối WiFi <code>JKBMS-…</code>, rồi gõ lại <code>192.168.4.1</code> trên trình duyệt.</div></details>
+      <details class="faq"><summary>Không lưu được WiFi nhà</summary><div>WiFi phải là <b>2.4GHz</b>. Kiểm tra lại mật khẩu (phân biệt chữ hoa / thường). Modem phát 2 băng tần cùng tên thì vào cài đặt modem tách riêng WiFi 2.4GHz.</div></details>
+      <details class="faq"><summary>Không thấy pin / không nối được pin</summary><div><b>Tắt app JK</b> trên điện thoại (và thiết bị khác đang nối Bluetooth vào pin), đưa hộp <b>lại gần tủ pin</b>, rồi bấm <b>Dò BMS</b> lại.</div></details>
+      <details class="faq"><summary>App báo mất kết nối</summary><div>Kiểm tra mạng nhà và nguồn của hộp. Có mạng lại là hộp tự nối lại.</div></details>
+      </div>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Cần hỗ trợ?</span>Nhắn Zalo <a href="https://zalo.me/0349897777" target="_blank" rel="noopener"><b>0349 897 777</b></a> kèm <b>Device ID 10 số</b> để được hỗ trợ nhanh.</div></div>
+    </div>
 
     <div class="cta-row">
       <a class="zbtn" href="https://zalo.me/0349897777" target="_blank" rel="noopener"><svg class="zi" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#fff"/><path d="M12 4.2c-4.6 0-8.3 3.1-8.3 7 0 2.2 1.2 4.1 3.1 5.4l-.6 2.6c-.1.4.3.7.6.5l3-1.7c.7.1 1.4.2 2.2.2 4.6 0 8.3-3.1 8.3-7s-3.7-7-8.3-7z" fill="#0068FF"/><path d="M8.6 9h5.6l-5.3 5.4h5.5" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Đặt hàng qua Zalo</span></a>
-      <a class="cta pri" href="/huongdan/jkbms-c3-act/">Xem hướng dẫn chi tiết →</a>
+      <a class="cta pri" href="#caidat">Lên đầu hướng dẫn ↑</a>
       <a class="cta ghost" href="/sanpham">Sản phẩm khác</a>
     </div>
   </div>

@@ -41,6 +41,15 @@
 .fchip.on i{background:rgba(255,255,255,.22);color:#fff}
 .hgrid{grid-template-columns:repeat(4,1fr)}
 .hcard[hidden]{display:none!important}
+.hsd{margin:-6px 0 18px}
+.hjump{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0}
+.hjump a{flex:1 1 200px;display:flex;flex-direction:column;gap:2px;padding:12px 16px;border-radius:14px;border:1.5px solid var(--brand-line);background:rgba(255,255,255,.75);text-decoration:none;color:var(--ink);box-shadow:var(--sh-1);transition:border-color .15s,transform .15s}
+.hjump a b{font-size:16px;color:var(--brand)}
+.hjump a span{font-size:13.5px;color:var(--muted)}
+.hjump a:hover{border-color:var(--brand);transform:translateY(-1px)}
+#tulam,#ketnoi{scroll-margin-top:70px}
+#ketnoi[hidden]{display:none}
+
 .hcard .pimg{position:relative}
 .hbadge{position:absolute;top:10px;left:10px;z-index:2;font-size:11.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:var(--brand);border-radius:999px;padding:4px 10px;box-shadow:0 4px 10px rgba(14,119,94,.3)}
 .hbadge.new{background:#F59E0B;box-shadow:0 4px 10px rgba(245,158,11,.35)}
@@ -65,9 +74,10 @@
   <section class="hero hhero">
     <div class="wrap">
       <div class="hl">
-        <span class="eyebrow">Hướng dẫn · Tự lắp · Từng bước</span>
+        <span class="eyebrow">Hướng dẫn · Tự làm · Kết nối</span>
         <h1>Hướng dẫn cài đặt và<br><em>tự làm thiết bị theo&nbsp;ý&nbsp;thích</em></h1>
-        <p class="lede">Chọn thiết bị để xem hướng dẫn <b>nạp firmware</b>, <b>kết nối WiFi</b> và <b>dùng app SOLAR CLOUD</b>. Mỗi bài có hình minh hoạ từng bước, nạp firmware ngay trong trang.</p>
+        <p class="lede">Hai mảng hướng dẫn: <b>tự làm thiết bị</b> (mua bo, nạp firmware ngay trong trang) và <b>kết nối thiết bị mua sẵn</b>. Mỗi bài có hình minh hoạ từng bước.</p>
+        <div class="hjump"><a href="#tulam"><b>Tự làm thiết bị</b><span>mua bo, nạp firmware</span></a><a href="#ketnoi"><b>Kết nối thiết bị</b><span>đã mua sẵn</span></a></div>
         <div class="hsearch">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
           <input id="q" type="search" placeholder="Tìm thiết bị: JK BMS, Luxpower, Senergy, Gateway…" autocomplete="off" aria-label="Tìm hướng dẫn">
@@ -86,9 +96,10 @@
   </section>
 
   <div class="wrap">
-    <section class="sec" id="danhsach">
-      <div class="shead"><h2>Chọn thiết bị</h2><a class="more" href="/flash">Nạp firmware →</a></div>
-      <div class="filters" role="tablist" aria-label="Lọc theo loại"><button type="button" class="fchip on" data-f="all">Tất cả<i>6</i></button><button type="button" class="fchip" data-f="pin">Pin lưu trữ<i>1</i></button><button type="button" class="fchip" data-f="inv">Inverter<i>3</i></button><button type="button" class="fchip" data-f="gw">Gateway<i>2</i></button></div>
+    <section class="sec" id="tulam">
+      <div class="shead"><h2>Hướng dẫn tự làm thiết bị</h2><a class="more" href="/flash">Nạp firmware →</a></div>
+      <p class="sdesc hsd">Tự mua bo ESP32 / ESP32-S3, <b>nạp firmware ngay trên trình duyệt</b> rồi cài đặt theo từng bước có hình.</p>
+      <div class="filters" role="tablist" aria-label="Lọc theo loại"><button type="button" class="fchip on" data-f="all">Tất cả<i>5</i></button><button type="button" class="fchip" data-f="pin">Pin lưu trữ<i>1</i></button><button type="button" class="fchip" data-f="inv">Inverter<i>3</i></button><button type="button" class="fchip" data-f="gw">Gateway<i>1</i></button></div>
       <div class="pgrid hgrid">
         <a class="pcard hcard" href="/huongdan/gateway-deye-lux-bms/" data-cat="gw">
           <div class="pimg wide"><span class="hbadge new">Mới</span><img src="/huongdan/img/gw-cover.webp" alt="Tự làm thiết bị giám sát 2 inverter song song + pin BMS" loading="lazy"></div>
@@ -100,18 +111,8 @@
             <span class="pbtn">Xem hướng dẫn <span class="ar">→</span></span>
           </div>
         </a>
-        <a class="pcard hcard" href="/sanpham/gateway/#caidat" data-cat="gw">
-          <div class="pimg" style="overflow:hidden"><span class="hbadge">Có bán sẵn</span><img src="/huongdan/img/gw-box-photo.webp" width="1400" height="1052" style="inset:0;width:100%;height:100%;object-fit:cover" alt="Hướng dẫn cài đặt hộp Gateway mua sẵn" loading="lazy"></div>
-          <div class="pb">
-            <span class="part">Gateway · hộp mua sẵn</span>
-            <h3>Hướng dẫn cài đặt Gateway</h3>
-            <p>Cắm nguồn, nối WiFi, tìm inverter, ghép <b>pin JK BMS</b> và vào app — 5 bước có hình.</p>
-            <div class="hchips"><span>5 bước</span><span>Có hình</span><span>Chỉ cần điện thoại</span></div>
-            <span class="pbtn">Xem hướng dẫn <span class="ar">→</span></span>
-          </div>
-        </a>
         <a class="pcard hcard" href="/huongdan/jkbms-c3-act/" data-cat="pin">
-          <div class="pimg"><span class="hbadge">Có bán sẵn</span><img src="/sanpham/img/jkbms-c3-hero.webp" alt="Tự làm thiết bị giám sát & cài đặt pin JK BMS qua WiFi" loading="lazy"></div>
+          <div class="pimg"><img src="/sanpham/img/jkbms-c3-hero.webp" alt="Tự làm thiết bị giám sát & cài đặt pin JK BMS qua WiFi" loading="lazy"></div>
           <div class="pb">
             <span class="part">Pin lưu trữ · JK BMS</span>
             <h3>Tự làm thiết bị giám sát & cài đặt pin JK BMS qua WiFi</h3>
@@ -162,6 +163,33 @@
       <p class="hempty" hidden>Không tìm thấy thiết bị phù hợp. Thử từ khoá khác hoặc <a href="https://zalo.me/0349897777" target="_blank" rel="noopener">hỏi qua Zalo</a>.</p>
     </section>
 
+    <section class="sec" id="ketnoi">
+      <div class="shead"><h2>Hướng dẫn kết nối thiết bị</h2><a class="more" href="/sanpham/">Xem sản phẩm →</a></div>
+      <p class="sdesc hsd">Dành cho thiết bị <b>SOLAR CLOUD mua sẵn</b>: cắm nguồn, nối WiFi, vào app — từng bước có hình, chỉ cần điện thoại.</p>
+      <div class="pgrid hgrid">
+        <a class="pcard hcard" href="/sanpham/gateway/#caidat" data-cat="buy">
+          <div class="pimg" style="overflow:hidden"><span class="hbadge">Có bán sẵn</span><img src="/huongdan/img/gw-box-photo.webp" width="1400" height="1052" style="inset:0;width:100%;height:100%;object-fit:cover" alt="Hướng dẫn cài đặt hộp Gateway mua sẵn" loading="lazy"></div>
+          <div class="pb">
+            <span class="part">Gateway · 2 inverter + pin</span>
+            <h3>Hướng dẫn cài đặt Gateway</h3>
+            <p>Cắm nguồn, nối WiFi, tìm inverter, ghép <b>pin JK BMS</b> và vào app — 5 bước có hình.</p>
+            <div class="hchips"><span>5 bước</span><span>Có hình</span><span>Chỉ cần điện thoại</span></div>
+            <span class="pbtn">Xem hướng dẫn <span class="ar">→</span></span>
+          </div>
+        </a>
+        <a class="pcard hcard" href="/sanpham/jkbms-c3/#caidat" data-cat="buy">
+          <div class="pimg" style="overflow:hidden"><span class="hbadge">Có bán sẵn</span><img src="/sanpham/img/jkbms-c3-box.webp" width="1400" height="1188" style="inset:0;width:100%;height:100%;object-fit:cover" alt="Hướng dẫn cài đặt bộ giám sát JK BMS mua sẵn" loading="lazy"></div>
+          <div class="pb">
+            <span class="part">Pin lưu trữ · JK BMS</span>
+            <h3>Hướng dẫn cài đặt bộ giám sát JK BMS</h3>
+            <p>Cắm nguồn gần tủ pin, nối WiFi, nối pin và vào app — xem và <b>cài đặt BMS từ xa</b>.</p>
+            <div class="hchips"><span>5 bước</span><span>Có hình</span><span>Chỉ cần điện thoại</span></div>
+            <span class="pbtn">Xem hướng dẫn <span class="ar">→</span></span>
+          </div>
+        </a>
+      </div>
+    </section>
+
     <section class="guide hbuy">
       <div class="gl">
         <div class="gi"><div class="ib"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div><h2>Không muốn tự lắp?</h2></div>
@@ -193,8 +221,9 @@
     function norm(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d');}
     cards.forEach(function(c){c._t=norm(c.textContent);});
     function apply(){var t=norm(q.value).trim(), n=0;
-      cards.forEach(function(c){var ok=(f==='all'||c.dataset.cat===f)&&(!t||t.split(/\s+/).every(function(w){return c._t.indexOf(w)>=0;}));
-        c.hidden=!ok; if(ok)n++;});
+      cards.forEach(function(c){var ok=(f==='all'||c.dataset.cat===f||c.dataset.cat==='buy')&&(!t||t.split(/\s+/).every(function(w){return c._t.indexOf(w)>=0;}));
+        c.hidden=!ok; if(ok&&c.dataset.cat!=='buy')n++;});
+      var kn=document.getElementById('ketnoi'); kn.hidden=![].some.call(kn.querySelectorAll('.hcard'),function(c){return !c.hidden;});
       empty.hidden=n>0;}
     chips.forEach(function(b){b.addEventListener('click',function(){chips.forEach(function(x){x.classList.toggle('on',x===b);});f=b.dataset.f;apply();});});
     q.addEventListener('input',apply);
