@@ -117,7 +117,7 @@
       <ul>
         <li><span class="ix mono">01</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Máy tính</b> (Windows/macOS) có <b>Chrome</b> hoặc <b>Edge</b> — chỉ dùng cho bước nạp firmware. <em>Không nạp được trên điện thoại, Safari, Firefox.</em></div></li>
         <li><span class="ix mono">02</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Cáp USB truyền dữ liệu</b> — không phải cáp chỉ để sạc.</div></li>
-        <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Mạch <b>Inverter Luxpower · S3 cảm ứng (ACT)</b> — dùng bo <b>ES3C28P (ESP32‑S3 2.8″ cảm ứng, ILI9341V + FT6336)</b>.</div></li>
+        <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Mạch <b>Inverter Luxpower · S3 cảm ứng</b> — dùng bo <b>ES3C28P (ESP32‑S3 2.8″ cảm ứng, ILI9341V + FT6336)</b>.</div></li>
         <li><span class="ix mono">04</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>WiFi nhà 2.4GHz</b> + mật khẩu. <em>ESP32 không bắt được WiFi 5GHz.</em></div></li>
         <li><span class="ix mono">05</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Dongle WiFi Luxpower</b> đã cắm vào inverter và cho vào <b>cùng WiFi nhà</b> với mạch (đây là nguồn dữ liệu của mạch).</div></li>
         <li><span class="ix mono">06</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Nguồn <b>5V USB</b> để cấp điện cho mạch khi cấu hình.</div></li>
@@ -322,7 +322,7 @@
         </div>
         <div class="figcap">Ứng dụng SOLAR CLOUD — nhập đúng 10 số ID (xem ở CÀI ĐẶT → ID thiết bị).</div>
       </div>
-      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Nếu số liệu hiện toàn số 0</span>Bản <b>ACT</b> cần được <b>kích hoạt</b> mới hiện đầy đủ số liệu (mạch vẫn lên mạng bình thường). Trên màn hình sẽ báo <b>“CHƯA — chờ VPS duyệt”</b>. Liên hệ nơi bán để kích hoạt (mua đứt hoặc theo thuê bao).</div></div>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Nếu số liệu hiện toàn số 0</span>Mạch cần được <b>kích hoạt</b> mới hiện đầy đủ số liệu (mạch vẫn lên mạng bình thường). Trên màn hình sẽ báo <b>“CHƯA — chờ VPS duyệt”</b>. Vào app, mở thiết bị và bấm <b>Kích hoạt</b>.</div></div>
     </div>
 
     <div class="done"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div><div class="bd"><span class="tt">Hoàn tất</span><p>Mạch tự gửi dữ liệu inverter lên SOLAR CLOUD mỗi giây. Muốn <b>đổi WiFi/dongle</b> sau này: vào <b>CÀI ĐẶT</b> trên màn hình → “Dò WiFi” hoặc “Quét dongle”, hoặc đổi WiFi từ xa trong app (tab Thông tin). Cần khởi động lại: <b>CÀI ĐẶT → “Khởi động lại”</b>.</p></div></div>
@@ -338,7 +338,7 @@
     <div class="intro">
       <p>Thêm thiết bị xong, mở app <b>SOLAR CLOUD</b> và chạm vào thẻ <b>Inverter Luxpower</b> ở màn hình Home. Thanh dưới cùng có 4 tab: <b>⚡ Tổng quan · 📊 Năng lượng · ℹ️ Thông tin · 🔀 Thiết bị</b> (tab cuối để chuyển nhanh sang máy khác).</p>
     </div>
-    <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Bản ACT</span>Sau khi cài đặt và <b>kết nối thành công vào app</b>, nhấn <b>Kích hoạt</b> để hiển thị các thông số.</div></div>
+    <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Kích hoạt</span>Sau khi cài đặt và <b>kết nối thành công vào app</b>, nhấn <b>Kích hoạt</b> để hiển thị các thông số.</div></div>
 
     <!-- A -->
     <div class="sec">
