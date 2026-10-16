@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Giám sát 2 inverter chạy song song và pin JK BMS từ xa qua WiFi — Deye, Luxpower, Solis, Growatt… tự lắp (ESP32-S3) | SOLAR CLOUD</title>
-<meta name="description" content="Tự làm bộ giám sát 2 inverter chạy song song (hoặc 1 máy) và pin JK BMS trên một app: xem cả 2 máy cùng lúc trên cùng một mạng WiFi nhà. Đọc được Deye, Luxpower, Senergy, Solis, Sofar, Growatt, SolaX. Không đấu dây: inverter qua dongle WiFi, BMS qua Bluetooth.">
+<title>Giám sát 2 inverter chạy song song và 2 pin JK BMS từ xa qua WiFi — Deye, Luxpower, Solis, Growatt… tự lắp (ESP32-S3) | SOLAR CLOUD</title>
+<meta name="description" content="Tự làm bộ giám sát 2 inverter chạy song song (hoặc 1 máy) và 2 pin JK BMS trên một app: xem cả 2 máy cùng lúc trên cùng một mạng WiFi nhà. Đọc được Deye, Luxpower, Senergy, Solis, Sofar, Growatt, SolaX. Không đấu dây: inverter qua dongle WiFi, BMS qua Bluetooth.">
 <meta name="theme-color" content="#0E775E">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -121,8 +121,8 @@
   <div class="wrap">
     <!-- GIỚI THIỆU -->
     <div class="hero" style="padding-top:clamp(26px,4.5vw,40px)">
-      <h1>Hướng dẫn tự làm thiết bị<br>giám sát 2 inverter song song &amp; pin JK BMS <span class="amp">từ xa</span></h1>
-      <p class="lede">Nhà bạn có <b>2 inverter chạy song song</b>? Một mạch nhỏ xem <b>cả 2 máy cùng lúc</b> trên <b>cùng một mạng WiFi nhà</b>, kèm <b>pin JK BMS</b>, gom hết về <b>một app</b>: xem từng máy và cả nhà, ở đâu cũng được. Nhà chỉ có <b>1 inverter</b> cũng dùng được. <b>Không cần đấu dây.</b></p>
+      <h1>Hướng dẫn tự làm thiết bị<br>giám sát 2 inverter song song &amp; 2 pin JK BMS <span class="amp">từ xa</span></h1>
+      <p class="lede">Nhà bạn có <b>2 inverter chạy song song</b>? Một mạch nhỏ xem <b>cả 2 máy cùng lúc</b> trên <b>cùng một mạng WiFi nhà</b>, kèm <b>2 pin JK BMS</b>, gom hết về <b>một app</b>: xem từng máy và cả nhà, ở đâu cũng được. Nhà chỉ có <b>1 inverter</b> cũng dùng được. <b>Không cần đấu dây.</b></p>
     </div>
 
     <div class="intro">
@@ -132,7 +132,7 @@
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>2 máy song song, xem cùng lúc</b>: 2 inverter cùng hãng hoặc khác hãng, chung một mạng WiFi nhà (chỉ 1 máy cũng được). Đọc được <b>Deye, Luxpower, Senergy, Solis, Sofar, Growatt, SolaX</b>.</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Tổng cả nhà</b>: điện mặt trời, pin, lưới, tải của 2 máy cộng lại, cập nhật từng giây.</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Chi tiết từng máy</b>: Máy 1, Máy 2 — PV1/PV2, pin, tải, lưới, số điện hôm nay, nhiệt độ.</li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Pin JK BMS</b>: % pin, điện áp, dòng sạc/xả, <b>điện áp từng cell</b>, cân bằng, nhiệt độ, số chu kỳ.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>2 pin JK BMS</b> (Pin 1, Pin 2) xem riêng từng pin: % pin, điện áp, dòng sạc/xả, <b>điện áp từng cell</b>, nhiệt độ, số chu kỳ. <b>Chỉ giám sát</b> pin (không chỉnh cài đặt BMS) — muốn cài đặt BMS từ xa dùng <a href="/sanpham/jkbms-c3/">bộ giám sát JK BMS</a> riêng.</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Không đấu dây</b>: inverter qua dongle WiFi, pin qua Bluetooth. Chỉ cần cấp nguồn 5V cho mạch.</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>2 bản, cùng 1 firmware</b>: bo ESP32-S3 <b>không màn</b>, hoặc bo <b>màn cảm ứng 2.8″</b> (ES3C28P) xem số liệu và cài đặt ngay tại chỗ.</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Biểu đồ, thống kê ngày · tháng · năm; đổi WiFi và cập nhật firmware <b>từ xa</b>.</li>
@@ -140,13 +140,13 @@
     </div>
 
     <div class="fig" style="margin-top:26px">
-      <div class="plate" style="padding:10px"><a href="/huongdan/img/gw-sodo.webp" target="_blank" rel="noopener" style="display:block;width:100%"><img src="/huongdan/img/gw-sodo.webp" width="1600" height="1000" style="display:block;width:100%;height:auto;border-radius:var(--r-sm)" alt="Sơ đồ Gateway: 2 inverter Deye chạy song song nối qua dongle WiFi và pack pin JK BMS nối qua Bluetooth vào hộp Gateway; Gateway gửi lên máy chủ SOLAR CLOUD; xem trên máy tính, điện thoại Android và iPhone" loading="lazy"></a></div>
-      <div class="figcap">Gateway đọc cả 2 inverter cùng lúc qua dongle WiFi (2 dongle chung một WiFi nhà) và đọc pin qua Bluetooth, rồi gửi lên SOLAR CLOUD — xem trên máy tính, Android, iPhone. Ví dụ 2 máy Deye; hãng khác cũng dùng được.</div>
+      <div class="plate" style="padding:10px"><a href="/huongdan/img/gw-sodo-2pin.webp" target="_blank" rel="noopener" style="display:block;width:100%"><img src="/huongdan/img/gw-sodo-2pin.webp" width="1600" height="1000" style="display:block;width:100%;height:auto;border-radius:var(--r-sm)" alt="Sơ đồ Gateway: 2 inverter Deye chạy song song nối qua dongle WiFi và pack pin JK BMS nối qua Bluetooth vào hộp Gateway; Gateway gửi lên máy chủ SOLAR CLOUD; xem trên máy tính, điện thoại Android và iPhone" loading="lazy"></a></div>
+      <div class="figcap">Gateway đọc cả 2 inverter cùng lúc qua dongle WiFi (2 dongle chung một WiFi nhà) và đọc 2 pin JK BMS qua Bluetooth, rồi gửi lên SOLAR CLOUD — xem trên máy tính, Android, iPhone. Ví dụ 2 máy Deye; hãng khác cũng dùng được.</div>
     </div>
 
     <div class="compat" id="tuongthich">
       <h3>Dùng được với inverter nào?</h3>
-      <p>Inverter <b>hybrid</b> các hãng dưới đây, mỗi máy có <b>dongle WiFi</b>, cộng một pin dùng <b>JK BMS có Bluetooth</b>. Chạy được <b>2 máy song song cùng lúc</b> (cùng hãng hoặc khác hãng), hoặc chỉ <b>1 máy</b>.</p>
+      <p>Inverter <b>hybrid</b> các hãng dưới đây, mỗi máy có <b>dongle WiFi</b>, cộng <b>1–2 pin JK BMS có Bluetooth</b>. Chạy được <b>2 máy song song cùng lúc</b> (cùng hãng hoặc khác hãng), hoặc chỉ <b>1 máy</b>.</p>
       <div class="cgrp"><span class="cg">Số máy</span><div class="chips">
         <span class="chip">1 máy</span><span class="chip">2 máy song song cùng hãng</span><span class="chip">2 máy khác hãng</span>
       </div></div>
@@ -172,7 +172,7 @@
         <span class="chip">X1-Hybrid G3 / G4</span><span class="chip">X3-Hybrid G3 / G4</span><span class="chip">X1 / X3-IES</span>
       </div></div>
       <div class="cgrp"><span class="cg">Pin</span><div class="chips">
-        <span class="chip">JK BMS có Bluetooth</span>
+        <span class="chip">1–2 pin JK BMS có Bluetooth</span><span class="chip">chỉ giám sát pin</span>
       </div></div>
       <p class="cnote">Mỗi inverter cần <b>dongle WiFi của hãng</b> đã cắm sẵn và đã vào <b>cùng một WiFi nhà</b> (thường đã có khi lắp hệ để xem app hãng). 2 máy song song thì mỗi máy một dongle.</p>
     </div>
@@ -196,7 +196,7 @@
         <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Một trong hai bo (cùng 1 firmware): <b>ESP32-S3 N16R8 không màn</b> (module ESP32-S3-WROOM-1, 16MB flash, 8MB PSRAM), hoặc bo <b>ES3C28P màn cảm ứng 2.8″</b> (ESP32-S3 N16R8 có sẵn màn). <em>Bo S3 loại khác (N8, N4R2…) không chạy được.</em></div></li>
         <li><span class="ix mono">04</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>WiFi nhà 2.4GHz</b> + mật khẩu. <em>ESP32 không bắt được WiFi 5GHz.</em></div></li>
         <li><span class="ix mono">05</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Dongle WiFi</b> của <b>mỗi inverter</b> (2 máy là 2 dongle) đã cắm vào máy và <b>đã vào cùng WiFi nhà</b>.</div></li>
-        <li><span class="ix mono">06</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>JK BMS có Bluetooth</b>. Đặt mạch <b>gần tủ pin</b> (trong tầm Bluetooth, vài mét) và cấp nguồn <b>5V USB</b> lâu dài cho mạch.</div></li>
+        <li><span class="ix mono">06</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>1 hoặc 2 pin JK BMS có Bluetooth</b>. Đặt mạch <b>gần tủ pin</b> (trong tầm Bluetooth, vài mét) và cấp nguồn <b>5V USB</b> lâu dài cho mạch.</div></li>
       </ul>
     </div>
 
@@ -250,7 +250,7 @@
       <div class="ksteps">
         <a class="kstep" href="/sanpham/gateway/#b2"><b>Nối WiFi nhà</b><span>WiFi GATEWAY-S3… → 192.168.4.1 → ghi Device ID</span></a>
         <a class="kstep" href="/sanpham/gateway/#b3"><b>Tìm inverter</b><span>Quét tự động → kiểm hãng → Lưu</span></a>
-        <a class="kstep" href="/sanpham/gateway/#b4"><b>Ghép pin JK BMS</b><span>tắt app JK → Dò lại → chọn pin</span></a>
+        <a class="kstep" href="/sanpham/gateway/#b4"><b>Ghép 2 pin JK BMS</b><span>tự nhận · hoặc Dò Pin 1 / Pin 2 → Chọn làm Pin N</span></a>
         <a class="kstep" href="/sanpham/gateway/#b5"><b>Thêm vào app</b><span>solarcloud.io.vn → Thêm thiết bị → nhập ID</span></a>
       </div>
       <a class="jump" href="/sanpham/gateway/#b2">Mở <b>Hướng dẫn cài đặt Gateway</b> có hình, <b>bắt đầu từ bước 2 →</b></a>
