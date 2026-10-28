@@ -70,6 +70,21 @@
   .annoplate{padding:14px 10px}
 }
 /* trang sản phẩm Gateway */
+/* 2 phiên bản Gateway */
+.ver2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0 0}
+.vcard{border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);box-shadow:var(--sh-1);overflow:hidden;display:flex;flex-direction:column}
+.vimg{aspect-ratio:4/3;overflow:hidden;background:#EEF4F1}
+.vimg img{display:block;width:100%;height:100%;object-fit:cover}
+.vb{padding:16px 18px 18px}
+.vk{display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--phos-d);background:var(--phos-dim);border:1px solid var(--phos-line);border-radius:999px;padding:3px 10px}
+.vk.new{color:#fff;background:var(--phos);border-color:var(--phos)}
+.vb h3{margin:10px 0 6px;font-family:var(--fd);font-size:19px;font-weight:750;color:var(--paper)}
+.vb p{margin:0;font-size:15px;line-height:1.55;color:var(--paper)}
+.vb p.vn{margin-top:8px;font-size:14px;color:var(--muted)}
+#banrs485{scroll-margin-top:70px}
+.vb b{font-weight:650}
+@media (max-width:640px){.ver2{grid-template-columns:1fr}}
+
 /* hướng dẫn cài đặt (phần dưới trang sản phẩm) */
 html{scroll-behavior:smooth}
 .sec,.prep,.kband,.fig{scroll-margin-top:70px}
@@ -162,6 +177,32 @@ html{scroll-behavior:smooth}
       <div class="figcap">Gateway đặt trong nhà: đọc <b>2 inverter</b> qua dongle WiFi và <b>2 pin JK BMS</b> qua Bluetooth, gửi lên máy chủ SOLAR CLOUD. Bạn xem trên <b>máy tính, Android, iPhone</b> ở bất cứ đâu. Ví dụ 2 máy Deye — hãng khác cũng dùng được.</div>
     </div>
 
+    <div class="ghead" style="margin-top:56px"><h2>2 phiên bản</h2><span class="gcount">không dây · cắm dây RS485</span></div>
+    <div class="ver2">
+      <div class="vcard">
+        <div class="vimg"><img src="/huongdan/img/gw-box-photo.webp" width="1400" height="1052" alt="Gateway bản không dây: hộp trắng in chữ GATEWAY, cổng nguồn USB-C" loading="lazy"></div>
+        <div class="vb">
+          <span class="vk">Bản không dây</span>
+          <h3>Gateway WiFi + Bluetooth</h3>
+          <p>Đọc 2 inverter qua <b>dongle WiFi</b> đang cắm sẵn ở máy, đọc 2 pin JK BMS qua <b>Bluetooth</b>. Không đi dây.</p>
+        </div>
+      </div>
+      <div class="vcard">
+        <div class="vimg"><img src="/huongdan/img/gw485-box.webp" width="1400" height="1050" alt="Gateway bản cắm dây RS485: hộp trắng có 3 cổng RS485 đánh số 1, 2, 3" loading="lazy"></div>
+        <div class="vb">
+          <span class="vk new">Bản cắm dây RS485</span>
+          <h3>Gateway RS485 · 3 cổng</h3>
+          <p><b>Cổng 1, cổng 2</b> cắm dây vào cổng RS485 của 2 inverter (Deye, Luxpower: <b>dây mạng RJ45</b>), <b>cổng 3</b> cắm pin lưu trữ JK BMS. Cấp nguồn 5V qua cổng Type-C.</p>
+          <p class="vn">Vẫn đọc được qua <b>WiFi / Bluetooth</b> như bản không dây — đổi cách kết nối ngay trên app. Cùng giá.</p>
+        </div>
+      </div>
+    </div>
+    <div class="fig" id="banrs485" style="margin-top:22px">
+      <div class="figtag"><span class="n">BẢN RS485</span><span>Cắm dây vào cổng nào?</span><span class="rule"></span></div>
+      <div class="plate" style="padding:10px"><a href="/huongdan/img/gw485-cong.webp" target="_blank" rel="noopener" style="display:block;width:100%"><img src="/huongdan/img/gw485-cong.webp" width="1400" height="1000" style="display:block;width:100%;height:auto;border-radius:var(--r-sm)" alt="Gateway RS485: mặt trước có cổng RS485 1 và 2 cắm inverter, cổng RS485 3 cắm pin JK BMS; mặt bên có cổng Type-C cấp nguồn 5V" loading="lazy"></a></div>
+      <div class="figcap">Mặt trước: <b>RS485 1</b>, <b>RS485 2</b> cắm inverter (Deye, Luxpower dùng dây mạng RJ45) · <b>RS485 3</b> cắm pin JK BMS. Mặt bên: cổng <b>Type-C</b> cấp nguồn 5V (củ sạc điện thoại là được). Nút tròn trên nắp là nút <b>BOOT</b> — giữ 5 giây để cài lại WiFi.</div>
+    </div>
+
     <div class="intro">
       <p>Nhà có <b>2 inverter chạy song song</b> thì mỗi máy lại phải xem riêng trên <b>app của hãng</b>; muốn biết <b>cả nhà</b> đang phát bao nhiêu, dùng bao nhiêu thì phải tự cộng. Pin JK thì phải mở <b>app JK</b> và <b>đứng gần tủ pin</b> mới xem được.</p>
       <p>Gateway đọc <b>cả 2 inverter cùng lúc</b> qua <b>dongle WiFi</b> đang cắm sẵn ở mỗi máy (chung một WiFi nhà), đọc pin <b>qua Bluetooth</b> của JK BMS, rồi đưa tất cả lên app <b>SOLAR CLOUD</b>: tổng cả nhà, chi tiết từng máy và từng cell pin, có lịch sử và biểu đồ.</p>
@@ -210,6 +251,9 @@ html{scroll-behavior:smooth}
       <div class="cgrp"><span class="cg">SolaX</span><div class="chips">
         <span class="chip">X1-Hybrid G3 / G4</span><span class="chip">X3-Hybrid G3 / G4</span><span class="chip">X1 / X3-IES</span>
       </div></div>
+      <div class="cgrp"><span class="cg">Cách kết nối</span><div class="chips">
+        <span class="chip">Dongle WiFi</span><span class="chip">Bluetooth (pin JK)</span><span class="chip">Dây RS485 <small>(bản 3 cổng · Deye, Luxpower: RJ45)</small></span>
+      </div></div>
       <div class="cgrp"><span class="cg">Cần thêm</span><div class="chips">
         <span class="chip">Nguồn USB 5V (củ sạc điện thoại)</span><span class="chip">Cáp USB-C</span><span class="chip">WiFi nhà 2.4GHz</span><span class="chip">Dongle WiFi của inverter</span>
       </div></div>
@@ -230,6 +274,7 @@ html{scroll-behavior:smooth}
         <li><span class="ix mono">01</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Hộp Gateway</b> + <b>củ sạc 5V</b> (củ sạc điện thoại là được) + <b>cáp USB-C</b>.</div></li>
         <li><span class="ix mono">02</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>WiFi nhà 2.4GHz</b> + mật khẩu. <em>Gateway không bắt được WiFi 5GHz.</em></div></li>
         <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Dongle WiFi</b> của inverter đã cắm vào máy và <b>đã vào WiFi nhà</b> — mở app của hãng thấy số liệu là đã vào. 2 máy thì 2 dongle. <em>Dongle chưa vào WiFi: làm theo hướng dẫn đi kèm dongle hoặc của hãng inverter.</em></div></li>
+        <li><span class="ix mono">03b</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Bản cắm dây RS485:</b> dây nối cổng RS485 của inverter vào cổng 1 / 2 (Deye, Luxpower: <b>dây mạng RJ45</b>), dây cổng RS485 của JK BMS vào cổng 3. Bản này không cần dongle WiFi cho inverter cắm dây.</div></li>
         <li><span class="ix mono">04</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>1 hoặc 2 pin JK BMS có Bluetooth</b> — app JK trên điện thoại nối được pin qua Bluetooth là dùng được.</div></li>
         <li><span class="ix mono">05</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Điện thoại</b> (Android hoặc iPhone) để cài đặt.</div></li>
       </ul>
@@ -241,7 +286,7 @@ html{scroll-behavior:smooth}
       <div class="sechd"><div class="st">Tại nhà</div><h2>Cắm nguồn &amp; chọn chỗ đặt</h2></div>
       <ol class="steps">
         <li>Đặt hộp <b>gần tủ pin</b> (trong tầm Bluetooth, vài mét) và ở chỗ <b>có sóng WiFi nhà</b>. <div class="hint">Tránh đặt trong tủ sắt đóng kín — sóng WiFi và Bluetooth sẽ yếu.</div></li>
-        <li>Cắm cáp <b>USB-C</b> vào hộp, đầu kia vào <b>củ sạc 5V</b>. Hộp tự khởi động sau khoảng 10 giây.</li>
+        <li>Cắm cáp <b>USB-C</b> vào hộp, đầu kia vào <b>củ sạc 5V</b>. Hộp tự khởi động sau khoảng 10 giây.<div class="hint"><b>Bản RS485:</b> cổng Type-C cấp nguồn ở <b>mặt bên</b>; cắm dây inverter vào cổng 1, 2 và pin JK vào cổng 3 (xem <a href="#banrs485">ảnh cổng</a>).</div></li>
       </ol>
       <div class="fig">
         <div class="figtag"><span class="n">HÌNH 1</span><span>Hộp Gateway</span><span class="rule"></span></div>
@@ -253,7 +298,7 @@ html{scroll-behavior:smooth}
           </a>
           <ol class="legend">
             <li><span class="pin">1</span><div><b>Cổng USB-C</b>: cắm nguồn 5V.</div></li>
-            <li><span class="pin">2</span><div><b>Nút trên nắp hộp</b>: chỉ dùng khi muốn cài lại WiFi từ đầu (giữ khoảng 5 giây). Bình thường không cần bấm.</div></li>
+            <li><span class="pin">2</span><div><b>Nút BOOT trên nắp hộp</b>: chỉ dùng khi muốn cài lại WiFi từ đầu (giữ khoảng 5 giây). Bình thường không cần bấm.</div></li>
           </ol>
         </div>
       </div>
@@ -295,7 +340,7 @@ html{scroll-behavior:smooth}
       <div class="snum">3</div>
       <div class="sechd"><div class="st">Trang 192.168.4.1 · thẻ “Kết nối inverter”</div><h2>Tìm inverter</h2></div>
       <ol class="steps">
-        <li>Kiểm tra <b>dongle WiFi</b> của inverter đã vào <b>cùng WiFi nhà</b> (app hãng có số liệu là đã vào).</li>
+        <li>Kiểm tra <b>dongle WiFi</b> của inverter đã vào <b>cùng WiFi nhà</b> (app hãng có số liệu là đã vào).<div class="hint"><b>Bản RS485 cắm dây:</b> inverter / pin cắm dây thì không cần dongle — chọn cách kết nối <b>RS485</b> cho máy đó; đổi cách kết nối được ngay trên app.</div></li>
         <li>Bấm <b>🔍 Quét tự động</b> và chờ thanh chạy hết. Gateway tự tìm inverter trong mạng nhà và <b>tự điền</b> Máy 1, Máy 2.</li>
         <li>Kiểm tra <b>hãng</b> từng máy: dấu <b>✓</b> là đã nhận đúng hãng. Ô hãng có <b>viền cam</b> là chưa nhận ra — chọn đúng hãng.<div class="hint">Nhà chỉ có <b>1 inverter</b>: chỉ cần Máy 1, để trống Máy 2.</div></li>
         <li>Bấm <b>Lưu &amp; khởi động lại</b>. Khoảng 15 giây sau, đầu thẻ hiện từng máy <b>Online</b>.</li>
