@@ -145,6 +145,11 @@ html{scroll-behavior:smooth}
 .bh{display:flex;flex-wrap:wrap;gap:6px 18px;margin:12px 0 0;font-size:14.5px;font-weight:650;color:var(--paper)}
 .bh span{display:inline-flex;align-items:center;gap:6px}
 .bh svg{width:17px;height:17px;flex:0 0 auto;color:var(--phos-d)}
+.faq>div p{margin:0 0 8px}
+.faq .ft{display:block;margin:12px 0 4px;font-weight:700}
+.faq ol{margin:0;padding-left:22px}
+.faq ol li{margin:4px 0}
+#doiip{scroll-margin-top:70px}
 </style>
 </head>
 <body>
@@ -466,6 +471,26 @@ html{scroll-behavior:smooth}
       <details class="faq"><summary>Quét không thấy inverter</summary><div>Mở app của hãng inverter: app <b>không có số liệu</b> nghĩa là dongle chưa vào WiFi nhà — làm lại phần cài WiFi cho dongle theo hướng dẫn của hãng. Dongle và Gateway phải <b>cùng một WiFi nhà</b>. Thử rút cắm lại dongle, chờ 2 phút rồi quét lại.</div></details>
       <details class="faq"><summary>Không thấy pin JK</summary><div><b>Tắt app JK</b> trên điện thoại (và các thiết bị khác đang nối Bluetooth vào pin), đưa hộp <b>lại gần tủ pin</b>, rồi bấm <b>Dò Pin 1</b> / <b>Dò Pin 2</b>.</div></details>
       <details class="faq"><summary>App báo mất kết nối</summary><div>Kiểm tra mạng nhà và nguồn của hộp. Có mạng lại là Gateway tự nối lại. Đổi modem / mật khẩu WiFi thì xem mục <a href="#doiwifi">Đổi WiFi</a>.</div></details>
+      <details class="faq" id="doiip"><summary>Inverter báo mất kết nối, dongle vẫn online</summary><div>
+        <p><b>Áp dụng:</b> Gateway đọc inverter qua <b>dongle Luxpower</b> hoặc <b>Modbus TCP</b>. Logger Solarman không cần làm mục này vì Gateway tự tìm lại theo serial.</p>
+        <p><b>Hiện tượng:</b> inverter đang đọc tốt bỗng báo mất kết nối và không tự có lại, dù dongle vẫn online.</p>
+        <p><b>Nguyên nhân:</b> router đã cấp IP mới cho dongle, còn Gateway vẫn gọi IP cũ đã lưu.</p>
+        <span class="ft">Sửa nhanh trên app</span>
+        <ol>
+          <li>Mở Gateway, vào thẻ <b>Cài đặt inverter</b>. Ghi lại IP đang có ở ô <b>IP (bắt buộc)</b> của máy bị mất kết nối.</li>
+          <li>Bấm <b>Quét tự động</b> (có thể mất tới 5 phút). Quét xong, app liệt kê dongle kèm IP và tự điền vào ô. IP khác IP vừa ghi thì đúng là lỗi này.</li>
+          <li>Kiểm tra lại hãng và IP từng máy. App báo chưa rõ hãng thì chọn đúng hãng. Ô IP chưa được điền thì nhập tay IP mới.</li>
+          <li>Bấm <b>Lưu &amp; khởi động lại máy</b>, chờ khoảng 15 giây rồi xem inverter đã báo kết nối chưa.</li>
+        </ol>
+        <span class="ft">Sửa lâu dài: gán IP cố định để không bị lại</span>
+        <ol>
+          <li>Vào trang quản trị router, mở danh sách thiết bị đang nối.</li>
+          <li>Tìm thiết bị có đúng IP của dongle và lấy địa chỉ MAC.</li>
+          <li>Vào mục gán IP cố định. Tên mục tuỳ router, thường là DHCP Reservation, Address Reservation, Static Lease hoặc IP-MAC Binding.</li>
+          <li>Gán IP đó cho MAC của dongle rồi lưu.</li>
+          <li>Tắt rồi bật lại dongle, sau đó xem trên app đã có số liệu chưa. IP đã gán phải trùng với IP đã lưu trong Gateway.</li>
+        </ol>
+      </div></details>
       </div>
       <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Cần hỗ trợ?</span>Nhắn Zalo <a href="https://zalo.me/0349897777" target="_blank" rel="noopener"><b>0349 897 777</b></a> kèm <b>Device ID 10 số</b> để được hỗ trợ nhanh.</div></div>
     </div>
