@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Màn hình JK BMS — màn màu 2,8 inch xem pin JK ngay tại tủ, xem từ xa qua WiFi | SOLAR CLOUD</title>
+<meta name="description" content="Màn hình JK BMS: màn màu 2,8 inch cho pin JK BMS dòng PB, một dây vào cổng 6 chân của BMS vừa lấy số liệu vừa lấy nguồn. 4 kiểu giao diện, trang từng cell, bật/tắt sạc xả cân bằng ngay trên màn, xem và điều khiển từ xa trên app SOLAR CLOUD.">
+<meta name="theme-color" content="#0E775E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/huongdan/guide.css?v=20261004j">
+<style>
+/* bài JK: phần cài đặt từ xa — chú thích ảnh */
+.feat .new{display:inline-block;color:#fff;background:var(--phos);font-size:11px;font-weight:700;letter-spacing:.05em;line-height:1;padding:4px 7px 3px;border-radius:5px;margin-left:4px;vertical-align:2px}
+.feat a{color:var(--phos);font-weight:600}
+.jump{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;margin:26px 0 0;padding:13px 18px;border:1px solid var(--phos-line);border-radius:var(--r);background:var(--phos-dim);color:var(--paper);text-decoration:none;font-size:15px;line-height:1.45;transition:background .15s}
+.jump b{color:var(--phos-d);font-weight:700}
+.jump:hover{background:rgba(14,119,94,.15)}
+.annoplate{align-items:flex-start}
+.annoplate.stack{flex-direction:column;align-items:center}
+.anno{position:relative;display:block;width:100%;line-height:0;cursor:zoom-in}
+.anno img{display:block;width:100%;height:auto;border-radius:var(--r-sm);border:1px solid var(--line)}
+.annoplate.side .anno.tall{flex:0 1 320px}
+.annoplate.side .anno.mid{flex:0 1 340px}
+@media (min-width:760px){.annoplate.side .anno.tall{position:sticky;top:16px}}
+.annoplate.side .legend{flex:1 1 300px}
+.annoplate.stack .legend{width:100%;max-width:560px}
+.pin{position:absolute;transform:translate(-50%,-50%);width:24px;height:24px;border-radius:50%;background:var(--phos);color:#fff;font:700 12px/24px var(--fd);text-align:center;box-shadow:0 0 0 2px #fff,0 2px 6px rgba(0,0,0,.4);pointer-events:none;font-variant-numeric:tabular-nums}
+.brk{position:absolute;width:8px;border:2px solid #fff;border-right:0;border-radius:6px 0 0 6px;opacity:.9;pointer-events:none}
+.legend{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-size:15px;line-height:1.55;color:var(--paper)}
+.legend li{display:flex;gap:11px;align-items:flex-start}
+.legend li>div{min-width:0}
+.legend .pin{position:static;transform:none;flex:0 0 auto;box-shadow:none}
+.legend .pin-in{display:inline-block;width:20px;height:20px;font-size:11px;line-height:20px;vertical-align:1px;margin:0 2px}
+.legend b{font-weight:650}
+.legend.groups{gap:20px}
+.legend dl{margin:8px 0 0;padding:0}
+.legend dt{font-weight:650;font-size:14px;color:var(--phos-d);margin-top:8px}
+.legend dt:first-child{margin-top:0}
+.legend dd{margin:2px 0 0;font-size:14.5px;line-height:1.5}
+.legend .rule-line{margin:10px 0 0;font-size:13.5px;color:var(--muted);background:var(--ink-3);border:1px solid var(--line);border-radius:8px;padding:6px 10px;line-height:1.5}
+.legend .rule-line b{color:var(--paper)}
+.rtab{border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);overflow:hidden;box-shadow:var(--sh-1)}
+.rrow{display:grid;grid-template-columns:minmax(150px,230px) 1fr;gap:14px;padding:11px 16px;border-bottom:1px solid var(--line);font-size:14.5px;line-height:1.5}
+.rrow:last-child{border-bottom:0}
+.rrow .rk{font-weight:650;color:var(--amber-d)}
+.rrow b{font-weight:650}
+.rtab.set .rk{color:var(--phos-d)}
+.figtag .n{white-space:nowrap}
+.compat{margin:26px 0 0;border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);padding:18px 20px 20px;box-shadow:var(--sh-1)}
+.compat h3{margin:0 0 6px;font-family:var(--fd);font-size:17px;font-weight:750;color:var(--paper)}
+.compat>p{margin:0;font-size:15px;line-height:1.55;color:var(--paper)}
+.compat b{font-weight:650}
+.cgrp{margin:16px 0 0}
+.cg{display:block;font-size:12.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:14px;font-weight:600;color:var(--phos-d);background:var(--phos-dim);border:1px solid var(--phos-line);border-radius:999px;padding:4px 11px;line-height:1.3;white-space:nowrap}
+.chip small{font-weight:500;color:var(--muted);font-size:12.5px}
+.compat .cnote{margin:16px 0 0;font-size:13.5px;line-height:1.5;color:var(--muted)}
+.heroshot{margin:22px auto 0;max-width:600px}
+.heroshot img{display:block;width:100%;height:auto}
+.anno img[src*="-box-"]{border:0;border-radius:0}
+@media (max-width:560px){
+  .rrow{grid-template-columns:1fr;gap:3px}
+  .pin{width:19px;height:19px;font-size:10px;line-height:19px;box-shadow:0 0 0 1.5px #fff,0 1px 4px rgba(0,0,0,.4)}
+  .legend .pin{width:22px;height:22px;font-size:11px;line-height:22px}
+  .brk{width:5px}
+  .annoplate{padding:14px 10px}
+}
+/* trang sản phẩm Gateway */
+/* 2 phiên bản Gateway */
+.ver2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0 0}
+.vcard{border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);box-shadow:var(--sh-1);overflow:hidden;display:flex;flex-direction:column}
+.vimg{aspect-ratio:4/3;overflow:hidden;background:#EEF4F1}
+.vimg img{display:block;width:100%;height:100%;object-fit:cover}
+.vb{padding:16px 18px 18px}
+.vk{display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--phos-d);background:var(--phos-dim);border:1px solid var(--phos-line);border-radius:999px;padding:3px 10px}
+.vk.new{color:#fff;background:var(--phos);border-color:var(--phos)}
+.vb h3{margin:10px 0 6px;font-family:var(--fd);font-size:19px;font-weight:750;color:var(--paper)}
+.vb p{margin:0;font-size:15px;line-height:1.55;color:var(--paper)}
+.vb p.vn{margin-top:8px;font-size:14px;color:var(--muted)}
+#banrs485{scroll-margin-top:70px}
+.vb b{font-weight:650}
+@media (max-width:640px){.ver2{grid-template-columns:1fr}}
+
+/* hướng dẫn cài đặt (phần dưới trang sản phẩm) */
+html{scroll-behavior:smooth}
+.sec,.prep,.kband,.fig{scroll-margin-top:70px}
+.kband{margin:84px 0 0;padding:26px 24px;border-radius:var(--r);background:linear-gradient(135deg,#0E775E,#12936F);color:#fff;box-shadow:var(--sh-2)}
+.kband .kk{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.kband h2{margin:4px 0 6px;font-family:var(--fd);font-size:clamp(28px,4.6vw,40px);font-weight:800;letter-spacing:-.02em;color:#fff}
+.kband p{margin:0;font-size:16px;line-height:1.5;opacity:.95}
+.kband p b{color:#fff}
+.ktoc{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0}
+.ktoc a{font-size:14px;font-weight:650;color:#fff;text-decoration:none;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 12px;transition:background .15s}
+.ktoc a:hover{background:rgba(255,255,255,.26)}
+.faqs{display:grid;gap:10px;margin:22px 0 0}
+.faq{border:1px solid var(--line);border-radius:12px;background:var(--ink-2);box-shadow:var(--sh-1);overflow:hidden}
+.faq summary{cursor:pointer;list-style:none;padding:14px 44px 14px 16px;font-weight:650;font-size:15.5px;color:var(--paper);position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:22px;font-weight:600;color:var(--phos)}
+.faq[open] summary::after{content:"–"}
+.faq>div{padding:0 16px 15px;font-size:15px;line-height:1.6;color:var(--paper)}
+.faq a,.sec .note a{color:var(--phos-d);font-weight:650}
+
+
+/* ═════════ NÚT ĐẶT HÀNG QUA ZALO + GIÁ ═════════ */
+.zbtn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:11px 18px;border-radius:12px;background:#0068FF;color:#fff!important;
+  font-weight:700;font-size:15px;line-height:1.2;text-decoration:none;box-shadow:0 6px 18px rgba(0,104,255,.28);transition:background .15s,box-shadow .15s,transform .15s;position:relative;overflow:hidden}
+.zbtn:hover{background:#0057D6;box-shadow:0 8px 24px rgba(0,104,255,.38);transform:translateY(-1px)}
+.zbtn .zi{width:24px;height:24px;flex:0 0 auto;border-radius:6px}
+.zbtn::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;transform:skewX(-20deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transition:left .6s}
+.zbtn:hover::after{left:120%}
+.zphone{display:block;margin-top:6px;font-size:13px;color:var(--muted)}
+.coin{width:1em;height:1em}
+.order{margin:16px 0 0}
+.price{display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin:22px 0 0;padding:12px 20px;border-radius:14px;background:var(--ink-2);border:1px solid var(--phos-line);box-shadow:var(--sh-1)}
+.price .pl{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.03em}
+.price .pv{font-size:30px;font-weight:800;color:var(--phos-d);line-height:1}
+.price .pn{font-size:14px;color:var(--muted)}
+.gia::before{content:"50" "0"}
+.coin{display:inline-block;width:.95em;height:.95em;margin-left:.18em;vertical-align:-.12em}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0}
+.badge{display:inline-flex;align-items:center;gap:7px;font-size:14.5px;font-weight:650;color:var(--phos-d);background:var(--phos-dim);border:1px solid var(--phos-line);border-radius:999px;padding:7px 14px}
+.badge svg{width:17px;height:17px;color:var(--good)}
+.prodshot{margin:26px 0 0;border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,#fff,#F2F5F4);box-shadow:var(--sh-1);padding:22px 18px;text-align:center}
+.prodshot img{display:block;width:100%;max-width:620px;height:auto;margin:0 auto}
+.cmp{border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);overflow:hidden;box-shadow:var(--sh-1);margin:20px 0 0}
+.cmp .cr{display:grid;grid-template-columns:1.25fr 1fr 1fr;border-bottom:1px solid var(--line)}
+.cmp .cr:last-child{border-bottom:0}
+.cmp .cr>div{padding:12px 16px;font-size:15px;line-height:1.45}
+.cmp .ch>div{font-weight:700;font-size:13.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.02em;background:var(--ink-3)}
+.cmp .cr.ch>div.hl{color:#fff;background:var(--phos)}
+.cmp .cr>div:first-child{font-weight:600;color:var(--paper)}
+.cmp .cr>div.hl{background:var(--phos-dim);font-weight:650;color:var(--phos-d)}
+.cmp .ok{color:var(--good);font-weight:700}
+.steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 0}
+.stp{border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);box-shadow:var(--sh-1);padding:18px}
+.stp .n{font-family:var(--fm);font-size:12px;font-weight:700;color:var(--phos)}
+.stp h3{margin:6px 0 6px;font-size:17px;font-weight:750;color:var(--paper)}
+.stp p{margin:0;font-size:14.5px;line-height:1.55;color:var(--paper)}
+@media (max-width:720px){.steps3{grid-template-columns:1fr}.cmp .cr{grid-template-columns:1.1fr 1fr 1fr}.cmp .cr>div{padding:10px 10px;font-size:13.5px}}
+.bh{display:flex;flex-wrap:wrap;gap:6px 18px;margin:12px 0 0;font-size:14.5px;font-weight:650;color:var(--paper)}
+.bh span{display:inline-flex;align-items:center;gap:6px}
+.bh svg{width:17px;height:17px;flex:0 0 auto;color:var(--phos-d)}
+/* Màn hình JK BMS: ảnh 2 mặt, 4 kiểu giao diện, trang Cell, ảnh app JK kiểu điện thoại, phím */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:26px 0 0}
+.dcard{margin:0;border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);box-shadow:var(--sh-1);overflow:hidden}
+.dcard a{display:block;line-height:0}
+.dcard img{display:block;width:100%;height:auto}
+.dcard figcaption{padding:10px 14px;font-size:14px;line-height:1.4;color:var(--paper)}
+.dcard figcaption b{font-weight:700}
+@media (max-width:560px){.duo{grid-template-columns:1fr;gap:12px}}
+.faces{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:20px 0 0}
+.face{margin:0;border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);box-shadow:var(--sh-1);overflow:hidden}
+.face a{display:block;line-height:0;background:#000}
+.face img{display:block;width:100%;height:auto}
+.face figcaption{padding:10px 14px 12px;font-size:14.5px;line-height:1.45;color:var(--paper)}
+.face figcaption b{font-weight:700}
+.face .fn{display:inline-block;font-family:var(--fm);font-size:12px;font-weight:700;line-height:1.5;color:#fff;background:var(--phos);border-radius:5px;padding:0 6px;margin-right:7px;vertical-align:1px}
+@media (max-width:560px){.faces{gap:10px}.face figcaption{padding:8px 10px 10px;font-size:13px;line-height:1.4}}
+.cellplate{display:flex;flex-wrap:wrap;gap:18px 26px;align-items:center}
+.cellplate .cimg{flex:1 1 300px;max-width:480px;display:block;line-height:0}
+.cellplate .cimg img{display:block;width:100%;height:auto;border-radius:var(--r-sm);background:#000}
+.cellplate .legend{flex:1 1 230px}
+.legend .dot{flex:0 0 auto;width:14px;height:14px;border-radius:50%;margin-top:5px}
+.phones{display:flex;flex-wrap:wrap;justify-content:center;gap:22px 28px;width:100%}
+.appshot{flex:0 1 270px;max-width:270px;margin:0 6px}
+.appshot .anno img{border:0;border-radius:22px;box-shadow:0 0 0 6px #1B1F24,0 8px 22px rgba(0,0,0,.22)}
+.appshot figcaption{margin-top:14px;text-align:center;font-size:13.5px;line-height:1.4;color:var(--muted)}
+.appshot figcaption b{color:var(--paper);font-weight:650}
+.annoplate.stack .phones + .legend{margin-top:20px}
+kbd.k{display:inline-block;min-width:1.7em;padding:0 6px;border:1px solid var(--line-2);border-bottom-width:2px;border-radius:6px;background:var(--ink-3);font:700 .84em/1.5 var(--fd);color:var(--paper);text-align:center;white-space:nowrap}
+.keys .rrow{grid-template-columns:minmax(120px,160px) 1fr}
+.keys .rk{color:var(--paper)!important;font-weight:600;white-space:nowrap}
+.secp{margin:16px 0 0;font-size:15.5px;line-height:1.6;color:var(--paper)}
+.secp b{font-weight:650}
+.subh{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:24px 0 2px;font-family:var(--fd);font-size:17px;font-weight:750;color:var(--paper)}
+.subh span{font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--phos);border-radius:999px;padding:3px 10px}
+.faq>div p{margin:0 0 8px}
+.faq>div p:last-child{margin:0}
+
+</style>
+</head>
+<body>
+<script src="/site-nav.js"></script>
+  <div class="topnav">
+    <a href="/sanpham">← Sản phẩm</a>
+    <a class="sp" href="#caidat">Hướng dẫn cài đặt ↓</a>
+  </div>
+
+  <div class="wrap">
+    <div class="hero" style="padding-top:clamp(26px,4.5vw,40px)">
+      <h1>Màn hình JK BMS<br><span class="amp">xem pin ngay tại tủ</span></h1>
+      <p class="lede">Màn màu <b>2,8 inch</b> cho pin dùng <b>JK BMS dòng PB</b>. Chỉ <b>một sợi dây</b> cắm vào cổng 6 chân zin của BMS là vừa có số liệu vừa có nguồn — <b>không cần sạc riêng</b>. Nhìn pin ngay tại tủ; nối WiFi nhà thì <b>xem và điều khiển từ xa</b> trên app SOLAR CLOUD.</p>
+      <div class="badges">
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Màn màu 2,8 inch</span>
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>1 dây: số liệu + nguồn</span>
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>4 kiểu giao diện</span>
+        <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Xem từ xa qua WiFi</span>
+      </div>
+      <div class="price"><span class="pl">Giá</span><span class="pv"><span class="gia"></span><svg class="coin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#F7931A"/><circle cx="12" cy="12" r="11" fill="none" stroke="#D97C0B" stroke-width=".8"/><g transform="rotate(14 12 12)" fill="#fff"><path fill-rule="evenodd" d="M8.4 6.3h5.1c2.2 0 3.3 1.2 3.3 2.8 0 1.2-.7 2-1.7 2.3 1.4.3 2.4 1.4 2.4 2.9 0 2.1-1.5 3.7-3.9 3.7H8.4zm2.3 1.8v3.1h2.4c1 0 1.5-.6 1.5-1.6s-.5-1.5-1.5-1.5zm0 4.7v3.4h2.7c1.2 0 1.8-.7 1.8-1.7s-.6-1.7-1.8-1.7z"/><rect x="9.9" y="4.4" width="1.4" height="2.2" rx=".4"/><rect x="12.3" y="4.4" width="1.4" height="2.2" rx=".4"/><rect x="9.9" y="17.4" width="1.4" height="2.2" rx=".4"/><rect x="12.3" y="17.4" width="1.4" height="2.2" rx=".4"/></g></svg></span><span class="pn">Giá sỉ: nhắn Zalo</span></div>
+      <div class="bh"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Bảo hành 12 tháng</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a4 4 0 1 1 0 8c-2.5 0-4-2-6-4s-3.5-4-6-4a4 4 0 1 0 0 8c2.5 0 4-2 6-4s3.5-4 6-4z"/></svg>Miễn phí phần mềm trọn đời</span></div>
+      <div class="order"><a class="zbtn" href="https://zalo.me/0349897777" target="_blank" rel="noopener"><svg class="zi" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#fff"/><path d="M12 4.2c-4.6 0-8.3 3.1-8.3 7 0 2.2 1.2 4.1 3.1 5.4l-.6 2.6c-.1.4.3.7.6.5l3-1.7c.7.1 1.4.2 2.2.2 4.6 0 8.3-3.1 8.3-7s-3.7-7-8.3-7z" fill="#0068FF"/><path d="M8.6 9h5.6l-5.3 5.4h5.5" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Đặt hàng qua Zalo</span></a><span class="zphone">Zalo / điện thoại: 0349 897 777</span></div>
+      <a class="jump" href="#caidat">Đã mua Màn hình JK BMS? <b>Xem hướng dẫn cài đặt ↓</b></a>
+    </div>
+
+    <div class="duo">
+      <figure class="dcard"><a href="/huongdan/img/lcdjk-mat-truoc.webp" target="_blank" rel="noopener"><img src="/huongdan/img/lcdjk-mat-truoc.webp" width="1200" height="809" alt="Màn hình JK BMS mặt trước: vỏ in 3D màu đen vân tam giác, màn 2,8 inch, 4 nút bấm dưới màn" loading="lazy"></a><figcaption><b>Mặt trước</b> · màn 2,8 inch + 4 nút bấm</figcaption></figure>
+      <figure class="dcard"><a href="/huongdan/img/lcdjk-mat-sau.webp" target="_blank" rel="noopener"><img src="/huongdan/img/lcdjk-mat-sau.webp" width="1200" height="809" alt="Màn hình JK BMS mặt sau: giắc 6 chân để cắm dây vào JK BMS" loading="lazy"></a><figcaption><b>Mặt sau</b> · giắc cắm dây BMS</figcaption></figure>
+    </div>
+    <div class="figcap" style="margin-top:10px">Vỏ in 3D màu đen vân tam giác, gọn trong lòng bàn tay.</div>
+
+    <div class="ghead" style="margin-top:46px"><h2>Màn hình JK BMS làm gì?</h2><span class="gcount">nhìn ảnh là hiểu</span></div>
+    <div class="fig" style="margin-top:18px">
+      <div class="plate" style="padding:10px"><a href="/huongdan/img/lcdjk-gioi-thieu.webp" target="_blank" rel="noopener" style="display:block;width:100%"><img src="/huongdan/img/lcdjk-gioi-thieu.webp" width="1600" height="993" style="display:block;width:100%;height:auto;border-radius:var(--r-sm)" alt="Màn hình JK BMS: ảnh mặt trước, mặt sau có giắc cắm BMS, trang chính và trang cell trên máy, cùng số liệu pin trên app SOLAR CLOUD" loading="lazy"></a></div>
+      <div class="figcap">Cắm vào JK BMS: màn hiện % pin, công suất, điện áp, dòng và <b>từng cell</b> ngay tại tủ pin. Có WiFi thì số liệu lên <b>SOLAR CLOUD</b> — xem trên điện thoại, máy tính ở bất cứ đâu. <span style="opacity:.75">(Số liệu trong ảnh là ví dụ)</span></div>
+    </div>
+
+    <div class="intro">
+      <p>Pin JK BMS muốn xem số thì phải <b>mở app JK</b>, nối Bluetooth và đứng gần tủ pin. Người nhà không quen app thì gần như không biết pin còn bao nhiêu.</p>
+      <p>Màn hình JK BMS gắn <b>ngay tại tủ pin</b>: nhìn là thấy pin còn bao nhiêu %, đang sạc hay xả, bao nhiêu W, cell nào cao nhất, thấp nhất. Bật/tắt <b>Sạc · Xả · Cân bằng</b> ngay trên màn. Nối WiFi thì xem và chỉnh <b>từ xa</b> trên app SOLAR CLOUD.</p>
+    </div>
+
+    <div class="ghead" style="margin-top:56px"><h2>4 kiểu giao diện</h2><span class="gcount">bấm 1 nút để đổi</span></div>
+    <div class="faces">
+      <figure class="face"><a href="/huongdan/img/lcdjk-gd-01.webp" target="_blank" rel="noopener"><img src="/huongdan/img/lcdjk-gd-01.webp" width="640" height="480" alt="Kiểu 01 Vòng SOC: vòng phần trăm pin, công suất, điện áp, dòng đang sạc" loading="lazy"></a><figcaption><span class="fn">01</span><b>Vòng SOC</b> — vòng % pin + công suất, điện áp, dòng (xanh khi sạc, cam khi xả). Kiểu mặc định.</figcaption></figure>
+      <figure class="face"><a href="/huongdan/img/lcdjk-gd-02.webp" target="_blank" rel="noopener"><img src="/huongdan/img/lcdjk-gd-02.webp" width="640" height="480" alt="Kiểu 02 Thanh pin lớn: thanh phần trăm pin, điện áp, dòng, công suất, nhiệt độ, trạng thái sạc xả" loading="lazy"></a><figcaption><span class="fn">02</span><b>Thanh pin lớn</b> — thanh % pin to, đứng xa vẫn đọc được.</figcaption></figure>
+      <figure class="face"><a href="/huongdan/img/lcdjk-gd-03.webp" target="_blank" rel="noopener"><img src="/huongdan/img/lcdjk-gd-03.webp" width="640" height="480" alt="Kiểu 03 Chia đôi: cột pin bên trái, ô số điện áp, dòng, công suất, nhiệt MOS, lệch cell, dòng cân bằng bên phải" loading="lazy"></a><figcaption><span class="fn">03</span><b>Chia đôi</b> — cột pin bên trái, 6 ô số lớn bên phải.</figcaption></figure>
+      <figure class="face"><a href="/huongdan/img/lcdjk-gd-04.webp" target="_blank" rel="noopener"><img src="/huongdan/img/lcdjk-gd-04.webp" width="640" height="480" alt="Kiểu 04 Bảng tổng quan: SOC, SOH, điện áp, dòng, công suất, nhiệt độ, số chu kỳ, cân bằng" loading="lazy"></a><figcaption><span class="fn">04</span><b>Bảng tổng quan</b> — nhiều số nhất trên một màn: SOC, SOH, V · A · W, nhiệt, chu kỳ.</figcaption></figure>
+    </div>
+    <div class="figcap" style="margin-top:12px">Bấm nút <kbd class="k">↩</kbd> để đổi kiểu. Máy <b>tự nhớ</b> kiểu đã chọn — tắt mở lại vẫn giữ. <span style="opacity:.75">(Ảnh minh hoạ, số liệu là ví dụ)</span></div>
+
+    <div class="fig cellfig" style="margin-top:26px">
+      <div class="figtag"><span class="n">TRANG CELL</span><span>Từng cell trên một màn</span><span class="rule"></span></div>
+      <div class="plate cellplate">
+        <a class="cimg" href="/huongdan/img/lcdjk-cell.webp" target="_blank" rel="noopener"><img src="/huongdan/img/lcdjk-cell.webp" width="640" height="480" alt="Trang Cell: 16 cell xếp 3 cột, cell cao nhất viền xanh dương, cell thấp nhất viền đỏ, hàng trên ghi cell cao nhất, thấp nhất, độ lệch và dòng cân bằng" loading="lazy"></a>
+        <ul class="legend">
+          <li><span class="dot" style="background:#3ea6ff"></span><div>Cell <b>cao nhất</b> viền xanh dương.</div></li>
+          <li><span class="dot" style="background:#ff5252"></span><div>Cell <b>thấp nhất</b> viền đỏ.</div></li>
+          <li><span class="dot" style="background:#4ade80"></span><div>Hàng trên: cell cao · thấp, <b>độ lệch mV</b> và <b>dòng cân bằng</b>.</div></li>
+          <li><span class="dot" style="background:#9aa5b1"></span><div>Tới <b>24 cell</b> xếp 3 cột, <b>25 – 32 cell</b> xếp 4 cột.</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ghead" style="margin-top:56px"><h2>Làm được gì?</h2><span class="gcount">đầy đủ tính năng</span></div>
+    <ul class="feat">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>4 kiểu giao diện</b> (Vòng SOC · Thanh pin lớn · Chia đôi · Bảng tổng quan), đổi bằng 1 nút, máy tự nhớ.</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Đủ số liệu pin</b>: % pin, SOH, Ah còn / tổng, công suất, điện áp, dòng (màu theo sạc / xả), nhiệt độ T1 · T2 · MOS, số chu kỳ, trạng thái Sạc · Xả · Cân bằng.</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Trang Cell</b>: tới 32 cell; cell cao nhất xanh dương, thấp nhất đỏ; độ lệch mV và dòng cân bằng.</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Trang <b>Thông tin BMS</b> riêng.</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Bật/tắt Sạc · Xả · Cân bằng</b> ngay trên màn (máy hỏi lại trước khi làm); <b>chỉnh thông số BMS</b> có kiểm giới hạn và ràng buộc giữa các thông số.</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Xem và điều khiển từ xa</b> trên app SOLAR CLOUD qua WiFi nhà; <b>cập nhật phần mềm từ xa</b>.</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Cài WiFi ngay trên màn</b> (có bàn phím trên màn) hoặc bằng điện thoại.</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Tiếng Việt / English</b>, chỉnh độ sáng, xoay màn 180°, đồng hồ giờ · ngày.</li>
+    </ul>
+
+    <div class="compat" id="tuongthich">
+      <h3>Dùng được với pin nào?</h3>
+      <p>Pin dùng <b>JK BMS dòng PB</b> có cổng UART 6 chân — đã chạy thực tế với <b>JK PB2A16S15P</b>. Mỗi màn đọc <b>1 pin</b>.</p>
+      <div class="cgrp"><span class="cg">Pin</span><div class="chips">
+        <span class="chip">JK BMS dòng PB</span><span class="chip">1 pin / 1 màn</span>
+      </div></div>
+      <div class="cgrp"><span class="cg">Cần thêm</span><div class="chips">
+        <span class="chip">App JK BMS <small>(đổi cổng UART3, làm 1 lần)</small></span><span class="chip">WiFi nhà 2.4GHz <small>(để xem từ xa)</small></span>
+      </div></div>
+      <p class="cnote">Không có WiFi, màn vẫn đọc và hiện pin tại chỗ bình thường.</p>
+    </div>
+
+    <!-- ═════════ HƯỚNG DẪN CÀI ĐẶT MÀN HÌNH JK BMS ═════════ -->
+    <div class="kband" id="caidat">
+      <span class="kk">Hướng dẫn cài đặt Màn hình JK BMS</span>
+      <h2>Lắp Màn hình JK BMS trong 10 phút</h2>
+      <p>Đã nhận hàng? Làm theo các bước dưới đây — <b>chỉ cần điện thoại</b>.</p>
+      <nav class="ktoc"><a href="#chuanbi">Chuẩn bị</a><a href="#b1">1 · App JK</a><a href="#b2">2 · Cắm dây</a><a href="#b3">3 · WiFi nhà</a><a href="#b4">4 · Device ID</a><a href="#b5">5 · Vào app</a><a href="#b6">6 · 4 nút bấm</a><a href="#suco">Sự cố</a></nav>
+    </div>
+
+    <div class="prep" id="chuanbi">
+      <h2>Cần chuẩn bị</h2>
+      <ul>
+        <li><span class="ix mono">01</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Màn hình JK BMS</b> + <b>dây nối 6 chân</b>.</div></li>
+        <li><span class="ix mono">02</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Pin dùng <b>JK BMS dòng PB</b>.</div></li>
+        <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Điện thoại có app JK BMS</b> — để đổi cổng UART3 (làm 1 lần).</div></li>
+        <li><span class="ix mono">04</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>WiFi nhà 2.4GHz</b> + mật khẩu — để xem từ xa. <em>Máy không bắt được WiFi 5GHz.</em></div></li>
+      </ul>
+    </div>
+
+    <div class="sec" id="b1">
+      <div class="rail"></div>
+      <div class="snum">1</div>
+      <div class="sechd"><div class="st">Trên app JK BMS · làm 1 lần</div><h2>Đổi cổng UART3 sang Modbus</h2></div>
+      <ol class="steps">
+        <li>Mở app <b>JK BMS</b> trên điện thoại, <b>kết nối Bluetooth</b> với pin như thường lệ.</li>
+        <li>Vào tab <b>Settings</b> (dưới cùng), kéo xuống dòng <b>UART3 Protocol No.</b></li>
+        <li>Chạm vào ô của dòng đó → bảng <b>Select UART Protocol</b> hiện ra → chọn <b>001 - JK BMS RS485 Modbus V1.0</b>.</li>
+        <li>Bấm <b>OK</b> ở cuối dòng <b>UART3 Protocol No.</b> để lưu.</li>
+        <li>Xem dòng <b>Device Addr.</b>: số phải <b>khác 0</b> (ảnh ví dụ là 2). Nếu đang là 0 → nhắn Zalo để được hướng dẫn.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 1</span><span>App JK BMS · tab Settings</span><span class="rule"></span></div>
+        <div class="plate annoplate stack">
+          <div class="phones">
+            <figure class="appshot"><a class="anno" href="/huongdan/img/lcdjk-jkapp-uart3.webp" target="_blank" rel="noopener"><img src="/huongdan/img/lcdjk-jkapp-uart3.webp" width="600" height="965" alt="App JK BMS tab Settings: dòng Device Addr. là 2 và dòng UART3 Protocol No. đang là 001 JK BMS RS485, có nút OK cuối dòng" loading="lazy"><span class="pin" style="left:4%;top:44.9%">1</span><span class="pin" style="left:4%;top:91.1%">2</span></a><figcaption>Tab <b>Settings</b></figcaption></figure>
+            <figure class="appshot"><a class="anno" href="/huongdan/img/lcdjk-jkapp-chon-001.webp" target="_blank" rel="noopener"><img src="/huongdan/img/lcdjk-jkapp-chon-001.webp" width="600" height="965" alt="Bảng Select UART Protocol trong app JK BMS: chọn dòng 001 JK BMS RS485 Modbus V1.0" loading="lazy"><span class="pin" style="left:3.5%;top:64.6%">3</span></a><figcaption>Bảng <b>Select UART Protocol</b></figcaption></figure>
+          </div>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Device Addr.</b> phải <b>khác 0</b>. Màn tự tìm địa chỉ — không cần nhập gì thêm.</div></li>
+            <li><span class="pin">2</span><div><b>UART3 Protocol No.</b>: chạm ô để chọn, chọn xong bấm <b>OK</b> cuối dòng.</div></li>
+            <li><span class="pin">3</span><div>Chọn <b>001 - JK BMS RS485 Modbus V1.0</b>.</div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Nhớ bấm OK</span>Phải bấm <b>OK</b> cuối dòng <b>UART3 Protocol No.</b> thì BMS mới lưu. Đã đổi mà màn vẫn chưa nhận pin → <b>tắt BMS rồi bật lại</b>.</div></div>
+    </div>
+
+    <div class="sec" id="b2">
+      <div class="rail"></div>
+      <div class="snum">2</div>
+      <div class="sechd"><div class="st">Tại tủ pin</div><h2>Cắm dây vào BMS</h2></div>
+      <ol class="steps">
+        <li>Cắm một đầu dây vào <b>giắc ở mặt sau</b> màn hình (hình 2).</li>
+        <li>Đầu còn lại cắm vào <b>cổng UART 6 chân</b> trên JK BMS. Một dây này vừa truyền số liệu vừa <b>cấp nguồn</b> cho màn — không cần củ sạc riêng.</li>
+        <li>Màn tự sáng. Trong lúc máy tự tìm pin, ô giữa thanh trên cùng báo <b>CHƯA THẤY BMS</b> (xám); tìm thấy thì hiện tên pin, ví dụ <b>JK BMS #2</b>, nền <b>xanh</b> và các ô có số.<div class="hint">Chưa có số liệu thì các ô hiện “--” màu xám — máy vẫn đang tìm pin, không phải lỗi.</div></li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 2</span><span>Mặt sau · giắc cắm dây BMS</span><span class="rule"></span></div>
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:520px" href="/huongdan/img/lcdjk-mat-sau.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/lcdjk-mat-sau.webp" width="1200" height="809" alt="Mặt sau Màn hình JK BMS, giắc 6 chân màu trắng ở cạnh phải để cắm dây vào JK BMS" loading="lazy">
+            <span class="pin" style="left:55%;top:41%">1</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Giắc 6 chân</b>: cắm dây nối sang cổng UART của JK BMS.</div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec" id="b3">
+      <div class="rail"></div>
+      <div class="snum">3</div>
+      <div class="sechd"><div class="st">Trên màn hình hoặc điện thoại</div><h2>Nối WiFi nhà</h2></div>
+      <p class="secp">Chọn <b>một trong hai cách</b>. Máy <b>thử nối trước</b> — nối được mới lưu; sai mật khẩu thì vẫn giữ WiFi cũ.</p>
+      <h3 class="subh"><span>Cách A</span>Ngay trên màn hình</h3>
+      <ol class="steps">
+        <li><b>Giữ <kbd class="k">MENU</kbd> 2 giây</b> → vào <b>CÀI ĐẶT</b>.</li>
+        <li>Bấm <kbd class="k">▲</kbd> / <kbd class="k">▼</kbd> chọn tab <b>Kết nối</b> → bấm <kbd class="k">MENU</kbd>.</li>
+        <li>Chọn <b>Chọn mạng WiFi</b> → máy dò WiFi xung quanh → chọn <b>WiFi nhà</b> → bấm <kbd class="k">MENU</kbd>.</li>
+        <li>Gõ mật khẩu bằng bàn phím trên màn: <kbd class="k">▲</kbd> <kbd class="k">▼</kbd> di chuyển, <kbd class="k">MENU</kbd> gõ ký tự, <kbd class="k">↩</kbd> xoá. Gõ xong <b>giữ <kbd class="k">MENU</kbd> 2 giây</b> = OK.</li>
+        <li>Màn hiện <b>ĐANG KẾT NỐI…</b> rồi <b>Đã lưu WiFi mới</b> là xong.</li>
+      </ol>
+      <h3 class="subh"><span>Cách B</span>Bằng điện thoại</h3>
+      <ol class="steps">
+        <li>Vào <b>Cài đặt › WiFi</b> của điện thoại → chọn WiFi <code>SC-LCDJK-xxxxxxxxxx</code> (10 số) → nhập mật khẩu <code>123456789</code>.<div class="hint">Điện thoại báo “WiFi không có internet” → chọn <b>Vẫn kết nối</b> / <b>Giữ kết nối</b>.</div></li>
+        <li>Trang cài đặt <b>tự mở</b>. Nếu không → mở trình duyệt, gõ <code>192.168.4.1</code>.</li>
+        <li>Mở thẻ <b>Kết nối WiFi</b> → bấm <b>Dò WiFi xung quanh</b> → chọn WiFi nhà → nhập mật khẩu → <b>Thử &amp; lưu WiFi</b>.</li>
+        <li>Hiện “<b>Đã nối và lưu</b> …” là xong.</li>
+      </ol>
+      <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">WiFi 2.4GHz</span>Máy chỉ bắt được WiFi <b>2.4GHz</b>. Modem phát 2 băng tần cùng tên thì vào cài đặt modem tách riêng WiFi 2.4GHz.</div></div>
+    </div>
+
+    <div class="sec" id="b4">
+      <div class="rail"></div>
+      <div class="snum">4</div>
+      <div class="sechd"><div class="st">Trên màn hình</div><h2>Ghi lại Device ID 10 số</h2></div>
+      <ol class="steps">
+        <li><b>10 giây đầu</b> sau khi cắm dây, góc trên bên trái màn hiện <b>ID</b> 10 số.</li>
+        <li>Hoặc giữ <kbd class="k">MENU</kbd> 2 giây → tab <b>Hệ thống</b> → dòng <b>ID thiết bị</b>.</li>
+        <li>Hoặc trên trang <code>192.168.4.1</code>: dòng <b>ID</b> ở đầu trang, có nút <b>Sao chép</b>.</li>
+      </ol>
+    </div>
+
+    <div class="sec" id="b5">
+      <div class="rail"></div>
+      <div class="snum">5</div>
+      <div class="sechd"><div class="st">Trên điện thoại hoặc máy tính</div><h2>Thêm vào app SOLAR CLOUD</h2></div>
+      <ol class="steps">
+        <li>Điện thoại về <b>WiFi nhà</b> hoặc <b>4G</b>.</li>
+        <li>Vào <a href="/"><code>solarcloud.io.vn</code></a> → <b>Đăng ký</b> bằng email + mật khẩu → đăng nhập.</li>
+        <li>Vào tab <b>Thiết bị</b> → <b>Thêm thiết bị</b> → nhập <b>Device ID 10 số</b> (bước 4).</li>
+        <li>Chạm vào thiết bị vừa thêm: xem pin đến <b>từng cell</b>, bật/tắt <b>Sạc · Xả · Cân bằng</b> và chỉnh thông số BMS từ xa.</li>
+      </ol>
+    </div>
+
+    <div class="sec" id="b6">
+      <div class="rail"></div>
+      <div class="snum">6</div>
+      <div class="sechd"><div class="st">Trên máy · 4 nút dưới màn, từ trái sang phải</div><h2>Dùng 4 nút bấm</h2></div>
+      <div class="rtab keys">
+        <div class="rrow"><div class="rk"><kbd class="k">↩</kbd> nút 1</div><div>Đổi <b>kiểu giao diện</b> 01 → 02 → 03 → 04. Đang ở trang Cell / Thông tin thì về trang giao diện.</div></div>
+        <div class="rrow"><div class="rk"><kbd class="k">▲</kbd> <kbd class="k">▼</kbd> nút 2 · 3</div><div>Đổi trang: <b>Giao diện · Cell · Thông tin BMS</b>.</div></div>
+        <div class="rrow"><div class="rk"><kbd class="k">MENU</kbd> nút 4</div><div><b>Giữ 2 giây</b> để vào <b>CÀI ĐẶT</b>.</div></div>
+      </div>
+      <p class="secp" style="margin-top:16px"><b>CÀI ĐẶT</b> có 5 tab: <b>Hiển thị · Điều khiển · Thông số · Kết nối · Hệ thống</b>. Trong đó <kbd class="k">▲</kbd> <kbd class="k">▼</kbd> chọn, <kbd class="k">MENU</kbd> chọn / sửa, <kbd class="k">↩</kbd> quay lại — hàng dưới cùng màn ghi chức năng từng nút.</p>
+      <ol class="steps">
+        <li><b>Hiển thị</b>: kiểu giao diện, độ sáng, xoay màn 180°, Tiếng Việt / English.</li>
+        <li><b>Điều khiển</b>: bật/tắt <b>Sạc · Xả · Cân bằng</b> — máy hỏi lại <b>Không | Có</b> rồi mới ghi vào BMS.</li>
+        <li><b>Thông số</b>: chỉnh ngưỡng bảo vệ BMS — máy kiểm giới hạn và ràng buộc giữa các thông số trước khi ghi.</li>
+        <li>Sửa xong <b>giữ <kbd class="k">MENU</kbd> 2 giây</b> để lưu hết.<div class="hint">60 giây không bấm nút thì máy bỏ các thay đổi chưa lưu và về màn chính.</div></li>
+      </ol>
+      <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Cẩn thận khi chỉnh</span>Ngưỡng bảo vệ sai có thể làm pin ngắt sạc/xả. Chưa rõ thông số nào thì giữ nguyên, hoặc nhắn Zalo để được hướng dẫn.</div></div>
+    </div>
+
+    <div class="done"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div><div class="bd"><span class="tt">Xong rồi!</span><p>Màn đọc BMS <b>mỗi 0,5 giây</b> và gửi lên SOLAR CLOUD <b>mỗi giây</b>. Mất điện hay mất mạng, có lại là máy tự nối lại — không cần làm gì thêm.</p></div></div>
+
+    <div class="sec" id="suco">
+      <div class="rail"></div>
+      <div class="snum">?</div>
+      <div class="sechd"><div class="st">Bấm vào từng mục để xem</div><h2>Sự cố thường gặp</h2></div>
+      <div class="faqs">
+      <details class="faq"><summary>Cắm dây mà màn không sáng</summary><div>Cắm lại <b>chặt cả 2 đầu dây</b>: giắc mặt sau màn và cổng UART 6 chân của BMS. Kiểm tra BMS đang bật (app JK nối được pin).</div></details>
+      <details class="faq"><summary>Thanh trên báo “CHƯA THẤY BMS”, các ô hiện “--”</summary><div><p>Làm lại <a href="#b1">bước 1</a>: dòng <b>UART3 Protocol No.</b> phải là <b>001 - JK BMS RS485 Modbus V1.0</b> và đã bấm <b>OK</b>; <b>Device Addr.</b> khác 0.</p><p>Vẫn chưa được → <b>tắt BMS rồi bật lại</b>, hoặc giữ <kbd class="k">MENU</kbd> 2 giây → tab <b>Hệ thống</b> → <b>Dò lại BMS</b>.</p></div></details>
+      <details class="faq"><summary>Thanh trên báo “MẤT BMS” màu đỏ</summary><div>Máy đang đọc thì mất tín hiệu từ BMS — thường do <b>dây lỏng</b>. Cắm lại chặt 2 đầu dây; có tín hiệu lại là máy tự đọc tiếp.</div></details>
+      <details class="faq"><summary>Điện thoại không thấy WiFi <code>SC-LCDJK-…</code></summary><div>Chờ khoảng 30 giây sau khi màn sáng rồi quét lại WiFi. Đứng gần màn hình.</div></details>
+      <details class="faq"><summary>Trang <code>192.168.4.1</code> không mở</summary><div>Tắt <b>dữ liệu di động (4G)</b> trong lúc đang nối WiFi <code>SC-LCDJK-…</code>, rồi gõ lại <code>192.168.4.1</code> trên trình duyệt.</div></details>
+      <details class="faq"><summary>Không lưu được WiFi nhà</summary><div>WiFi phải là <b>2.4GHz</b>. Kiểm tra lại mật khẩu (phân biệt chữ hoa / thường). Máy thử nối trước — không nối được thì giữ WiFi cũ và báo lý do trên màn.</div></details>
+      <details class="faq"><summary>Muốn đổi sang tiếng Anh</summary><div>Giữ <kbd class="k">MENU</kbd> 2 giây → tab <b>Hiển thị</b> → dòng <b>Ngôn ngữ</b> → đổi sang <b>English</b> → giữ <kbd class="k">MENU</kbd> 2 giây để lưu.</div></details>
+      <details class="faq"><summary>App báo mất kết nối</summary><div>Kiểm tra mạng nhà và dây nối BMS. Có mạng lại là máy tự nối lại.</div></details>
+      </div>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Cần hỗ trợ?</span>Nhắn Zalo <a href="https://zalo.me/0349897777" target="_blank" rel="noopener"><b>0349 897 777</b></a> kèm <b>Device ID 10 số</b> để được hỗ trợ nhanh.</div></div>
+    </div>
+
+    <div class="cta-row">
+      <a class="zbtn" href="https://zalo.me/0349897777" target="_blank" rel="noopener"><svg class="zi" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#fff"/><path d="M12 4.2c-4.6 0-8.3 3.1-8.3 7 0 2.2 1.2 4.1 3.1 5.4l-.6 2.6c-.1.4.3.7.6.5l3-1.7c.7.1 1.4.2 2.2.2 4.6 0 8.3-3.1 8.3-7s-3.7-7-8.3-7z" fill="#0068FF"/><path d="M8.6 9h5.6l-5.3 5.4h5.5" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Đặt hàng qua Zalo</span></a>
+      <a class="cta pri" href="#caidat">Lên đầu hướng dẫn ↑</a>
+      <a class="cta ghost" href="/sanpham">Sản phẩm khác</a>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Solar Cloud · <span class="on">solarcloud.io.vn</span></span>
+    <span>Giám sát năng lượng mặt trời · pin lưu trữ · inverter</span>
+  </div>
+</body>
+</html>
