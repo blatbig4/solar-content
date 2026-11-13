@@ -109,6 +109,13 @@
 .mockui .seg{display:flex;gap:6px;background:#1e293b;border:1px solid #334155;border-radius:10px;padding:4px;margin-bottom:4px}
 .mockui .seg span{flex:1;text-align:center;padding:7px;border-radius:8px;color:#94a3b8;font-weight:600}
 .mockui .seg span.on{background:#38bdf8;color:#0f172a}
+/* Link mua bo trên Shopee (mục Cần chuẩn bị) */
+.shp-row{display:flex;flex-wrap:wrap;align-items:center;gap:7px 10px;margin-top:9px}
+.prep a.shp{display:inline-flex;align-items:center;gap:6px;padding:4px 12px 4px 10px;border-radius:999px;background:#EE4D2D;color:#fff;font-size:13px;font-weight:700;line-height:1.4;text-decoration:none;white-space:nowrap;box-shadow:0 1px 3px rgba(238,77,45,.28);transition:background .15s}
+.prep a.shp:hover,.prep a.shp:focus-visible{background:#D73211;color:#fff}
+.prep a.shp svg{width:14px;height:14px;flex:0 0 auto}
+.shp-n{font-size:13px;color:var(--muted);line-height:1.4}
+.prep .shp-n b{font-weight:650;color:var(--paper)}
 </style>
 </head>
 <body>
@@ -193,7 +200,7 @@
       <ul>
         <li><span class="ix mono">01</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Máy tính</b> (Windows/macOS) có <b>Chrome</b> hoặc <b>Edge</b>, chỉ dùng cho bước nạp firmware. <em>Không nạp được trên điện thoại, Safari, Firefox.</em></div></li>
         <li><span class="ix mono">02</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Cáp USB-C truyền dữ liệu</b> — không phải cáp chỉ để sạc.</div></li>
-        <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Một trong hai bo (cùng 1 firmware): <b>ESP32-S3 N16R8 không màn</b> (module ESP32-S3-WROOM-1, 16MB flash, 8MB PSRAM), hoặc bo <b>ES3C28P màn cảm ứng 2.8″</b> (ESP32-S3 N16R8 có sẵn màn). <em>Bo S3 loại khác (N8, N4R2…) không chạy được.</em></div></li>
+        <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Một trong hai bo (cùng 1 firmware): <b>ESP32-S3 N16R8 không màn</b> (module ESP32-S3-WROOM-1, 16MB flash, 8MB PSRAM), hoặc bo <b>ES3C28P màn cảm ứng 2.8″</b> (ESP32-S3 N16R8 có sẵn màn). <em>Bo S3 loại khác (N8, N4R2…) không chạy được.</em><span class="shp-row"><a class="shp" href="https://s.shopee.vn/906jr82C89" target="_blank" rel="sponsored nofollow noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg>Mua trên Shopee ↗</a><span class="shp-n">bo không màn — chọn loại <b>N16R8</b> (16MB flash / 8MB PSRAM)</span></span></div></li>
         <li><span class="ix mono">04</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>WiFi nhà 2.4GHz</b> + mật khẩu. <em>ESP32 không bắt được WiFi 5GHz.</em></div></li>
         <li><span class="ix mono">05</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Dongle WiFi</b> của <b>mỗi inverter</b> (2 máy là 2 dongle) đã cắm vào máy và <b>đã vào cùng WiFi nhà</b>.</div></li>
         <li><span class="ix mono">06</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>1 hoặc 2 pin JK BMS có Bluetooth</b>. Đặt mạch <b>gần tủ pin</b> (trong tầm Bluetooth, vài mét) và cấp nguồn <b>5V USB</b> lâu dài cho mạch.</div></li>

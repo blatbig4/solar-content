@@ -54,6 +54,13 @@
   .brk{width:5px}
   .annoplate{padding:14px 10px}
 }
+/* Link mua bo trên Shopee (mục Cần chuẩn bị) */
+.shp-row{display:flex;flex-wrap:wrap;align-items:center;gap:7px 10px;margin-top:9px}
+.prep a.shp{display:inline-flex;align-items:center;gap:6px;padding:4px 12px 4px 10px;border-radius:999px;background:#EE4D2D;color:#fff;font-size:13px;font-weight:700;line-height:1.4;text-decoration:none;white-space:nowrap;box-shadow:0 1px 3px rgba(238,77,45,.28);transition:background .15s}
+.prep a.shp:hover,.prep a.shp:focus-visible{background:#D73211;color:#fff}
+.prep a.shp svg{width:14px;height:14px;flex:0 0 auto}
+.shp-n{font-size:13px;color:var(--muted);line-height:1.4}
+.prep .shp-n b{font-weight:650;color:var(--paper)}
 </style>
 </head>
 <body>
@@ -116,7 +123,7 @@
       <ul>
         <li><span class="ix mono">01</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Máy tính</b> (Windows/macOS) có <b>Chrome</b> hoặc <b>Edge</b>. <em>Không dùng được trên điện thoại, Safari, Firefox.</em></div></li>
         <li><span class="ix mono">02</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Cáp USB truyền dữ liệu</b> — không phải cáp chỉ để sạc.</div></li>
-        <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Mạch <b>JK BMS · BLE</b> — dùng một trong hai bo: <b>ESP32‑C3 SuperMini</b> (4MB, USB‑C) hoặc <b>ESP32 DevKit</b> (ESP‑WROOM‑32, 38 chân). <em>Chỉ khác con ESP, các bước còn lại như nhau.</em></div></li>
+        <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Mạch <b>JK BMS · BLE</b> — dùng một trong hai bo: <b>ESP32‑C3 SuperMini</b> (4MB, USB‑C) hoặc <b>ESP32 DevKit</b> (ESP‑WROOM‑32, 38 chân). <em>Chỉ khác con ESP, các bước còn lại như nhau.</em><span class="shp-row"><span class="shp-n">Mua trên Shopee:</span><a class="shp" href="https://s.shopee.vn/4B1U6HVszJ" target="_blank" rel="sponsored nofollow noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg>ESP32-C3 ↗</a><a class="shp" href="https://s.shopee.vn/8fTtSKMCJl" target="_blank" rel="sponsored nofollow noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg>ESP32 ↗</a></span></div></li>
         <li><span class="ix mono">04</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Pin đang gắn <b>JK BMS đã bật Bluetooth</b>, đặt mạch <b>gần BMS</b> (trong tầm vài mét). <em>BMS phải còn nguồn.</em></div></li>
         <li><span class="ix mono">05</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>WiFi nhà 2.4GHz</b> + mật khẩu. <em>ESP32 không bắt được WiFi 5GHz.</em></div></li>
         <li><span class="ix mono">06</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Một <b>điện thoại</b> để cấu hình.</div></li>
