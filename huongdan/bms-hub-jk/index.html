@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Tự làm thiết bị giám sát &amp; cài đặt 3 pin JK BMS từ xa qua WiFi (ESP32-S3) | SOLAR CLOUD</title>
+<meta name="description" content="Tự làm BMS HUB: một mạch ESP32-S3 N16R8 nối tới 3 pin JK BMS qua Bluetooth, xem từng pin và cài đặt BMS từ xa trên app SOLAR CLOUD. Nạp firmware ngay trên trình duyệt.">
+<meta name="theme-color" content="#0E775E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/huongdan/guide.css?v=20261004j">
+<style>
+/* bài JK: phần cài đặt từ xa — chú thích ảnh */
+.feat .new{display:inline-block;color:#fff;background:var(--phos);font-size:11px;font-weight:700;letter-spacing:.05em;line-height:1;padding:4px 7px 3px;border-radius:5px;margin-left:4px;vertical-align:2px}
+.feat a{color:var(--phos);font-weight:600}
+.jump{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;margin:26px 0 0;padding:13px 18px;border:1px solid var(--phos-line);border-radius:var(--r);background:var(--phos-dim);color:var(--paper);text-decoration:none;font-size:15px;line-height:1.45;transition:background .15s}
+.jump b{color:var(--phos-d);font-weight:700}
+.jump:hover{background:rgba(14,119,94,.15)}
+.annoplate{align-items:flex-start}
+.annoplate.stack{flex-direction:column;align-items:center}
+.anno{position:relative;display:block;width:100%;line-height:0;cursor:zoom-in}
+.anno img{display:block;width:100%;height:auto;border-radius:var(--r-sm);border:1px solid var(--line)}
+.annoplate.side .anno.tall{flex:0 1 320px}
+.annoplate.side .anno.mid{flex:0 1 340px}
+@media (min-width:760px){.annoplate.side .anno.tall{position:sticky;top:16px}}
+.annoplate.side .legend{flex:1 1 300px}
+.annoplate.stack .legend{width:100%;max-width:560px}
+.pin{position:absolute;transform:translate(-50%,-50%);width:24px;height:24px;border-radius:50%;background:var(--phos);color:#fff;font:700 12px/24px var(--fd);text-align:center;box-shadow:0 0 0 2px #fff,0 2px 6px rgba(0,0,0,.4);pointer-events:none;font-variant-numeric:tabular-nums}
+.brk{position:absolute;width:8px;border:2px solid #fff;border-right:0;border-radius:6px 0 0 6px;opacity:.9;pointer-events:none}
+.legend{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-size:15px;line-height:1.55;color:var(--paper)}
+.legend li{display:flex;gap:11px;align-items:flex-start}
+.legend li>div{min-width:0}
+.legend .pin{position:static;transform:none;flex:0 0 auto;box-shadow:none}
+.legend .pin-in{display:inline-block;width:20px;height:20px;font-size:11px;line-height:20px;vertical-align:1px;margin:0 2px}
+.legend b{font-weight:650}
+.legend.groups{gap:20px}
+.legend dl{margin:8px 0 0;padding:0}
+.legend dt{font-weight:650;font-size:14px;color:var(--phos-d);margin-top:8px}
+.legend dt:first-child{margin-top:0}
+.legend dd{margin:2px 0 0;font-size:14.5px;line-height:1.5}
+.legend .rule-line{margin:10px 0 0;font-size:13.5px;color:var(--muted);background:var(--ink-3);border:1px solid var(--line);border-radius:8px;padding:6px 10px;line-height:1.5}
+.legend .rule-line b{color:var(--paper)}
+.rtab{border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);overflow:hidden;box-shadow:var(--sh-1)}
+.rrow{display:grid;grid-template-columns:minmax(150px,230px) 1fr;gap:14px;padding:11px 16px;border-bottom:1px solid var(--line);font-size:14.5px;line-height:1.5}
+.rrow:last-child{border-bottom:0}
+.rrow .rk{font-weight:650;color:var(--amber-d)}
+.rrow b{font-weight:650}
+.rtab.set .rk{color:var(--phos-d)}
+.figtag .n{white-space:nowrap}
+.compat{margin:26px 0 0;border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);padding:18px 20px 20px;box-shadow:var(--sh-1)}
+.compat h3{margin:0 0 6px;font-family:var(--fd);font-size:17px;font-weight:750;color:var(--paper)}
+.compat>p{margin:0;font-size:15px;line-height:1.55;color:var(--paper)}
+.compat b{font-weight:650}
+.cgrp{margin:16px 0 0}
+.cg{display:block;font-size:12.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:14px;font-weight:600;color:var(--phos-d);background:var(--phos-dim);border:1px solid var(--phos-line);border-radius:999px;padding:4px 11px;line-height:1.3;white-space:nowrap}
+.chip small{font-weight:500;color:var(--muted);font-size:12.5px}
+.compat .cnote{margin:16px 0 0;font-size:13.5px;line-height:1.5;color:var(--muted)}
+.heroshot{margin:22px auto 0;max-width:600px}
+.heroshot img{display:block;width:100%;height:auto}
+.anno img[src*="-box-"]{border:0;border-radius:0}
+@media (max-width:560px){
+  .rrow{grid-template-columns:1fr;gap:3px}
+  .pin{width:19px;height:19px;font-size:10px;line-height:19px;box-shadow:0 0 0 1.5px #fff,0 1px 4px rgba(0,0,0,.4)}
+  .legend .pin{width:22px;height:22px;font-size:11px;line-height:22px}
+  .brk{width:5px}
+  .annoplate{padding:14px 10px}
+}
+.kp{margin:22px 0 0;font-size:16px;line-height:1.6;color:var(--paper)}
+.ksteps{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0 0}
+.kstep{display:flex;flex-direction:column;gap:3px;padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:var(--ink-2);box-shadow:var(--sh-1);text-decoration:none;color:var(--paper);transition:border-color .15s}
+.kstep b{font-size:15.5px;color:var(--phos-d)}
+.kstep span{font-size:13.5px;color:var(--muted)}
+.kstep:hover{border-color:var(--phos-line)}
+@media (max-width:560px){.ksteps{grid-template-columns:1fr}}
+/* hai bản bo */
+.plate.boards{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:end}
+.plate.boards figure{margin:0;text-align:center}
+.plate.boards img{display:block;width:100%;height:auto;max-height:340px;object-fit:contain;border-radius:var(--r-sm)}
+.plate.boards figcaption{margin-top:10px;font-size:14px;color:var(--muted)}
+.plate.boards figcaption b{color:var(--paper)}
+@media (max-width:560px){.plate.boards{grid-template-columns:1fr}}
+/* sơ đồ kết nối */
+.diag{margin:26px 0 0;border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);box-shadow:var(--sh-1);padding:18px 14px 10px}
+.diag svg{display:block;width:100%;height:auto}
+.diag .bx{fill:var(--ink-3);stroke:var(--line-2);stroke-width:1.5}
+.diag .bx.pri{fill:var(--phos-dim);stroke:var(--phos-line)}
+.diag .t1{font:700 15px var(--fd);fill:var(--paper)}
+.diag .t2{font:500 12.5px var(--fd);fill:var(--muted)}
+.diag .tl{font:700 12px var(--fd);fill:var(--phos-d)}
+.diag .tb{font:700 12px var(--fd);fill:#2563EB}
+.diag .wf{stroke:var(--phos);stroke-width:2.2;fill:none;stroke-dasharray:6 6}
+.diag .bt{stroke:#2563EB;stroke-width:2.2;fill:none;stroke-dasharray:3 6;stroke-linecap:round}
+.diag .net{stroke:var(--paper);stroke-width:2;fill:none;opacity:.55}
+.diag .dg{fill:var(--phos);}
+.diag .ic{fill:none;stroke:var(--phos-d);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mockui{width:100%;max-width:440px;background:#0f172a;border-radius:14px;padding:16px;color:#e2e8f0;font:14px/1.45 var(--fd);box-shadow:var(--sh-2)}
+.mockui .mh{font-weight:700;font-size:15px;margin-bottom:10px;color:#fff}
+.mockui .mr{display:flex;align-items:center;gap:10px;background:#1e293b;border:1px solid #334155;border-radius:10px;padding:10px 12px;margin-top:8px}
+.mockui .mr b{color:#fff;font-weight:650}
+.mockui .mr .st{margin-left:auto;color:#4ade80;font-weight:650;font-size:13px;white-space:nowrap}
+.mockui .mr .dt{width:9px;height:9px;border-radius:50%;background:#4ade80;flex:0 0 auto}
+.mockui .mr small{display:block;color:#94a3b8;font-size:12.5px}
+.mockui .mb{margin-top:12px;background:#38bdf8;color:#0f172a;border-radius:10px;text-align:center;font-weight:700;padding:10px}
+.mockui .mb.g{background:#1e293b;color:#e2e8f0;border:1px solid #334155}
+.mockui .seg{display:flex;gap:6px;background:#1e293b;border:1px solid #334155;border-radius:10px;padding:4px;margin-bottom:4px}
+.mockui .seg span{flex:1;text-align:center;padding:7px;border-radius:8px;color:#94a3b8;font-weight:600}
+.mockui .seg span.on{background:#38bdf8;color:#0f172a}
+/* Link mua bo trên Shopee (mục Cần chuẩn bị) */
+.shp-row{display:flex;flex-wrap:wrap;align-items:center;gap:7px 10px;margin-top:9px}
+.prep a.shp{display:inline-flex;align-items:center;gap:6px;padding:4px 12px 4px 10px;border-radius:999px;background:#EE4D2D;color:#fff;font-size:13px;font-weight:700;line-height:1.4;text-decoration:none;white-space:nowrap;box-shadow:0 1px 3px rgba(238,77,45,.28);transition:background .15s}
+.prep a.shp:hover,.prep a.shp:focus-visible{background:#D73211;color:#fff}
+.prep a.shp svg{width:14px;height:14px;flex:0 0 auto}
+.shp-n{font-size:13px;color:var(--muted);line-height:1.4}
+.prep .shp-n b{font-weight:650;color:var(--paper)}
+</style>
+</head>
+<body>
+<script src="/site-nav.js"></script>
+  <div class="topnav">
+    <a href="/huongdan">← Chọn thiết bị khác</a>
+    <a class="sp" href="/flash">Nạp firmware →</a>
+  </div>
+
+  <div class="wrap">
+    <div class="hero" style="padding-top:clamp(26px,4.5vw,40px)">
+      <h1>Hướng dẫn tự làm thiết bị<br>giám sát &amp; cài đặt 3 pin JK BMS <span class="amp">từ xa</span></h1>
+      <p class="lede">Một mạch <b>ESP32-S3 N16R8</b> nối <b>tới 3 pin JK BMS qua Bluetooth</b>, đưa lên app SOLAR CLOUD: xem từng pin đến từng cell và <b>cài đặt BMS từ xa</b>. Nạp firmware ngay trên trình duyệt, không đấu dây vào pin.</p>
+    </div>
+
+    <div class="fig" style="margin-top:22px">
+      <div class="plate" style="padding:10px"><a href="/huongdan/img/hub-jk-sodo.webp" target="_blank" rel="noopener" style="display:block;width:100%"><img src="/huongdan/img/hub-jk-sodo.webp" width="1600" height="1000" style="display:block;width:100%;height:auto;border-radius:var(--r-sm)" alt="Sơ đồ BMS HUB JK: 3 pin JK BMS nối Bluetooth vào BMS HUB, BMS HUB gửi lên máy chủ SOLAR CLOUD qua WiFi nhà, xem trên máy tính, Android, iPhone" loading="lazy"></a></div>
+      <div class="figcap">Mạch nối 3 pin JK qua Bluetooth, lên internet qua WiFi nhà, gửi lên SOLAR CLOUD — xem và cài đặt từng pin trên máy tính, Android, iPhone.</div>
+    </div>
+
+    <div class="compat" id="tuongthich">
+      <h3>Dùng được với pin nào?</h3>
+      <p>Pin dùng <b>JK BMS có Bluetooth</b> — app JK trên điện thoại nối được là dùng được. Tối đa <b>3 pin</b> trên một mạch, cùng hoặc khác loại.</p>
+    </div>
+
+    <div class="ghead" style="margin-top:58px"><h2>Hướng dẫn tự lắp</h2><span class="gcount">nạp firmware → kết nối · khoảng 15 phút</span></div>
+
+    <div class="prep">
+      <h2>Cần chuẩn bị</h2>
+      <ul>
+        <li><span class="ix mono">01</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Máy tính</b> (Windows/macOS) có <b>Chrome</b> hoặc <b>Edge</b>, chỉ dùng cho bước nạp firmware. <em>Không nạp được trên điện thoại, Safari, Firefox.</em></div></li>
+        <li><span class="ix mono">02</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Cáp USB-C truyền dữ liệu</b> — không phải cáp chỉ để sạc.</div></li>
+        <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Bo <b>ESP32-S3 N16R8</b> (module ESP32-S3-WROOM-1, 16MB flash, 8MB PSRAM). <em>Bo S3 loại khác (N8, N4R2…) không chạy được.</em><span class="shp-row"><a class="shp" href="https://s.shopee.vn/906jr82C89" target="_blank" rel="sponsored nofollow noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg>Mua trên Shopee ↗</a><span class="shp-n">chọn loại <b>N16R8</b> (16MB flash / 8MB PSRAM)</span></span></div></li>
+        <li><span class="ix mono">04</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>WiFi nhà 2.4GHz</b> + mật khẩu. <em>ESP32 không bắt được WiFi 5GHz.</em></div></li>
+        <li><span class="ix mono">05</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>1 – 3 pin JK BMS có Bluetooth</b>. Đặt mạch <b>gần tủ pin</b> và cấp nguồn <b>5V USB</b> lâu dài.</div></li>
+      </ul>
+    </div>
+
+    <div class="fig">
+      <div class="figtag"><span class="n">BO MẠCH</span><span>ESP32-S3 N16R8</span><span class="rule"></span></div>
+      <div class="plate"><img class="appshot" style="max-width:360px;height:auto" src="/huongdan/img/gw-esp32s3-n16r8.webp" alt="Bo phát triển ESP32-S3 N16R8, module ESP32-S3-WROOM-1, 2 cổng USB-C" loading="lazy"></div>
+      <div class="figcap">Ảnh bo: VectorVoyager, <a href="https://commons.wikimedia.org/wiki/File:ESP32-S3_on_paper.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>.</div>
+    </div>
+
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">1</div>
+      <div class="sechd"><div class="st">Trên máy tính · bằng Chrome hoặc Edge</div><h2>Nạp firmware qua USB</h2></div>
+      <ol class="steps">
+        <li>Dùng <b>máy tính</b> mở bài này bằng <b>Chrome</b> hoặc <b>Edge</b>.</li>
+        <li><b>Cắm bo</b> ESP32-S3 N16R8 vào máy tính bằng cáp USB-C.<div class="hint">Bo có 2 cổng: cổng ghi <b>USB</b> hoặc <b>COM</b> đều được.</div></li>
+        <li>Ở khung <b>“Nạp ngay”</b> bên dưới, bấm <b>Nạp BMS HUB JK (ESP32-S3)</b> → chọn <b>cổng COM</b> → <b>Connect</b>.<div class="hint">Cài mới hoàn toàn: tích “Erase device”. Chỉ cập nhật (giữ WiFi): bỏ tích.</div></li>
+        <li>Chờ chạy đến 100%. <b>Mạch tự khởi động lại là xong.</b></li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">NẠP NGAY</span><span>Nạp firmware tại đây — không cần rời trang</span><span class="rule"></span></div>
+        <div class="plate"><span class="rc-tr"></span><span class="rc-bl"></span>
+          <div class="flashbox">
+            <p class="fb-lbl">Cắm bo vào máy rồi bấm:</p>
+            <div class="fb-btns">
+              <esp-web-install-button manifest="/flash/manifest/bms-hub-jk-act.json">
+                <button class="fw-btn" slot="activate">⚡ Nạp BMS HUB JK (ESP32-S3)</button>
+                <span slot="unsupported" class="fw-unsup">Trình duyệt chưa hỗ trợ — hãy dùng <b>Chrome</b> hoặc <b>Edge</b> trên máy tính.</span>
+                <span slot="not-allowed" class="fw-unsup">Cần mở trang bằng <b>HTTPS</b> mới nạp được.</span>
+              </esp-web-install-button>
+            </div>
+            <p class="fb-note">Cần <b>máy tính</b> + <b>Chrome/Edge</b> + <b>cáp USB-C truyền dữ liệu</b>. Bấm nút → chọn <b>cổng COM</b> → chờ tới 100%.</p>
+          </div>
+        </div>
+        <div class="figcap">Nút nạp không hiện hoặc không chạy? Mở <a href="/flash">solarcloud.io.vn/flash</a>, chọn dòng <b>HUB BMS JK</b> để nạp như bình thường.</div>
+      </div>
+      <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Đúng bo ESP32-S3 N16R8</span>Firmware cần bo <b>ESP32-S3 N16R8</b> (16MB flash, 8MB PSRAM — module ghi “N16R8”). Bo S3 loại khác <b>không chạy được</b>. Trong lúc nạp <b>không rút cáp USB</b>.</div></div>
+    </div>
+
+    <div class="sec">
+      <div class="rail"></div>
+      <div class="snum">2</div>
+      <div class="sechd"><div class="st">Giống hệt hộp BMS HUB JK mua sẵn</div><h2>Kết nối WiFi, ghép pin &amp; vào app</h2></div>
+      <p class="kp">Nạp xong, mạch của bạn chạy <b>cùng firmware</b> với hộp BMS HUB JK bán sẵn, nên các bước kết nối giống hệt nhau. Hướng dẫn có hình từng bước nằm ở trang BMS HUB JK:</p>
+      <div class="ksteps">
+        <a class="kstep" href="/sanpham/bms-hub-jk/#b2"><b>Nối WiFi nhà</b><span>WiFi BMS-HUB-JK-… → 192.168.4.1 → ghi Device ID</span></a>
+        <a class="kstep" href="/sanpham/bms-hub-jk/#b3"><b>Ghép 3 pin JK</b><span>tắt app JK → Dò BMS → Gán Máy 1/2/3</span></a>
+        <a class="kstep" href="/sanpham/bms-hub-jk/#b4"><b>Thêm vào app</b><span>solarcloud.io.vn → Thêm thiết bị → nhập ID</span></a>
+        <a class="kstep" href="/sanpham/bms-hub-jk/#b5"><b>Cài đặt BMS từ xa</b><span>chọn loại pin, chỉnh ngưỡng, bật/tắt Sạc · Xả</span></a>
+      </div>
+      <a class="jump" href="/sanpham/bms-hub-jk/#b2">Mở <b>Hướng dẫn cài đặt BMS HUB JK</b> có hình, <b>bắt đầu từ bước 2 →</b></a>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Khác hộp mua sẵn một chút</span>Bo tự làm: giữ <b>nút BOOT</b> trên bo khoảng 5 giây để xoá WiFi đã lưu và cài lại từ đầu. Nếu app hiện nút <b>Kích hoạt</b>, bấm Kích hoạt để mở số đo và cài đặt.</div></div>
+    </div>
+
+    <div class="cta-row">
+      <a class="cta pri" href="/flash">Nạp firmware ngay →</a>
+      <a class="cta ghost" href="/huongdan">Thiết bị khác</a>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Solar Cloud · <span class="on">solarcloud.io.vn</span></span>
+    <span>Giám sát năng lượng mặt trời · pin lưu trữ · inverter</span>
+  </div>
+
+  <script type="module" src="https://cdn.jsdelivr.net/npm/esp-web-tools@10/dist/web/install-button.js"></script>
+  <script src="/huongdan/guide.js" defer></script>
+</body>
+</html>
