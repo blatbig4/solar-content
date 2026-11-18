@@ -297,19 +297,17 @@ kbd.k{display:inline-block;min-width:1.7em;padding:0 6px;border:1px solid var(--
         <li>Vào tab <b>Settings</b> (dưới cùng), kéo xuống dòng <b>UART3 Protocol No.</b></li>
         <li>Chạm vào ô của dòng đó → bảng <b>Select UART Protocol</b> hiện ra → chọn <b>001 - JK BMS RS485 Modbus V1.0</b>.</li>
         <li>Bấm <b>OK</b> ở cuối dòng <b>UART3 Protocol No.</b> để lưu.</li>
-        <li>Xem dòng <b>Device Addr.</b>: số phải <b>khác 0</b> (ảnh ví dụ là 2). Nếu đang là 0 → nhắn Zalo để được hướng dẫn.</li>
       </ol>
       <div class="fig">
         <div class="figtag"><span class="n">HÌNH 1</span><span>App JK BMS · tab Settings</span><span class="rule"></span></div>
         <div class="plate annoplate stack">
           <div class="phones">
-            <figure class="appshot"><a class="anno" href="/huongdan/img/lcdjk-jkapp-uart3.webp" target="_blank" rel="noopener"><img src="/huongdan/img/lcdjk-jkapp-uart3.webp" width="600" height="965" alt="App JK BMS tab Settings: dòng Device Addr. là 2 và dòng UART3 Protocol No. đang là 001 JK BMS RS485, có nút OK cuối dòng" loading="lazy"><span class="pin" style="left:4%;top:44.9%">1</span><span class="pin" style="left:4%;top:91.1%">2</span></a><figcaption>Tab <b>Settings</b></figcaption></figure>
-            <figure class="appshot"><a class="anno" href="/huongdan/img/lcdjk-jkapp-chon-001.webp" target="_blank" rel="noopener"><img src="/huongdan/img/lcdjk-jkapp-chon-001.webp" width="600" height="965" alt="Bảng Select UART Protocol trong app JK BMS: chọn dòng 001 JK BMS RS485 Modbus V1.0" loading="lazy"><span class="pin" style="left:3.5%;top:64.6%">3</span></a><figcaption>Bảng <b>Select UART Protocol</b></figcaption></figure>
+            <figure class="appshot"><a class="anno" href="/huongdan/img/lcdjk-jkapp-uart3.webp" target="_blank" rel="noopener"><img src="/huongdan/img/lcdjk-jkapp-uart3.webp" width="600" height="965" alt="App JK BMS tab Settings: dòng UART3 Protocol No. đang là 001 JK BMS RS485, có nút OK cuối dòng" loading="lazy"><span class="pin" style="left:4%;top:91.1%">1</span></a><figcaption>Tab <b>Settings</b></figcaption></figure>
+            <figure class="appshot"><a class="anno" href="/huongdan/img/lcdjk-jkapp-chon-001.webp" target="_blank" rel="noopener"><img src="/huongdan/img/lcdjk-jkapp-chon-001.webp" width="600" height="965" alt="Bảng Select UART Protocol trong app JK BMS: chọn dòng 001 JK BMS RS485 Modbus V1.0" loading="lazy"><span class="pin" style="left:3.5%;top:64.6%">2</span></a><figcaption>Bảng <b>Select UART Protocol</b></figcaption></figure>
           </div>
           <ol class="legend">
-            <li><span class="pin">1</span><div><b>Device Addr.</b> phải <b>khác 0</b>. Màn tự tìm địa chỉ — không cần nhập gì thêm.</div></li>
-            <li><span class="pin">2</span><div><b>UART3 Protocol No.</b>: chạm ô để chọn, chọn xong bấm <b>OK</b> cuối dòng.</div></li>
-            <li><span class="pin">3</span><div>Chọn <b>001 - JK BMS RS485 Modbus V1.0</b>.</div></li>
+            <li><span class="pin">1</span><div><b>UART3 Protocol No.</b>: chạm ô để chọn, chọn xong bấm <b>OK</b> cuối dòng.</div></li>
+            <li><span class="pin">2</span><div>Chọn <b>001 - JK BMS RS485 Modbus V1.0</b>.</div></li>
           </ol>
         </div>
       </div>
@@ -412,7 +410,7 @@ kbd.k{display:inline-block;min-width:1.7em;padding:0 6px;border:1px solid var(--
       <div class="sechd"><div class="st">Bấm vào từng mục để xem</div><h2>Sự cố thường gặp</h2></div>
       <div class="faqs">
       <details class="faq"><summary>Cắm dây mà màn không sáng</summary><div>Cắm lại <b>chặt cả 2 đầu dây</b>: giắc mặt sau màn và cổng UART 6 chân của BMS. Kiểm tra BMS đang bật (app JK nối được pin).</div></details>
-      <details class="faq"><summary>Thanh trên báo “CHƯA THẤY BMS”, các ô hiện “--”</summary><div><p>Làm lại <a href="#b1">bước 1</a>: dòng <b>UART3 Protocol No.</b> phải là <b>001 - JK BMS RS485 Modbus V1.0</b> và đã bấm <b>OK</b>; <b>Device Addr.</b> khác 0.</p><p>Vẫn chưa được → <b>tắt BMS rồi bật lại</b>, hoặc giữ <kbd class="k">MENU</kbd> 2 giây → tab <b>Hệ thống</b> → <b>Dò lại BMS</b>.</p></div></details>
+      <details class="faq"><summary>Thanh trên báo “CHƯA THẤY BMS”, các ô hiện “--”</summary><div><p>Làm lại <a href="#b1">bước 1</a>: dòng <b>UART3 Protocol No.</b> phải là <b>001 - JK BMS RS485 Modbus V1.0</b> và đã bấm <b>OK</b>.</p><p>Vẫn chưa được → <b>tắt BMS rồi bật lại</b>, hoặc giữ <kbd class="k">MENU</kbd> 2 giây → tab <b>Hệ thống</b> → <b>Dò lại BMS</b>.</p></div></details>
       <details class="faq"><summary>Thanh trên báo “MẤT BMS” màu đỏ</summary><div>Máy đang đọc thì mất tín hiệu từ BMS — thường do <b>dây lỏng</b>. Cắm lại chặt 2 đầu dây; có tín hiệu lại là máy tự đọc tiếp.</div></details>
       <details class="faq"><summary>Điện thoại không thấy WiFi <code>SC-LCDJK-…</code></summary><div>Chờ khoảng 30 giây sau khi màn sáng rồi quét lại WiFi. Đứng gần màn hình.</div></details>
       <details class="faq"><summary>Trang <code>192.168.4.1</code> không mở</summary><div>Tắt <b>dữ liệu di động (4G)</b> trong lúc đang nối WiFi <code>SC-LCDJK-…</code>, rồi gõ lại <code>192.168.4.1</code> trên trình duyệt.</div></details>
