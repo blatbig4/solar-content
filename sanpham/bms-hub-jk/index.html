@@ -188,6 +188,7 @@ html{scroll-behavior:smooth}
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Cài đặt BMS từ xa cho từng pin</b>: chọn nhanh loại pin, chỉnh ngưỡng bảo vệ, <b>bật/tắt Sạc · Xả · Cân bằng</b>.</li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Không đấu dây vào pin</b>: nối pin qua Bluetooth, chỉ cần cấp nguồn 5V cho hộp.</li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Dò / chọn / quên từng pin riêng; đổi WiFi và <b>cập nhật phần mềm từ xa</b>.</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Cài WiFi bằng app Android</b>: quét thiết bị ở gần, không cần gõ ID — <a href="/huongdan/them-thiet-bi-quet-gan/">xem cách làm</a>. iPhone, máy tính: nhập ID 10 số.</li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Dùng trên <b>Android · iPhone · máy tính</b>; gộp nhiều thiết bị về một tài khoản.</li>
     </ul>
 
@@ -260,6 +261,7 @@ html{scroll-behavior:smooth}
         </div>
       </div>
       <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Nhớ hai điều</span>WiFi nhà phải là <b>2.4GHz</b>. Và <b>ghi lại Device ID 10 số</b>.</div></div>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Cách nhanh hơn trên Android</span>Hộp mới chưa có WiFi: mở app SOLAR CLOUD → <b>Thêm thiết bị</b> → <b>Quét thiết bị ở gần</b>, chạm đúng hộp, chọn WiFi nhà, nhập mật khẩu — hộp <b>tự vào tài khoản</b>, bỏ qua được bước 4. <a href="/huongdan/them-thiet-bi-quet-gan/">Xem hướng dẫn có hình →</a></div></div>
     </div>
 
     <div class="sec" id="b3">
@@ -345,6 +347,8 @@ html{scroll-behavior:smooth}
       <details class="faq"><summary>Dò không thấy pin</summary><div><b>Tắt app JK</b> trên điện thoại (và thiết bị khác đang nối Bluetooth vào pin), đưa hộp <b>lại gần tủ pin</b>, rồi bấm <b>Dò BMS quanh đây</b> lại.</div></details>
       <details class="faq"><summary>Pin hay mất kết nối</summary><div>Đưa hộp <b>gần pin hơn</b>, tránh tủ sắt hoặc tường dày giữa hộp và pin. Kiểm tra không còn điện thoại nào đang mở app JK nối vào pin.</div></details>
       <details class="faq"><summary>App báo mất kết nối</summary><div>Kiểm tra mạng nhà và nguồn của hộp. Có mạng lại là hộp tự nối lại.</div></details>
+      <details class="faq"><summary>Đổi WiFi nhà (đổi modem, đổi mật khẩu)</summary><div><p><b>Từ xa trên app</b>: tab <b>ℹ️ Thông tin</b> → <b>Kết nối WiFi</b> → <b>Dò WiFi xung quanh</b> → chọn WiFi mới, nhập mật khẩu. Hộp có thể <b>tạm offline tối đa khoảng 45 giây</b> để thử; WiFi mới không vào được thì hộp <b>tự quay về WiFi cũ</b>.</p><p><b>Tại chỗ</b>: nối WiFi <code>BMS-HUB-JK-…</code> của hộp, mở <code>192.168.4.1</code>, làm lại bước 2 — hoặc bấm <b>Bật cài đặt qua app</b> ở thẻ WiFi rồi cài bằng <a href="/huongdan/them-thiet-bi-quet-gan/">Quét thiết bị ở gần</a>.</p></div></details>
+      <details class="faq"><summary>App ghi “tạm ngắt Pack 3”</summary><div><p>Lúc đang <b>cài đặt qua app</b> mà hộp đang nối đủ 3 pin, hộp <b>tạm ngắt Pack 3</b> để nhường kết nối cho điện thoại (hộp nối được tối đa 3 thiết bị Bluetooth cùng lúc). <b>Cài xong hộp tự nối lại</b>, bạn không cần làm gì.</p><img src="/huongdan/img/quetgan-hub-tam-ngat.webp" width="392" height="178" alt="App SOLAR CLOUD: khung Đang bật cài đặt qua app — tạm ngắt Pack 3 để nhường kết nối, cài xong tự nối lại; BMS đang nối 2/3" loading="lazy"></div></details>
       </div>
       <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Cần hỗ trợ?</span>Nhắn Zalo <a href="https://zalo.me/0349897777" target="_blank" rel="noopener"><b>0349 897 777</b></a> kèm <b>Device ID 10 số</b> để được hỗ trợ nhanh.</div></div>
     </div>

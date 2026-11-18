@@ -224,6 +224,7 @@ html{scroll-behavior:smooth}
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Chi tiết từng máy</b>: PV1/PV2, pin, tải, lưới, số điện hôm nay, nhiệt độ.</li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>2 pin JK BMS</b> (Pin 1, Pin 2) xem riêng từng pin: % pin, điện áp, dòng sạc/xả, <b>điện áp từng cell</b>, nhiệt độ, số chu kỳ. <b>Chỉ giám sát</b> pin (không chỉnh cài đặt BMS) — muốn cài đặt BMS từ xa dùng <a href="/sanpham/jkbms-c3/">bộ giám sát JK BMS</a> riêng.</li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Biểu đồ, thống kê <b>ngày · tháng · năm</b>; đổi WiFi và <b>cập nhật phần mềm từ xa</b>.</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><b>Cài WiFi bằng app Android</b>: quét thiết bị ở gần, không cần gõ ID — <a href="/huongdan/them-thiet-bi-quet-gan/">xem cách làm</a>. iPhone, máy tính: nhập ID 10 số.</li>
       <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Dùng trên <b>Android · iPhone · máy tính</b>; gộp nhiều thiết bị về một tài khoản.</li>
     </ul>
 
@@ -342,6 +343,7 @@ html{scroll-behavior:smooth}
         </div>
       </div>
       <div class="note warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></div><div class="bd"><span class="tt">Nhớ hai điều</span>WiFi nhà phải là <b>2.4GHz</b>. Và <b>ghi lại Device ID 10 số</b>.</div></div>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Cách nhanh hơn trên Android</span>Gateway mới chưa có WiFi: mở app SOLAR CLOUD → <b>Thêm thiết bị</b> → <b>Quét thiết bị ở gần</b>, chạm đúng Gateway, chọn WiFi nhà, nhập mật khẩu — Gateway <b>tự vào tài khoản</b>, không cần gõ ID. Chọn inverter và pin vẫn làm ở bước 3, 4. <a href="/huongdan/them-thiet-bi-quet-gan/">Xem hướng dẫn có hình →</a></div></div>
     </div>
 
     <div class="sec" id="b3">
@@ -437,9 +439,9 @@ html{scroll-behavior:smooth}
       <div class="snum">↻</div>
       <div class="sechd"><div class="st">Khi cần</div><h2>Đổi WiFi, chuyển chỗ, cài lại</h2></div>
       <ol class="steps">
-        <li><b>Đổi WiFi từ xa</b> (ví dụ đổi mật khẩu modem): trên app vào tab <b>ℹ️ Thông tin</b> → <b>Kết nối WiFi</b> → <b>Dò WiFi xung quanh</b> → chọn WiFi mới, nhập mật khẩu. WiFi mới không vào được thì Gateway <b>tự quay về WiFi cũ</b>.</li>
+        <li><b>Đổi WiFi từ xa</b> (ví dụ đổi mật khẩu modem): trên app vào tab <b>ℹ️ Thông tin</b> → <b>Kết nối WiFi</b> → <b>Dò WiFi xung quanh</b> → chọn WiFi mới, nhập mật khẩu. Gateway có thể <b>tạm offline tối đa khoảng 45 giây</b> để thử; WiFi mới không vào được thì Gateway <b>tự quay về WiFi cũ</b>.</li>
         <li><b>Đổi tại chỗ</b>: WiFi <code>GATEWAY-S3…</code> của hộp <b>luôn bật</b> — điện thoại vào WiFi đó, mở <code>192.168.4.1</code>, làm lại bước 2.</li>
-        <li><b>Cài lại WiFi từ đầu</b>: <b>giữ nút trên nắp hộp khoảng 5 giây</b> để xoá WiFi đã lưu, rồi làm lại bước 2.</li>
+        <li><b>Cài lại WiFi từ đầu</b>: <b>giữ nút trên nắp hộp khoảng 5 giây</b> để xoá WiFi đã lưu, rồi làm lại bước 2 — hoặc cài bằng app Android: <a href="/huongdan/them-thiet-bi-quet-gan/">Quét thiết bị ở gần</a>.</li>
         <li><b>Thêm / đổi inverter, đổi pin</b>: vào <code>192.168.4.1</code>, làm lại bước 3 hoặc 4.</li>
       </ol>
       <div class="fig">
@@ -454,7 +456,7 @@ html{scroll-behavior:smooth}
           <ol class="legend">
             <li><span class="pin">1</span><div><b>ID thiết bị</b> 10 số (bấm 📋 để sao chép) — gửi kèm khi cần hỗ trợ.</div></li>
             <li><span class="pin">2</span><div><b>Kết nối WiFi</b>: sóng và tên WiFi Gateway đang dùng.</div></li>
-            <li><span class="pin">3</span><div><b>Dò WiFi xung quanh</b>: chọn WiFi mới, nhập mật khẩu. Không vào được thì tự quay về WiFi cũ.</div></li>
+            <li><span class="pin">3</span><div><b>Dò WiFi xung quanh</b>: chọn WiFi mới, nhập mật khẩu. Gateway tạm offline tối đa ~45 giây; không vào được thì tự quay về WiFi cũ.</div></li>
           </ol>
         </div>
       </div>
@@ -471,6 +473,7 @@ html{scroll-behavior:smooth}
       <details class="faq"><summary>Quét không thấy inverter</summary><div>Mở app của hãng inverter: app <b>không có số liệu</b> nghĩa là dongle chưa vào WiFi nhà — làm lại phần cài WiFi cho dongle theo hướng dẫn của hãng. Dongle và Gateway phải <b>cùng một WiFi nhà</b>. Thử rút cắm lại dongle, chờ 2 phút rồi quét lại.</div></details>
       <details class="faq"><summary>Không thấy pin JK</summary><div><b>Tắt app JK</b> trên điện thoại (và các thiết bị khác đang nối Bluetooth vào pin), đưa hộp <b>lại gần tủ pin</b>, rồi bấm <b>Dò Pin 1</b> / <b>Dò Pin 2</b>.</div></details>
       <details class="faq"><summary>App báo mất kết nối</summary><div>Kiểm tra mạng nhà và nguồn của hộp. Có mạng lại là Gateway tự nối lại. Đổi modem / mật khẩu WiFi thì xem mục <a href="#doiwifi">Đổi WiFi</a>.</div></details>
+      <details class="faq"><summary>App ghi “tạm ngắt Pin 3”</summary><div><p>Lúc đang <b>cài đặt qua app</b>, Gateway giữ tối đa <b>2 pin</b> Bluetooth để nhường 1 kết nối cho điện thoại. Nếu đang nối pin thứ 3 thì pin đó <b>tạm ngắt</b> — <b>cài xong Gateway tự nối lại</b>, bạn không cần làm gì.</p><img src="/huongdan/img/quetgan-gw-tam-ngat.webp" width="392" height="208" alt="App SOLAR CLOUD: khung Đang bật cài đặt qua app — tạm ngắt Pin 3, cài xong tự nối lại; thẻ Pin 3 ghi tạm ngắt" loading="lazy"></div></details>
       <details class="faq" id="doiip"><summary>Inverter báo mất kết nối, dongle vẫn online</summary><div>
         <p><b>Áp dụng:</b> Gateway đọc inverter qua <b>dongle Luxpower</b> hoặc <b>Modbus TCP</b>. Logger Solarman không cần làm mục này vì Gateway tự tìm lại theo serial.</p>
         <p><b>Hiện tượng:</b> inverter đang đọc tốt bỗng báo mất kết nối và không tự có lại, dù dongle vẫn online.</p>

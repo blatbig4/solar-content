@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Thêm thiết bị bằng app — Quét thiết bị ở gần, không cần gõ ID | SOLAR CLOUD</title>
+<meta name="description" content="Cài WiFi và thêm thiết bị SOLAR CLOUD vào tài khoản ngay trên app Android: app tự tìm thiết bị ở gần, chọn máy, chọn WiFi nhà, nhập mật khẩu — thiết bị tự vào tài khoản, không phải gõ ID 10 số.">
+<meta name="theme-color" content="#0E775E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/huongdan/guide.css?v=20261004j">
+<style>
+html{scroll-behavior:smooth}
+.sec,.prep,.kband,.fig,.howon{scroll-margin-top:70px}
+.annoplate{align-items:flex-start}
+.anno{position:relative;display:block;width:100%;line-height:0;cursor:zoom-in}
+.anno img{display:block;width:100%;height:auto;border-radius:var(--r-sm);border:1px solid var(--line)}
+.annoplate.side .anno.tall{flex:0 1 300px}
+@media (min-width:760px){.annoplate.side .anno.tall{position:sticky;top:16px}}
+.annoplate.side .legend{flex:1 1 300px}
+.pin{position:absolute;transform:translate(-50%,-50%);width:24px;height:24px;border-radius:50%;background:var(--phos);color:#fff;font:700 12px/24px var(--fd);text-align:center;box-shadow:0 0 0 2px #fff,0 2px 6px rgba(0,0,0,.4);pointer-events:none;font-variant-numeric:tabular-nums}
+.legend{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-size:15px;line-height:1.55;color:var(--paper)}
+.legend li{display:flex;gap:11px;align-items:flex-start}
+.legend li>div{min-width:0}
+.legend .pin{position:static;transform:none;flex:0 0 auto;box-shadow:none}
+.legend b{font-weight:650}
+.legend .rule-line{margin:10px 0 0;font-size:13.5px;color:var(--muted);background:var(--ink-3);border:1px solid var(--line);border-radius:8px;padding:6px 10px;line-height:1.5}
+.legend .rule-line b{color:var(--paper)}
+.compat{margin:26px 0 0;border:1px solid var(--line);border-radius:var(--r);background:var(--ink-2);padding:18px 20px 20px;box-shadow:var(--sh-1)}
+.compat h2{margin:0 0 6px;font-family:var(--fd);font-size:17px;font-weight:750;color:var(--paper)}
+.compat>p{margin:0;font-size:15px;line-height:1.55;color:var(--paper)}
+.compat b{font-weight:650}
+.compat .cnote{margin:12px 0 0;font-size:13.5px;line-height:1.5;color:var(--muted)}
+.heroshot{margin:22px auto 0;max-width:620px}
+.heroshot img{display:block;width:100%;height:auto;border-radius:var(--r)}
+/* khi nào máy ở chế độ cài đặt qua app */
+.howon{margin:26px 0 0;border:1px solid var(--phos-line);border-radius:var(--r);background:var(--phos-dim);padding:18px 20px 20px}
+.howon h2{margin:0 0 10px;font-family:var(--fd);font-size:17px;font-weight:750;color:var(--paper)}
+.howon ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.howon li{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.55;color:var(--paper)}
+.howon li svg{width:18px;height:18px;flex:0 0 auto;margin-top:3px;color:var(--phos-d)}
+.howon b{font-weight:650}
+.howon .cnote{margin:12px 0 0;font-size:13.5px;line-height:1.5;color:var(--muted)}
+/* 2 ảnh cạnh nhau */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:18px;width:100%;max-width:640px;margin:0 auto}
+.duo figure{margin:0;text-align:center}
+.duo img{display:block;width:100%;height:auto;border-radius:var(--r-sm);border:1px solid var(--line)}
+.duo figcaption{margin-top:8px;font-size:13.5px;color:var(--muted);line-height:1.45}
+.duo figcaption b{color:var(--paper)}
+/* mục lục + hỏi đáp */
+.kband{margin:46px 0 0;padding:22px 22px;border-radius:var(--r);background:linear-gradient(135deg,#0E775E,#12936F);color:#fff;box-shadow:var(--sh-2)}
+.kband .kk{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+.kband p{margin:4px 0 0;font-size:15.5px;line-height:1.5;opacity:.95}
+.kband p b{color:#fff}
+.ktoc{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0}
+.ktoc a{font-size:14px;font-weight:650;color:#fff;text-decoration:none;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 12px;transition:background .15s}
+.ktoc a:hover{background:rgba(255,255,255,.26)}
+.faqs{display:grid;gap:10px;margin:22px 0 0}
+.faq{border:1px solid var(--line);border-radius:12px;background:var(--ink-2);box-shadow:var(--sh-1);overflow:hidden}
+.faq summary{cursor:pointer;list-style:none;padding:14px 44px 14px 16px;font-weight:650;font-size:15.5px;color:var(--paper);position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:16px;top:50%;transform:translateY(-50%);font-size:22px;font-weight:600;color:var(--phos)}
+.faq[open] summary::after{content:"–"}
+.faq>div{padding:0 16px 15px;font-size:15px;line-height:1.6;color:var(--paper)}
+.faq>div p{margin:0 0 8px}
+.faq>div p:last-child{margin-bottom:0}
+.faq a,.sec .note a,.howon a,.compat a{color:var(--phos-d);font-weight:650}
+.faq img{display:block;width:100%;max-width:392px;height:auto;margin:10px 0 0;border-radius:10px;border:1px solid var(--line)}
+@media (max-width:560px){
+  .pin{width:19px;height:19px;font-size:10px;line-height:19px;box-shadow:0 0 0 1.5px #fff,0 1px 4px rgba(0,0,0,.4)}
+  .legend .pin{width:22px;height:22px;font-size:11px;line-height:22px}
+  .annoplate{padding:14px 10px}
+  .duo{gap:10px}
+}
+</style>
+</head>
+<body>
+<script src="/site-nav.js"></script>
+  <div class="topnav">
+    <a href="/huongdan">← Hướng dẫn khác</a>
+    <a class="sp" href="/">Mở SOLAR CLOUD →</a>
+  </div>
+
+  <div class="wrap">
+    <div class="hero" style="padding-top:clamp(26px,4.5vw,40px)">
+      <h1>Thêm thiết bị bằng app<br><span class="amp">Quét thiết bị ở gần</span></h1>
+      <p class="lede">Trên app <b>SOLAR CLOUD cho Android</b>, app <b>tự tìm thiết bị ở gần</b>: bạn chỉ chạm đúng máy, chọn <b>WiFi nhà</b> và nhập mật khẩu. Thiết bị nối WiFi xong là <b>tự vào tài khoản của bạn</b> — không phải gõ ID 10 số, không phải đổi WiFi điện thoại.</p>
+    </div>
+
+    <div class="heroshot">
+      <img src="/huongdan/img/quetgan-the.webp" width="1400" height="1050" alt="App SOLAR CLOUD: màn Thêm thiết bị — Quét thiết bị ở gần, danh sách máy tìm thấy và màn chọn WiFi cho thiết bị">
+    </div>
+
+    <div class="compat">
+      <h2>Dùng được khi nào?</h2>
+      <p>Cần <b>app SOLAR CLOUD trên điện thoại Android</b> và thiết bị SOLAR CLOUD đời mới (ví dụ <b>Gateway</b>, <b>BMS HUB JK</b>) đang ở <b>chế độ cài đặt qua app</b>. Trên <b>web trình duyệt</b> (iPhone, máy tính) chỉ có cách <b>Nhập ID 10 số</b> — xem <a href="#khongthay">phần cuối bài</a>.</p>
+      <p class="cnote">Tem QR dán trên thiết bị: quét bằng <b>camera thường</b> của điện thoại vẫn mở được trang web để thêm máy.</p>
+    </div>
+
+    <div class="howon" id="chedo">
+      <h2>Khi nào thiết bị ở chế độ cài đặt qua app?</h2>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Máy mới, chưa có WiFi</b>: cắm nguồn là máy tự bật, chờ đến khi bạn cài xong.</div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Vừa xoá WiFi</b>: với Gateway và BMS HUB JK, <b>giữ nút BOOT khoảng 5 giây</b> để xoá WiFi đã lưu — máy tự bật chế độ này.</div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Máy đang có WiFi, muốn cài lại</b>: bật trong <b>menu trên màn hình máy</b> (máy có màn hình) hoặc ở trang <code>192.168.4.1</code>, thẻ <b>WiFi</b>, nút <b>cài qua app</b>. Lúc này chế độ cài đặt <b>tự tắt sau 5 phút</b> nếu không có điện thoại nào nối vào.</div></li>
+      </ul>
+      <p class="cnote">Máy đã có WiFi và đang chạy bình thường sẽ <b>không hiện</b> trong danh sách quét — bật lại theo cách ở dòng thứ ba.</p>
+    </div>
+
+    <div class="kband">
+      <span class="kk">4 bước · khoảng 2 phút</span>
+      <p>Đứng <b>gần thiết bị</b> (vài mét), cầm điện thoại Android đã cài app SOLAR CLOUD.</p>
+      <nav class="ktoc"><a href="#chuanbi">Chuẩn bị</a><a href="#b1">1 · Mở Thêm thiết bị</a><a href="#b2">2 · Chọn máy</a><a href="#b3">3 · Chọn WiFi</a><a href="#b4">4 · Chờ xong</a><a href="#khongthay">Không thấy máy</a><a href="#suco">Sự cố</a></nav>
+    </div>
+
+    <div class="prep" id="chuanbi">
+      <h2>Cần chuẩn bị</h2>
+      <ul>
+        <li><span class="ix mono">01</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>Điện thoại Android</b> có app <b>SOLAR CLOUD</b>, đã đăng nhập tài khoản.</div></li>
+        <li><span class="ix mono">02</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Bật <b>Bluetooth</b> trên điện thoại. <em>Android 11 trở xuống: bật thêm Vị trí (GPS).</em></div></li>
+        <li><span class="ix mono">03</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div><b>WiFi nhà 2.4GHz</b> + mật khẩu. <em>Thiết bị không bắt được WiFi 5GHz.</em></div></li>
+        <li><span class="ix mono">04</span><svg class="ck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><div>Thiết bị <b>đã cắm nguồn</b> và đang ở <a href="#chedo">chế độ cài đặt qua app</a>. Xem trước <b>ID 10 số</b> trên tem để đối chiếu.</div></li>
+      </ul>
+    </div>
+
+    <div class="sec" id="b1">
+      <div class="rail"></div>
+      <div class="snum">1</div>
+      <div class="sechd"><div class="st">Trên app SOLAR CLOUD · Android</div><h2>Mở Thêm thiết bị — app tự quét</h2></div>
+      <ol class="steps">
+        <li>Mở app <b>SOLAR CLOUD</b> → bấm <b>Thêm thiết bị</b>.</li>
+        <li>Hộp mở sẵn tab <b>Quét thiết bị ở gần</b> và <b>tự quét</b> — vòng sóng lan ra là đang tìm.<div class="hint">Đứng gần thiết bị. App chỉ tìm các thiết bị SOLAR CLOUD <b>đang chờ cài đặt</b>.</div></li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 1</span><span>Thêm thiết bị — Quét thiết bị ở gần</span><span class="rule"></span></div>
+        <div class="plate annoplate side">
+          <a class="anno tall" href="/huongdan/img/quetgan-01-tu-quet.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/quetgan-01-tu-quet.webp" width="788" height="1002" alt="Hộp Thêm thiết bị: tab Quét thiết bị ở gần đang chọn, vòng sóng đang tìm thiết bị ở gần, nút Quét lại" loading="lazy">
+            <span class="pin" style="left:8.6%;top:31.1%">1</span>
+            <span class="pin" style="left:24.4%;top:60.7%">2</span>
+            <span class="pin" style="left:7.4%;top:88.8%">3</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div>Tab <b>Quét thiết bị ở gần</b> — mở là tự quét. Tab bên cạnh là <b>Nhập ID 10 số</b>.</div></li>
+            <li><span class="pin">2</span><div><b>Đang tìm thiết bị ở gần…</b> — chờ vài giây.</div></li>
+            <li><span class="pin">3</span><div><b>Quét lại</b> nếu chưa thấy máy.</div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec" id="b2">
+      <div class="rail"></div>
+      <div class="snum">2</div>
+      <div class="sechd"><div class="st">Danh sách máy tìm thấy</div><h2>Chạm đúng máy của bạn</h2></div>
+      <ol class="steps">
+        <li>Danh sách hiện các máy ở gần: <b>tên dòng máy</b> + <b>ID 10 số</b> + <b>cột sóng</b>.</li>
+        <li><b>Đối chiếu ID trên tem</b> rồi chạm vào đúng máy đó.<div class="hint">Nhà có nhiều thiết bị chờ cài cùng lúc thì danh sách có nhiều dòng — luôn chọn theo ID.</div></li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 2</span><span>Máy tìm thấy ở gần</span><span class="rule"></span></div>
+        <div class="plate annoplate side">
+          <a class="anno tall" href="/huongdan/img/quetgan-02-danh-sach.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/quetgan-02-danh-sach.webp" width="788" height="1419" alt="Danh sách thiết bị ở gần: mỗi dòng có tên dòng máy, ID 10 số và cột sóng" loading="lazy">
+            <span class="pin" style="left:8.6%;top:49.9%">1</span>
+            <span class="pin" style="left:91.6%;top:49.9%">2</span>
+            <span class="pin" style="left:7.4%;top:92.2%">3</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div>Mỗi dòng là <b>một máy</b>: tên dòng máy và <b>ID 10 số</b>. Chạm vào dòng có ID <b>trùng với tem</b>.</div></li>
+            <li><span class="pin">2</span><div><b>Cột sóng</b>: càng nhiều vạch xanh là càng gần.</div></li>
+            <li><span class="pin">3</span><div><b>Quét lại</b> khi máy của bạn chưa hiện.</div></li>
+          </ol>
+        </div>
+        <div class="figcap">ID trong ảnh là số minh hoạ.</div>
+      </div>
+    </div>
+
+    <div class="sec" id="b3">
+      <div class="rail"></div>
+      <div class="snum">3</div>
+      <div class="sechd"><div class="st">Màn “Chọn WiFi cho thiết bị”</div><h2>Chọn WiFi nhà &amp; nhập mật khẩu</h2></div>
+      <ol class="steps">
+        <li>Thiết bị <b>tự dò WiFi quanh nó</b> và gửi danh sách lên app. Chạm chọn <b>WiFi nhà</b> (WiFi <b>2.4GHz</b>).<div class="hint">Không thấy WiFi nhà trong danh sách → bấm <b>Dò lại</b>, hoặc gõ tay tên WiFi vào ô <b>Tên WiFi</b>.</div></li>
+        <li>Nhập <b>mật khẩu WiFi</b> — bấm nút <b>con mắt</b> để xem lại cho chắc.</li>
+        <li>Đặt <b>Tên thiết bị</b> nếu muốn (có thể bỏ trống) → bấm <b>Kết nối &amp; thêm vào tài khoản</b>.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 3</span><span>Chọn WiFi cho thiết bị</span><span class="rule"></span></div>
+        <div class="plate annoplate side">
+          <a class="anno tall" href="/huongdan/img/quetgan-03-chon-wifi.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/quetgan-03-chon-wifi.webp" width="788" height="1566" alt="Màn Chọn WiFi cho thiết bị: ID thiết bị, danh sách WiFi thiết bị bắt được kèm cột sóng, nút Dò lại, ô Tên WiFi chỉ 2.4 GHz, ô mật khẩu có nút con mắt" loading="lazy">
+            <span class="pin" style="left:26.9%;top:40.1%">1</span>
+            <span class="pin" style="left:8.6%;top:51.1%">2</span>
+            <span class="pin" style="left:94.2%;top:45%">3</span>
+            <span class="pin" style="left:8.6%;top:86.1%">4</span>
+            <span class="pin" style="left:8.6%;top:97.2%">5</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>ID thiết bị</b> đang cài — đúng ID trên tem.</div></li>
+            <li><span class="pin">2</span><div>WiFi <b>thiết bị bắt được</b>: chạm để chọn. Cột sóng 4 mức — càng nhiều vạch càng mạnh; có hình ổ khoá là WiFi có mật khẩu.</div></li>
+            <li><span class="pin">3</span><div><b>Dò lại</b> danh sách WiFi.</div></li>
+            <li><span class="pin">4</span><div><b>Tên WiFi</b> — tự điền khi chạm chọn, hoặc gõ tay. Chỉ WiFi <b>2.4GHz</b>.</div></li>
+            <li><span class="pin">5</span><div><b>Mật khẩu WiFi</b> — nút con mắt để xem chữ đã gõ.</div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec" id="b4">
+      <div class="rail"></div>
+      <div class="snum">4</div>
+      <div class="sechd"><div class="st">Giữ app mở, đứng gần thiết bị</div><h2>Chờ máy vào WiFi &amp; tự thêm vào tài khoản</h2></div>
+      <ol class="steps">
+        <li>Thiết bị <b>thử nối WiFi trước</b> — thường mất <b>10–40 giây</b>. Nối được thì máy <b>mới lưu</b> WiFi đó.<div class="hint">Sai mật khẩu, sai tên hoặc WiFi 5GHz: app báo ngay, máy <b>không lưu</b> WiFi sai — sửa lại rồi gửi lại.</div></li>
+        <li>Máy lên mạng là <b>tự vào tài khoản</b> của bạn. App báo <b>Đã thêm thiết bị vào tài khoản</b> rồi mở thiết bị.</li>
+      </ol>
+    </div>
+
+    <div class="done"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div><div class="bd"><span class="tt">Xong rồi!</span><p>Thiết bị đã có WiFi và nằm trong tài khoản của bạn. Chế độ cài đặt qua app <b>tự tắt</b> ngay sau đó — không cần làm gì thêm.</p></div></div>
+
+    <div class="sec" id="khongthay">
+      <div class="rail"></div>
+      <div class="snum">↻</div>
+      <div class="sechd"><div class="st">Khi cần</div><h2>Không thấy máy · Dùng iPhone hoặc máy tính</h2></div>
+      <ol class="steps">
+        <li>Không thấy máy: bấm <b>Quét lại</b> / <b>Tìm lại</b> sau khi kiểm tra Bluetooth, đứng gần, và máy đang ở <a href="#chedo">chế độ cài đặt qua app</a>.</li>
+        <li>Hoặc chuyển sang tab <b>Nhập ID 10 số</b>: gõ ID trên tem (hoặc ID trên màn hình máy / trang <code>192.168.4.1</code>) → <b>Thêm thiết bị</b>.</li>
+        <li>Hoặc cài WiFi kiểu cũ: điện thoại nối <b>WiFi của thiết bị</b> rồi mở <code>192.168.4.1</code> — làm theo hướng dẫn cài đặt của từng sản phẩm (<a href="/sanpham/gateway/#b2">Gateway</a>, <a href="/sanpham/bms-hub-jk/#b2">BMS HUB JK</a>). Máy lên mạng bằng cách này app cũng tự thêm.</li>
+        <li><b>iPhone và máy tính</b> (web trình duyệt): chỉ có <b>Nhập ID 10 số</b>. Quét thiết bị ở gần chỉ có trong <b>app Android</b>.</li>
+      </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 4</span><span>Không tìm thấy thiết bị ở gần</span><span class="rule"></span></div>
+        <div class="plate annoplate side">
+          <a class="anno tall" href="/huongdan/img/quetgan-05-khong-thay.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/quetgan-05-khong-thay.webp" width="788" height="1243" alt="Màn Không tìm thấy thiết bị ở gần: các mục cần kiểm tra, nút Cài qua WiFi máy và nút Tìm lại" loading="lazy">
+            <span class="pin" style="left:8.6%;top:77.1%">1</span>
+            <span class="pin" style="left:91.6%;top:77.1%">2</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Cài qua WiFi máy</b>: hướng dẫn nối WiFi của thiết bị và mở <code>192.168.4.1</code>.</div></li>
+            <li><span class="pin">2</span><div><b>Tìm lại</b> sau khi đã kiểm tra các mục ở trên màn.</div></li>
+          </ol>
+        </div>
+      </div>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 5</span><span>Nhập ID 10 số — trên app và trên web</span><span class="rule"></span></div>
+        <div class="plate">
+          <div class="duo">
+            <figure><a href="/huongdan/img/quetgan-04-nhap-id.webp" target="_blank" rel="noopener"><img src="/huongdan/img/quetgan-04-nhap-id.webp" width="788" height="1059" alt="Tab Nhập ID 10 số trên app: ô ID thiết bị, ô tên thiết bị, nút Thêm thiết bị" loading="lazy"></a><figcaption><b>App Android</b>: tab Nhập ID 10 số</figcaption></figure>
+            <figure><a href="/huongdan/img/quetgan-06-web-nhap-id.webp" target="_blank" rel="noopener"><img src="/huongdan/img/quetgan-06-web-nhap-id.webp" width="788" height="928" alt="Web trình duyệt trên iPhone hoặc máy tính: chỉ có ô nhập ID 10 số" loading="lazy"></a><figcaption><b>iPhone / máy tính</b>: chỉ có Nhập ID</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec" id="suco">
+      <div class="rail"></div>
+      <div class="snum">?</div>
+      <div class="sechd"><div class="st">Bấm vào từng mục để xem</div><h2>Sự cố thường gặp</h2></div>
+      <div class="faqs">
+      <details class="faq"><summary>Danh sách quét trống</summary><div><p>Kiểm tra: <b>Bluetooth</b> đang bật (Android 11 trở xuống bật thêm <b>Vị trí</b>) · đứng <b>gần</b> thiết bị · thiết bị đang ở <a href="#chedo">chế độ cài đặt qua app</a>. Máy đang có WiFi và chạy bình thường sẽ không hiện — bật lại chế độ cài đặt rồi bấm <b>Quét lại</b>.</p><p>Vẫn không thấy: dùng tab <b>Nhập ID 10 số</b>.</p></div></details>
+      <details class="faq"><summary>Thấy nhiều máy, không biết chọn máy nào</summary><div>Chọn dòng có <b>ID 10 số trùng với tem</b> dán trên thiết bị. Cột sóng nhiều vạch hơn thường là máy ở gần bạn hơn.</div></details>
+      <details class="faq"><summary>Báo sai mật khẩu / không vào được WiFi</summary><div>WiFi phải là <b>2.4GHz</b>. Kiểm tra lại mật khẩu (phân biệt chữ hoa / thường) bằng nút con mắt. Modem phát 2 băng tần cùng tên thì vào cài đặt modem tách riêng WiFi 2.4GHz. WiFi sai không bị lưu — sửa rồi gửi lại.</div></details>
+      <details class="faq"><summary>Máy lên mạng nhưng chưa vào tài khoản</summary><div>Giữ app mở thêm ít giây — app tự thêm khi thấy máy lên mạng. Nếu app báo <b>Chưa thêm được</b> vì máy đang thuộc tài khoản khác, nhắn Zalo kèm <b>ID 10 số</b> để được hỗ trợ.</div></details>
+      <details class="faq"><summary>Gateway / BMS HUB JK đang nối 3 pin thì sao?</summary><div><p>Lúc đang ở chế độ cài đặt qua app, máy <b>tạm ngắt Pin 3</b> để nhường kết nối cho điện thoại (máy chỉ nối được tối đa 3 thiết bị Bluetooth cùng lúc). Trên app hiện khung xanh <b>“Đang bật cài đặt qua app — tạm ngắt Pin 3…”</b> và thẻ pin đó ghi <b>tạm ngắt</b>.</p><p><b>Cài xong máy tự nối lại Pin 3</b>, bạn không cần làm gì.</p><img src="/huongdan/img/quetgan-gw-tam-ngat.webp" width="392" height="208" alt="App SOLAR CLOUD: khung Đang bật cài đặt qua app — tạm ngắt Pin 3 để nhường kết nối, cài xong tự nối lại; thẻ Pin 3 ghi tạm ngắt" loading="lazy"></div></details>
+      <details class="faq"><summary>Có cần quét mã QR trong app không?</summary><div>Không. Trong app chỉ có <b>Quét thiết bị ở gần</b> và <b>Nhập ID 10 số</b>. Tem QR dán trên thiết bị quét bằng <b>camera thường</b> của điện thoại vẫn mở được trang web để thêm máy.</div></details>
+      </div>
+      <div class="note info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5h.01"/></svg></div><div class="bd"><span class="tt">Cần hỗ trợ?</span>Nhắn Zalo <a href="https://zalo.me/0349897777" target="_blank" rel="noopener"><b>0349 897 777</b></a> kèm <b>ID 10 số</b> của thiết bị để được hỗ trợ nhanh.</div></div>
+    </div>
+
+    <div class="cta-row">
+      <a class="cta pri" href="/huongdan">Hướng dẫn khác →</a>
+      <a class="cta ghost" href="/sanpham">Xem sản phẩm</a>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Solar Cloud · <span class="on">solarcloud.io.vn</span></span>
+    <span>Giám sát năng lượng mặt trời · pin lưu trữ · inverter</span>
+  </div>
+  <script src="/huongdan/guide.js" defer></script>
+</body>
+</html>
