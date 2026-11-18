@@ -3,10 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Giám sát inverter Senergy từ xa — tự làm, mọi model (ESP32 / ESP32-S3 màn cảm ứng) | SOLAR CLOUD</title>
-<meta name="description" content="Tự làm bộ giám sát inverter Senergy (SE Green, ECO, PRO, Pro3, KTL…) xem từ xa trên app: điện mặt trời, pin, lưới, tải. Một firmware tự nhận model, đọc qua dongle WiFi, không đấu dây. Bo ESP32, ESP32-S3 N16R8 hoặc màn cảm ứng 2.8 inch.">
-<meta name="theme-color" content="#0E775E">
+<title>Tự làm bộ giám sát inverter Senergy từ xa | SOLAR CLOUD</title>
+<meta name="description" content="Tự làm bộ giám sát inverter Senergy (SE Green, ECO, PRO, KTL…) bằng ESP32 hoặc ESP32-S3: tự nhận model, đọc qua dongle WiFi, xem PV, pin, lưới, tải trên app.">
+<!-- SEO:BEGIN -->
 <link rel="canonical" href="https://solarcloud.io.vn/huongdan/inv-senergy-act/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="SOLAR CLOUD">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:url" content="https://solarcloud.io.vn/huongdan/inv-senergy-act/">
+<meta property="og:title" content="Tự làm bộ giám sát inverter Senergy từ xa">
+<meta property="og:description" content="Tự làm bộ giám sát inverter Senergy (SE Green, ECO, PRO, KTL…) bằng ESP32 hoặc ESP32-S3: tự nhận model, đọc qua dongle WiFi, xem PV, pin, lưới, tải trên app.">
+<meta property="og:image" content="https://solarcloud.io.vn/huongdan/img/og-sen-box-hero.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Hộp màn cảm ứng giám sát inverter Senergy">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "headline": "Hướng dẫn tự làm thiết bị giám sát inverter Senergy từ xa", "description": "Tự làm bộ giám sát inverter Senergy (SE Green, ECO, PRO, KTL…) bằng ESP32 hoặc ESP32-S3: tự nhận model, đọc qua dongle WiFi, xem PV, pin, lưới, tải trên app.", "image": ["https://solarcloud.io.vn/huongdan/img/og-sen-box-hero.jpg"], "inLanguage": "vi-VN", "mainEntityOfPage": "https://solarcloud.io.vn/huongdan/inv-senergy-act/", "author": {"@type": "Organization", "name": "SOLAR CLOUD", "url": "https://solarcloud.io.vn/", "logo": {"@type": "ImageObject", "url": "https://solarcloud.io.vn/icon-512.png"}}, "publisher": {"@type": "Organization", "name": "SOLAR CLOUD", "url": "https://solarcloud.io.vn/", "logo": {"@type": "ImageObject", "url": "https://solarcloud.io.vn/icon-512.png"}}, "datePublished": "2026-10-06T16:49:43+07:00", "dateModified": "2026-11-13T17:13:03+07:00"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SOLAR CLOUD", "item": "https://solarcloud.io.vn/"}, {"@type": "ListItem", "position": 2, "name": "Hướng dẫn", "item": "https://solarcloud.io.vn/huongdan/"}, {"@type": "ListItem", "position": 3, "name": "Giám sát inverter Senergy", "item": "https://solarcloud.io.vn/huongdan/inv-senergy-act/"}]}]}</script>
+<!-- SEO:END -->
+<meta name="theme-color" content="#0E775E">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -3,8 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Giám sát 2 inverter chạy song song và 2 pin JK BMS từ xa qua WiFi — Deye, Luxpower, Solis, Growatt… tự lắp (ESP32-S3) | SOLAR CLOUD</title>
-<meta name="description" content="Tự làm bộ giám sát 2 inverter chạy song song (hoặc 1 máy) và 2 pin JK BMS trên một app: xem cả 2 máy cùng lúc trên cùng một mạng WiFi nhà. Đọc được Deye, Luxpower, Senergy, Solis, Sofar, Growatt, SolaX. Không đấu dây: inverter qua dongle WiFi, BMS qua Bluetooth.">
+<title>Gateway ESP32-S3 giám sát inverter + JK BMS | SOLAR CLOUD</title>
+<meta name="description" content="Tự làm gateway ESP32-S3 xem 2 inverter chạy song song và 2 pin JK BMS trên một app: Deye, Luxpower, Senergy, Solis, Sofar, Growatt, SolaX. Không đấu dây.">
+<!-- SEO:BEGIN -->
+<link rel="canonical" href="https://solarcloud.io.vn/huongdan/gateway-deye-lux-bms/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="SOLAR CLOUD">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:url" content="https://solarcloud.io.vn/huongdan/gateway-deye-lux-bms/">
+<meta property="og:title" content="Gateway ESP32-S3 giám sát inverter + JK BMS">
+<meta property="og:description" content="Tự làm gateway ESP32-S3 xem 2 inverter chạy song song và 2 pin JK BMS trên một app: Deye, Luxpower, Senergy, Solis, Sofar, Growatt, SolaX. Không đấu dây.">
+<meta property="og:image" content="https://solarcloud.io.vn/huongdan/img/og-gw-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sơ đồ gateway ESP32-S3 đọc inverter và pin JK BMS">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "headline": "Hướng dẫn tự làm thiết bị giám sát 2 inverter song song & 2 pin JK BMS từ xa", "description": "Tự làm gateway ESP32-S3 xem 2 inverter chạy song song và 2 pin JK BMS trên một app: Deye, Luxpower, Senergy, Solis, Sofar, Growatt, SolaX. Không đấu dây.", "image": ["https://solarcloud.io.vn/huongdan/img/og-gw-cover.jpg"], "inLanguage": "vi-VN", "mainEntityOfPage": "https://solarcloud.io.vn/huongdan/gateway-deye-lux-bms/", "author": {"@type": "Organization", "name": "SOLAR CLOUD", "url": "https://solarcloud.io.vn/", "logo": {"@type": "ImageObject", "url": "https://solarcloud.io.vn/icon-512.png"}}, "publisher": {"@type": "Organization", "name": "SOLAR CLOUD", "url": "https://solarcloud.io.vn/", "logo": {"@type": "ImageObject", "url": "https://solarcloud.io.vn/icon-512.png"}}, "datePublished": "2026-10-03T19:21:25+07:00", "dateModified": "2026-11-18T14:39:13+07:00"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SOLAR CLOUD", "item": "https://solarcloud.io.vn/"}, {"@type": "ListItem", "position": 2, "name": "Hướng dẫn", "item": "https://solarcloud.io.vn/huongdan/"}, {"@type": "ListItem", "position": 3, "name": "Gateway 2 inverter + 2 pin JK BMS", "item": "https://solarcloud.io.vn/huongdan/gateway-deye-lux-bms/"}]}]}</script>
+<!-- SEO:END -->
 <meta name="theme-color" content="#0E775E">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">

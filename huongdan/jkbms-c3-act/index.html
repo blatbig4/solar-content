@@ -3,8 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Giám sát & cài đặt pin JK BMS từ xa qua WiFi — giới thiệu & hướng dẫn (ESP32 & ESP32-C3) | SOLAR CLOUD</title>
-<meta name="description" content="Bộ giám sát pin JK BMS qua WiFi: xem SoC, điện áp từng cell, cân bằng, SoH và cài đặt BMS từ xa (chọn loại pin LFP/NCM/LTO, ngưỡng bảo vệ, bật/tắt sạc xả) trên app SOLAR CLOUD — Android, iPhone, máy tính. Hướng dẫn tự lắp cho ESP32 và ESP32-C3.">
+<title>Tự làm bộ giám sát JK BMS từ xa qua WiFi | SOLAR CLOUD</title>
+<meta name="description" content="Tự làm bộ đọc JK BMS qua WiFi bằng ESP32-C3 hoặc ESP32: xem SoC, điện áp từng cell, cân bằng và cài đặt BMS từ xa trên Android, iPhone, máy tính.">
+<!-- SEO:BEGIN -->
+<link rel="canonical" href="https://solarcloud.io.vn/huongdan/jkbms-c3-act/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="SOLAR CLOUD">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:url" content="https://solarcloud.io.vn/huongdan/jkbms-c3-act/">
+<meta property="og:title" content="Tự làm bộ giám sát JK BMS từ xa qua WiFi">
+<meta property="og:description" content="Tự làm bộ đọc JK BMS qua WiFi bằng ESP32-C3 hoặc ESP32: xem SoC, điện áp từng cell, cân bằng và cài đặt BMS từ xa trên Android, iPhone, máy tính.">
+<meta property="og:image" content="https://solarcloud.io.vn/sanpham/img/og-jkbms-c3-hero.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Mạch ESP32-C3 đọc pin JK BMS qua WiFi">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "headline": "Hướng dẫn tự làm thiết bị giám sát & cài đặt pin JK BMS từ xa", "description": "Tự làm bộ đọc JK BMS qua WiFi bằng ESP32-C3 hoặc ESP32: xem SoC, điện áp từng cell, cân bằng và cài đặt BMS từ xa trên Android, iPhone, máy tính.", "image": ["https://solarcloud.io.vn/sanpham/img/og-jkbms-c3-hero.jpg"], "inLanguage": "vi-VN", "mainEntityOfPage": "https://solarcloud.io.vn/huongdan/jkbms-c3-act/", "author": {"@type": "Organization", "name": "SOLAR CLOUD", "url": "https://solarcloud.io.vn/", "logo": {"@type": "ImageObject", "url": "https://solarcloud.io.vn/icon-512.png"}}, "publisher": {"@type": "Organization", "name": "SOLAR CLOUD", "url": "https://solarcloud.io.vn/", "logo": {"@type": "ImageObject", "url": "https://solarcloud.io.vn/icon-512.png"}}, "datePublished": "2026-09-23T23:21:38+07:00", "dateModified": "2026-11-13T17:13:03+07:00"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SOLAR CLOUD", "item": "https://solarcloud.io.vn/"}, {"@type": "ListItem", "position": 2, "name": "Hướng dẫn", "item": "https://solarcloud.io.vn/huongdan/"}, {"@type": "ListItem", "position": 3, "name": "Giám sát pin JK BMS", "item": "https://solarcloud.io.vn/huongdan/jkbms-c3-act/"}]}]}</script>
+<!-- SEO:END -->
 <meta name="theme-color" content="#0E775E">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">

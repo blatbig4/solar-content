@@ -3,8 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Tự làm thiết bị giám sát &amp; cài đặt 3 pin JK BMS từ xa qua WiFi (ESP32-S3) | SOLAR CLOUD</title>
-<meta name="description" content="Tự làm BMS HUB: một mạch ESP32-S3 N16R8 nối tới 3 pin JK BMS qua Bluetooth, xem từng pin và cài đặt BMS từ xa trên app SOLAR CLOUD. Nạp firmware ngay trên trình duyệt.">
+<title>Tự làm BMS HUB giám sát 3 pin JK BMS từ xa | SOLAR CLOUD</title>
+<meta name="description" content="Tự làm BMS HUB: mạch ESP32-S3 nối tới 3 pin JK BMS qua Bluetooth, xem từng pin và cài đặt BMS từ xa trên app SOLAR CLOUD. Nạp firmware ngay trên trình duyệt.">
+<!-- SEO:BEGIN -->
+<link rel="canonical" href="https://solarcloud.io.vn/huongdan/bms-hub-jk/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="SOLAR CLOUD">
+<meta property="og:locale" content="vi_VN">
+<meta property="og:url" content="https://solarcloud.io.vn/huongdan/bms-hub-jk/">
+<meta property="og:title" content="Tự làm BMS HUB giám sát 3 pin JK BMS từ xa">
+<meta property="og:description" content="Tự làm BMS HUB: mạch ESP32-S3 nối tới 3 pin JK BMS qua Bluetooth, xem từng pin và cài đặt BMS từ xa trên app SOLAR CLOUD. Nạp firmware ngay trên trình duyệt.">
+<meta property="og:image" content="https://solarcloud.io.vn/huongdan/img/og-hub-jk-the.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Sơ đồ BMS HUB nối 3 pin JK BMS">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "TechArticle", "headline": "Hướng dẫn tự làm thiết bị giám sát & cài đặt 3 pin JK BMS từ xa", "description": "Tự làm BMS HUB: mạch ESP32-S3 nối tới 3 pin JK BMS qua Bluetooth, xem từng pin và cài đặt BMS từ xa trên app SOLAR CLOUD. Nạp firmware ngay trên trình duyệt.", "image": ["https://solarcloud.io.vn/huongdan/img/og-hub-jk-the.jpg"], "inLanguage": "vi-VN", "mainEntityOfPage": "https://solarcloud.io.vn/huongdan/bms-hub-jk/", "author": {"@type": "Organization", "name": "SOLAR CLOUD", "url": "https://solarcloud.io.vn/", "logo": {"@type": "ImageObject", "url": "https://solarcloud.io.vn/icon-512.png"}}, "publisher": {"@type": "Organization", "name": "SOLAR CLOUD", "url": "https://solarcloud.io.vn/", "logo": {"@type": "ImageObject", "url": "https://solarcloud.io.vn/icon-512.png"}}, "datePublished": "2026-11-13T18:38:49+07:00", "dateModified": "2026-11-18T14:39:13+07:00"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SOLAR CLOUD", "item": "https://solarcloud.io.vn/"}, {"@type": "ListItem", "position": 2, "name": "Hướng dẫn", "item": "https://solarcloud.io.vn/huongdan/"}, {"@type": "ListItem", "position": 3, "name": "BMS HUB 3 pin JK BMS", "item": "https://solarcloud.io.vn/huongdan/bms-hub-jk/"}]}]}</script>
+<!-- SEO:END -->
 <meta name="theme-color" content="#0E775E">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%98%80%EF%B8%8F%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
