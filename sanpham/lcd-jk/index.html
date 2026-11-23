@@ -188,6 +188,16 @@ html{scroll-behavior:smooth}
 .appshot figcaption b{color:var(--paper);font-weight:650}
 .annoplate.stack .phones + .legend{margin-top:20px}
 kbd.k{display:inline-block;min-width:1.7em;padding:0 6px;border:1px solid var(--line-2);border-bottom-width:2px;border-radius:6px;background:var(--ink-3);font:700 .84em/1.5 var(--fd);color:var(--paper);text-align:center;white-space:nowrap}
+.btnmap{max-width:520px;margin:18px 0 4px}
+.btnmap .bm-img{position:relative;line-height:0}
+.btnmap .bm-img img{display:block;width:100%;height:auto;border-radius:var(--r-sm);border:1px solid var(--line)}
+.btnmap .bm-ring{position:absolute;width:8.6%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);border:2.5px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.5);pointer-events:none}
+.btnmap .bm-ring.hot{border:3px solid #3BE38A}
+.btnmap .bm-lab{position:relative;height:50px;margin-top:8px}
+.btnmap .bm-lab span{position:absolute;top:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;font:600 12.5px/1.2 var(--fd);color:var(--paper);white-space:nowrap}
+.btnmap .bm-lab kbd.k{font-size:14.5px}
+.btnmap .bm-lab .hot kbd.k{border-color:var(--phos);background:var(--phos);color:#fff}
+.btnmap .bm-cap{margin:2px 0 0;font-size:14px;line-height:1.5;color:var(--paper)}
 .keys .rrow{grid-template-columns:minmax(120px,160px) 1fr}
 .keys .rk{color:var(--paper)!important;font-weight:600;white-space:nowrap}
 .secp{margin:16px 0 0;font-size:15.5px;line-height:1.6;color:var(--paper)}
@@ -290,7 +300,7 @@ kbd.k{display:inline-block;min-width:1.7em;padding:0 6px;border:1px solid var(--
       <span class="kk">Hướng dẫn cài đặt Màn hình JK BMS</span>
       <h2>Lắp Màn hình JK BMS trong 10 phút</h2>
       <p>Đã nhận hàng? Làm theo các bước dưới đây — <b>chỉ cần điện thoại</b>.</p>
-      <nav class="ktoc"><a href="#chuanbi">Chuẩn bị</a><a href="#b1">1 · App JK</a><a href="#b2">2 · Cắm dây</a><a href="#b3">3 · WiFi nhà</a><a href="#b4">4 · Device ID</a><a href="#b5">5 · Vào app</a><a href="#b6">6 · 4 nút bấm</a><a href="#suco">Sự cố</a></nav>
+      <nav class="ktoc"><a href="#chuanbi">Chuẩn bị</a><a href="#b1">1 · App JK</a><a href="#b2">2 · Cắm dây</a><a href="#b3">3 · WiFi nhà</a><a href="#b4">4 · Mã QR</a><a href="#b5">5 · Vào app</a><a href="#b6">6 · 4 nút bấm</a><a href="#suco">Sự cố</a></nav>
     </div>
 
     <div class="prep" id="chuanbi">
@@ -385,24 +395,63 @@ kbd.k{display:inline-block;min-width:1.7em;padding:0 6px;border:1px solid var(--
     <div class="sec" id="b4">
       <div class="rail"></div>
       <div class="snum">4</div>
-      <div class="sechd"><div class="st">Trên màn hình</div><h2>Ghi lại Device ID 10 số</h2></div>
+      <div class="sechd"><div class="st">Trên màn hình</div><h2>Mở mã QR trên màn</h2></div>
+      <div class="btnmap">
+        <div class="bm-img">
+          <img src="/huongdan/img/lcdjk-4-nut.webp" width="1040" height="205" alt="4 nút bấm dưới màn hình JK BMS, từ trái sang phải: quay lại, lên, xuống, MENU" loading="lazy">
+          <span class="bm-ring" style="left:36.5%;top:69%"></span>
+          <span class="bm-ring" style="left:62.5%;top:71%"></span>
+          <span class="bm-ring hot" style="left:88.7%;top:72%"></span>
+        </div>
+        <div class="bm-lab">
+          <span style="left:10.8%"><kbd class="k">↩</kbd>nút 1</span>
+          <span style="left:36.5%"><kbd class="k">▲</kbd>nút 2</span>
+          <span style="left:62.5%"><kbd class="k">▼</kbd>nút 3</span>
+          <span class="hot" style="left:88.7%"><kbd class="k">MENU</kbd>nút 4</span>
+        </div>
+        <p class="bm-cap">4 nút dưới màn, từ trái sang phải. Bước này dùng <kbd class="k">▲</kbd> <kbd class="k">▼</kbd> và <kbd class="k">MENU</kbd>.</p>
+      </div>
       <ol class="steps">
-        <li><b>10 giây đầu</b> sau khi cắm dây, góc trên bên trái màn hiện <b>ID</b> 10 số.</li>
-        <li>Hoặc giữ <kbd class="k">MENU</kbd> 2 giây → tab <b>Hệ thống</b> → dòng <b>ID thiết bị</b>.</li>
-        <li>Hoặc trên trang <code>192.168.4.1</code>: dòng <b>ID</b> ở đầu trang, có nút <b>Sao chép</b>.</li>
+        <li><b>Giữ <kbd class="k">MENU</kbd> 2 giây</b> → vào <b>CÀI ĐẶT</b> → bấm <kbd class="k">▲</kbd> / <kbd class="k">▼</kbd> chọn tab <b>Kết nối</b> → bấm <kbd class="k">MENU</kbd>.</li>
+        <li>Dòng đầu tiên <b>Thêm vào app (mã QR)</b> → bấm <kbd class="k">MENU</kbd>. Màn hiện <b>mã QR</b> và <b>ID máy</b> 10 số (hình 4).<div class="hint">Cách khác: tab <b>Hệ thống</b> → dòng <b>ID thiết bị</b> → bấm <kbd class="k">MENU</kbd> cũng mở mã QR.</div></li>
+        <li>Quét xong bấm <b>nút bất kỳ</b> để quay lại.</li>
       </ol>
+      <div class="fig">
+        <div class="figtag"><span class="n">HÌNH 4</span><span>Trang mã QR · Thêm vào app</span><span class="rule"></span></div>
+        <div class="plate annoplate stack">
+          <a class="anno" style="max-width:520px" href="/huongdan/img/lcdjk-qr-them-app.webp" target="_blank" rel="noopener">
+            <img src="/huongdan/img/lcdjk-qr-them-app.webp" width="640" height="480" alt="Màn hình JK BMS trang THÊM VÀO APP SOLARCLOUD: mã QR bên trái, 3 bước bên phải, ID máy 12345 67890 và chữ Đã nối WiFi" loading="lazy">
+            <span class="pin" style="left:31%;top:17%">1</span>
+            <span class="pin" style="left:80%;top:64.5%">2</span>
+            <span class="pin" style="left:95.5%;top:80%">3</span>
+          </a>
+          <ol class="legend">
+            <li><span class="pin">1</span><div><b>Mã QR</b>: quét bằng camera điện thoại (bước 5, cách A).</div></li>
+            <li><span class="pin">2</span><div><b>ID máy</b> 10 số: dùng khi nhập tay (bước 5, cách B).</div></li>
+            <li><span class="pin">3</span><div><b>Đã nối WiFi</b>: máy phải nối WiFi nhà (bước 3) thì app mới thấy số liệu.</div></li>
+          </ol>
+        </div>
+      </div>
+      <p class="secp" style="margin-top:14px">ID 10 số còn hiện ở <b>10 giây đầu</b> sau khi cắm dây (góc trên bên trái màn) và trên trang <code>192.168.4.1</code> (có nút <b>Sao chép</b>).</p>
     </div>
 
     <div class="sec" id="b5">
       <div class="rail"></div>
       <div class="snum">5</div>
       <div class="sechd"><div class="st">Trên điện thoại hoặc máy tính</div><h2>Thêm vào app SOLAR CLOUD</h2></div>
+      <p class="secp">Điện thoại dùng <b>WiFi nhà</b> hoặc <b>4G</b> (đã thoát WiFi <code>SC-LCDJK-…</code> của máy). Chọn <b>một trong hai cách</b>.</p>
+      <h3 class="subh"><span>Cách A</span>Quét mã QR — nhanh nhất</h3>
       <ol class="steps">
-        <li>Điện thoại về <b>WiFi nhà</b> hoặc <b>4G</b>.</li>
-        <li>Vào <a href="/"><code>solarcloud.io.vn</code></a> → <b>Đăng ký</b> bằng email + mật khẩu → đăng nhập.</li>
-        <li>Vào tab <b>Thiết bị</b> → <b>Thêm thiết bị</b> → nhập <b>Device ID 10 số</b> (bước 4).</li>
-        <li>Chạm vào thiết bị vừa thêm: xem pin đến <b>từng cell</b>, bật/tắt <b>Sạc · Xả · Cân bằng</b> và chỉnh thông số BMS từ xa.</li>
+        <li>Mở <b>camera</b> điện thoại, hướng vào <b>mã QR</b> trên màn (hình 4) → chạm vào đường link <b>solarcloud.io.vn</b> hiện ra.</li>
+        <li><b>Đăng nhập</b> — chưa có tài khoản thì bấm <b>Đăng ký</b> bằng email + mật khẩu.</li>
+        <li>Máy <b>tự vào tài khoản</b>, không phải gõ ID → đặt tên cho máy (ví dụ “Pin nhà kho”) là xong.<div class="hint">Đang dùng app SOLAR CLOUD trên Android: vào <b>Thêm thiết bị</b> → tab <b>Quét mã QR</b> cũng quét được mã này.</div></li>
       </ol>
+      <h3 class="subh"><span>Cách B</span>Nhập ID 10 số</h3>
+      <ol class="steps">
+        <li>Vào <a href="/"><code>solarcloud.io.vn</code></a> → <b>Đăng ký</b> bằng email + mật khẩu → đăng nhập.</li>
+        <li>Vào tab <b>Thiết bị</b> → <b>Thêm thiết bị</b> → nhập <b>ID 10 số</b> (bước 4).</li>
+      </ol>
+      <p class="secp" style="margin-top:14px">Chạm vào thiết bị vừa thêm: xem pin đến <b>từng cell</b>, bật/tắt <b>Sạc · Xả · Cân bằng</b> và chỉnh thông số BMS từ xa.</p>
     </div>
 
     <div class="sec" id="b6">
@@ -434,6 +483,7 @@ kbd.k{display:inline-block;min-width:1.7em;padding:0 6px;border:1px solid var(--
       <details class="faq"><summary>Cắm dây mà màn không sáng</summary><div>Cắm lại <b>chặt cả 2 đầu dây</b>: giắc mặt sau màn và cổng UART 6 chân của BMS. Kiểm tra BMS đang bật (app JK nối được pin).</div></details>
       <details class="faq"><summary>Thanh trên báo “CHƯA THẤY BMS”, các ô hiện “--”</summary><div><p>Làm lại <a href="#b1">bước 1</a>: dòng <b>UART3 Protocol No.</b> phải là <b>001 - JK BMS RS485 Modbus V1.0</b> và đã bấm <b>OK</b>.</p><p>Vẫn chưa được → <b>tắt BMS rồi bật lại</b>, hoặc giữ <kbd class="k">MENU</kbd> 2 giây → tab <b>Hệ thống</b> → <b>Dò lại BMS</b>.</p></div></details>
       <details class="faq"><summary>Thanh trên báo “MẤT BMS” màu đỏ</summary><div>Máy đang đọc thì mất tín hiệu từ BMS — thường do <b>dây lỏng</b>. Cắm lại chặt 2 đầu dây; có tín hiệu lại là máy tự đọc tiếp.</div></details>
+      <details class="faq"><summary>Quét mã QR mà điện thoại không mở trang</summary><div>Điện thoại phải có mạng (<b>WiFi nhà</b> hoặc <b>4G</b>), không còn nối WiFi <code>SC-LCDJK-…</code> của máy. Camera không hiện đường link thì làm <a href="#b5">cách B</a>: nhập ID 10 số ghi dưới mã QR.</div></details>
       <details class="faq"><summary>Điện thoại không thấy WiFi <code>SC-LCDJK-…</code></summary><div>Chờ khoảng 30 giây sau khi màn sáng rồi quét lại WiFi. Đứng gần màn hình.</div></details>
       <details class="faq"><summary>Trang <code>192.168.4.1</code> không mở</summary><div>Tắt <b>dữ liệu di động (4G)</b> trong lúc đang nối WiFi <code>SC-LCDJK-…</code>, rồi gõ lại <code>192.168.4.1</code> trên trình duyệt.</div></details>
       <details class="faq"><summary>Không lưu được WiFi nhà</summary><div>WiFi phải là <b>2.4GHz</b>. Kiểm tra lại mật khẩu (phân biệt chữ hoa / thường). Máy thử nối trước — không nối được thì giữ WiFi cũ và báo lý do trên màn.</div></details>
